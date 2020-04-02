@@ -30,8 +30,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "postinstall": "./node_modules/.bin/rn-nodeify --install buffer,events,process,stream,util,inherits,fs,path --hack; npm run releasenotes2json; npx jetify",
-    "test": "npm run unit && npm run jest && npm run lint",
+    "test": "npm run unit && npm run jest",
     "jest": "node node_modules/jest/bin/jest.js tests/integration/*",
     "lint": "./node_modules/.bin/eslint *.js screen/**/*.js screen/ class/ models/ loc/ tests/integration/ --fix",
     "unit": "./node_modules/.bin/mocha tests/unit/*"
