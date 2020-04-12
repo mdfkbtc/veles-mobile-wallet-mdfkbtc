@@ -1,0 +1,11 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.14.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:semver:20150403':
+    - react-native-level-fs > levelup > semver:
+        patched: '2020-04-12T15:32:22.781Z'
+  SNYK-JS-TREEKILL-536781:
+    - '@sentry/react-native > @sentry/wizard > snyk > snyk-sbt-plugin > tree-kill':
+        patched: '2020-04-12T15:32:22.781Z'
