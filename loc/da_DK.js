@@ -10,11 +10,14 @@ module.exports = {
   wallets: {
     select_wallet: 'Vælg wallet',
     options: 'valgmuligheder',
-    createBitcoinWallet: 'In order to use a Lightning wallet, a Bitcoin wallet is needed to fund it. Would you like to continue anyway?',
+    createBitcoinWallet:
+      'In order to use a Lightning wallet, a Bitcoin wallet is needed to fund it. Would you like to continue anyway?',
     list: {
       app_name: 'Veles Wallet',
       title: 'wallets',
-      header: 'En wallet består af par af hemmelige (private nøgler) og en adresse' + 'som du kan dele med andre for at modtage coins.',
+      header:
+        'En wallet består af par af hemmelige (private nøgler) og en adresse' +
+        'som du kan dele med andre for at modtage coins.',
       add: 'Tilføj Wallet',
       create_a_wallet: 'Opret en  wallet',
       create_a_wallet1: 'Det er helt gratis og du kan oprette',
@@ -206,12 +209,15 @@ module.exports = {
       'Veles Wallet, vil brugeren se den alternative wallet. Det vil se helt' +
       'legitimt ud for andre, og dermed beskytte din originale wallet og ' +
       'dine coins.',
-    help2: 'Det nye lager vil være fuldt funktionsdygtigt, og du kan evt have nogle ' + 'småbeløb så det ser troværdigt ud.',
+    help2:
+      'Det nye lager vil være fuldt funktionsdygtigt, og du kan evt have nogle ' + 'småbeløb så det ser troværdigt ud.',
     create_fake_storage: 'Opret falsk kryopteret lager',
     go_back: 'tilbage',
     create_password: 'Opret adgangskode',
-    create_password_explanation: 'Adgangskoden til det falske lager må ikke være den samme som den du bruger til det rigtige lager',
-    password_should_not_match: 'Adgangskoden til det falske lager må ikke være den samme som den du bruger til det rigtige lager',
+    create_password_explanation:
+      'Adgangskoden til det falske lager må ikke være den samme som den du bruger til det rigtige lager',
+    password_should_not_match:
+      'Adgangskoden til det falske lager må ikke være den samme som den du bruger til det rigtige lager',
     retype_password: 'Indtast adgangskoden igen',
     passwords_do_not_match: 'Adgangskoden er ikke den samme, prøv igen',
     success: 'Succes',

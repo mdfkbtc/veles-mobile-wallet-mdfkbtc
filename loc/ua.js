@@ -10,7 +10,8 @@ module.exports = {
   wallets: {
     options: 'options',
     select_wallet: 'Select Wallet',
-    createBitcoinWallet: 'In order to use a Lightning wallet, a Bitcoin wallet is needed to fund it. Would you like to continue anyway?',
+    createBitcoinWallet:
+      'In order to use a Lightning wallet, a Bitcoin wallet is needed to fund it. Would you like to continue anyway?',
 
     list: {
       app_name: 'Veles Wallet',

@@ -1,13 +1,15 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View, ActivityIndicator, Image, Text, TouchableOpacity, FlatList } from 'react-native';
-import { SafeBlueArea, BlueNavigationStyle, BlueText, BlueSpacing20, BluePrivateBalance } from '../../BlueComponents';
-import LinearGradient from 'react-native-linear-gradient';
-import PropTypes from 'prop-types';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+import LinearGradient from 'react-native-linear-gradient';
+
+import { SafeBlueArea, BlueNavigationStyle, BlueText, BlueSpacing20, BluePrivateBalance } from '../../BlueComponents';
 import WalletGradient from '../../class/walletGradient';
+
 /** @type {AppStorage} */
-let BlueApp = require('../../BlueApp');
-let loc = require('../../loc');
+const BlueApp = require('../../BlueApp');
+const loc = require('../../loc');
 
 export default class SelectWallet extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -45,14 +47,12 @@ export default class SelectWallet extends Component {
         onPress={() => {
           ReactNativeHapticFeedback.trigger('selection', { ignoreAndroidSystemSettings: false });
           this.props.navigation.getParam('onWalletSelect')(item);
-        }}
-      >
+        }}>
         <View
           shadowOpacity={40 / 100}
           shadowOffset={{ width: 0, height: 0 }}
           shadowRadius={5}
-          style={{ backgroundColor: 'transparent', padding: 10, marginVertical: 17 }}
-        >
+          style={{ backgroundColor: 'transparent', padding: 10, marginVertical: 17 }}>
           <LinearGradient
             shadowColor="#ffffff"
             colors={WalletGradient.gradientsFor(item.type)}
@@ -61,12 +61,9 @@ export default class SelectWallet extends Component {
               borderRadius: 10,
               minHeight: 164,
               elevation: 5,
-            }}
-          >
+            }}>
             <Image
-              source={
-                (require('../../img/btc-shape.png'))
-              }
+              source={require('../../img/btc-shape.png')}
               style={{
                 width: 99,
                 height: 94,
@@ -83,8 +80,7 @@ export default class SelectWallet extends Component {
                 backgroundColor: 'transparent',
                 fontSize: 19,
                 color: '#fff',
-              }}
-            >
+              }}>
               {item.getLabel()}
             </Text>
             {item.hideBalance ? (
@@ -98,8 +94,7 @@ export default class SelectWallet extends Component {
                   fontWeight: 'bold',
                   fontSize: 36,
                   color: '#fff',
-                }}
-              >
+                }}>
                 {loc.formatBalance(Number(item.getBalance()), item.getPreferredBalanceUnit(), true)}
               </Text>
             )}
@@ -110,8 +105,7 @@ export default class SelectWallet extends Component {
                 backgroundColor: 'transparent',
                 fontSize: 13,
                 color: '#fff',
-              }}
-            >
+              }}>
               {loc.wallets.list.latest_transaction}
             </Text>
             <Text
@@ -121,8 +115,7 @@ export default class SelectWallet extends Component {
                 fontWeight: 'bold',
                 fontSize: 16,
                 color: '#fff',
-              }}
-            >
+              }}>
               {loc.transactionTimeToReadable(item.getLatestTransactionTime())}
             </Text>
           </LinearGradient>

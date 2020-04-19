@@ -1,4 +1,5 @@
 import Biometrics from 'react-native-biometrics';
+
 const BlueApp = require('../BlueApp');
 
 export default class Biometric {

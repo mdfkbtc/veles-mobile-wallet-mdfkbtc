@@ -15,7 +15,9 @@ module.exports = {
     list: {
       app_name: 'Veles Wallet',
       title: 'cüzdanlar',
-      header: 'Cüzdan biri gizli, biri halka açık olan bir çift anahtar ve koin almak için' + ' paylaşabileceğiniz bir adrestir.',
+      header:
+        'Cüzdan biri gizli, biri halka açık olan bir çift anahtar ve koin almak için' +
+        ' paylaşabileceğiniz bir adrestir.',
       add: 'Cüzdan Ekle',
       create_a_wallet: 'Cüzdan oluştur',
       create_a_wallet1: 'Oluşturması bedava ve',

@@ -1,12 +1,14 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { View } from 'react-native';
 import { Text, Icon } from 'react-native-elements';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+
 import { BlueButton, SafeBlueArea, BlueCard } from '../../BlueComponents';
 import { BitcoinUnit } from '../../models/bitcoinUnits';
-import PropTypes from 'prop-types';
-let loc = require('../../loc');
-let BlueApp = require('../../BlueApp');
+
+const BlueApp = require('../../BlueApp');
+const loc = require('../../loc');
 
 export default class Success extends Component {
   static navigationOptions = {
@@ -41,8 +43,7 @@ export default class Success extends Component {
                 color: BlueApp.settings.alternativeTextColor2,
                 fontSize: 36,
                 fontWeight: '600',
-              }}
-            >
+              }}>
               {this.state.amount}
             </Text>
             <Text
@@ -53,8 +54,7 @@ export default class Success extends Component {
                 paddingBottom: 6,
                 fontWeight: '600',
                 alignSelf: 'flex-end',
-              }}
-            >
+              }}>
               {' ' + this.state.amountUnit}
             </Text>
           </View>
@@ -67,8 +67,7 @@ export default class Success extends Component {
                 paddingBottom: 6,
                 fontWeight: '500',
                 alignSelf: 'center',
-              }}
-            >
+              }}>
               {loc.send.create.fee}: {this.state.fee} {BitcoinUnit.BTC}
             </Text>
           )}
@@ -82,8 +81,7 @@ export default class Success extends Component {
                 paddingBottom: 6,
                 fontWeight: '500',
                 alignSelf: 'center',
-              }}
-            >
+              }}>
               {this.state.invoiceDescription}
             </Text>
           )}
@@ -98,8 +96,7 @@ export default class Success extends Component {
             justifyContent: 'center',
             marginTop: 43,
             marginBottom: 53,
-          }}
-        >
+          }}>
           <Icon name="check" size={50} type="font-awesome" color="#e4b99c" />
         </View>
         <BlueCard>

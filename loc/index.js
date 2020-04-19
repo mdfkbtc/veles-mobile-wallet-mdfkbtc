@@ -1,11 +1,15 @@
-import Localization from 'react-localization';
 import AsyncStorage from '@react-native-community/async-storage';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import Localization from 'react-localization';
+
 import { AppStorage } from '../class';
 import { BitcoinUnit } from '../models/bitcoinUnits';
-import relativeTime from 'dayjs/plugin/relativeTime';
-const dayjs = require('dayjs');
-const currency = require('../currency');
+
 const BigNumber = require('bignumber.js');
+const dayjs = require('dayjs');
+
+const currency = require('../currency');
+
 let strings;
 dayjs.extend(relativeTime);
 
@@ -142,7 +146,7 @@ strings.transactionTimeToReadable = time => {
   }
   let timejs;
   try {
-    timejs = dayjs(time).format("YYYY-MM-DD, HH:mm:ss");
+    timejs = dayjs(time).format('YYYY-MM-DD, HH:mm:ss');
   } catch (_) {
     console.warn('incorrect locale set for dayjs');
     return time;
@@ -203,7 +207,10 @@ strings.formatBalanceWithoutSuffix = (balance = 0, toUnit, withFormatting = fals
       const value = new BigNumber(balance).dividedBy(100000000).toFixed(8);
       return removeTrailingZeros(value);
     } else if (toUnit === BitcoinUnit.SATS) {
-      return (balance < 0 ? '-' : '') + (withFormatting ? new Intl.NumberFormat().format(balance).replace(/[^0-9]/g, ' ') : balance);
+      return (
+        (balance < 0 ? '-' : '') +
+        (withFormatting ? new Intl.NumberFormat().format(balance).replace(/[^0-9]/g, ' ') : balance)
+      );
     } else if (toUnit === BitcoinUnit.LOCAL_CURRENCY) {
       return ' ';
       //return currency.satoshiToLocalCurrency(balance);

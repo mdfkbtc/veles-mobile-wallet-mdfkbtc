@@ -1,7 +1,21 @@
 /* global alert */
-import React, { Component } from 'react';
-import { Alert, Text, LayoutAnimation, ActivityIndicator, Keyboard, KeyboardAvoidingView, Platform, View, TextInput } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import {
+  Alert,
+  Text,
+  LayoutAnimation,
+  ActivityIndicator,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  View,
+  TextInput,
+} from 'react-native';
+import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+
 import {
   BlueTextCentered,
   BlueText,
@@ -15,17 +29,16 @@ import {
   BlueSpacing20,
   BlueSpacing10,
 } from '../../BlueComponents';
-import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button';
-import PropTypes from 'prop-types';
-import { HDSegwitP2SHWallet } from '../../class/hd-segwit-p2sh-wallet';
-import { HDLegacyP2PKHWallet } from '../../class/hd-legacy-p2pkh-wallet';
 import { AppStorage, HDSegwitBech32Wallet, SegwitP2SHWallet } from '../../class';
-import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
-let EV = require('../../events');
-let A = require('../../analytics');
+import { HDLegacyP2PKHWallet } from '../../class/hd-legacy-p2pkh-wallet';
+import { HDSegwitP2SHWallet } from '../../class/hd-segwit-p2sh-wallet';
+
+const BlueApp = require('../../BlueApp');
+const A = require('../../analytics');
+const EV = require('../../events');
 /** @type {AppStorage} */
-let BlueApp = require('../../BlueApp');
-let loc = require('../../loc');
+const loc = require('../../loc');
+
 export default class WalletsAdd extends Component {
   static navigationOptions = ({ navigation }) => ({
     ...BlueNavigationStyle(navigation, true),
@@ -43,7 +56,7 @@ export default class WalletsAdd extends Component {
 
   async componentDidMount() {
     let walletBaseURI = await AsyncStorage.getItem(AppStorage.LNDHUB);
-    let isAdvancedOptionsEnabled = !!(await AsyncStorage.getItem(AppStorage.ADVANCED_MODE_ENABLED));
+    const isAdvancedOptionsEnabled = !!(await AsyncStorage.getItem(AppStorage.ADVANCED_MODE_ENABLED));
     walletBaseURI = walletBaseURI || '';
 
     this.setState({
@@ -86,7 +99,10 @@ export default class WalletsAdd extends Component {
     return (
       <SafeBlueArea forceInset={{ horizontal: 'always' }} style={{ flex: 1, paddingTop: 40 }}>
         <KeyboardAvoidingView enabled behavior={Platform.OS === 'ios' ? 'position' : null} keyboardVerticalOffset={20}>
-          <BlueFormLabel>{loc.wallets.add.wallet_name.slice(0,1).toUpperCase() + loc.wallets.add.wallet_name.slice(1, loc.wallets.add.wallet_name.length)}</BlueFormLabel>
+          <BlueFormLabel>
+            {loc.wallets.add.wallet_name.slice(0, 1).toUpperCase() +
+              loc.wallets.add.wallet_name.slice(1, loc.wallets.add.wallet_name.length)}
+          </BlueFormLabel>
           <View
             style={{
               flexDirection: 'row',
@@ -100,8 +116,7 @@ export default class WalletsAdd extends Component {
               alignItems: 'center',
               marginVertical: 16,
               borderRadius: 4,
-            }}
-          >
+            }}>
             <TextInput
               value={this.state.label}
               placeholderTextColor={BlueApp.settings.alternativeTextColor}
@@ -122,11 +137,13 @@ export default class WalletsAdd extends Component {
                   <View
                     style={{
                       height: 140,
-                    }}
-                  >
+                    }}>
                     <BlueSpacing20 />
                     <Text style={{ color: '#ffffff', fontWeight: '500' }}>{loc.settings.advanced_options}</Text>
-                    <RadioGroup color={'#e4b99c'} onSelect={(index, value) => this.onSelect(index, value)} selectedIndex={0}>
+                    <RadioGroup
+                      color={'#e4b99c'}
+                      onSelect={(index, value) => this.onSelect(index, value)}
+                      selectedIndex={0}>
                       <RadioButton value={HDLegacyP2PKHWallet.type}>
                         <BlueText>{HDLegacyP2PKHWallet.typeReadable}</BlueText>
                       </RadioButton>
@@ -148,8 +165,7 @@ export default class WalletsAdd extends Component {
                 alignItems: 'center',
                 flex: 1,
                 marginVertical: 50,
-              }}
-            >
+              }}>
               {!this.state.isLoading ? (
                 <BlueButton
                   title={loc.wallets.add.create}
@@ -180,8 +196,14 @@ export default class WalletsAdd extends Component {
                           await BlueApp.saveToDisk();
                           EV(EV.enum.WALLETS_COUNT_CHANGED);
                           A(A.ENUM.CREATED_WALLET);
-                          ReactNativeHapticFeedback.trigger('notificationSuccess', { ignoreAndroidSystemSettings: false });
-                          if (w.type === HDSegwitP2SHWallet.type || w.type === HDSegwitBech32Wallet.type || w.type === HDLegacyP2PKHWallet.type) {
+                          ReactNativeHapticFeedback.trigger('notificationSuccess', {
+                            ignoreAndroidSystemSettings: false,
+                          });
+                          if (
+                            w.type === HDSegwitP2SHWallet.type ||
+                            w.type === HDSegwitBech32Wallet.type ||
+                            w.type === HDLegacyP2PKHWallet.type
+                          ) {
                             this.props.navigation.navigate('PleaseBackup', {
                               secret: w.getSecret(),
                             });

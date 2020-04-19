@@ -1,20 +1,23 @@
 /* global alert */
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { ActivityIndicator, FlatList, TouchableOpacity, StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-elements';
-import { BlueButton, BlueText, SafeBlueArea, BlueCard, BlueSpacing40, BlueNavigationStyle } from '../../BlueComponents';
-import { BitcoinUnit } from '../../models/bitcoinUnits';
-import PropTypes from 'prop-types';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
-import Biometric from '../../class/biometrics';
+
+import { BlueButton, BlueText, SafeBlueArea, BlueCard, BlueSpacing40, BlueNavigationStyle } from '../../BlueComponents';
 import { HDSegwitBech32Wallet } from '../../class';
-let loc = require('../../loc');
-let EV = require('../../events');
-let currency = require('../../currency');
-let BlueElectrum = require('../../BlueElectrum');
-let Bignumber = require('bignumber.js');
+import Biometric from '../../class/biometrics';
+import { BitcoinUnit } from '../../models/bitcoinUnits';
+
+const Bignumber = require('bignumber.js');
+
 /** @type {AppStorage} */
 const BlueApp = require('../../BlueApp');
+const BlueElectrum = require('../../BlueElectrum');
+const currency = require('../../currency');
+const EV = require('../../events');
+const loc = require('../../loc');
 
 export default class Confirm extends Component {
   static navigationOptions = () => ({
@@ -56,7 +59,7 @@ export default class Confirm extends Component {
           }
         }
 
-        let result = await this.state.fromWallet.broadcastTx(this.state.tx);
+        const result = await this.state.fromWallet.broadcastTx(this.state.tx);
         if (result && result.code) {
           if (result.code === 1) {
             const message = result.message.split('\n');
@@ -103,8 +106,7 @@ export default class Confirm extends Component {
               color: BlueApp.settings.alternativeTextColor2,
               fontSize: 36,
               fontWeight: '600',
-            }}
-          >
+            }}>
             {item.amount === BitcoinUnit.MAX
               ? currency.satoshiToBTC(this.state.fromWallet.getBalance() - this.state.feeSatoshi)
               : item.amount || currency.satoshiToBTC(item.value)}
@@ -117,8 +119,7 @@ export default class Confirm extends Component {
               paddingBottom: 6,
               fontWeight: '600',
               alignSelf: 'flex-end',
-            }}
-          >
+            }}>
             {' ' + BitcoinUnit.BTC}
           </Text>
         </View>
@@ -162,8 +163,7 @@ export default class Confirm extends Component {
                   paddingBottom: 6,
                   fontWeight: '500',
                   alignSelf: 'center',
-                }}
-              >
+                }}>
                 {loc.send.create.fee}: {loc.formatBalance(this.state.feeSatoshi, BitcoinUnit.BTC)}
               </Text>
               <BlueSpacing40 />
@@ -191,9 +191,14 @@ export default class Confirm extends Component {
                     wallet: this.state.fromWallet,
                     feeSatoshi: this.state.feeSatoshi,
                   });
-                }}
-              >
-                <Text style={{ color: BlueApp.settings.buttonLinkUrlColor, fontSize: 15, fontWeight: '500', alignSelf: 'center' }}>
+                }}>
+                <Text
+                  style={{
+                    color: BlueApp.settings.buttonLinkUrlColor,
+                    fontSize: 15,
+                    fontWeight: '500',
+                    alignSelf: 'center',
+                  }}>
                   {loc.transactions.details.transaction_details}
                 </Text>
               </TouchableOpacity>

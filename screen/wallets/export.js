@@ -1,29 +1,41 @@
-import React, { Component } from 'react';
-import { Dimensions, ActivityIndicator, ScrollView, View, } from 'react-native';
-import QRCode from 'react-native-qrcode-svg';
-import { BlueSpacing20, SafeBlueArea, BlueNavigationStyle, BlueText, BlueCopyTextToClipboard, BlueCard } from '../../BlueComponents';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { Dimensions, ActivityIndicator, ScrollView, View } from 'react-native';
+import QRCode from 'react-native-qrcode-svg';
+
+import {
+  BlueSpacing20,
+  SafeBlueArea,
+  BlueNavigationStyle,
+  BlueText,
+  BlueCopyTextToClipboard,
+  BlueCard,
+} from '../../BlueComponents';
 import Privacy from '../../Privacy';
 import Biometric from '../../class/biometrics';
+
 /** @type {AppStorage} */
-let BlueApp = require('../../BlueApp');
-let loc = require('../../loc');
+const BlueApp = require('../../BlueApp');
+const loc = require('../../loc');
+
 const { height, width } = Dimensions.get('window');
 
 export default class WalletExport extends Component {
   static navigationOptions = ({ navigation }) => ({
     ...BlueNavigationStyle(navigation, true),
-    title: loc.wallets.export.title.slice(0,1).toUpperCase() + loc.wallets.export.title.slice(1, loc.wallets.export.title.length),
+    title:
+      loc.wallets.export.title.slice(0, 1).toUpperCase() +
+      loc.wallets.export.title.slice(1, loc.wallets.export.title.length),
     headerLeft: null,
   });
 
   constructor(props) {
     super(props);
 
-    let address = props.navigation.state.params.address;
-    let secret = props.navigation.state.params.secret;
+    const address = props.navigation.state.params.address;
+    const secret = props.navigation.state.params.secret;
     let wallet;
-    for (let w of BlueApp.getWallets()) {
+    for (const w of BlueApp.getWallets()) {
       if ((address && w.getAddress() === address) || w.getSecret() === secret) {
         // found our wallet
         wallet = w;
@@ -74,9 +86,14 @@ export default class WalletExport extends Component {
       <SafeBlueArea style={{ flex: 1 }}>
         <ScrollView
           centerContent
-          contentContainerStyle={{ alignItems: 'center', justifyContent: 'center', flexGrow: 1, padding: 10, paddingTop: 5 }}
-          onLayout={this.onLayout}
-        >
+          contentContainerStyle={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexGrow: 1,
+            padding: 10,
+            paddingTop: 5,
+          }}
+          onLayout={this.onLayout}>
           <BlueCard>
             <BlueText>{this.state.wallet.typeReadable}</BlueText>
           </BlueCard>
@@ -96,10 +113,11 @@ export default class WalletExport extends Component {
           <BlueCard>
             <BlueText>{loc.wallets.details.mnemoic_seed}</BlueText>
           </BlueCard>
-          <BlueText style={{ alignItems: 'center', paddingHorizontal: 8, color: BlueApp.settings.failedColor }}>{this.state.wallet.getSecret()}</BlueText>
+          <BlueText style={{ alignItems: 'center', paddingHorizontal: 8, color: BlueApp.settings.failedColor }}>
+            {this.state.wallet.getSecret()}
+          </BlueText>
 
           <BlueSpacing20 />
-
         </ScrollView>
       </SafeBlueArea>
     );

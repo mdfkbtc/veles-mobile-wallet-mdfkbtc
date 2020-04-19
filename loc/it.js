@@ -124,7 +124,8 @@ module.exports = {
       fee_field_is_not_valid: 'Commissione non valida',
       address_field_is_not_valid: 'Indirizzo non valido',
       total_exceeds_balance: "L'importo da inviare eccede i fondi disponibili.",
-      create_tx_error: "Si è verificato un errore nella creazione della transazione. Assicurati che l'indirizzo sia valido",
+      create_tx_error:
+        "Si è verificato un errore nella creazione della transazione. Assicurati che l'indirizzo sia valido",
       address: 'Indirizzo',
       amount_placeholder: 'Importo da inviare (in VLS)',
       fee_placeholder: 'Più commissione (in VLS)',
@@ -208,12 +209,16 @@ module.exports = {
       'Veles Wallet, questa sbloccherà un "falso" archivio. Esso sembrerà ' +
       'autentico alle terze parti, ma manterrà segretamente il tuo archivio principale ' +
       'con i Bitcoin al sicuro.',
-    help2: 'Il nuovo archivio sarà completamente funzionante, e puoi conservarci ' + 'piccole quantità così sembrerà più credibile.',
+    help2:
+      'Il nuovo archivio sarà completamente funzionante, e puoi conservarci ' +
+      'piccole quantità così sembrerà più credibile.',
     create_fake_storage: 'Crea archivio falso criptato',
     go_back: 'Indietro',
     create_password: 'Crea una password',
-    create_password_explanation: "La password per l'archivio falso non deve corrispondere a quella dell'archivio principale",
-    password_should_not_match: "La password per l'archivio falso non deve corrispondere a quella dell'archivio principale",
+    create_password_explanation:
+      "La password per l'archivio falso non deve corrispondere a quella dell'archivio principale",
+    password_should_not_match:
+      "La password per l'archivio falso non deve corrispondere a quella dell'archivio principale",
     retype_password: 'Reinserisci password',
     passwords_do_not_match: 'Le password non corrispondono, riprova',
     success: 'Fatto',

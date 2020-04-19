@@ -1,8 +1,21 @@
 /* global alert */
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { ActivityIndicator, TouchableOpacity, View, Dimensions, Image, TextInput, Clipboard, Linking } from 'react-native';
-import QRCode from 'react-native-qrcode-svg';
+import {
+  ActivityIndicator,
+  TouchableOpacity,
+  View,
+  Dimensions,
+  Image,
+  TextInput,
+  Clipboard,
+  Linking,
+} from 'react-native';
+import { RNCamera } from 'react-native-camera';
 import { Icon, Text } from 'react-native-elements';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+import QRCode from 'react-native-qrcode-svg';
+
 import {
   BlueButton,
   BlueText,
@@ -12,15 +25,15 @@ import {
   BlueSpacing20,
   BlueCopyToClipboardButton,
 } from '../../BlueComponents';
-import PropTypes from 'prop-types';
-import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
-import { RNCamera } from 'react-native-camera';
-let loc = require('../../loc');
-let EV = require('../../events');
-let BlueElectrum = require('../../BlueElectrum');
-/** @type {AppStorage} */
-const BlueApp = require('../../BlueApp');
+
 const bitcoin = require('bitcoinjs-lib');
+
+const BlueApp = require('../../BlueApp');
+const BlueElectrum = require('../../BlueElectrum');
+const EV = require('../../events');
+const loc = require('../../loc');
+/** @type {AppStorage} */
+
 const { height, width } = Dimensions.get('window');
 
 export default class PsbtWithHardwareWallet extends Component {
@@ -36,7 +49,7 @@ export default class PsbtWithHardwareWallet extends Component {
     this.setState({ renderScanner: false }, () => {
       console.log(ret.data);
       try {
-        let Tx = this.state.fromWallet.combinePsbt(this.state.psbt.toBase64(), ret.data);
+        const Tx = this.state.fromWallet.combinePsbt(this.state.psbt.toBase64(), ret.data);
         this.setState({ txhex: Tx.toHex() });
       } catch (Err) {
         alert(Err);
@@ -66,13 +79,13 @@ export default class PsbtWithHardwareWallet extends Component {
       try {
         await BlueElectrum.ping();
         await BlueElectrum.waitTillConnected();
-        let result = await this.state.fromWallet.broadcastTx(this.state.txhex);
+        const result = await this.state.fromWallet.broadcastTx(this.state.txhex);
         if (result) {
           console.log('broadcast result = ', result);
           EV(EV.enum.REMOTE_TRANSACTIONS_COUNT_CHANGED); // someone should fetch txs
           this.setState({ success: true, isLoading: false });
           if (this.state.memo) {
-            let txDecoded = bitcoin.Transaction.fromHex(this.state.txhex);
+            const txDecoded = bitcoin.Transaction.fromHex(this.state.txhex);
             const txid = txDecoded.getId();
             BlueApp.tx_metadata[txid] = { memo: this.state.memo };
           }
@@ -116,8 +129,7 @@ export default class PsbtWithHardwareWallet extends Component {
             right: 16,
             top: 64,
           }}
-          onPress={() => this.setState({ renderScanner: false })}
-        >
+          onPress={() => this.setState({ renderScanner: false })}>
           <Image style={{ alignSelf: 'center' }} source={require('../../img/close.png')} />
         </TouchableOpacity>
       </SafeBlueArea>
@@ -137,8 +149,7 @@ export default class PsbtWithHardwareWallet extends Component {
             justifyContent: 'center',
             marginTop: 143,
             marginBottom: 53,
-          }}
-        >
+          }}>
           <Icon name="check" size={50} type="font-awesome" color="#0f5cc0" />
         </View>
         <BlueCard>
@@ -173,10 +184,16 @@ export default class PsbtWithHardwareWallet extends Component {
           />
 
           <TouchableOpacity style={{ marginVertical: 24 }} onPress={() => Clipboard.setString(this.state.txhex)}>
-            <Text style={{ color: '#9aa0aa', fontSize: 15, fontWeight: '500', alignSelf: 'center' }}>Copy and broadcast later</Text>
+            <Text style={{ color: '#9aa0aa', fontSize: 15, fontWeight: '500', alignSelf: 'center' }}>
+              Copy and broadcast later
+            </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{ marginVertical: 24 }} onPress={() => Linking.openURL('https://coinb.in/?verify=' + this.state.txhex)}>
-            <Text style={{ color: '#9aa0aa', fontSize: 15, fontWeight: '500', alignSelf: 'center' }}>Verify on coinb.in</Text>
+          <TouchableOpacity
+            style={{ marginVertical: 24 }}
+            onPress={() => Linking.openURL('https://coinb.in/?verify=' + this.state.txhex)}>
+            <Text style={{ color: '#9aa0aa', fontSize: 15, fontWeight: '500', alignSelf: 'center' }}>
+              Verify on coinb.in
+            </Text>
           </TouchableOpacity>
           <BlueSpacing20 />
           <BlueButton onPress={this.broadcast} title={loc.send.confirm.sendNow} />
@@ -203,7 +220,9 @@ export default class PsbtWithHardwareWallet extends Component {
         <View style={{ alignItems: 'center', justifyContent: 'space-between' }}>
           <View style={{ flexDirection: 'row', justifyContent: 'center', paddingTop: 16, paddingBottom: 16 }}>
             <BlueCard>
-              <BlueText>This is partially signed bitcoin transaction (PSBT). Please finish signing it with your hardware wallet.</BlueText>
+              <BlueText>
+                This is partially signed bitcoin transaction (PSBT). Please finish signing it with your hardware wallet.
+              </BlueText>
               <BlueSpacing20 />
               <QRCode
                 value={this.state.psbt.toBase64()}
@@ -216,7 +235,10 @@ export default class PsbtWithHardwareWallet extends Component {
               <BlueButton onPress={() => this.setState({ renderScanner: true })} title={'Scan signed transaction'} />
               <BlueSpacing20 />
               <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                <BlueCopyToClipboardButton stringToCopy={this.state.psbt.toBase64()} displayText={'Copy to Clipboard'} />
+                <BlueCopyToClipboardButton
+                  stringToCopy={this.state.psbt.toBase64()}
+                  displayText={'Copy to Clipboard'}
+                />
               </View>
             </BlueCard>
           </View>

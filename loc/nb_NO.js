@@ -15,7 +15,9 @@ module.exports = {
     list: {
       app_name: 'Veles Wallet',
       title: 'lommebøker',
-      header: 'En lommebok representerer en hemmelighet (privat nøkkel) og en adresse ' + ' du kan dele for å motta kryptovaluta.',
+      header:
+        'En lommebok representerer en hemmelighet (privat nøkkel) og en adresse ' +
+        ' du kan dele for å motta kryptovaluta.',
       add: 'Legg til lommebok',
       create_a_wallet: 'Lag en lommebok',
       create_a_wallet1: 'Det er gratis, og du kan lage',
@@ -122,7 +124,8 @@ module.exports = {
       fee_field_is_not_valid: 'Avgiftsfeltet er ikke gyldig',
       address_field_is_not_valid: 'Adressefeltet er ikke gyldig',
       total_exceeds_balance: 'Sendingsbeløpet overstiger den tilgjengelige saldoen.',
-      create_tx_error: 'Det oppsto en feil under opprettelse av transaksjonen. Vennligst vær sikker på at adressen er gyldig.',
+      create_tx_error:
+        'Det oppsto en feil under opprettelse av transaksjonen. Vennligst vær sikker på at adressen er gyldig.',
       address: 'adresse',
       amount_placeholder: 'mengde å sende (i VLS)',
       fee_placeholder: 'pluss transaksjonsgebyr (i VLS)',
@@ -206,7 +209,9 @@ module.exports = {
       'Veles Wallet, det vil låse opp ny "falsk" lagring. Dette vil virke' +
       'troverdig overfor en tredje part, men vil i hemmelighet beholde ' +
       'hovedlageret trygt.',
-    help2: 'Ny lagring vil være fullt funksjonell, og du kan lagre en mindre sum der' + ' , slik at det ser mer troverdig ut.',
+    help2:
+      'Ny lagring vil være fullt funksjonell, og du kan lagre en mindre sum der' +
+      ' , slik at det ser mer troverdig ut.',
     create_fake_storage: 'Lag falsk kryptert lagring',
     go_back: 'Gå tilbake',
     create_password: 'Lag et passord',

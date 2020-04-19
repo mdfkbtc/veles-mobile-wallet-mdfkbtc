@@ -1,18 +1,7 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
-import SettingsContainer from './screen/settings/settings';
-import About from './screen/settings/about';
-import ReleaseNotes from './screen/settings/releasenotes';
-import Selftest from './screen/selftest';
-import Language from './screen/settings/language';
-import Currency from './screen/settings/currency';
-import EncryptStorage from './screen/settings/encryptStorage';
 import PlausibleDeniability from './screen/plausibledeniability';
-import ElectrumSettings from './screen/settings/electrumSettings';
-import DefaultView from './screen/settings/defaultView';
-
 import WalletsList from './screen/wallets/list';
-import WalletTransactions from './screen/wallets/transactions';
 import AddWallet from './screen/wallets/add';
 import PleaseBackup from './screen/wallets/pleaseBackup';
 import ImportWallet from './screen/wallets/import';
@@ -35,13 +24,23 @@ import rbfCancel from './screen/transactions/RBFCancel';
 
 import receiveDetails from './screen/receive/details';
 import setReceiveAmount from './screen/receive/receiveAmount';
+import Selftest from './screen/selftest';
 
-import sendDetails from './screen/send/details';
 import ScanQRCode from './screen/send/scanQrAddress';
 import sendCreate from './screen/send/create';
 import Confirm from './screen/send/confirm';
+import sendDetails from './screen/send/details';
 import PsbtWithHardwareWallet from './screen/send/psbtWithHardwareWallet';
 import Success from './screen/send/success';
+import About from './screen/settings/about';
+import Currency from './screen/settings/currency';
+import DefaultView from './screen/settings/defaultView';
+import ElectrumSettings from './screen/settings/electrumSettings';
+import EncryptStorage from './screen/settings/encryptStorage';
+import Language from './screen/settings/language';
+import ReleaseNotes from './screen/settings/releasenotes';
+import SettingsContainer from './screen/settings/settings';
+import WalletTransactions from './screen/wallets/transactions';
 
 const ReorderWalletsStackNavigator = createStackNavigator({
   ReorderWallets: {

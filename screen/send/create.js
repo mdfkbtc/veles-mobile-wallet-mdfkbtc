@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import {
   TextInput,
@@ -12,14 +13,15 @@ import {
   Text,
   View,
 } from 'react-native';
+
 import { BlueNavigationStyle, SafeBlueArea, BlueCard, BlueText } from '../../BlueComponents';
-import PropTypes from 'prop-types';
 import Privacy from '../../Privacy';
 import { BitcoinUnit } from '../../models/bitcoinUnits';
+
 /** @type {AppStorage} */
 const BlueApp = require('../../BlueApp');
-const loc = require('../../loc');
 const currency = require('../../currency');
+const loc = require('../../loc');
 
 export default class SendCreate extends Component {
   static navigationOptions = () => ({
@@ -107,10 +109,28 @@ export default class SendCreate extends Component {
               />
 
               <TouchableOpacity style={{ marginVertical: 24 }} onPress={() => Clipboard.setString(this.state.tx)}>
-                <Text style={{ color: BlueApp.settings.buttonLinkUrlColor, fontSize: 15, fontWeight: '500', alignSelf: 'center' }}>Copy and broadcast later</Text>
+                <Text
+                  style={{
+                    color: BlueApp.settings.buttonLinkUrlColor,
+                    fontSize: 15,
+                    fontWeight: '500',
+                    alignSelf: 'center',
+                  }}>
+                  Copy and broadcast later
+                </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={{ marginVertical: 24 }} onPress={() => Linking.openURL('https://wallet.veles.network/?verify=' + this.state.tx)}>
-                <Text style={{ color: BlueApp.settings.buttonLinkUrlColor, fontSize: 15, fontWeight: '500', alignSelf: 'center' }}>Verify on Veles Webwallet</Text>
+              <TouchableOpacity
+                style={{ marginVertical: 24 }}
+                onPress={() => Linking.openURL('https://wallet.veles.network/?verify=' + this.state.tx)}>
+                <Text
+                  style={{
+                    color: BlueApp.settings.buttonLinkUrlColor,
+                    fontSize: 15,
+                    fontWeight: '500',
+                    alignSelf: 'center',
+                  }}>
+                  Verify on Veles Webwallet
+                </Text>
               </TouchableOpacity>
             </BlueCard>
             <BlueCard>

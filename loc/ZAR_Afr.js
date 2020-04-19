@@ -121,7 +121,8 @@
       fee_field_is_not_valid: 'Fooi spasie is ongeldig',
       address_field_is_not_valid: 'Adres is ongeldig',
       total_exceeds_balance: 'Die bedrag is meer as die beskikbare balans.',
-      create_tx_error: 'Daar was ‘n probleem met die skepping van die transaksie. Bevestig asseblief die adres is geldig.',
+      create_tx_error:
+        'Daar was ‘n probleem met die skepping van die transaksie. Bevestig asseblief die adres is geldig.',
       address: 'adres',
       amount_placeholder: 'bedrag om te stuur (in VLS)',
       fee_placeholder: 'plus transaksie fooi (in VLS)',

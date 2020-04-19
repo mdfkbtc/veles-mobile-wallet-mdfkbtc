@@ -208,12 +208,16 @@ module.exports = {
       'Veles Walletiin, se avaa uuden väärennetyn tallennustilan. Se näyttää ' +
       'oikealta kolmannelle osapuolelle, mutta pitää oikean tallennustilasi ' +
       'kolikkoineen turvassa.',
-    help2: 'Uusi tallennustila näyttää täysin toimivalta, ja voit säilyttää ' + 'pieniä summia siellä, jotta se näyttää uskottavalta.',
+    help2:
+      'Uusi tallennustila näyttää täysin toimivalta, ja voit säilyttää ' +
+      'pieniä summia siellä, jotta se näyttää uskottavalta.',
     create_fake_storage: 'Luo väärennetty tallennustila',
     go_back: 'Mene Takaisin',
     create_password: 'Luo salasana',
-    create_password_explanation: 'Väärennetyn tallennustilan salasanan ei tule täsmätä oikean tallennustilan salasanan kanssa',
-    password_should_not_match: 'Väärennetyn tallennustilan salasanan ei tule täsmätä oikean tallennustilan salasanan kanssa',
+    create_password_explanation:
+      'Väärennetyn tallennustilan salasanan ei tule täsmätä oikean tallennustilan salasanan kanssa',
+    password_should_not_match:
+      'Väärennetyn tallennustilan salasanan ei tule täsmätä oikean tallennustilan salasanan kanssa',
     retype_password: 'Salasana uudelleen',
     passwords_do_not_match: 'Salasanat eivät täsmää, yritä uudelleen',
     success: 'Onnistui',

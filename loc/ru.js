@@ -10,7 +10,8 @@ module.exports = {
   wallets: {
     options: 'Настройки',
     select_wallet: 'Выбрать кошелек',
-    createBitcoinWallet: 'Чтобы воспользоватья кошельком Lightning, нужно сначала пополнить его с помощью кошелька Bitcoin. Продолжить?',
+    createBitcoinWallet:
+      'Чтобы воспользоватья кошельком Lightning, нужно сначала пополнить его с помощью кошелька Bitcoin. Продолжить?',
 
     list: {
       app_name: 'Veles Wallet',
@@ -74,7 +75,8 @@ module.exports = {
     },
     import: {
       title: 'Импорт',
-      explanation: 'Напиши тут свою мнемоническую фразу, приватный ключ, WIF - что угодно! Veles Wallet постарается угадать верный формат',
+      explanation:
+        'Напиши тут свою мнемоническую фразу, приватный ключ, WIF - что угодно! Veles Wallet постарается угадать верный формат',
       imported: 'Импорт завершен',
       error: 'Не удалось импортировать',
       success: 'Успех',

@@ -1,4 +1,5 @@
 /* global alert */
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import {
   ActivityIndicator,
@@ -12,19 +13,20 @@ import {
   TouchableWithoutFeedback,
   Switch,
 } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+
 import { BlueButton, SafeBlueArea, BlueCard, BlueSpacing20, BlueNavigationStyle, BlueText } from '../../BlueComponents';
-import PropTypes from 'prop-types';
+import { HDSegwitBech32Wallet, WatchOnlyWallet } from '../../class';
+import Biometric from '../../class/biometrics';
 import { HDLegacyP2PKHWallet } from '../../class/hd-legacy-p2pkh-wallet';
 import { HDSegwitP2SHWallet } from '../../class/hd-segwit-p2sh-wallet';
-import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
-import Biometric from '../../class/biometrics';
-import { HDSegwitBech32Wallet, WatchOnlyWallet } from '../../class';
-import { ScrollView } from 'react-native-gesture-handler';
-let EV = require('../../events');
-let prompt = require('../../prompt');
+
+const BlueApp = require('../../BlueApp');
+const EV = require('../../events');
+const loc = require('../../loc');
+const prompt = require('../../prompt');
 /** @type {AppStorage} */
-let BlueApp = require('../../BlueApp');
-let loc = require('../../loc');
 
 export default class WalletDetails extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -38,8 +40,7 @@ export default class WalletDetails extends Component {
           if (navigation.state.params.saveAction) {
             navigation.getParam('saveAction')();
           }
-        }}
-      >
+        }}>
         <Text style={{ color: '#ffffff' }}>{loc.wallets.details.save}</Text>
       </TouchableOpacity>
     ),
@@ -105,7 +106,7 @@ export default class WalletDetails extends Component {
 
   async onUseWithHardwareWalletSwitch(value) {
     this.setState((state, props) => {
-      let wallet = state.wallet;
+      const wallet = state.wallet;
       wallet.use_with_hardware_wallet = !!value;
       return { useWithHardwareWallet: !!value, wallet };
     });
@@ -113,21 +114,21 @@ export default class WalletDetails extends Component {
 
   render() {
     if (this.state.isLoading) {
-      return (
+      return ((
         <View style={{ flex: 1 }}>
           <ActivityIndicator />
         </View>
-      );
+      ));
     }
-    return (
+    return ((
       <SafeBlueArea style={{ flex: 1 }}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
           <KeyboardAvoidingView behavior="position">
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
               <BlueCard style={{ alignItems: 'center', flex: 1 }}>
-
                 <Text style={{ color: '#ffffff', fontWeight: '500', fontSize: 14, marginVertical: 12 }}>
-                  {loc.wallets.add.wallet_name.slice(0,1).toUpperCase() + loc.wallets.add.wallet_name.slice(1, loc.wallets.add.wallet_name.length)}
+                  {loc.wallets.add.wallet_name.slice(0, 1).toUpperCase() +
+                    loc.wallets.add.wallet_name.slice(1, loc.wallets.add.wallet_name.length)}
                 </Text>
 
                 <View
@@ -141,8 +142,7 @@ export default class WalletDetails extends Component {
                     height: 44,
                     alignItems: 'center',
                     borderRadius: 4,
-                  }}
-                >
+                  }}>
                   <TextInput
                     placeholder={loc.send.details.note_placeholder}
                     placeholderTextColor={BlueApp.settings.alternativeTextColor}
@@ -158,15 +158,20 @@ export default class WalletDetails extends Component {
                 <Text style={{ color: '#ffffff', fontWeight: '500', fontSize: 14, marginVertical: 12 }}>
                   {loc.wallets.details.type}
                 </Text>
-                <Text style={{ color: '#81868e', fontWeight: '500', fontSize: 14 }}>{this.state.wallet.typeReadable}</Text>
-                
+                <Text style={{ color: '#81868e', fontWeight: '500', fontSize: 14 }}>
+                  {this.state.wallet.typeReadable}
+                </Text>
+
                 <BlueSpacing20 />
 
                 {this.state.wallet.type === WatchOnlyWallet.type && this.state.wallet.getSecret().startsWith('zpub') && (
                   <React.Fragment>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                       <BlueText>{'Use with hardware wallet'}</BlueText>
-                      <Switch value={this.state.useWithHardwareWallet} onValueChange={value => this.onUseWithHardwareWalletSwitch(value)} />
+                      <Switch
+                        value={this.state.useWithHardwareWallet}
+                        onValueChange={value => this.onUseWithHardwareWalletSwitch(value)}
+                      />
                     </View>
                     <BlueSpacing20 />
                   </React.Fragment>
@@ -224,7 +229,9 @@ export default class WalletDetails extends Component {
                               this.props.navigation.setParams({ isLoading: true });
                               this.setState({ isLoading: true }, async () => {
                                 BlueApp.deleteWallet(this.state.wallet);
-                                ReactNativeHapticFeedback.trigger('notificationSuccess', { ignoreAndroidSystemSettings: false });
+                                ReactNativeHapticFeedback.trigger('notificationSuccess', {
+                                  ignoreAndroidSystemSettings: false,
+                                });
                                 await BlueApp.saveToDisk();
                                 EV(EV.enum.TRANSACTIONS_COUNT_CHANGED);
                                 EV(EV.enum.WALLETS_COUNT_CHANGED);
@@ -244,10 +251,9 @@ export default class WalletDetails extends Component {
               </BlueCard>
             </ScrollView>
           </KeyboardAvoidingView>
-
         </TouchableWithoutFeedback>
       </SafeBlueArea>
-    );
+    ));
   }
 }
 

@@ -15,7 +15,9 @@ module.exports = {
     list: {
       app_name: 'Veles Wallet',
       title: 'portemonnees',
-      header: 'Een portemonnee vertegenwoordigt een geheime (privésleutel) en een adres' + 'dat u kunt delen om munten te ontvangen.',
+      header:
+        'Een portemonnee vertegenwoordigt een geheime (privésleutel) en een adres' +
+        'dat u kunt delen om munten te ontvangen.',
       add: 'Portemonnee toevoegen',
       create_a_wallet: 'Portemonnee aanmaken',
       create_a_wallet1: 'Het is gratis en u kunt er',
@@ -122,7 +124,8 @@ module.exports = {
       fee_field_is_not_valid: 'Tarief is niet geldig',
       address_field_is_not_valid: 'Adresveld is niet geldig',
       total_exceeds_balance: 'Het verzendingsbedrag overschrijdt het beschikbare saldo.',
-      create_tx_error: 'Er is een fout opgetreden bij het maken van de transactie. Zorg ervoor dat het adres geldig is.',
+      create_tx_error:
+        'Er is een fout opgetreden bij het maken van de transactie. Zorg ervoor dat het adres geldig is.',
       address: 'adres',
       amount_placeholder: 'te verzenden bedrag (in VLS)',
       fee_placeholder: 'plus transactie vergoeding (in VLS)',
@@ -209,12 +212,15 @@ module.exports = {
       'derde partij, maar zal uw hoofdopslag met munten niet bekend maken ' +
       'aan de derde partij',
     help2:
-      'De nieuwe opslag zal volledig functioneel zijn en u kunt er ' + 'een minimum aantal munten opslaan zodat het geloofwaardig lijkt.',
+      'De nieuwe opslag zal volledig functioneel zijn en u kunt er ' +
+      'een minimum aantal munten opslaan zodat het geloofwaardig lijkt.',
     create_fake_storage: 'Nep versleutelde opslag aanmaken',
     go_back: 'Ga terug',
     create_password: 'Wachtwoord aanmaken',
-    create_password_explanation: 'Wachtwoord voor nep-opslag hoort niet overeen te komen met wachtwoord voor uw hoofdopslag',
-    password_should_not_match: 'Wachtwoord voor nep-opslag hoort niet overeen te komen met wachtwoord voor uw hoofdopslag',
+    create_password_explanation:
+      'Wachtwoord voor nep-opslag hoort niet overeen te komen met wachtwoord voor uw hoofdopslag',
+    password_should_not_match:
+      'Wachtwoord voor nep-opslag hoort niet overeen te komen met wachtwoord voor uw hoofdopslag',
     retype_password: 'Herhaal wachtwoord',
     passwords_do_not_match: 'Wachtwoorden komen niet overeen, probeer het opnieuw',
     success: 'Succes',
@@ -227,7 +233,8 @@ module.exports = {
     withdraw: 'Opvragen',
     expired: 'Verlopen',
     placeholder: 'Invoice',
-    sameWalletAsInvoiceError: 'U kunt geen factuur betalen met dezelfde portemonnee die is gebruikt om de factuur te maken.',
+    sameWalletAsInvoiceError:
+      'U kunt geen factuur betalen met dezelfde portemonnee die is gebruikt om de factuur te maken.',
   },
   pleasebackup: {
     title: 'Your wallet is created...',

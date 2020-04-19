@@ -10,11 +10,13 @@ module.exports = {
   wallets: {
     select_wallet: 'Vyberte peněženku',
     options: 'možnosti',
-    createBitcoinWallet: 'In order to use a Lightning wallet, a Bitcoin wallet is needed to fund it. Would you like to continue anyway?',
+    createBitcoinWallet:
+      'In order to use a Lightning wallet, a Bitcoin wallet is needed to fund it. Would you like to continue anyway?',
     list: {
       app_name: 'Veles Wallet',
       title: 'peněženky',
-      header: 'Peněženka reprezentuje pár tajného (privátního) klíče a adresy' + 'kterou můžete sdílet, abyste získali mince',
+      header:
+        'Peněženka reprezentuje pár tajného (privátního) klíče a adresy' + 'kterou můžete sdílet, abyste získali mince',
       add: 'Přidat peněženku',
       create_a_wallet: 'Vytvořit peněženku',
       create_a_wallet1: 'Je to zdarma a můžete vytvořit',

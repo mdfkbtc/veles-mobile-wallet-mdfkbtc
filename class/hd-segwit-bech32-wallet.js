@@ -1,13 +1,16 @@
-import { AbstractHDWallet } from './abstract-hd-wallet';
-import { NativeModules } from 'react-native';
-import bip39 from 'bip39';
 import BigNumber from 'bignumber.js';
+import bip39 from 'bip39';
 import b58 from 'bs58check';
-const bitcoin = require('bitcoinjs-lib');
-const BlueElectrum = require('../BlueElectrum');
+import { NativeModules } from 'react-native';
+
+import { AbstractHDWallet } from './abstract-hd-wallet';
+
 const HDNode = require('bip32');
+const bitcoin = require('bitcoinjs-lib');
 const coinSelectAccumulative = require('coinselect/accumulative');
 const coinSelectSplit = require('coinselect/split');
+
+const BlueElectrum = require('../BlueElectrum');
 
 const { RNRandomBytes } = NativeModules;
 
@@ -39,7 +42,7 @@ export class HDSegwitBech32Wallet extends AbstractHDWallet {
    * @inheritDoc
    */
   timeToRefreshTransaction() {
-    for (let tx of this.getTransactions()) {
+    for (const tx of this.getTransactions()) {
       if (tx.confirmations < 7) return true;
     }
     return false;
@@ -50,7 +53,7 @@ export class HDSegwitBech32Wallet extends AbstractHDWallet {
   }
 
   async generate() {
-    let that = this;
+    const that = this;
     return new Promise(function(resolve) {
       if (typeof RNRandomBytes === 'undefined') {
         // CLI/CI environment
@@ -65,7 +68,7 @@ export class HDSegwitBech32Wallet extends AbstractHDWallet {
       // RN environment
       RNRandomBytes.randomBytes(32, (err, bytes) => {
         if (err) throw new Error(err);
-        let b = Buffer.from(bytes, 'base64').toString('hex');
+        const b = Buffer.from(bytes, 'base64').toString('hex');
         that.setSecret(bip39.entropyToMnemonic(b));
         resolve();
       });
@@ -92,7 +95,7 @@ export class HDSegwitBech32Wallet extends AbstractHDWallet {
 
   _getNodeAddressByIndex(index) {
     index = index * 1; // cast to int
-    return this._address[index]
+    return this._address[index];
   }
 
   generateAddresses() {
@@ -102,7 +105,7 @@ export class HDSegwitBech32Wallet extends AbstractHDWallet {
       this._node0 = hdNode.derive(0);
     }
     for (let index = 0; index < this.num_addresses; index++) {
-      let address = this.constructor._nodeToBech32SegwitAddress(this._node0.derive(index));
+      const address = this.constructor._nodeToBech32SegwitAddress(this._node0.derive(index));
       this._address.push(address);
       this._address_to_wif_cache[address] = this._getWIFByIndex(index);
       this._addr_balances[address] = {
@@ -157,16 +160,16 @@ export class HDSegwitBech32Wallet extends AbstractHDWallet {
 
   _getDerivationPathByAddress(address) {
     const path = "m/84'/0'/0'/0/";
-    let index =  this._address.indexOf(address);
+    const index = this._address.indexOf(address);
     if (index === -1) return false;
     return path + index;
   }
 
   _getPubkeyByAddress(address) {
-    let index =  this._address.indexOf(address);
+    const index = this._address.indexOf(address);
     if (index === -1) return false;
     return this._getNodePubkeyByIndex(index);
-    }
+  }
 
   /**
    * @deprecated
@@ -193,18 +196,18 @@ export class HDSegwitBech32Wallet extends AbstractHDWallet {
       // we want to send MAX
       algo = coinSelectSplit;
     }
-    let { inputs, outputs, fee } = algo(utxos, targets, feeRate);
+    const { inputs, outputs, fee } = algo(utxos, targets, feeRate);
 
     // .inputs and .outputs will be undefined if no solution was found
     if (!inputs || !outputs) {
       throw new Error('Not enough balance. Try sending smaller amount');
     }
 
-    let psbt = new bitcoin.Psbt();
+    const psbt = new bitcoin.Psbt();
 
     let c = 0;
-    let keypairs = {};
-    let values = {};
+    const keypairs = {};
+    const values = {};
 
     inputs.forEach(input => {
       let keyPair;
@@ -217,14 +220,15 @@ export class HDSegwitBech32Wallet extends AbstractHDWallet {
       c++;
       if (!skipSigning) {
         // skiping signing related stuff
-        if (!input.address || !this._getWifForAddress(input.address)) throw new Error('Internal error: no address or WIF to sign input');
+        if (!input.address || !this._getWifForAddress(input.address))
+          throw new Error('Internal error: no address or WIF to sign input');
       }
-      let pubkey = this._getPubkeyByAddress(input.address);
-      let masterFingerprint = Buffer.from([0x00, 0x00, 0x00, 0x00]);
+      const pubkey = this._getPubkeyByAddress(input.address);
+      const masterFingerprint = Buffer.from([0x00, 0x00, 0x00, 0x00]);
       // this is not correct fingerprint, as we dont know real fingerprint - we got zpub with 84/0, but fingerpting
       // should be from root. basically, fingerprint should be provided from outside  by user when importing zpub
-      let path = this._getDerivationPathByAddress(input.address);
-      const p2wpkh = bitcoin.payments.p2wpkh({ pubkey })
+      const path = this._getDerivationPathByAddress(input.address);
+      const p2wpkh = bitcoin.payments.p2wpkh({ pubkey });
       psbt.addInput({
         hash: input.txid,
         index: input.vout,
@@ -251,13 +255,13 @@ export class HDSegwitBech32Wallet extends AbstractHDWallet {
         output.address = changeAddress;
       }
 
-      let path = this._getDerivationPathByAddress(output.address);
-      let pubkey = this._getPubkeyByAddress(output.address);
-      let masterFingerprint = Buffer.from([0x00, 0x00, 0x00, 0x00]);
+      const path = this._getDerivationPathByAddress(output.address);
+      const pubkey = this._getPubkeyByAddress(output.address);
+      const masterFingerprint = Buffer.from([0x00, 0x00, 0x00, 0x00]);
       // this is not correct fingerprint, as we dont know realfingerprint - we got zpub with 84/0, but fingerpting
       // should be from root. basically, fingerprint should be provided from outside  by user when importing zpub
 
-      let outputData = {
+      const outputData = {
         address: output.address,
         value: output.value,
       };
@@ -337,7 +341,7 @@ export class HDSegwitBech32Wallet extends AbstractHDWallet {
    * @returns {Promise<boolean>}
    */
   async broadcastTx(txhex) {
-    let broadcast = await BlueElectrum.broadcastV2(txhex);
+    const broadcast = await BlueElectrum.broadcastV2(txhex);
     console.log({ broadcast });
     if (broadcast.indexOf('successfully') !== -1) return true;
     return broadcast.length === 64; // this means return string is txid (precise length), so it was broadcasted ok

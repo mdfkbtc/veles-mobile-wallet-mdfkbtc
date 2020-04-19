@@ -13,7 +13,8 @@ module.exports = {
     list: {
       app_name: 'Veles Wallet',
       title: 'Voleti',
-      header: 'Volet je par privatnog ključa (tajna!) i javne adrese ' + 'koju slobodno možete dijeliti kada primate novce.',
+      header:
+        'Volet je par privatnog ključa (tajna!) i javne adrese ' + 'koju slobodno možete dijeliti kada primate novce.',
       add: 'Dodaj volet',
       create_a_wallet: 'Stvori novi volet',
       create_a_wallet1: 'Ne košta ništa i možete',
@@ -31,7 +32,8 @@ module.exports = {
     },
     add: {
       title: 'Dodaj volet',
-      description: 'Možete ili skenirati bekap papirnati volet (u WIF - Wallet Import Format), ili stvoriti novi volet. Segwit je podržan.',
+      description:
+        'Možete ili skenirati bekap papirnati volet (u WIF - Wallet Import Format), ili stvoriti novi volet. Segwit je podržan.',
       scan: 'Skeniraj',
       create: 'Stvori',
       label_new_segwit: 'Novi SegWit',
@@ -203,7 +205,9 @@ module.exports = {
       'stvoriti ćemo fejk volet sa drugačijom lozinkom. Haha, žišku? ' +
       'Pa kad se ovaj počne pjeniti, a ti vidiš da je vrag odnio šalu, ' +
       'samo mu podvali lozinku za ovaj drugi volet. Eto mu ga. Nek si cucla. ',
-    help2: 'Novi spremnik će biti posve funkcionalan, možeš pohraniti koliko ' + 'misliš da je potrebno da izgleda uvjerljivo.',
+    help2:
+      'Novi spremnik će biti posve funkcionalan, možeš pohraniti koliko ' +
+      'misliš da je potrebno da izgleda uvjerljivo.',
     create_fake_storage: 'Stvori fejk enkriptirani spremnik',
     go_back: 'Povratak',
     create_password: 'Unesi lozinku',

@@ -1,13 +1,23 @@
 /* global alert */
+import AsyncStorage from '@react-native-community/async-storage';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View, TextInput } from 'react-native';
+
+import {
+  BlueLoading,
+  BlueSpacing20,
+  BlueButton,
+  SafeBlueArea,
+  BlueCard,
+  BlueNavigationStyle,
+  BlueText,
+} from '../../BlueComponents';
 import { AppStorage } from '../../class';
-import AsyncStorage from '@react-native-community/async-storage';
-import { BlueLoading, BlueSpacing20, BlueButton, SafeBlueArea, BlueCard, BlueNavigationStyle, BlueText } from '../../BlueComponents';
-import PropTypes from 'prop-types';
-let loc = require('../../loc');
-let BlueApp = require('../../BlueApp');
-let BlueElectrum = require('../../BlueElectrum');
+
+const BlueApp = require('../../BlueApp');
+const BlueElectrum = require('../../BlueElectrum');
+const loc = require('../../loc');
 
 export default class ElectrumSettings extends Component {
   static navigationOptions = () => ({
@@ -24,8 +34,8 @@ export default class ElectrumSettings extends Component {
   }
 
   async componentDidMount() {
-    let host = await AsyncStorage.getItem(AppStorage.ELECTRUM_HOST);
-    let port = await AsyncStorage.getItem(AppStorage.ELECTRUM_TCP_PORT);
+    const host = await AsyncStorage.getItem(AppStorage.ELECTRUM_HOST);
+    const port = await AsyncStorage.getItem(AppStorage.ELECTRUM_TCP_PORT);
 
     this.setState({
       isLoading: false,
@@ -77,15 +87,20 @@ export default class ElectrumSettings extends Component {
               height: 44,
               alignItems: 'center',
               borderRadius: 4,
-            }}
-          >
+            }}>
             <TextInput
               placeholder={'host, for example 111.222.333.444'}
               placeholderTextColor={BlueApp.settings.alternativeTextColor}
               value={this.state.host}
               onChangeText={text => this.setState({ host: text })}
               numberOfLines={1}
-              style={{ flex: 1, marginHorizontal: 8, minHeight: 36, height: 36, color: BlueApp.settings.foregroundColor }}
+              style={{
+                flex: 1,
+                marginHorizontal: 8,
+                minHeight: 36,
+                height: 36,
+                color: BlueApp.settings.foregroundColor,
+              }}
               editable={!this.state.isLoading}
               underlineColorAndroid="transparent"
             />
@@ -102,15 +117,20 @@ export default class ElectrumSettings extends Component {
               height: 44,
               alignItems: 'center',
               borderRadius: 4,
-            }}
-          >
+            }}>
             <TextInput
               placeholder={'TCP port, usually 50001'}
               placeholderTextColor={BlueApp.settings.alternativeTextColor}
               value={this.state.port}
               onChangeText={text => this.setState({ port: text })}
               numberOfLines={1}
-              style={{ flex: 1, marginHorizontal: 8, minHeight: 36, height: 36, color: BlueApp.settings.foregroundColor }}
+              style={{
+                flex: 1,
+                marginHorizontal: 8,
+                minHeight: 36,
+                height: 36,
+                color: BlueApp.settings.foregroundColor,
+              }}
               editable={!this.state.isLoading}
               underlineColorAndroid="transparent"
             />

@@ -1,7 +1,9 @@
+import bip21 from 'bip21';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View, Share, TextInput, KeyboardAvoidingView, Dimensions, ScrollView } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
-import bip21 from 'bip21';
+
 import {
   SafeBlueArea,
   BlueCard,
@@ -11,11 +13,12 @@ import {
   BlueText,
   BlueCopyTextToClipboard,
 } from '../../BlueComponents';
-import PropTypes from 'prop-types';
 import Privacy from '../../Privacy';
+
 /** @type {AppStorage} */
-let BlueApp = require('../../BlueApp');
-let loc = require('../../loc');
+const BlueApp = require('../../BlueApp');
+const loc = require('../../loc');
+
 const { width } = Dimensions.get('window');
 
 export default class ReceiveAmount extends Component {
@@ -37,7 +40,7 @@ export default class ReceiveAmount extends Component {
 
   constructor(props) {
     super(props);
-    let address = props.navigation.state.params.address;
+    const address = props.navigation.state.params.address;
 
     this.state = {
       address: address,
@@ -79,8 +82,7 @@ export default class ReceiveAmount extends Component {
             alignItems: 'center',
             marginVertical: 8,
             borderRadius: 4,
-          }}
-        >
+          }}>
           <TextInput
             onChangeText={text => this.setState({ label: text })}
             placeholderTextColor={BlueApp.settings.alternativeTextColor}
@@ -109,7 +111,9 @@ export default class ReceiveAmount extends Component {
   renderWithSetAmount() {
     return (
       <View style={{ justifyContent: 'space-between' }}>
-        <BlueText style={{ color: '#9aa0aa', fontWeight: '600', textAlign: 'center', paddingBottom: 24 }} numberOfLines={1}>
+        <BlueText
+          style={{ color: '#9aa0aa', fontWeight: '600', textAlign: 'center', paddingBottom: 24 }}
+          numberOfLines={1}>
           {this.state.label}
         </BlueText>
         <View style={{ justifyContent: 'center', alignItems: 'center', paddingHorizontal: 16 }}>

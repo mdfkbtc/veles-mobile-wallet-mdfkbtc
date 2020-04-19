@@ -15,7 +15,9 @@ module.exports = {
     list: {
       app_name: 'Veles Wallet',
       title: 'plånböcker',
-      header: 'En plånbok representerar ett par av en privat nyckel samt en adress' + 'som du kan dela med andra för att ta emot coins',
+      header:
+        'En plånbok representerar ett par av en privat nyckel samt en adress' +
+        'som du kan dela med andra för att ta emot coins',
       add: 'Ny Plånbok',
       create_a_wallet: 'Ny plånbok',
       create_a_wallet1: 'Det är gratis och du kan skapa',

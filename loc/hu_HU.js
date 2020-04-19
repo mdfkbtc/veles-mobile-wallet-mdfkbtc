@@ -15,7 +15,8 @@ module.exports = {
     list: {
       app_name: 'Veles Wallet',
       title: 'tárcák',
-      header: 'Egy tárca nem más, mint egy kulcspár, és egy cím. A cím nyilvános, és megoszhatod másokkal, ha szeretnél Bitcoint fogadni',
+      header:
+        'Egy tárca nem más, mint egy kulcspár, és egy cím. A cím nyilvános, és megoszhatod másokkal, ha szeretnél Bitcoint fogadni',
       add: 'Új Tárca',
       create_a_wallet: 'Új tárca',
       create_a_wallet1: 'Ingyenes, és annyit hozhatsz létre',
@@ -204,7 +205,8 @@ module.exports = {
       'tárhelyedet fogja megnyitni. Ez ugyanúgy fog kinézni, mint egy igazi tárhely, ' +
       'azzal a különbséggel, hogy a pénzed teljes biztonságban lesz az elsődleges ' +
       'tárhelyen.',
-    help2: 'Az alternatív tárhely teljesen működőképes, és akár egy kisebb összeget is elhelyezhetsz rajta, hogy hitelesebbnek tűnjön.',
+    help2:
+      'Az alternatív tárhely teljesen működőképes, és akár egy kisebb összeget is elhelyezhetsz rajta, hogy hitelesebbnek tűnjön.',
     create_fake_storage: 'Hamis tárhely létrehozása',
     go_back: 'Vissza',
     create_password: 'Jelszó létrehozása',

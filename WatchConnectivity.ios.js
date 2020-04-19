@@ -1,6 +1,8 @@
-import * as Watch from 'react-native-watch-connectivity';
 import { InteractionManager } from 'react-native';
+import * as Watch from 'react-native-watch-connectivity';
+
 const loc = require('./loc');
+
 export default class WatchConnectivity {
   isAppInstalled = false;
   static shared = new WatchConnectivity();
@@ -66,7 +68,7 @@ export default class WatchConnectivity {
 
     return InteractionManager.runAfterInteractions(async () => {
       if (WatchConnectivity.shared.isAppInstalled) {
-        let wallets = [];
+        const wallets = [];
 
         for (const wallet of allWallets) {
           let receiveAddress = '';
@@ -83,8 +85,8 @@ export default class WatchConnectivity {
               receiveAddress = wallet.getAddress();
             }
           }
-          let transactions = wallet.getTransactions(10);
-          let watchTransactions = [];
+          const transactions = wallet.getTransactions(10);
+          const watchTransactions = [];
           for (const transaction of transactions) {
             let type = 'pendingConfirmation';
             let memo = '';
@@ -131,7 +133,10 @@ export default class WatchConnectivity {
             } else {
               amount = loc.formatBalance(transaction.value, wallet.getPreferredBalanceUnit(), true).toString();
             }
-            if (WatchConnectivity.shared.tx_metadata[transaction.hash] && WatchConnectivity.shared.tx_metadata[transaction.hash]['memo']) {
+            if (
+              WatchConnectivity.shared.tx_metadata[transaction.hash] &&
+              WatchConnectivity.shared.tx_metadata[transaction.hash]['memo']
+            ) {
               memo = WatchConnectivity.shared.tx_metadata[transaction.hash]['memo'];
             } else if (transaction.memo) {
               memo = transaction.memo;

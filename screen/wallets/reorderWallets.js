@@ -1,15 +1,17 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View, ActivityIndicator, Image, Text } from 'react-native';
-import { SafeBlueArea, BlueNavigationStyle } from '../../BlueComponents';
-import SortableList from 'react-native-sortable-list';
-import LinearGradient from 'react-native-linear-gradient';
-import PropTypes from 'prop-types';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+import LinearGradient from 'react-native-linear-gradient';
+import SortableList from 'react-native-sortable-list';
+
+import { SafeBlueArea, BlueNavigationStyle } from '../../BlueComponents';
 import WalletGradient from '../../class/walletGradient';
-let EV = require('../../events');
+
+const BlueApp = require('../../BlueApp');
+const EV = require('../../events');
 /** @type {AppStorage} */
-let BlueApp = require('../../BlueApp');
-let loc = require('../../loc/');
+const loc = require('../../loc/');
 
 export default class ReorderWallets extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -34,7 +36,7 @@ export default class ReorderWallets extends Component {
     this.props.navigation.setParams({
       customCloseButtonFunction: async () => {
         if (this.sortableList.state.data.length === this.state.data.length && this.state.hasMovedARow) {
-          let newWalletsOrderArray = [];
+          const newWalletsOrderArray = [];
           this.sortableList.state.order.forEach(element => {
             newWalletsOrderArray.push(this.state.data[element]);
           });
@@ -68,8 +70,7 @@ export default class ReorderWallets extends Component {
         shadowOpacity={40 / 100}
         shadowOffset={{ width: 0, height: 0 }}
         shadowRadius={5}
-        style={{ backgroundColor: 'transparent', padding: 10, marginVertical: 17 }}
-      >
+        style={{ backgroundColor: 'transparent', padding: 10, marginVertical: 17 }}>
         <LinearGradient
           shadowColor="#000000"
           colors={WalletGradient.gradientsFor(item.type)}
@@ -78,12 +79,9 @@ export default class ReorderWallets extends Component {
             borderRadius: 10,
             minHeight: 164,
             elevation: 5,
-          }}
-        >
+          }}>
           <Image
-            source={
-              (require('../../img/btc-shape.png'))
-            }
+            source={require('../../img/btc-shape.png')}
             style={{
               width: 99,
               height: 94,
@@ -100,8 +98,7 @@ export default class ReorderWallets extends Component {
               backgroundColor: 'transparent',
               fontSize: 19,
               color: '#fff',
-            }}
-          >
+            }}>
             {item.getLabel()}
           </Text>
           <Text
@@ -112,8 +109,7 @@ export default class ReorderWallets extends Component {
               fontWeight: 'bold',
               fontSize: 36,
               color: '#fff',
-            }}
-          >
+            }}>
             {loc.formatBalance(Number(item.getBalance()), item.getPreferredBalanceUnit(), true)}
           </Text>
           <Text style={{ backgroundColor: 'transparent' }} />
@@ -123,8 +119,7 @@ export default class ReorderWallets extends Component {
               backgroundColor: 'transparent',
               fontSize: 13,
               color: '#fff',
-            }}
-          >
+            }}>
             {loc.wallets.list.latest_transaction}
           </Text>
           <Text
@@ -134,8 +129,7 @@ export default class ReorderWallets extends Component {
               fontWeight: 'bold',
               fontSize: 16,
               color: '#fff',
-            }}
-          >
+            }}>
             {loc.transactionTimeToReadable(item.getLatestTransactionTime())}
           </Text>
         </LinearGradient>

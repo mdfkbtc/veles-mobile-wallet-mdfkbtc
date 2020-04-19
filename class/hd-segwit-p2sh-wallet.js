@@ -1,13 +1,16 @@
-import { AbstractHDWallet } from './abstract-hd-wallet';
+import BigNumber from 'bignumber.js';
+import bip39 from 'bip39';
+import b58 from 'bs58check';
 import Frisbee from 'frisbee';
 import { NativeModules } from 'react-native';
-import bip39 from 'bip39';
-import BigNumber from 'bignumber.js';
-import b58 from 'bs58check';
-import signer from '../models/signer';
+
 import { BitcoinUnit } from '../models/bitcoinUnits';
-const bitcoin = require('bitcoinjs-lib');
+import signer from '../models/signer';
+import { AbstractHDWallet } from './abstract-hd-wallet';
+
 const HDNode = require('bip32');
+const bitcoin = require('bitcoinjs-lib');
+
 const BlueElectrum = require('../BlueElectrum');
 
 const { RNRandomBytes } = NativeModules;
@@ -51,12 +54,12 @@ export class HDSegwitP2SHWallet extends AbstractHDWallet {
     return true;
   }
 
-  allowSendMax(){
+  allowSendMax() {
     return true;
   }
 
   async generate() {
-    let that = this;
+    const that = this;
     return new Promise(function(resolve) {
       if (typeof RNRandomBytes === 'undefined') {
         // CLI/CI environment
@@ -71,7 +74,7 @@ export class HDSegwitP2SHWallet extends AbstractHDWallet {
       // RN environment
       RNRandomBytes.randomBytes(32, (err, bytes) => {
         if (err) throw new Error(err);
-        let b = Buffer.from(bytes, 'base64').toString('hex');
+        const b = Buffer.from(bytes, 'base64').toString('hex');
         that.setSecret(bip39.entropyToMnemonic(b));
         resolve();
       });
@@ -125,12 +128,12 @@ export class HDSegwitP2SHWallet extends AbstractHDWallet {
 
   generateAddresses() {
     if (!this._node0) {
-        const xpub = ypubToXpub(this.getXpub());
-        const hdNode = HDNode.fromBase58(xpub);
-        this._node0 = hdNode.derive(0);
+      const xpub = ypubToXpub(this.getXpub());
+      const hdNode = HDNode.fromBase58(xpub);
+      this._node0 = hdNode.derive(0);
     }
-    for (let index = 0; index <this.num_addresses; index++) {
-      let address = nodeToP2shSegwitAddress(this._node0.derive(index));
+    for (let index = 0; index < this.num_addresses; index++) {
+      const address = nodeToP2shSegwitAddress(this._node0.derive(index));
       this._address.push(address);
       this._address_to_wif_cache[address] = this._getWIFByIndex(index);
       this._addr_balances[address] = {
@@ -150,7 +153,7 @@ export class HDSegwitP2SHWallet extends AbstractHDWallet {
    * @returns {string}
    */
   createTx(utxos, amount, fee, address) {
-    for (let utxo of utxos) {
+    for (const utxo of utxos) {
       utxo.wif = this._getWifForAddress(utxo.address);
     }
 
@@ -158,18 +161,12 @@ export class HDSegwitP2SHWallet extends AbstractHDWallet {
 
     if (amount === BitcoinUnit.MAX) {
       amountPlusFee = new BigNumber(0);
-      for (let utxo of utxos) {
+      for (const utxo of utxos) {
         amountPlusFee = amountPlusFee.plus(utxo.value);
       }
       amountPlusFee = amountPlusFee.dividedBy(100000000).toString(10);
     }
 
-    return signer.createHDSegwitTransaction(
-      utxos,
-      address,
-      amountPlusFee,
-      fee,
-      this.getAddressForTransaction(),
-    );
+    return signer.createHDSegwitTransaction(utxos, address, amountPlusFee, fee, this.getAddressForTransaction());
   }
 }

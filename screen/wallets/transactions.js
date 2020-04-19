@@ -1,6 +1,6 @@
 /* global alert */
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Chain } from '../../models/bitcoinUnits';
 import {
   Text,
   Platform,
@@ -17,8 +17,11 @@ import {
   Linking,
   KeyboardAvoidingView,
 } from 'react-native';
-import PropTypes from 'prop-types';
+import { Icon } from 'react-native-elements';
+import Handoff from 'react-native-handoff';
+import Modal from 'react-native-modal';
 import { NavigationEvents } from 'react-navigation';
+
 import {
   BlueSendButtonIcon,
   BlueListItem,
@@ -28,16 +31,15 @@ import {
   BlueSpacing10,
   BlueSpacing40,
 } from '../../BlueComponents';
-import WalletGradient from '../../class/walletGradient';
-import { Icon } from 'react-native-elements';
-import Handoff from 'react-native-handoff';
-import Modal from 'react-native-modal';
 import NavigationService from '../../NavigationService';
+import WalletGradient from '../../class/walletGradient';
+import { Chain } from '../../models/bitcoinUnits';
+
 /** @type {AppStorage} */
-let BlueApp = require('../../BlueApp');
-let loc = require('../../loc');
-let EV = require('../../events');
-let BlueElectrum = require('../../BlueElectrum');
+const BlueApp = require('../../BlueApp');
+const BlueElectrum = require('../../BlueElectrum');
+const EV = require('../../events');
+const loc = require('../../loc');
 
 export default class WalletTransactions extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -50,8 +52,7 @@ export default class WalletTransactions extends Component {
             navigation.navigate('WalletDetails', {
               wallet: navigation.state.params.wallet,
             })
-          }
-        >
+          }>
           <Icon name="kebab-horizontal" type="octicon" size={22} color="#FFFFFF" />
         </TouchableOpacity>
       ),
@@ -93,7 +94,7 @@ export default class WalletTransactions extends Component {
    * Forcefully fetches TXs and balance for wallet
    */
   refreshTransactionsFunction() {
-    let that = this;
+    const that = this;
     setTimeout(function() {
       that.refreshTransactions();
     }, 4000); // giving a chance to remote server to propagate
@@ -107,9 +108,9 @@ export default class WalletTransactions extends Component {
    * @returns {Array}
    */
   getTransactions(limit = Infinity) {
-    let wallet = this.props.navigation.getParam('wallet');
+    const wallet = this.props.navigation.getParam('wallet');
     let txs = wallet.getTransactions();
-    for (let tx of txs) {
+    for (const tx of txs) {
       tx.sort_ts = +new Date(tx.received);
     }
     txs = txs.sort(function(a, b) {
@@ -147,14 +148,14 @@ export default class WalletTransactions extends Component {
           await BlueElectrum.ping();
           await BlueElectrum.waitTillConnected();
           /** @type {LegacyWallet} */
-          let wallet = this.state.wallet;
-          let balanceStart = +new Date();
+          const wallet = this.state.wallet;
+          const balanceStart = +new Date();
           const oldBalance = wallet.getBalance();
           await wallet.fetchBalance();
           if (oldBalance !== wallet.getBalance()) smthChanged = true;
-          let balanceEnd = +new Date();
+          const balanceEnd = +new Date();
           console.log(wallet.getLabel(), 'fetch balance took', (balanceEnd - balanceStart) / 1000, 'sec');
-          let start = +new Date();
+          const start = +new Date();
           const oldTxLen = wallet.getTransactions().length;
           await wallet.fetchTransactions();
           if (wallet.fetchPendingTransactions) {
@@ -164,7 +165,7 @@ export default class WalletTransactions extends Component {
             await wallet.fetchUserInvoices();
           }
           if (oldTxLen !== wallet.getTransactions().length) smthChanged = true;
-          let end = +new Date();
+          const end = +new Date();
           console.log(wallet.getLabel(), 'fetch tx took', (end - start) / 1000, 'sec');
         } catch (err) {
           noErr = false;
@@ -188,7 +189,11 @@ export default class WalletTransactions extends Component {
 
   renderListFooterComponent = () => {
     // if not all txs rendered - display indicator
-    return (this.getTransactions(Infinity).length > this.state.limit && <ActivityIndicator style={{ marginVertical: 20 }} />) || <View />;
+    return (
+      (this.getTransactions(Infinity).length > this.state.limit && (
+        <ActivityIndicator style={{ marginVertical: 20 }} />
+      )) || <View />
+    );
   };
 
   renderListHeaderComponent = () => {
@@ -203,8 +208,7 @@ export default class WalletTransactions extends Component {
             fontWeight: 'bold',
             fontSize: 24,
             color: BlueApp.settings.foregroundColor,
-          }}
-        >
+          }}>
           {loc.transactions.list.tabBarLabel}
         </Text>
       </View>
@@ -291,15 +295,16 @@ export default class WalletTransactions extends Component {
             ListHeaderComponent={this.renderListHeaderComponent}
             ListFooterComponent={this.renderListFooterComponent}
             ListEmptyComponent={
-              <ScrollView style={{ minHeight: 100 }} contentContainerStyle={{ flex: 1, justifyContent: 'center', paddingHorizontal: 16 }}>
+              <ScrollView
+                style={{ minHeight: 100 }}
+                contentContainerStyle={{ flex: 1, justifyContent: 'center', paddingHorizontal: 16 }}>
                 <Text
                   numberOfLines={0}
                   style={{
                     fontSize: 18,
                     color: '#9aa0aa',
                     textAlign: 'center',
-                  }}
-                >
+                  }}>
                   {true && loc.wallets.list.empty_txs1}
                 </Text>
                 <Text
@@ -307,8 +312,7 @@ export default class WalletTransactions extends Component {
                     fontSize: 18,
                     color: '#9aa0aa',
                     textAlign: 'center',
-                  }}
-                >
+                  }}>
                   {true && loc.wallets.list.empty_txs2}
                 </Text>
 
@@ -317,7 +321,10 @@ export default class WalletTransactions extends Component {
               </ScrollView>
             }
             refreshControl={
-              <RefreshControl onRefresh={() => this.refreshTransactions()} refreshing={this.state.showShowFlatListRefreshControl} />
+              <RefreshControl
+                onRefresh={() => this.refreshTransactions()}
+                refreshing={this.state.showShowFlatListRefreshControl}
+              />
             }
             extraData={this.state.dataSource}
             data={this.state.dataSource}
@@ -336,14 +343,13 @@ export default class WalletTransactions extends Component {
             borderRadius: 0,
             minHeight: 48,
             overflow: 'hidden',
-          }}
-        >
+          }}>
           {(() => {
             if (this.state.wallet.allowReceive()) {
               return (
                 <BlueReceiveButtonIcon
                   onPress={() => {
-                      navigate('ReceiveDetails', { secret: this.state.wallet.getSecret() });
+                    navigate('ReceiveDetails', { secret: this.state.wallet.getSecret() });
                   }}
                 />
               );
@@ -355,13 +361,12 @@ export default class WalletTransactions extends Component {
               return (
                 <BlueSendButtonIcon
                   onPress={() => {
-                      navigate('SendDetails', {
-                        fromAddress: this.state.wallet.getAddress(),
-                        fromSecret: this.state.wallet.getSecret(),
-                        fromWallet: this.state.wallet,
-                      });
-                    }
-                  }
+                    navigate('SendDetails', {
+                      fromAddress: this.state.wallet.getAddress(),
+                      fromSecret: this.state.wallet.getSecret(),
+                      fromWallet: this.state.wallet,
+                    });
+                  }}
                 />
               );
             }

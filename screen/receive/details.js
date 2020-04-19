@@ -1,7 +1,10 @@
+import bip21 from 'bip21';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View, InteractionManager, ScrollView } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
-import bip21 from 'bip21';
+import Share from 'react-native-share';
+
 import {
   BlueLoading,
   SafeBlueArea,
@@ -12,13 +15,12 @@ import {
   BlueSpacing10,
   is,
 } from '../../BlueComponents';
-import PropTypes from 'prop-types';
 import Privacy from '../../Privacy';
-import Share from 'react-native-share';
 import { Chain } from '../../models/bitcoinUnits';
+
 /** @type {AppStorage} */
-let BlueApp = require('../../BlueApp');
-let loc = require('../../loc');
+const BlueApp = require('../../BlueApp');
+const loc = require('../../loc');
 
 export default class ReceiveDetails extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -29,7 +31,7 @@ export default class ReceiveDetails extends Component {
 
   constructor(props) {
     super(props);
-    let secret = props.navigation.state.params.secret || '';
+    const secret = props.navigation.state.params.secret || '';
 
     this.state = {
       secret: secret,
@@ -45,7 +47,7 @@ export default class ReceiveDetails extends Component {
     {
       let address;
       let wallet;
-      for (let w of BlueApp.getWallets()) {
+      for (const w of BlueApp.getWallets()) {
         if (w.getSecret() === this.state.secret) {
           // found our wallet
           wallet = w;
@@ -150,7 +152,7 @@ export default class ReceiveDetails extends Component {
                   } else {
                     InteractionManager.runAfterInteractions(async () => {
                       this.qrCodeSVG.toDataURL(data => {
-                        let shareImageBase64 = {
+                        const shareImageBase64 = {
                           message: `veles:${this.state.address}`,
                           url: `data:image/png;base64,${data}`,
                         };

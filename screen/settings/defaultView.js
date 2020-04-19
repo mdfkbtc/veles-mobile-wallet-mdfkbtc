@@ -1,8 +1,10 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { TouchableOpacity, View } from 'react-native';
+
 import { SafeBlueArea, BlueNavigationStyle, BlueListItem } from '../../BlueComponents';
-import PropTypes from 'prop-types';
 import OnAppLaunch from '../../class/onAppLaunch';
+
 const BlueApp = require('../../BlueApp');
 
 export default class DefaultView extends Component {
@@ -43,7 +45,9 @@ export default class DefaultView extends Component {
   onWalletSelectValueChanged = async wallet => {
     await OnAppLaunch.setViewAllWalletsEnabled(false);
     await OnAppLaunch.setSelectedDefaultWallet(wallet.getID());
-    this.setState({ defaultWalletLabel: wallet.getLabel(), viewAllWalletsEnabled: false }, () => this.props.navigation.pop());
+    this.setState({ defaultWalletLabel: wallet.getLabel(), viewAllWalletsEnabled: false }, () =>
+      this.props.navigation.pop(),
+    );
   };
 
   render() {

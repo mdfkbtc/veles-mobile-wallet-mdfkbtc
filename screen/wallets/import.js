@@ -1,14 +1,9 @@
 /* global alert */
-import {
-  SegwitP2SHWallet,
-  LegacyWallet,
-  WatchOnlyWallet,
-  HDSegwitP2SHWallet,
-  HDLegacyP2PKHWallet,
-  HDSegwitBech32Wallet,
-} from '../../class';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { KeyboardAvoidingView, Platform, Dimensions, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+
 import {
   BlueFormMultiInput,
   BlueButtonLink,
@@ -20,22 +15,31 @@ import {
   SafeBlueArea,
   BlueSpacing10,
   BlueSpacing20,
-  BlueNavigationStyle
-} from "../../BlueComponents";
-import PropTypes from "prop-types";
-import ReactNativeHapticFeedback from "react-native-haptic-feedback";
-import Privacy from "../../Privacy";
+  BlueNavigationStyle,
+} from '../../BlueComponents';
+import Privacy from '../../Privacy';
+import {
+  SegwitP2SHWallet,
+  LegacyWallet,
+  WatchOnlyWallet,
+  HDSegwitP2SHWallet,
+  HDLegacyP2PKHWallet,
+  HDSegwitBech32Wallet,
+} from '../../class';
 
-const EV = require("../../events");
 /** @type {AppStorage} */
-let BlueApp = require('../../BlueApp');
-let loc = require('../../loc');
+const BlueApp = require('../../BlueApp');
+const EV = require('../../events');
+const loc = require('../../loc');
+
 const { width } = Dimensions.get('window');
 
 export default class WalletsImport extends Component {
   static navigationOptions = {
     ...BlueNavigationStyle(),
-    title: loc.wallets.import.title.slice(0,1).toUpperCase() + loc.wallets.import.title.slice(1, loc.wallets.import.title.length),
+    title:
+      loc.wallets.import.title.slice(0, 1).toUpperCase() +
+      loc.wallets.import.title.slice(1, loc.wallets.import.title.length),
   };
 
   constructor(props) {
@@ -75,12 +79,12 @@ export default class WalletsImport extends Component {
   async importMnemonic(text) {
     try {
       // trying other wallet types
-      let segwitWallet = new SegwitP2SHWallet();
+      const segwitWallet = new SegwitP2SHWallet();
       segwitWallet.setSecret(text);
       if (segwitWallet.getAddress()) {
         // ok its a valid WIF
 
-        let legacyWallet = new LegacyWallet();
+        const legacyWallet = new LegacyWallet();
         legacyWallet.setSecret(text);
 
         await legacyWallet.fetchBalance();
@@ -98,7 +102,7 @@ export default class WalletsImport extends Component {
 
       // case - WIF is valid, just has uncompressed pubkey
 
-      let legacyWallet = new LegacyWallet();
+      const legacyWallet = new LegacyWallet();
       legacyWallet.setSecret(text);
       if (legacyWallet.getAddress()) {
         await legacyWallet.fetchBalance();
@@ -108,7 +112,7 @@ export default class WalletsImport extends Component {
 
       // if we're here - nope, its not a valid WIF
 
-      let hd4 = new HDSegwitBech32Wallet();
+      const hd4 = new HDSegwitBech32Wallet();
       hd4.setSecret(text);
       if (hd4.validateMnemonic()) {
         await hd4.fetchBalance();
@@ -118,7 +122,7 @@ export default class WalletsImport extends Component {
         }
       }
 
-      let hd2 = new HDSegwitP2SHWallet();
+      const hd2 = new HDSegwitP2SHWallet();
       hd2.setSecret(text);
       if (hd2.validateMnemonic()) {
         await hd2.fetchBalance();
@@ -128,7 +132,7 @@ export default class WalletsImport extends Component {
         }
       }
 
-      let hd3 = new HDLegacyP2PKHWallet();
+      const hd3 = new HDLegacyP2PKHWallet();
       hd3.setSecret(text);
       if (hd3.validateMnemonic()) {
         await hd3.fetchBalance();
@@ -172,7 +176,7 @@ export default class WalletsImport extends Component {
 
       // not valid? maybe its a watch-only address?
 
-      let watchOnly = new WatchOnlyWallet();
+      const watchOnly = new WatchOnlyWallet();
       watchOnly.setSecret(text);
       if (watchOnly.valid()) {
         await watchOnly.fetchTransactions();
@@ -235,9 +239,8 @@ export default class WalletsImport extends Component {
             />
             <View
               style={{
-              alignItems: 'center',
-              }}
-            >
+                alignItems: 'center',
+              }}>
               {Platform.select({
                 ios: (
                   <BlueDoneAndDismissKeyboardInputAccessory
@@ -260,8 +263,7 @@ export default class WalletsImport extends Component {
         <View
           style={{
             alignItems: 'center',
-          }}
-        >
+          }}>
           <BlueButton
             disabled={!this.state.label}
             title={loc.wallets.import.do_import}

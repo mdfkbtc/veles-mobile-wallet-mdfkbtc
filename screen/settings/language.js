@@ -1,9 +1,11 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { FlatList, TouchableOpacity } from 'react-native';
-import { BlueLoading, BlueText, SafeBlueArea, BlueListItem, BlueCard, BlueNavigationStyle } from '../../BlueComponents';
-import PropTypes from 'prop-types';
 import { Icon } from 'react-native-elements';
-let loc = require('../../loc');
+
+import { BlueLoading, BlueText, SafeBlueArea, BlueListItem, BlueCard, BlueNavigationStyle } from '../../BlueComponents';
+
+const loc = require('../../loc');
 
 export default class Language extends Component {
   static navigationOptions = () => ({
@@ -62,8 +64,7 @@ export default class Language extends Component {
           console.warn('setLanguage', item.value);
           loc.saveLanguage(item.value);
           return this.setState({ language: item.value });
-        }}
-      >
+        }}>
         <BlueListItem
           title={item.label}
           {...(this.state.language === item.value
@@ -91,7 +92,9 @@ export default class Language extends Component {
           renderItem={this.renderItem}
         />
         <BlueCard>
-          <BlueText>When selecting a new language, restarting Veles Wallet may be required for the change to take effect.</BlueText>
+          <BlueText>
+            When selecting a new language, restarting Veles Wallet may be required for the change to take effect.
+          </BlueText>
         </BlueCard>
       </SafeBlueArea>
     );

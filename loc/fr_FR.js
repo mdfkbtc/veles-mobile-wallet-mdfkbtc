@@ -10,7 +10,8 @@ module.exports = {
   wallets: {
     select_wallet: 'Choix du portefeuille',
     options: 'options',
-    createBitcoinWallet: 'In order to use a Lightning wallet, a Bitcoin wallet is needed to fund it. Would you like to continue anyway?',
+    createBitcoinWallet:
+      'In order to use a Lightning wallet, a Bitcoin wallet is needed to fund it. Would you like to continue anyway?',
 
     list: {
       app_name: 'Veles Wallet',
@@ -208,12 +209,16 @@ module.exports = {
       "Veles Wallet, débloquera se 'faux' espace de stockage. Le tiers pourra " +
       'confondre ces données avec des données légitimes, votre espace de stockage ' +
       "principal restera sécurisé et hors d'atteinte.",
-    help2: 'New storage will be fully functional, and you can store some ' + 'minimum amounts there so it looks more believable.',
+    help2:
+      'New storage will be fully functional, and you can store some ' +
+      'minimum amounts there so it looks more believable.',
     create_fake_storage: 'Créer un faux espace de stockage chiffré',
     go_back: 'Retour',
     create_password: 'Créer un mot de passe',
-    create_password_explanation: 'Le mot de passe pour le faux espace de stockage ne doit pas être le même que celui du stockage principal',
-    password_should_not_match: 'Le mot de passe pour le faux espace de stockage ne doit pas être le même que celui du stockage principal',
+    create_password_explanation:
+      'Le mot de passe pour le faux espace de stockage ne doit pas être le même que celui du stockage principal',
+    password_should_not_match:
+      'Le mot de passe pour le faux espace de stockage ne doit pas être le même que celui du stockage principal',
     retype_password: 'Confirmation du mot de passe',
     passwords_do_not_match: 'Vos mot de passe ne sont pas identiques, veillez ré-essayer',
     success: 'Succès',

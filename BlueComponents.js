@@ -1,8 +1,7 @@
 /* eslint react/prop-types: 0 */
-import React, { Component, useEffect, useState } from 'react';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { BlurView } from '@react-native-community/blur';
 import PropTypes from 'prop-types';
-import { Icon, FormLabel, FormInput, Text, Header, List, ListItem } from 'react-native-elements';
+import React, { Component, useEffect, useState } from 'react';
 import {
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -21,22 +20,27 @@ import {
   Platform,
   TextInput,
 } from 'react-native';
+import { Icon, FormLabel, FormInput, Text, Header, List, ListItem } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
-import Carousel from 'react-native-snap-carousel';
-import { BitcoinUnit } from './models/bitcoinUnits';
-import NavigationService from './NavigationService';
-import WalletGradient from './class/walletGradient';
-import ToolTip from 'react-native-tooltip';
-import { BlurView } from '@react-native-community/blur';
 import showPopupMenu from 'react-native-popup-menu-android';
-import NetworkTransactionFees, { NetworkTransactionFeeType } from './models/networkTransactionFees';
+import Carousel from 'react-native-snap-carousel';
+import ToolTip from 'react-native-tooltip';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+import NavigationService from './NavigationService';
 import Biometric from './class/biometrics';
-let loc = require('./loc/');
+import WalletGradient from './class/walletGradient';
+import { BitcoinUnit } from './models/bitcoinUnits';
+import NetworkTransactionFees, { NetworkTransactionFeeType } from './models/networkTransactionFees';
+
+const BlueApp = require('./BlueApp');
+const loc = require('./loc/');
 /** @type {AppStorage} */
-let BlueApp = require('./BlueApp');
+
 const { height, width } = Dimensions.get('window');
 const aspectRatio = height / width;
 const BigNumber = require('bignumber.js');
+
 let isIpad;
 if (aspectRatio > 1.6) {
   isIpad = false;
@@ -46,7 +50,9 @@ if (aspectRatio > 1.6) {
 
 export class BlueButton extends Component {
   render() {
-    let backgroundColor = this.props.backgroundColor ? this.props.backgroundColor : BlueApp.settings.buttonBackgroundColor;
+    let backgroundColor = this.props.backgroundColor
+      ? this.props.backgroundColor
+      : BlueApp.settings.buttonBackgroundColor;
     let fontColor = BlueApp.settings.buttonTextColor;
     if (this.props.hasOwnProperty('disabled') && this.props.disabled === true) {
       backgroundColor = BlueApp.settings.buttonDisabledBackgroundColor;
@@ -71,11 +77,14 @@ export class BlueButton extends Component {
           justifyContent: 'center',
           alignItems: 'center',
         }}
-        {...this.props}
-      >
+        {...this.props}>
         <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-          {this.props.icon && <Icon name={this.props.icon.name} type={this.props.icon.type} color={this.props.icon.color} />}
-          {this.props.title && <Text style={{ marginHorizontal: 8, fontSize: 16, color: fontColor }}>{this.props.title}</Text>}
+          {this.props.icon && (
+            <Icon name={this.props.icon.name} type={this.props.icon.type} color={this.props.icon.color} />
+          )}
+          {this.props.title && (
+            <Text style={{ marginHorizontal: 8, fontSize: 16, color: fontColor }}>{this.props.title}</Text>
+          )}
         </View>
       </TouchableOpacity>
     );
@@ -89,28 +98,34 @@ export class BitcoinButton extends Component {
         onPress={() => {
           // eslint-disable-next-line
           if (this.props.onPress) this.props.onPress();
-        }}
-      >
+        }}>
         <View
           style={{
             // eslint-disable-next-line
             borderColor: BlueApp.settings.hdborderColor,
             borderWidth: 1,
             borderRadius: 5,
-            backgroundColor: (this.props.active && BlueApp.settings.hdbackgroundColor) || BlueApp.settings.brandingColor,
+            backgroundColor:
+              (this.props.active && BlueApp.settings.hdbackgroundColor) || BlueApp.settings.brandingColor,
             // eslint-disable-next-line
             minWidth: this.props.style.width,
             // eslint-disable-next-line
             minHeight: this.props.style.height,
             height: this.props.style.height,
             flex: 1,
-          }}
-        >
+          }}>
           <View style={{ marginTop: 16, marginLeft: 16, marginBottom: 16 }}>
             <Text style={{ color: BlueApp.settings.hdborderColor, fontWeight: 'bold' }}>{loc.wallets.add.bitcoin}</Text>
           </View>
           <Image
-            style={{ width: 34, height: 34, marginRight: 8, marginBottom: 8, justifyContent: 'flex-end', alignSelf: 'flex-end' }}
+            style={{
+              width: 34,
+              height: 34,
+              marginRight: 8,
+              marginBottom: 8,
+              justifyContent: 'flex-end',
+              alignSelf: 'flex-end',
+            }}
             source={require('./img/addWallet/bitcoin.png')}
           />
         </View>
@@ -118,8 +133,6 @@ export class BitcoinButton extends Component {
     );
   }
 }
-
-
 
 export class BlueWalletNavigationHeader extends Component {
   static propTypes = {
@@ -137,7 +150,9 @@ export class BlueWalletNavigationHeader extends Component {
   }
 
   handleCopyPress = _item => {
-    Clipboard.setString(loc.formatBalance(this.state.wallet.getBalance(), this.state.wallet.getPreferredBalanceUnit()).toString());
+    Clipboard.setString(
+      loc.formatBalance(this.state.wallet.getBalance(), this.state.wallet.getPreferredBalanceUnit()).toString(),
+    );
   };
 
   handleBalanceVisibility = async _item => {
@@ -193,7 +208,7 @@ export class BlueWalletNavigationHeader extends Component {
     } else if (walletPreviousPreferredUnit === BitcoinUnit.SATS) {
       wallet.preferredBalanceUnit = BitcoinUnit.BTC;
       walletPreviousPreferredUnit = BitcoinUnit.SATS;
-     } else {
+    } else {
       wallet.preferredBalanceUnit = BitcoinUnit.BTC;
       walletPreviousPreferredUnit = BitcoinUnit.BTC;
     }
@@ -211,12 +226,9 @@ export class BlueWalletNavigationHeader extends Component {
     return (
       <LinearGradient
         colors={WalletGradient.gradientsFor(this.state.wallet.type)}
-        style={{ padding: 15, minHeight: 140, justifyContent: 'center' }}
-      >
+        style={{ padding: 15, minHeight: 140, justifyContent: 'center' }}>
         <Image
-          source={
-            (require('./img/btc-shape.png'))
-          }
+          source={require('./img/btc-shape.png')}
           style={{
             width: 99,
             height: 94,
@@ -232,8 +244,7 @@ export class BlueWalletNavigationHeader extends Component {
             backgroundColor: 'transparent',
             fontSize: 19,
             color: '#fff',
-          }}
-        >
+          }}>
           {this.state.wallet.getLabel()}
         </Text>
         {Platform.OS === 'ios' && (
@@ -241,9 +252,17 @@ export class BlueWalletNavigationHeader extends Component {
             ref={tooltip => (this.tooltip = tooltip)}
             actions={
               this.state.wallet.hideBalance
-                ? [{ text: this.state.wallet.hideBalance ? 'Show Balance' : 'Hide Balance', onPress: this.handleBalanceVisibility }]
+                ? [
+                    {
+                      text: this.state.wallet.hideBalance ? 'Show Balance' : 'Hide Balance',
+                      onPress: this.handleBalanceVisibility,
+                    },
+                  ]
                 : [
-                    { text: this.state.wallet.hideBalance ? 'Show Balance' : 'Hide Balance', onPress: this.handleBalanceVisibility },
+                    {
+                      text: this.state.wallet.hideBalance ? 'Show Balance' : 'Hide Balance',
+                      onPress: this.handleBalanceVisibility,
+                    },
                     { text: loc.transactions.details.copy, onPress: this.handleCopyPress },
                   ]
             }
@@ -253,8 +272,7 @@ export class BlueWalletNavigationHeader extends Component {
           style={styles.balance}
           onPress={() => this.changeWalletBalanceUnit()}
           ref={ref => (this.walletBalanceText = ref)}
-          onLongPress={() => (Platform.OS === 'ios' ? this.tooltip.showMenu() : this.showAndroidTooltip())}
-        >
+          onLongPress={() => (Platform.OS === 'ios' ? this.tooltip.showMenu() : this.showAndroidTooltip())}>
           {this.state.wallet.hideBalance ? (
             <BluePrivateBalance />
           ) : (
@@ -266,9 +284,10 @@ export class BlueWalletNavigationHeader extends Component {
                 fontWeight: 'bold',
                 fontSize: 36,
                 color: '#fff',
-              }}
-            >
-              {loc.formatBalance(this.state.wallet.getBalance(), this.state.wallet.getPreferredBalanceUnit(), true).toString()}
+              }}>
+              {loc
+                .formatBalance(this.state.wallet.getBalance(), this.state.wallet.getPreferredBalanceUnit(), true)
+                .toString()}
             </Text>
           )}
         </TouchableOpacity>
@@ -279,8 +298,10 @@ export class BlueWalletNavigationHeader extends Component {
 
 export class BlueButtonLink extends Component {
   render() {
-    let backgroundColor = this.props.backgroundColor ? this.props.backgroundColor : BlueApp.settings.buttonBackgroundColor;
-    let fontColor = BlueApp.settings.buttonTextColor;
+    const backgroundColor = this.props.backgroundColor
+      ? this.props.backgroundColor
+      : BlueApp.settings.buttonBackgroundColor;
+    const fontColor = BlueApp.settings.buttonTextColor;
     let buttonWidth = width / 1.5;
     if (this.props.hasOwnProperty('noMinWidth')) {
       buttonWidth = 0;
@@ -300,10 +321,11 @@ export class BlueButtonLink extends Component {
           justifyContent: 'center',
           alignItems: 'center',
         }}
-        {...this.props}
-      >
+        {...this.props}>
         <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-          {this.props.title && <Text style={{ marginHorizontal: 8, fontSize: 16, color: fontColor }}>{this.props.title}</Text>}
+          {this.props.title && (
+            <Text style={{ marginHorizontal: 8, fontSize: 16, color: fontColor }}>{this.props.title}</Text>
+          )}
         </View>
       </TouchableOpacity>
     );
@@ -320,15 +342,20 @@ export class BlueButtonLinkUrl extends Component {
           height: 60,
           justifyContent: 'center',
         }}
-        {...this.props}
-      >
-        <Text style={{ color: BlueApp.settings.buttonLinkUrlColor, textAlign: 'center', fontSize: 16 }}>{this.props.title}</Text>
+        {...this.props}>
+        <Text style={{ color: BlueApp.settings.buttonLinkUrlColor, textAlign: 'center', fontSize: 16 }}>
+          {this.props.title}
+        </Text>
       </TouchableOpacity>
     );
   }
 }
 
-export const BlueNavigationStyle = (navigation, withNavigationCloseButton = false, customCloseButtonFunction = undefined) => ({
+export const BlueNavigationStyle = (
+  navigation,
+  withNavigationCloseButton = false,
+  customCloseButtonFunction = undefined,
+) => ({
   headerStyle: {
     backgroundColor: BlueApp.settings.navbarColor,
     borderBottomWidth: 0,
@@ -349,15 +376,18 @@ export const BlueNavigationStyle = (navigation, withNavigationCloseButton = fals
               navigation.goBack(null);
             }
           : customCloseButtonFunction
-      }
-    >
+      }>
       <Image style={{ alignSelf: 'center' }} source={require('./img/close.png')} />
     </TouchableOpacity>
   ) : null,
   headerBackTitle: null,
 });
 
-export const BlueCreateTxNavigationStyle = (navigation, withAdvancedOptionsMenuButton = false, advancedOptionsMenuButtonAction) => ({
+export const BlueCreateTxNavigationStyle = (
+  navigation,
+  withAdvancedOptionsMenuButton = false,
+  advancedOptionsMenuButtonAction,
+) => ({
   headerStyle: {
     backgroundColor: BlueApp.settings.navbarColor,
     borderBottomWidth: 0,
@@ -374,8 +404,7 @@ export const BlueCreateTxNavigationStyle = (navigation, withAdvancedOptionsMenuB
       onPress={() => {
         Keyboard.dismiss();
         navigation.goBack(null);
-      }}
-    >
+      }}>
       <Image style={{ alignSelf: 'center' }} source={require('./img/close.png')} />
     </TouchableOpacity>
   ),
@@ -407,7 +436,9 @@ export const BluePrivateBalance = () => {
 export const BlueCopyToClipboardButton = ({ stringToCopy, displayText = false }) => {
   return (
     <TouchableOpacity {...this.props} onPress={() => Clipboard.setString(stringToCopy)}>
-      <Text style={{ fontSize: 13, fontWeight: '400', color: BlueApp.settings.buttonLinkUrlColor }}>{displayText || loc.transactions.details.copy}</Text>
+      <Text style={{ fontSize: 13, fontWeight: '400', color: BlueApp.settings.buttonLinkUrlColor }}>
+        {displayText || loc.transactions.details.copy}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -628,8 +659,7 @@ export class BlueHeaderDefaultSub extends Component {
                 fontWeight: 'bold',
                 fontSize: 34,
                 color: BlueApp.settings.foregroundColor,
-              }}
-            >
+              }}>
               {
                 // eslint-disable-next-line
                 this.props.leftText
@@ -641,8 +671,7 @@ export class BlueHeaderDefaultSub extends Component {
               onPress={() => {
                 // eslint-disable-next-line
                 if (this.props.onClose) this.props.onClose();
-              }}
-            >
+              }}>
               <View style={stylesBlueIcon.box}>
                 <View style={stylesBlueIcon.ballTransparrent}>
                   <Image source={require('./img/close.png')} />
@@ -676,8 +705,7 @@ export class BlueHeaderDefaultMain extends Component {
                 fontWeight: 'bold',
                 fontSize: 34,
                 color: BlueApp.settings.foregroundColor,
-              }}
-            >
+              }}>
               {
                 // eslint-disable-next-line
                 this.props.leftText
@@ -690,8 +718,7 @@ export class BlueHeaderDefaultMain extends Component {
               style={{
                 height: 48,
                 alignSelf: 'flex-end',
-              }}
-            >
+              }}>
               <BluePlusIcon />
             </TouchableOpacity>
           }
@@ -774,8 +801,7 @@ export class BlueUseAllFundsButton extends Component {
           justifyContent: 'space-between',
           alignItems: 'center',
           backgroundColor: BlueApp.settings.buttonBackgroundColor,
-        }}
-      >
+        }}>
         <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
           <Text
             style={{
@@ -787,17 +813,16 @@ export class BlueUseAllFundsButton extends Component {
               paddingLeft: 0,
               paddingTop: 12,
               paddingBottom: 12,
-            }}
-          >
+            }}>
             Total:
           </Text>
           {this.props.wallet.allowSendMax() && this.props.wallet.getBalance() > 0 ? (
             <BlueButtonLink
               onPress={this.props.onUseAllPressed}
               style={{ marginLeft: 8, paddingRight: 0, paddingLeft: 0, paddingTop: 12, paddingBottom: 12 }}
-              title={`${loc.formatBalanceWithoutSuffix(this.props.wallet.getBalance(), BitcoinUnit.BTC, true).toString()} ${
-                BitcoinUnit.BTC
-              }`}
+              title={`${loc
+                .formatBalanceWithoutSuffix(this.props.wallet.getBalance(), BitcoinUnit.BTC, true)
+                .toString()} ${BitcoinUnit.BTC}`}
             />
           ) : (
             <Text
@@ -810,9 +835,9 @@ export class BlueUseAllFundsButton extends Component {
                 paddingLeft: 0,
                 paddingTop: 12,
                 paddingBottom: 12,
-              }}
-            >
-              {loc.formatBalanceWithoutSuffix(this.props.wallet.getBalance(), BitcoinUnit.BTC, true).toString()} {BitcoinUnit.BTC}
+              }}>
+              {loc.formatBalanceWithoutSuffix(this.props.wallet.getBalance(), BitcoinUnit.BTC, true).toString()}{' '}
+              {BitcoinUnit.BTC}
             </Text>
           )}
         </View>
@@ -847,8 +872,7 @@ export class BlueDismissKeyboardInputAccessory extends Component {
             flexDirection: 'row',
             justifyContent: 'flex-end',
             alignItems: 'center',
-          }}
-        >
+          }}>
           <BlueButtonLink title="Done" onPress={() => Keyboard.dismiss()} />
         </View>
       </InputAccessoryView>
@@ -875,8 +899,7 @@ export class BlueDoneAndDismissKeyboardInputAccessory extends Component {
           flexDirection: 'row',
           justifyContent: 'flex-end',
           alignItems: 'center',
-        }}
-      >
+        }}>
         <BlueButtonLinkUrl title="Clear" onPress={this.props.onClearTapped} />
         <BlueButtonLinkUrl title="Paste" onPress={this.onPasteTapped} />
         <BlueButtonLinkUrl title="Done" onPress={() => Keyboard.dismiss()} />
@@ -884,7 +907,11 @@ export class BlueDoneAndDismissKeyboardInputAccessory extends Component {
     );
 
     if (Platform.OS === 'ios') {
-      return <InputAccessoryView nativeID={BlueDoneAndDismissKeyboardInputAccessory.InputAccessoryViewID}>{inputView}</InputAccessoryView>;
+      return (
+        <InputAccessoryView nativeID={BlueDoneAndDismissKeyboardInputAccessory.InputAccessoryViewID}>
+          {inputView}
+        </InputAccessoryView>
+      );
     } else {
       return <KeyboardAvoidingView style={{ height: 44 }}>{inputView}</KeyboardAvoidingView>;
     }
@@ -1153,8 +1180,7 @@ export class BlueReceiveButtonIcon extends Component {
             flex: 1,
             minWidth: 130,
             backgroundColor: BlueApp.settings.buttonBackgroundColor,
-          }}
-        >
+          }}>
           <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
             <View
               style={{
@@ -1165,8 +1191,7 @@ export class BlueReceiveButtonIcon extends Component {
                 transform: [{ rotate: '-45deg' }],
                 alignItems: 'center',
                 marginBottom: -11,
-              }}
-            >
+              }}>
               <Icon {...this.props} name="arrow-down" size={16} type="font-awesome" color="#aeed6a" />
             </View>
             <Text
@@ -1176,8 +1201,7 @@ export class BlueReceiveButtonIcon extends Component {
                 fontWeight: '500',
                 left: 5,
                 backgroundColor: 'transparent',
-              }}
-            >
+              }}>
               {loc.receive.header}
             </Text>
           </View>
@@ -1197,8 +1221,7 @@ export class BlueSendButtonIcon extends Component {
             minWidth: 130,
             backgroundColor: BlueApp.settings.buttonBackgroundColor,
             alignItems: 'center',
-          }}
-        >
+          }}>
           <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
             <View
               style={{
@@ -1208,8 +1231,7 @@ export class BlueSendButtonIcon extends Component {
                 backgroundColor: 'transparent',
                 transform: [{ rotate: '225deg' }],
                 marginBottom: 11,
-              }}
-            >
+              }}>
               <Icon {...this.props} name="arrow-down" size={16} type="font-awesome" color="#FAA" />
             </View>
             <Text
@@ -1218,8 +1240,7 @@ export class BlueSendButtonIcon extends Component {
                 fontSize: (isIpad && 10) || 16,
                 fontWeight: '500',
                 backgroundColor: 'transparent',
-              }}
-            >
+              }}>
               {loc.send.header}
             </Text>
           </View>
@@ -1238,8 +1259,7 @@ export class ManageFundsBigButton extends Component {
             flex: 1,
             width: 168,
             backgroundColor: BlueApp.settings.buttonBackgroundColor,
-          }}
-        >
+          }}>
           <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
             <View
               style={{
@@ -1248,9 +1268,14 @@ export class ManageFundsBigButton extends Component {
                 right: 5,
                 backgroundColor: 'transparent',
                 transform: [{ rotate: '90deg' }],
-              }}
-            >
-              <Icon {...this.props} name="link" size={16} type="font-awesome" color={BlueApp.settings.buttonAlternativeTextColor} />
+              }}>
+              <Icon
+                {...this.props}
+                name="link"
+                size={16}
+                type="font-awesome"
+                color={BlueApp.settings.buttonAlternativeTextColor}
+              />
             </View>
             <Text
               style={{
@@ -1258,8 +1283,7 @@ export class ManageFundsBigButton extends Component {
                 fontSize: (isIpad && 10) || 16,
                 fontWeight: '500',
                 backgroundColor: 'transparent',
-              }}
-            >
+              }}>
               {loc.lnd.title}
             </Text>
           </View>
@@ -1310,8 +1334,7 @@ export class NewWalletPanel extends Component {
             this.handleClick();
           }
         }}
-        style={{ marginVertical: 17 }}
-      >
+        style={{ marginVertical: 17 }}>
         <LinearGradient
           colors={WalletGradient.createWallet}
           style={{
@@ -1320,8 +1343,7 @@ export class NewWalletPanel extends Component {
             minHeight: 164,
             justifyContent: 'center',
             alignItems: 'center',
-          }}
-        >
+          }}>
           <BluePlusIconDimmed />
           <Text
             style={{
@@ -1329,8 +1351,7 @@ export class NewWalletPanel extends Component {
               fontWeight: 'bold',
               fontSize: 20,
               color: BlueApp.settings.alternativeTextColor,
-            }}
-          >
+            }}>
             {loc.wallets.list.create_a_wallet}
           </Text>
           <Text style={{ backgroundColor: 'transparent' }} />
@@ -1339,8 +1360,7 @@ export class NewWalletPanel extends Component {
               backgroundColor: 'transparent',
               fontSize: 13,
               color: BlueApp.settings.alternativeTextColor,
-            }}
-          >
+            }}>
             {loc.wallets.list.create_a_wallet1}
           </Text>
           <Text
@@ -1348,8 +1368,7 @@ export class NewWalletPanel extends Component {
               backgroundColor: 'transparent',
               fontSize: 13,
               color: BlueApp.settings.alternativeTextColor,
-            }}
-          >
+            }}>
             {loc.wallets.list.create_a_wallet2}
           </Text>
         </LinearGradient>
@@ -1359,10 +1378,10 @@ export class NewWalletPanel extends Component {
 }
 
 export const BlueTransactionListItem = ({ item, itemPriceUnit = BitcoinUnit.BTC }) => {
-  const calculateTimeLabel = () => {
+  const calculateTimeLabel = useCallback(() => {
     const transactionTimeToReadable = loc.transactionTimeToReadable(item.received);
     return setTransactionTimeToReadable(transactionTimeToReadable);
-  };
+  });
   const interval = setInterval(() => calculateTimeLabel(), 60000);
   const [transactionTimeToReadable, setTransactionTimeToReadable] = useState('...');
   const [subtitleNumberOfLines, setSubtitleNumberOfLines] = useState(1);
@@ -1370,7 +1389,7 @@ export const BlueTransactionListItem = ({ item, itemPriceUnit = BitcoinUnit.BTC 
   useEffect(() => {
     calculateTimeLabel();
     return () => clearInterval(interval);
-  }, [item, itemPriceUnit]);
+  }, [calculateTimeLabel, interval, item, itemPriceUnit]);
 
   const txMemo = () => {
     if (BlueApp.tx_metadata[item.hash] && BlueApp.tx_metadata[item.hash]['memo']) {
@@ -1499,8 +1518,14 @@ export const BlueTransactionListItem = ({ item, itemPriceUnit = BitcoinUnit.BTC 
   };
 
   const subtitle = () => {
-    return loc.transactions.list.conf + ': ' + (item.confirmations < 7 ? item.confirmations : '6')+ '/6 ' + txMemo() + (item.memo || '');
-
+    return (
+      loc.transactions.list.conf +
+      ': ' +
+      (item.confirmations < 7 ? item.confirmations : '6') +
+      '/6 ' +
+      txMemo() +
+      (item.memo || '')
+    );
   };
 
   const onPress = () => {
@@ -1691,7 +1716,9 @@ export class BlueListTransactionItem extends Component {
 
   subtitle = () => {
     return (
-      (this.props.item.confirmations < 7 ? loc.transactions.list.conf + ': ' + this.props.item.confirmations + ' ' : '') +
+      (this.props.item.confirmations < 7
+        ? loc.transactions.list.conf + ': ' + this.props.item.confirmations + ' '
+        : '') +
       this.txMemo() +
       (this.props.item.memo || '')
     );
@@ -1755,8 +1782,8 @@ export class WalletsCarousel extends Component {
   }
 
   _renderItem({ item, index }) {
-    let scaleValue = new Animated.Value(1.0);
-    let props = { duration: 50 };
+    const scaleValue = new Animated.Value(1.0);
+    const props = { duration: 50 };
     if (Platform.OS === 'android') {
       props['useNativeDriver'] = true;
     }
@@ -1786,8 +1813,7 @@ export class WalletsCarousel extends Component {
         style={{ paddingRight: 10, marginVertical: 17, transform: [{ scale: scaleValue }] }}
         shadowOpacity={40 / 100}
         shadowOffset={{ width: 0, height: 0 }}
-        shadowRadius={5}
-      >
+        shadowRadius={5}>
         <TouchableWithoutFeedback
           onPressIn={this.onPressedIn}
           onPressOut={this.onPressedOut}
@@ -1796,8 +1822,7 @@ export class WalletsCarousel extends Component {
             if (WalletsCarousel.handleClick) {
               WalletsCarousel.handleClick(index);
             }
-          }}
-        >
+          }}>
           <LinearGradient
             shadowColor={BlueApp.settings.shadowColor}
             colors={WalletGradient.gradientsFor(item.type)}
@@ -1806,8 +1831,7 @@ export class WalletsCarousel extends Component {
               borderRadius: 10,
               minHeight: 164,
               elevation: 5,
-            }}
-          >
+            }}>
             <Image
               source={require('./img/btc-shape.png')}
               style={{
@@ -1826,8 +1850,7 @@ export class WalletsCarousel extends Component {
                 backgroundColor: 'transparent',
                 fontSize: 19,
                 color: BlueApp.settings.inverseForegroundColor,
-              }}
-            >
+              }}>
               {item.getLabel()}
             </Text>
             {item.hideBalance ? (
@@ -1841,8 +1864,7 @@ export class WalletsCarousel extends Component {
                   fontWeight: 'bold',
                   fontSize: 36,
                   color: BlueApp.settings.inverseForegroundColor,
-                }}
-              >
+                }}>
                 {loc.formatBalance(Number(item.getBalance()), item.getPreferredBalanceUnit(), true)}
               </Text>
             )}
@@ -1853,8 +1875,7 @@ export class WalletsCarousel extends Component {
                 backgroundColor: 'transparent',
                 fontSize: 13,
                 color: BlueApp.settings.inverseForegroundColor,
-              }}
-            >
+              }}>
               {loc.wallets.list.latest_transaction}
             </Text>
             <Text
@@ -1864,8 +1885,7 @@ export class WalletsCarousel extends Component {
                 fontWeight: 'bold',
                 fontSize: 16,
                 color: BlueApp.settings.inverseForegroundColor,
-              }}
-            >
+              }}>
               {loc.transactionTimeToReadable(item.getLatestTransactionTime())}
             </Text>
           </LinearGradient>
@@ -1930,8 +1950,7 @@ export class BlueAddressInput extends Component {
           alignItems: 'center',
           marginVertical: 8,
           borderRadius: 4,
-        }}
-      >
+        }}>
         <TextInput
           onChangeText={text => {
             this.props.onChangeText(text);
@@ -1961,8 +1980,7 @@ export class BlueAddressInput extends Component {
             paddingVertical: 4,
             paddingHorizontal: 8,
             marginHorizontal: 4,
-          }}
-        >
+          }}>
           <Icon name="qrcode" size={22} type="font-awesome" color={BlueApp.settings.foregroundColor} />
           <Text style={{ marginLeft: 4, color: BlueApp.settings.inverseForegroundColor }}>{loc.send.details.scan}</Text>
         </TouchableOpacity>
@@ -2047,7 +2065,14 @@ export class BlueReplaceFeeSuggestions extends Component {
           </>
         )}
         <TouchableOpacity onPress={() => this.customTextInput.focus()}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginLeft: 18, marginRight: 18, alignItems: 'center' }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              marginLeft: 18,
+              marginRight: 18,
+              alignItems: 'center',
+            }}>
             <Text style={{ color: BlueApp.settings.foregroundColor, fontSize: 16, fontWeight: '500' }}>Custom</Text>
             <View
               style={{
@@ -2058,8 +2083,7 @@ export class BlueReplaceFeeSuggestions extends Component {
                 alignItems: 'center',
                 justifyContent: 'flex-end',
                 marginVertical: 8,
-              }}
-            >
+              }}>
               <TextInput
                 onChangeText={this.onCustomFeeTextChange}
                 keyboardType={'numeric'}
@@ -2084,13 +2108,16 @@ export class BlueReplaceFeeSuggestions extends Component {
                 inputAccessoryViewID={BlueDismissKeyboardInputAccessory.InputAccessoryViewID}
               />
               <Text style={{ color: BlueApp.settings.alternativeTextColor, marginHorizontal: 8 }}>sat/b</Text>
-              {this.state.selectedFeeType === NetworkTransactionFeeType.CUSTOM && <Icon name="check" type="font-awesome" color="#0c2550" />}
+              {this.state.selectedFeeType === NetworkTransactionFeeType.CUSTOM && (
+                <Icon name="check" type="font-awesome" color="#0c2550" />
+              )}
             </View>
             <BlueDismissKeyboardInputAccessory />
           </View>
         </TouchableOpacity>
         <BlueText>
-          The total fee rate (satoshi per byte) you want to pay should be higher than {this.props.transactionMinimum} sat/byte
+          The total fee rate (satoshi per byte) you want to pay should be higher than {this.props.transactionMinimum}{' '}
+          sat/byte
         </BlueText>
       </View>
     );
@@ -2160,23 +2187,28 @@ export class BlueBitcoinAmount extends Component {
               ref={textInput => (this.textInput = textInput)}
               editable={!this.props.isLoading && !this.props.disabled}
               value={amount}
-              placeholderTextColor={this.props.disabled ? BlueApp.settings.buttonDisabledTextColor : BlueApp.settings.alternativeTextColor2}
+              placeholderTextColor={
+                this.props.disabled ? BlueApp.settings.buttonDisabledTextColor : BlueApp.settings.alternativeTextColor2
+              }
               style={{
-                color: this.props.disabled ? BlueApp.settings.buttonDisabledTextColor : BlueApp.settings.alternativeTextColor2,
+                color: this.props.disabled
+                  ? BlueApp.settings.buttonDisabledTextColor
+                  : BlueApp.settings.alternativeTextColor2,
                 fontSize: 36,
                 fontWeight: '600',
               }}
             />
             <Text
               style={{
-                color: this.props.disabled ? BlueApp.settings.buttonDisabledTextColor : BlueApp.settings.alternativeTextColor2,
+                color: this.props.disabled
+                  ? BlueApp.settings.buttonDisabledTextColor
+                  : BlueApp.settings.alternativeTextColor2,
                 fontSize: 16,
                 marginHorizontal: 4,
                 paddingBottom: 6,
                 fontWeight: '600',
                 alignSelf: 'flex-end',
-              }}
-            >
+              }}>
               {' ' + this.props.unit}
             </Text>
           </View>
@@ -2189,12 +2221,8 @@ export class BlueBitcoinAmount extends Component {
 export class NavbarLogo extends Component {
   render() {
     return (
-      <View style={{flexDirection: 'row'}}>
-        <Image
-          source={require('./img/veles.png')}
-          style={{ maxWidth: 40, maxHeight: 40, marginLeft: 15 }}
-        />
- 
+      <View style={{ flexDirection: 'row' }}>
+        <Image source={require('./img/veles.png')} style={{ maxWidth: 40, maxHeight: 40, marginLeft: 15 }} />
       </View>
     );
   }

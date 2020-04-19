@@ -146,7 +146,8 @@ module.exports = {
       title: 'Transaktion erstellen',
       error: 'Fehler beim Erstellen der Transaktion. Falsche Adresse oder Betrag?',
       go_back: 'Zurück',
-      this_is_hex: 'Das ist die hexadezimale Darstellung der signierten Transaktion und bereit zum Übertragen an das Netzwerk',
+      this_is_hex:
+        'Das ist die hexadezimale Darstellung der signierten Transaktion und bereit zum Übertragen an das Netzwerk',
       to: 'An',
       amount: 'Betrag',
       fee: 'Gebühr',
@@ -209,12 +210,15 @@ module.exports = {
       'Veles Wallet einen anderen Speicher zur Täuschung. Dies wirkt ' +
       'auf Fremde täuschend echt und dein Hauptspeicher bleibt geheim ' +
       'und sicher.',
-    help2: 'Der andere Speicher ist voll funktional und man kann einen Minimalbetrag für die Glaubhaftigkeit hinterlegen.',
+    help2:
+      'Der andere Speicher ist voll funktional und man kann einen Minimalbetrag für die Glaubhaftigkeit hinterlegen.',
     create_fake_storage: 'Erstelle verschlüsselten Speicher zur Täuschung',
     go_back: 'Zurück',
     create_password: 'Erstelle ein Passwort',
-    create_password_explanation: 'Das Passwort für den täuschenden Speicher darf nicht mit dem deines Hauptspeichers übereinstimmen',
-    password_should_not_match: 'Das Passwort für den täuschenden Speicher darf nicht mit dem deines Hauptspeichers übereinstimmen',
+    create_password_explanation:
+      'Das Passwort für den täuschenden Speicher darf nicht mit dem deines Hauptspeichers übereinstimmen',
+    password_should_not_match:
+      'Das Passwort für den täuschenden Speicher darf nicht mit dem deines Hauptspeichers übereinstimmen',
     retype_password: 'Passwort wiederholen',
     passwords_do_not_match: 'Passwörter stimmen nicht überein. Neuer Versuch',
     success: 'Erfolg!',

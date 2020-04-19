@@ -1,12 +1,15 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { ScrollView, View } from 'react-native';
+
 import { BlueLoading, BlueSpacing20, SafeBlueArea, BlueCard, BlueText, BlueNavigationStyle } from '../BlueComponents';
-import PropTypes from 'prop-types';
 import { SegwitP2SHWallet, LegacyWallet, HDSegwitP2SHWallet, HDSegwitBech32Wallet } from '../class';
+
+const BigNumber = require('bignumber.js');
 const bitcoin = require('bitcoinjs-lib');
-let BigNumber = require('bignumber.js');
-let encryption = require('../encryption');
-let BlueElectrum = require('../BlueElectrum');
+
+const BlueElectrum = require('../BlueElectrum');
+const encryption = require('../encryption');
 
 export default class Selftest extends Component {
   static navigationOptions = () => ({
@@ -27,8 +30,8 @@ export default class Selftest extends Component {
 
     try {
       if (typeof navigator !== 'undefined' && navigator.product === 'ReactNative') {
-        let uniqs = {};
-        let w = new SegwitP2SHWallet();
+        const uniqs = {};
+        const w = new SegwitP2SHWallet();
         for (let c = 0; c < 1000; c++) {
           await w.generate();
           if (uniqs[w.getSecret()]) {
@@ -47,13 +50,14 @@ export default class Selftest extends Component {
       if (typeof navigator !== 'undefined' && navigator.product === 'ReactNative') {
         await BlueElectrum.ping();
         await BlueElectrum.waitTillConnected();
-        let addr4elect = '3GCvDBAktgQQtsbN6x5DYiQCMmgZ9Yk8BK';
-        let electrumBalance = await BlueElectrum.getBalanceByAddress(addr4elect);
+        const addr4elect = '3GCvDBAktgQQtsbN6x5DYiQCMmgZ9Yk8BK';
+        const electrumBalance = await BlueElectrum.getBalanceByAddress(addr4elect);
         if (electrumBalance.confirmed !== 51432)
           throw new Error('BlueElectrum getBalanceByAddress failure, got ' + JSON.stringify(electrumBalance));
 
-        let electrumTxs = await BlueElectrum.getTransactionsByAddress(addr4elect);
-        if (electrumTxs.length !== 1) throw new Error('BlueElectrum getTransactionsByAddress failure, got ' + JSON.stringify(electrumTxs));
+        const electrumTxs = await BlueElectrum.getTransactionsByAddress(addr4elect);
+        if (electrumTxs.length !== 1)
+          throw new Error('BlueElectrum getTransactionsByAddress failure, got ' + JSON.stringify(electrumTxs));
       } else {
         console.warn('skipping RN-specific test');
       }
@@ -158,7 +162,7 @@ export default class Selftest extends Component {
       //
 
       // utxos as received from blockcypher
-      let utxo = [
+      const utxo = [
         {
           tx_hash: '0f5eea78fb19e72b55bd119252ff29fc16c503d0e956a9c1b5b2ab0e95e0c323',
           block_height: 514991,
@@ -173,9 +177,9 @@ export default class Selftest extends Component {
         },
       ];
 
-      let tx = l.createTx(utxo, 0.001, 0.0001, '1QHf8Gp3wfmFiSdEX4FtrssCGR68diN1cj');
-      let txDecoded = bitcoin.Transaction.fromHex(tx);
-      let txid = txDecoded.getId();
+      const tx = l.createTx(utxo, 0.001, 0.0001, '1QHf8Gp3wfmFiSdEX4FtrssCGR68diN1cj');
+      const txDecoded = bitcoin.Transaction.fromHex(tx);
+      const txid = txDecoded.getId();
 
       if (txid !== '110f51d28d585e922adbf701cba802e549b8fe3a53fa5d62426ab42549c9b6de') {
         errorMessage += 'created txid doesnt match; ';
@@ -201,8 +205,8 @@ export default class Selftest extends Component {
 
       //
 
-      let crypted = encryption.encrypt('data', 'password');
-      let decrypted = encryption.decrypt(crypted, 'password');
+      const crypted = encryption.encrypt('data', 'password');
+      const decrypted = encryption.decrypt(crypted, 'password');
 
       if (decrypted !== 'data' && crypted && decrypted) {
         errorMessage += 'encryption lib is not ok; ';
@@ -211,15 +215,15 @@ export default class Selftest extends Component {
 
       //
 
-      let bip39 = require('bip39');
-      let mnemonic =
+      const bip39 = require('bip39');
+      const mnemonic =
         'honey risk juice trip orient galaxy win situate shoot anchor bounce remind horse traffic exotic since escape mimic ramp skin judge owner topple erode';
-      let seed = bip39.mnemonicToSeed(mnemonic);
-      let root = bitcoin.bip32.fromSeed(seed);
+      const seed = bip39.mnemonicToSeed(mnemonic);
+      const root = bitcoin.bip32.fromSeed(seed);
 
-      let path = "m/49'/0'/0'/0/0";
-      let child = root.derivePath(path);
-      let address = bitcoin.payments.p2sh({
+      const path = "m/49'/0'/0'/0/0";
+      const child = root.derivePath(path);
+      const address = bitcoin.payments.p2sh({
         redeem: bitcoin.payments.p2wpkh({
           pubkey: child.publicKey,
           network: bitcoin.networks.bitcoin,
@@ -234,11 +238,11 @@ export default class Selftest extends Component {
 
       //
       if (typeof navigator !== 'undefined' && navigator.product === 'ReactNative') {
-        let hd = new HDSegwitP2SHWallet();
-        let hashmap = {};
+        const hd = new HDSegwitP2SHWallet();
+        const hashmap = {};
         for (let c = 0; c < 1000; c++) {
           await hd.generate();
-          let secret = hd.getSecret();
+          const secret = hd.getSecret();
           if (hashmap[secret]) {
             throw new Error('Duplicate secret generated!');
           }
@@ -248,7 +252,7 @@ export default class Selftest extends Component {
           }
         }
 
-        let hd2 = new HDSegwitP2SHWallet();
+        const hd2 = new HDSegwitP2SHWallet();
         hd2.setSecret(hd.getSecret());
         if (!hd2.validateMnemonic()) {
           throw new Error('mnemonic phrase validation not ok');
@@ -256,8 +260,9 @@ export default class Selftest extends Component {
 
         //
 
-        let hd3 = new HDSegwitP2SHWallet();
-        hd3._xpub = 'ypub6Wb82D7F38b48uzRVyTwydMCPcos4njzygPRCJ4x1enm6EA5YUthtWgJUPYiFTs7Sk53q8rJ9d1SJ2fBNqsyhjUTDR7gyF1SXbBnaa9xcQj';
+        const hd3 = new HDSegwitP2SHWallet();
+        hd3._xpub =
+          'ypub6Wb82D7F38b48uzRVyTwydMCPcos4njzygPRCJ4x1enm6EA5YUthtWgJUPYiFTs7Sk53q8rJ9d1SJ2fBNqsyhjUTDR7gyF1SXbBnaa9xcQj';
         await hd3.fetchBalance();
         if (hd3.getBalance() !== 26000) throw new Error('Could not fetch HD balance');
         await hd3.fetchTransactions();
@@ -265,8 +270,9 @@ export default class Selftest extends Component {
 
         //
 
-        let hd4 = new HDSegwitBech32Wallet();
-        hd4._xpub = 'zpub6r7jhKKm7BAVx3b3nSnuadY1WnshZYkhK8gKFoRLwK9rF3Mzv28BrGcCGA3ugGtawi1WLb2vyjQAX9ZTDGU5gNk2bLdTc3iEXr6tzR1ipNP';
+        const hd4 = new HDSegwitBech32Wallet();
+        hd4._xpub =
+          'zpub6r7jhKKm7BAVx3b3nSnuadY1WnshZYkhK8gKFoRLwK9rF3Mzv28BrGcCGA3ugGtawi1WLb2vyjQAX9ZTDGU5gNk2bLdTc3iEXr6tzR1ipNP';
         await hd4.fetchBalance();
         if (hd4.getBalance() !== 200000) throw new Error('Could not fetch HD Bech32 balance');
         await hd4.fetchTransactions();

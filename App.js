@@ -1,18 +1,29 @@
-import React from 'react';
-import { Linking, DeviceEventEmitter, AppState, Clipboard, StyleSheet, KeyboardAvoidingView, Platform, View } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import * as Sentry from '@sentry/react-native';
+import React from 'react';
+import {
+  Linking,
+  DeviceEventEmitter,
+  AppState,
+  Clipboard,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  View,
+} from 'react-native';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import Modal from 'react-native-modal';
+import QuickActions from 'react-native-quick-actions';
 import { NavigationActions } from 'react-navigation';
+import url from 'url';
+
+import { BlueTextCentered, BlueButton } from './BlueComponents';
 import MainBottomTabs from './MainBottomTabs';
 import NavigationService from './NavigationService';
-import { BlueTextCentered, BlueButton } from './BlueComponents';
-import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
-import url from 'url';
 import { AppStorage } from './class';
-import { Chain } from './models/bitcoinUnits';
-import QuickActions from 'react-native-quick-actions';
-import * as Sentry from '@sentry/react-native';
 import OnAppLaunch from './class/onAppLaunch';
+import { Chain } from './models/bitcoinUnits';
+
 const A = require('./analytics');
 
 if (process.env.NODE_ENV !== 'development') {
@@ -22,6 +33,7 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 const bitcoin = require('bitcoinjs-lib');
+
 const bitcoinModalString = 'Bitcoin address';
 const loc = require('./loc');
 /** @type {AppStorage} */
@@ -113,12 +125,14 @@ export default class App extends React.Component {
         A(A.ENUM.APP_UNSUSPENDED);
         const clipboard = await Clipboard.getString();
         const isAddressFromStoredWallet = BlueApp.getWallets().some(wallet =>
-          wallet.chain === Chain.ONCHAIN ? wallet.weOwnAddress(clipboard) : wallet.isInvoiceGeneratedByWallet(clipboard),
+          wallet.chain === Chain.ONCHAIN
+            ? wallet.weOwnAddress(clipboard)
+            : wallet.isInvoiceGeneratedByWallet(clipboard),
         );
         if (
           !isAddressFromStoredWallet &&
           this.state.clipboardContent !== clipboard &&
-          (this.isBitcoinAddress(clipboard))
+          this.isBitcoinAddress(clipboard)
         ) {
           this.setState({ isClipboardContentModalVisible: true });
         }
@@ -181,7 +195,7 @@ export default class App extends React.Component {
           }),
         );
     } else {
-        return;
+      return;
     }
   };
 
@@ -193,12 +207,12 @@ export default class App extends React.Component {
         style={styles.bottomModal}
         onBackdropPress={() => {
           this.setState({ isClipboardContentModalVisible: false });
-        }}
-      >
+        }}>
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'position' : null}>
           <View style={styles.modalContent}>
             <BlueTextCentered>
-              You have a {this.state.clipboardContentModalAddressType} on your clipboard. Would you like to use it for a transaction?
+              You have a {this.state.clipboardContentModalAddressType} on your clipboard. Would you like to use it for a
+              transaction?
             </BlueTextCentered>
             <View style={styles.modelContentButtonLayout}>
               <BlueButton
