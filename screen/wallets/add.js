@@ -195,7 +195,6 @@ export default class WalletsAdd extends Component {
                           BlueApp.wallets.push(w);
                           await BlueApp.saveToDisk();
                           EV(EV.enum.WALLETS_COUNT_CHANGED);
-                          A(A.ENUM.CREATED_WALLET);
                           ReactNativeHapticFeedback.trigger('notificationSuccess', {
                             ignoreAndroidSystemSettings: false,
                           });

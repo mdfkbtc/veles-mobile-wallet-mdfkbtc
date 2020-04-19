@@ -122,7 +122,6 @@ export default class App extends React.Component {
   _handleAppStateChange = async nextAppState => {
     if (BlueApp.getWallets().length > 0) {
       if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
-        A(A.ENUM.APP_UNSUSPENDED);
         const clipboard = await Clipboard.getString();
         const isAddressFromStoredWallet = BlueApp.getWallets().some(wallet =>
           wallet.chain === Chain.ONCHAIN
