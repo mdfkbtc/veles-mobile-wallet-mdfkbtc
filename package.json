@@ -42,7 +42,9 @@
     "jest": "node node_modules/jest/bin/jest.js tests/integration/*",
     "lint": "eslint *.js screen/**/*.js screen/ class/ models/ loc/ tests/integration/",
     "lint:fix": "npm run lint --fix",
-    "unit": "./node_modules/.bin/mocha tests/unit/*"
+    "unit": "./node_modules/.bin/mocha tests/unit/*",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "jest": {
     "preset": "react-native",
@@ -133,7 +135,8 @@
     "typescript": "^3.8.3",
     "url": "0.11.0",
     "util": "0.12.1",
-    "wif": "2.0.6"
+    "wif": "2.0.6",
+    "snyk": "^1.336.0"
   },
   "react-native": {
     "path": "path-browserify",
@@ -159,5 +162,6 @@
     "./**/*.{ts,tsx,js,jsx}": [
       "npm run lint:fix"
     ]
-  }
+  },
+  "snyk": true
 }
