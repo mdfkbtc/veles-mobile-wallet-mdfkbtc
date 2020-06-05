@@ -380,6 +380,72 @@ patch:
         patched: '2020-06-05T13:38:34.996Z'
     - react-native > @react-native-community/cli > metro-config > metro > metro-react-native-babel-preset > @babel/plugin-transform-exponentiation-operator > @babel/helper-builder-binary-assignment-operator-visitor > @babel/helper-explode-assignable-expression > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
         patched: '2020-06-05T13:38:34.996Z'
+    - mocha > yargs-unparser > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > metro-react-native-babel-transformer > metro-source-map > @babel/traverse > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > metro-react-native-babel-transformer > metro-source-map > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > metro-react-native-babel-transformer > metro-babel-transformer > metro-source-map > @babel/traverse > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro-react-native-babel-transformer > metro-source-map > @babel/traverse > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > metro-react-native-babel-transformer > metro-source-map > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > metro-react-native-babel-transformer > metro-babel-transformer > metro-source-map > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro-react-native-babel-transformer > metro-source-map > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro > metro-babel-transformer > metro-source-map > @babel/traverse > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro-react-native-babel-transformer > metro-babel-transformer > metro-source-map > @babel/traverse > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro > metro-symbolicate > metro-source-map > @babel/traverse > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > metro-react-native-babel-transformer > metro-source-map > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > metro-react-native-babel-transformer > metro-babel-transformer > metro-source-map > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro-react-native-babel-transformer > metro-source-map > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro > metro-babel-transformer > metro-source-map > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro-react-native-babel-transformer > metro-babel-transformer > metro-source-map > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro > metro-symbolicate > metro-source-map > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro-config > metro > metro-babel-transformer > metro-source-map > @babel/traverse > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro-config > metro > metro-symbolicate > metro-source-map > @babel/traverse > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > metro-react-native-babel-transformer > metro-babel-transformer > metro-source-map > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro-react-native-babel-transformer > metro-source-map > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro > metro-babel-transformer > metro-source-map > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro-react-native-babel-transformer > metro-babel-transformer > metro-source-map > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro > metro-symbolicate > metro-source-map > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro-config > metro > metro-babel-transformer > metro-source-map > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro-config > metro > metro-symbolicate > metro-source-map > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro > metro-babel-transformer > metro-source-map > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro-react-native-babel-transformer > metro-babel-transformer > metro-source-map > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro > metro-symbolicate > metro-source-map > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro-config > metro > metro-babel-transformer > metro-source-map > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro-config > metro > metro-symbolicate > metro-source-map > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro-config > metro > metro-babel-transformer > metro-source-map > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
+    - react-native > @react-native-community/cli > metro-config > metro > metro-symbolicate > metro-source-map > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-06-05T13:40:43.097Z'
   SNYK-JS-TREEKILL-536781:
     - '@sentry/react-native > @sentry/wizard > snyk > snyk-sbt-plugin > tree-kill':
         patched: '2020-06-05T13:38:34.996Z'
