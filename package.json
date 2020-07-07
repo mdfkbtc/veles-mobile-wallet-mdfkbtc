@@ -49,7 +49,7 @@
     "jest": "node node_modules/jest/bin/jest.js tests/integration/*",
     "install_local": "cd src && yarn install",
     "lint": "eslint '**/*.{js,ts,tsx}'",
-    "lint:fix": "yarn lint --fix",
+    "lint": "yarn lint",
     "unit": "./node_modules/.bin/mocha tests/unit/*",
     "typescript:check": "tsc --noEmit",
     "prettier:fix": "prettier --write '**/*.{js,ts,tsx}'",
@@ -184,7 +184,6 @@
   },
   "lint-staged": {
     "./**/*.{ts,tsx,js,jsx}": [
-      "yarn lint:fix"
     ],
     "./**/*.{ts|tsx}": [
       "yarn typescript:check"
