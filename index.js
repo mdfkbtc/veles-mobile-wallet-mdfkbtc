@@ -54,4 +54,4 @@ class BlueAppComponent extends React.Component {
   }
 }
 
-AppRegistry.registerComponent('GoldWallet', () => BlueAppComponent);
+AppRegistry.registerComponent('VelesWallet', () => BlueAppComponent);

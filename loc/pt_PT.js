@@ -74,12 +74,12 @@ module.exports = {
       receive: 'Receber moedas',
       noTransactions: 'Nenhuma transacção para apresentar.',
     },
-    walletModal: { btcv: 'BTCV', wallets: 'Carteiras' },
+    walletModal: { btcv: 'VLS', wallets: 'Carteiras' },
     importWallet: {
       title: 'Importar a sua carteira',
       header: 'Importar carteira',
       subtitle:
-        'Anote aqui a sua mnemónica, chave privada, WIF ou o que tiver. GoldWallet fará o melhor para descobrir o formato correto e importar a sua carteira',
+        'Anote aqui a sua mnemónica, chave privada, WIF ou o que tiver. VelesWallet fará o melhor para descobrir o formato correto e importar a sua carteira',
       placeholder: 'Mnemónica, chave privada, WIF',
       import: 'Importar',
       scanQrCode: 'ou analisar o código de QR',
@@ -130,7 +130,7 @@ module.exports = {
     import: {
       title: 'Importar',
       explanation:
-        'Anote aqui a sua mnemónica, chave privada, WIF ou o que tiver. GoldWallet fará o melhor para descobrir o formato correto e importar a sua carteira',
+        'Anote aqui a sua mnemónica, chave privada, WIF ou o que tiver. VelesWallet fará o melhor para descobrir o formato correto e importar a sua carteira',
       imported: 'Importada',
       error: 'Falha na importação. Garanta que os dados fornecidos são válidos.',
       success: 'Sucesso',
@@ -198,8 +198,8 @@ module.exports = {
       address_field_is_not_valid: 'O campo do endereço não é válido',
       create_tx_error: 'Houve um erro na criação da transacção. Garanta que o endereço é válido.',
       address: 'endereço',
-      amount_placeholder: 'montante a enviar (em BTCV)',
-      fee_placeholder: 'mais taxa da transacção (em BTCV)',
+      amount_placeholder: 'montante a enviar (em VLS)',
+      fee_placeholder: 'mais taxa da transacção (em VLS)',
       note_placeholder: 'nota para si mesmo',
       cancel: 'Cancelar',
       scan: 'Analisar',
@@ -251,10 +251,10 @@ module.exports = {
     releaseNotes: 'Notas de lançamento',
     runSelfTest: 'Executar teste próprio',
     buildWithAwesome: 'Construir com Awesome:',
-    rateGoldWallet: 'Classificar GoldWallet',
+    rateVelesWallet: 'Classificar VelesWallet',
     goToOurGithub: 'Ir para Github',
     alwaysBackupYourKeys: 'Realizar sempre uma cópia de segurança nas suas chaves',
-    title: 'A Gold Wallet é grátis, tratando-se de uma carteira gratuita do Bitcoin Vault. Licenciada pelo MIT.',
+    title: 'A Gold Wallet é grátis, tratando-se de uma carteira gratuita do Cortez Vault. Licenciada pelo MIT.',
   },
   electrumServer: {
     header: 'Servidor Electrum',
@@ -278,7 +278,7 @@ module.exports = {
   selectLanguage: {
     header: 'Idioma',
     restartInfo:
-      'Quando um novo idioma é seleccionado, o reinício da aplicação GoldWallet pode ser exigido para esta alteração ter efeito',
+      'Quando um novo idioma é seleccionado, o reinício da aplicação VelesWallet pode ser exigido para esta alteração ter efeito',
     confirmation: 'Confirmação',
     confirm: 'Confirmar',
     alertDescription: 'Seleccionar o idioma e reiniciar a aplicação?',

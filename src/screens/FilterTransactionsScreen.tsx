@@ -99,7 +99,7 @@ export const FilterTransactionsScreen = (props: NavigationScreenProps<{ onFilter
               value={fromAmount}
               setValue={text => setFromAmount(text.replace(',', '.'))}
               label={i18n.filterTransactions.fromAmount}
-              suffix="BTCV"
+              suffix="VLS"
               keyboardType="numeric"
             />,
             <InputItem
@@ -107,7 +107,7 @@ export const FilterTransactionsScreen = (props: NavigationScreenProps<{ onFilter
               value={toAmount}
               setValue={text => setToAmount(text.replace(',', '.'))}
               label={i18n.filterTransactions.toAmount}
-              suffix="BTCV"
+              suffix="VLS"
               keyboardType="numeric"
             />,
           ]}

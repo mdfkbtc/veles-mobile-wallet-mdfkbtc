@@ -23,7 +23,7 @@ export const images = {
   close: require('./images/close.png'),
   closeInverted: require('./images/closeInverted.png'),
   scanQRcrosshair: require('./images/scanQRcrosshair.png'),
-  goldWalletLogoBlack: require('./images/bv017LogoGoldWalletRgbV3HorizontalBlack.png'),
+  goldWalletLogoBlack: require('./images/bv017LogoVelesWalletRgbV3HorizontalBlack.png'),
   bigMinus: require('./images/bigMinus.png'),
   bigPlus: require('./images/bigPlus.png'),
   cancelSmall: require('./images/cancelSmall.png'),

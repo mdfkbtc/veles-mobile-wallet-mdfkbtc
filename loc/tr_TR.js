@@ -73,12 +73,12 @@ module.exports = {
       receive: 'Coin al',
       noTransactions: 'Gösterilecek işlem yok.',
     },
-    walletModal: { btcv: 'BTCV', wallets: 'Cüzdanlar' },
+    walletModal: { btcv: 'VLS', wallets: 'Cüzdanlar' },
     importWallet: {
       title: 'Cüzdanınızı içeri aktarın',
       header: 'Cüzdanı içeri aktar',
       subtitle:
-        'Buraya hatırlatıcı ipucunuzu, özel anahtarınızı, WIF’ı veya sahip olduğunuz başka bir şeyi yazın. GoldWallet doğru biçimi tahmin etmek ve cüzdanınızı içeri aktarmak için elinden geleni yapacak.',
+        'Buraya hatırlatıcı ipucunuzu, özel anahtarınızı, WIF’ı veya sahip olduğunuz başka bir şeyi yazın. VelesWallet doğru biçimi tahmin etmek ve cüzdanınızı içeri aktarmak için elinden geleni yapacak.',
       placeholder: 'Özel ipucu, özel anahtar, WIF',
       import: 'İçeri aktar',
       scanQrCode: 'veya QR kodunu tara',
@@ -128,7 +128,7 @@ module.exports = {
     import: {
       title: 'İçeri aktar',
       explanation:
-        'Buraya hatırlatıcı ipucunuzu, özel anahtarınızı, WIF’ı veya sahip olduğunuz başka bir şeyi yazın. GoldWallet doğru biçimi tahmin etmek ve cüzdanınızı içeri aktarmak için elinden geleni yapacak',
+        'Buraya hatırlatıcı ipucunuzu, özel anahtarınızı, WIF’ı veya sahip olduğunuz başka bir şeyi yazın. VelesWallet doğru biçimi tahmin etmek ve cüzdanınızı içeri aktarmak için elinden geleni yapacak',
       imported: 'İçeri aktarıldı',
       error: 'İçeri aktarılamadı. Lütfen sağlanan verilerin geçerli olduğundan emin olun.',
       success: 'Başarılı',
@@ -196,8 +196,8 @@ module.exports = {
       address_field_is_not_valid: 'Adres alanı geçerli değil',
       create_tx_error: 'İşlem oluşturulurken bir hata oluştu. Lütfen adresin geçerli olduğundan emin olun.',
       address: 'adres',
-      amount_placeholder: 'gönderilecek tutar (BTCV cinsinden)',
-      fee_placeholder: 'artı işlem ücreti (BTCV cinsinden)',
+      amount_placeholder: 'gönderilecek tutar (VLS cinsinden)',
+      fee_placeholder: 'artı işlem ücreti (VLS cinsinden)',
       note_placeholder: 'kendime not',
       cancel: 'İptal Et',
       scan: 'Tara',
@@ -249,10 +249,10 @@ module.exports = {
     releaseNotes: 'Sürüm notları',
     runSelfTest: 'Otomatik testi çalıştır',
     buildWithAwesome: 'Muhteşem özellikle oluştur:',
-    rateGoldWallet: 'GoldWallet’ı Puanla',
+    rateVelesWallet: 'VelesWallet’ı Puanla',
     goToOurGithub: 'Github’umuza Git',
     alwaysBackupYourKeys: 'Her zaman anahtarlarınızı yedekleyin',
-    title: 'Gold Wallet ücretsiz ve açık kaynaklı bir Bitcoin Vault cüzdanıdır. Lisanslı MIT.',
+    title: 'Gold Wallet ücretsiz ve açık kaynaklı bir Cortez Vault cüzdanıdır. Lisanslı MIT.',
   },
   electrumServer: {
     header: 'Electrum sunucusu',
@@ -275,7 +275,7 @@ module.exports = {
   selectLanguage: {
     header: 'Dil',
     restartInfo:
-      'Yeni bir dil seçerken GoldWallet’ı yeniden başlatmak değişikliğin geçerli olması için gerekli olabilir',
+      'Yeni bir dil seçerken VelesWallet’ı yeniden başlatmak değişikliğin geçerli olması için gerekli olabilir',
     confirmation: 'Onay',
     confirm: 'Onayla',
     alertDescription: 'Dili seçilsin ve uygulama yeniden başlatılsın mı?',

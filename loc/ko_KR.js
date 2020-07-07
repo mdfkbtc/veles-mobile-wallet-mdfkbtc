@@ -72,12 +72,12 @@ module.exports = {
       receive: '코인 받기',
       noTransactions: '표시할 트랜잭션이 없습니다.',
     },
-    walletModal: { btcv: 'BTCV', wallets: '지갑' },
+    walletModal: { btcv: 'VLS', wallets: '지갑' },
     importWallet: {
       title: '귀하의 지갑 가져오기',
       header: '지갑 가져오기',
       subtitle:
-        '연상 기호, 개인 키, WIF 또는 가지고 있는 것을 여기에 쓰십시오. 골드월렛(GoldWallet)은 올바른 형식을 추측하고 지갑을 가져오기 위해 최선을 다합니다.',
+        '연상 기호, 개인 키, WIF 또는 가지고 있는 것을 여기에 쓰십시오. 골드월렛(VelesWallet)은 올바른 형식을 추측하고 지갑을 가져오기 위해 최선을 다합니다.',
       placeholder: '연상 기호, 개인 키, WIF',
       import: '가져오기',
       scanQrCode: '또는 QR 코드 스캔하기',
@@ -128,7 +128,7 @@ module.exports = {
     import: {
       title: '가져오기',
       explanation:
-        '연상 기호, 개인 키, WIF 또는 가지고 있는 것을 여기에 쓰십시오. 골드월렛(GoldWallet)은 올바른 형식을 추측하고 지갑을 가져오기 위해 최선을 다합니다',
+        '연상 기호, 개인 키, WIF 또는 가지고 있는 것을 여기에 쓰십시오. 골드월렛(VelesWallet)은 올바른 형식을 추측하고 지갑을 가져오기 위해 최선을 다합니다',
       imported: '가져오기',
       error: '가져오기에 실패했습니다. 제공한 데이터의 유효성을 확인하십시오.',
       success: '성공',
@@ -196,8 +196,8 @@ module.exports = {
       address_field_is_not_valid: '주소 입력창이 유효하지 않습니다',
       create_tx_error: '트랜잭션을 생성하는 중에 오류가 발생했습니다. 주소의 유효성 여부를 확인하십시오.',
       address: '주소',
-      amount_placeholder: '보낼 금액(BTCV)',
-      fee_placeholder: '추가 트랜잭션 수수료(BTCV)',
+      amount_placeholder: '보낼 금액(VLS)',
+      fee_placeholder: '추가 트랜잭션 수수료(VLS)',
       note_placeholder: '자기 메모',
       cancel: '취소',
       scan: '스캔',
@@ -245,10 +245,10 @@ module.exports = {
     releaseNotes: '릴리스 노트',
     runSelfTest: '자체 테스트 실행',
     buildWithAwesome: '멋진 빌드:',
-    rateGoldWallet: '골드월렛(GoldWallet) 평가하기',
+    rateVelesWallet: '골드월렛(VelesWallet) 평가하기',
     goToOurGithub: '당사의 Github로 이동하기',
     alwaysBackupYourKeys: '항상 키를 백업하십시오',
-    title: '골드월렛(GoldWallet)은 무료이며 오픈 소스인 비트코인 볼트(Bitcoin Vault) 지갑입니다. 허가받은 MIT.',
+    title: '골드월렛(VelesWallet)은 무료이며 오픈 소스인 비트코인 볼트(Cortez Vault) 지갑입니다. 허가받은 MIT.',
   },
   electrumServer: {
     header: '일렉트럼(Electrum) 서버',
@@ -267,7 +267,7 @@ module.exports = {
   },
   selectLanguage: {
     header: '언어',
-    restartInfo: '새로운 언어를 선택할 때 변경 사항을 적용하려면 골드월렛(GoldWallet)을 다시 시작해야 할 수 있습니다',
+    restartInfo: '새로운 언어를 선택할 때 변경 사항을 적용하려면 골드월렛(VelesWallet)을 다시 시작해야 할 수 있습니다',
     confirmation: '확인',
     confirm: '확인',
     alertDescription: '언어를 선택하고 애플리케이션을 다시 시작하시겠습니까?',

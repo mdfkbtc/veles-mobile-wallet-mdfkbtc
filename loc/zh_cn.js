@@ -71,7 +71,7 @@ module.exports = {
     importWallet: {
       title: '导入您的钱包',
       header: '导入钱包',
-      subtitle: '请在此处写下您的助记词、WIF或者私钥等。GoldWallet会尽力猜测正确的格式并导入您的钱包。',
+      subtitle: '请在此处写下您的助记词、WIF或者私钥等。VelesWallet会尽力猜测正确的格式并导入您的钱包。',
       placeholder: '助记词、私钥、WIF',
       import: '导入',
       scanQrCode: '或扫描二维码',
@@ -120,7 +120,7 @@ module.exports = {
     export: { title: '钱包导出' },
     import: {
       title: '导入',
-      explanation: '请在此处写下您的助记词、私钥、WIF等。GoldWallet会尽力猜测正确的格式并导入您的钱包',
+      explanation: '请在此处写下您的助记词、私钥、WIF等。VelesWallet会尽力猜测正确的格式并导入您的钱包',
       imported: '已导入',
       error: '导入失败。请确认提供的数据有效。',
       success: '操作成功',
@@ -236,7 +236,7 @@ module.exports = {
     releaseNotes: '发行说明',
     runSelfTest: '运行自检',
     buildWithAwesome: '绝妙的架构：',
-    rateGoldWallet: '为 GoldWallet 评分',
+    rateVelesWallet: '为 VelesWallet 评分',
     goToOurGithub: '请访问我们的 Github',
     alwaysBackupYourKeys: '时刻备份您的秘钥',
     title: 'Gold wallet 是免费的开源比特币Vault钱包软件。由麻省理工授权。',
@@ -258,7 +258,7 @@ module.exports = {
   },
   selectLanguage: {
     header: '语言',
-    restartInfo: '重新选择一门新的语言后，请重启 GoldWallet 以使更改生效',
+    restartInfo: '重新选择一门新的语言后，请重启 VelesWallet 以使更改生效',
     confirmation: '确认',
     confirm: '确认',
     alertDescription: '选择语言并重启应用程序？',

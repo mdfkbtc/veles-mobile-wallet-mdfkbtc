@@ -76,12 +76,12 @@ module.exports = {
       receive: 'Nhận coin',
       noTransactions: 'Không có giao dịch nào.',
     },
-    walletModal: { btcv: 'BTCV', wallets: 'Ví' },
+    walletModal: { btcv: 'VLS', wallets: 'Ví' },
     importWallet: {
       title: 'Nhập ví của quý khách',
       header: 'Nhập ví',
       subtitle:
-        'Viết ra đây những thông tin cần ghi nhớ, khóa riêng tư, WIF hoặc bất cứ thông tin gì quý khách có được. GoldWallet tìm mọi cách để đoán đúng định dạng và nhập ví của quý khách.',
+        'Viết ra đây những thông tin cần ghi nhớ, khóa riêng tư, WIF hoặc bất cứ thông tin gì quý khách có được. VelesWallet tìm mọi cách để đoán đúng định dạng và nhập ví của quý khách.',
       placeholder: 'Thông tin ghi nhớ, khóa riêng tư, WIF',
       import: 'Nhập',
       scanQrCode: 'hoặc quét mã QR',
@@ -131,7 +131,7 @@ module.exports = {
     import: {
       title: 'nhập',
       explanation:
-        'Viết ra đây thông tin ghi nhớ, khóa riêng tư, WIF hoặc bất cứ thông tin gì quý khách có được. GoldWallet tìm mọi cách để đoán đúng định dạng và nhập ví của quý khách.',
+        'Viết ra đây thông tin ghi nhớ, khóa riêng tư, WIF hoặc bất cứ thông tin gì quý khách có được. VelesWallet tìm mọi cách để đoán đúng định dạng và nhập ví của quý khách.',
       imported: 'Đã nhập',
       error: 'Không nhập được. Vui lòng đảm bảo rằng dữ liệu được cung cấp là hợp lệ.',
       success: 'Thành công',
@@ -199,8 +199,8 @@ module.exports = {
       address_field_is_not_valid: 'Địa chỉ không hợp lệ',
       create_tx_error: 'Đã xảy ra lỗi khi tạo giao dịch. Vui lòng đảm bảo địa chỉ là hợp lệ.',
       address: 'địa chỉ',
-      amount_placeholder: 'số tiền cần gửi (tính bằng BTCV)',
-      fee_placeholder: 'cộng với phí giao dịch (tính bằng BTCV)',
+      amount_placeholder: 'số tiền cần gửi (tính bằng VLS)',
+      fee_placeholder: 'cộng với phí giao dịch (tính bằng VLS)',
       note_placeholder: 'ghi chú cho bản thân',
       cancel: 'Hủy',
       scan: 'Quét',
@@ -252,10 +252,10 @@ module.exports = {
     releaseNotes: 'Thông tin về phiên bản',
     runSelfTest: 'Chạy tự kiểm tra',
     buildWithAwesome: 'Xây dựng với:',
-    rateGoldWallet: 'Đánh giá GoldWallet',
+    rateVelesWallet: 'Đánh giá VelesWallet',
     goToOurGithub: 'Chuyển đến Github của chúng tôi',
     alwaysBackupYourKeys: 'Hãy luôn sao lưu mã khóa của quý khách',
-    title: 'GoldWallet là ví Bitcoin Vault miễn phí và mã nguồn mở. MIT được cấp phép.',
+    title: 'VelesWallet là ví Cortez Vault miễn phí và mã nguồn mở. MIT được cấp phép.',
   },
   electrumServer: {
     header: 'Máy chủ Electrum',
@@ -277,7 +277,7 @@ module.exports = {
   },
   selectLanguage: {
     header: 'Ngôn ngữ',
-    restartInfo: 'Khi chọn ngôn ngữ mới, có thể cần khởi động lại GoldWallet để thay đổi có hiệu lực',
+    restartInfo: 'Khi chọn ngôn ngữ mới, có thể cần khởi động lại VelesWallet để thay đổi có hiệu lực',
     confirmation: 'Xác nhận',
     confirm: 'Xác nhận',
     alertDescription: 'Chọn ngôn ngữ và khởi động lại ứng dụng?',

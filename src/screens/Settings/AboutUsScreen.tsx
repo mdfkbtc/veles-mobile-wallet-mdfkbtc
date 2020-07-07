@@ -33,11 +33,11 @@ export const AboutUsScreen = (props: NavigationScreenProps) => {
   const handleRateButtonPress = () => {
     const options = {
       AppleAppID: '1515116464',
-      GooglePackageName: 'io.goldwallet.wallet',
+      GooglePackageName: 'network.veles.wallet',
       preferredAndroidMarket: AndroidMarket.Google,
       preferInApp: true,
       openAppStoreIfInAppFails: true,
-      fallbackPlatformURL: 'https://bitcoinvault.global',
+      fallbackPlatformURL: 'https://veles.network',
     };
     Rate.rate(options, success => {
       if (success) {
@@ -49,7 +49,7 @@ export const AboutUsScreen = (props: NavigationScreenProps) => {
   const navigateToReleaseNotes = () => props.navigation.navigate(Route.ReleaseNotes);
 
   const goToGithub = () => {
-    Linking.openURL('https://github.com/bitcoinvault/GoldWallet');
+    Linking.openURL('https://github.com/velescore/veles-mobile-wallet');
   };
 
   return (
@@ -65,7 +65,7 @@ export const AboutUsScreen = (props: NavigationScreenProps) => {
       <Button
         onPress={handleRateButtonPress}
         source={icons.star}
-        title={i18n.aboutUs.rateGoldWallet}
+        title={i18n.aboutUs.rateVelesWallet}
         containerStyle={styles.buttonContainer}
       />
       <View style={styles.buildWithContainer}>

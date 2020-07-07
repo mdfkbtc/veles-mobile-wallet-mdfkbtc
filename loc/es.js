@@ -73,12 +73,12 @@ module.exports = {
       receive: 'Recibir monedas',
       noTransactions: 'No hay transacciones para mostrar.',
     },
-    walletModal: { btcv: 'BTCV', wallets: 'Monederos' },
+    walletModal: { btcv: 'VLS', wallets: 'Monederos' },
     importWallet: {
       title: 'Importe su monedero',
       header: 'Importar monedero',
       subtitle:
-        'Escriba aquí su frase mnemotécnica, clave privada, WIF o cualquier dato que tenga. GoldWallet hará todo lo posible para adivinar el formato correcto e importar su monedero.',
+        'Escriba aquí su frase mnemotécnica, clave privada, WIF o cualquier dato que tenga. VelesWallet hará todo lo posible para adivinar el formato correcto e importar su monedero.',
       placeholder: 'Frase mnemotécnica, clave privada, WIF',
       import: 'Importar',
       scanQrCode: 'o escanear el código QR',
@@ -129,7 +129,7 @@ module.exports = {
     import: {
       title: 'importar',
       explanation:
-        'Escriba aquí su clave mnemotécnica privada, WIF o cualquier cosa que tenga. GoldWallet hará todo lo posible para adivinar el formato correcto e importar su monedero',
+        'Escriba aquí su clave mnemotécnica privada, WIF o cualquier cosa que tenga. VelesWallet hará todo lo posible para adivinar el formato correcto e importar su monedero',
       imported: 'Importado',
       error: 'Error al importar. Asegúrese de que los datos proporcionados sean válidos.',
       success: 'Completado',
@@ -197,8 +197,8 @@ module.exports = {
       address_field_is_not_valid: 'El campo de dirección no es válido',
       create_tx_error: 'Se produjo un error al crear la transacción. Asegúrese de que la dirección sea válida.',
       address: 'dirección',
-      amount_placeholder: 'cantidad a enviar (en BTCV)',
-      fee_placeholder: 'más la comisión de transacción (en BTCV)',
+      amount_placeholder: 'cantidad a enviar (en VLS)',
+      fee_placeholder: 'más la comisión de transacción (en VLS)',
       note_placeholder: 'nota personal',
       cancel: 'Cancelar',
       scan: 'Escanear',
@@ -250,10 +250,10 @@ module.exports = {
     releaseNotes: 'Notas de la versión',
     runSelfTest: 'Ejecutar autocomprobación',
     buildWithAwesome: 'Construido con genialidad:',
-    rateGoldWallet: 'Valorar GoldWallet',
+    rateVelesWallet: 'Valorar VelesWallet',
     goToOurGithub: 'Acceda a nuestro Github',
     alwaysBackupYourKeys: 'Siempre guarde una copia de seguridad de sus claves',
-    title: 'Gold Wallet es un monedero de Bitcoin Vault gratuito y de código abierto. Con licencia MIT.',
+    title: 'Gold Wallet es un monedero de Cortez Vault gratuito y de código abierto. Con licencia MIT.',
   },
   electrumServer: {
     header: 'Servidor Electrum',
@@ -277,7 +277,7 @@ module.exports = {
   selectLanguage: {
     header: 'Idioma',
     restartInfo:
-      'Al seleccionar un nuevo idioma, puede ser necesario reiniciar GoldWallet para que el cambio surta efecto',
+      'Al seleccionar un nuevo idioma, puede ser necesario reiniciar VelesWallet para que el cambio surta efecto',
     confirmation: 'Confirmación',
     confirm: 'Confirmar',
     alertDescription: '¿Seleccionar idioma y reiniciar la aplicación?',

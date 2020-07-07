@@ -23,7 +23,7 @@ export const ActionSheet = (props: Props) => {
       <WalletItem
         variant={wallet.label === 'All wallets' ? GradientView.Variant.Secondary : GradientView.Variant.Primary}
         value={wallet.balance}
-        unit="BTCV"
+        unit="VLS"
         name={wallet.label === 'All wallets' ? i18n.wallets.dashboard.allWallets : wallet.label}
         title={wallet.label === 'All wallets' ? 'AW' : wallet.label[0]}
         selected={index == selectedIndex}

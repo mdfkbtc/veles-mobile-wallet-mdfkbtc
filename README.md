@@ -1,8 +1,8 @@
-# GoldWallet - A Bitcoin Vault mobile wallet
+# VelesWallet - A Cortez Vault mobile wallet
 
-The first ever Bitcoin Vault wallet.
+The first ever Cortez Vault wallet.
 
-[![Playstore](https://bluewallet.io/img/play-store-badge.svg)](https://play.google.com/store/apps/details?id=io.goldwallet.wallet)
+[![Playstore](https://bluewallet.io/img/play-store-badge.svg)](https://play.google.com/store/apps/details?id=network.veles.wallet)
 
 
 ## BUILD & RUN IT
@@ -10,8 +10,8 @@ The first ever Bitcoin Vault wallet.
 * In your console:
 
 ```
-git clone https://github.com/bitcoinvault/GoldWallet.git
-cd GoldWallet
+git clone https://github.com/bitcoinvault/VelesWallet.git
+cd VelesWallet
 npm install
 ```
 

@@ -493,7 +493,7 @@ export class SendCoinsScreen extends Component<Props, State> {
       rows.push(
         <InputItem
           label={i18n.transactions.details.amount}
-          suffix="BTCV"
+          suffix="VLS"
           keyboardType="numeric"
           value={item.amount ? item.amount.toString().replace(',', '.') : null}
           setValue={text => {

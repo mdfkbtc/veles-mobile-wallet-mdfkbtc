@@ -74,12 +74,12 @@ module.exports = {
       receive: 'Terima koin',
       noTransactions: 'Tidak ada transaksi untuk ditampilkan.',
     },
-    walletModal: { btcv: 'BTCV', wallets: 'Dompet' },
+    walletModal: { btcv: 'VLS', wallets: 'Dompet' },
     importWallet: {
       title: 'Impor dompet Anda',
       header: 'Impor dompet',
       subtitle:
-        'Tuliskan di sini mnemonik, kunci privat, WIF, atau apa pun yang Anda punya. GoldWallet akan berusaha sebaik mungkin untuk menebak format yang tepat dan mengimpor dompet Anda.',
+        'Tuliskan di sini mnemonik, kunci privat, WIF, atau apa pun yang Anda punya. VelesWallet akan berusaha sebaik mungkin untuk menebak format yang tepat dan mengimpor dompet Anda.',
       placeholder: 'Mnemonik, kunci pribadi, WIF',
       import: 'Impor',
       scanQrCode: 'atau pindai kode QR',
@@ -130,7 +130,7 @@ module.exports = {
     import: {
       title: 'impor',
       explanation:
-        'Tuliskan di sini mnemonik, kunci privat, WIF, atau apa pun yang Anda punya. GoldWallet akan berusaha sebaik mungkin untuk menebak format yang tepat dan mengimpor dompet Anda',
+        'Tuliskan di sini mnemonik, kunci privat, WIF, atau apa pun yang Anda punya. VelesWallet akan berusaha sebaik mungkin untuk menebak format yang tepat dan mengimpor dompet Anda',
       imported: 'Diimpor',
       error: 'Gagal mengimpor. Harap pastikan data yang diberikan valid.',
       success: 'Berhasil',
@@ -198,8 +198,8 @@ module.exports = {
       address_field_is_not_valid: 'Bidang alamat tidak valid',
       create_tx_error: 'Ada kesalahan saat membuat transaksi. Harap pastikan alamat valid.',
       address: 'alamat',
-      amount_placeholder: 'jumlah yang dikirimkan (dalam BTCV)',
-      fee_placeholder: 'plus biaya transaksi (dalam BTCV)',
+      amount_placeholder: 'jumlah yang dikirimkan (dalam VLS)',
+      fee_placeholder: 'plus biaya transaksi (dalam VLS)',
       note_placeholder: 'catatan untuk diri sendiri',
       cancel: 'Batal',
       scan: 'Pindai',
@@ -251,10 +251,10 @@ module.exports = {
     releaseNotes: 'Catatan rilis',
     runSelfTest: 'Jalankan tes mandiri',
     buildWithAwesome: 'Bangun dengan hebat:',
-    rateGoldWallet: 'Beri peringkat GoldWallet',
+    rateVelesWallet: 'Beri peringkat VelesWallet',
     goToOurGithub: 'Masuk ke Github kami',
     alwaysBackupYourKeys: 'Selalu cadangkan kunci Anda',
-    title: 'GoldWallet adalah dompet Bitcoin Vault gratis dan sumber terbuka. Dilisensi MIT.',
+    title: 'VelesWallet adalah dompet Cortez Vault gratis dan sumber terbuka. Dilisensi MIT.',
   },
   electrumServer: {
     header: 'Server Electrum',
@@ -276,7 +276,7 @@ module.exports = {
   },
   selectLanguage: {
     header: 'Bahasa',
-    restartInfo: 'Saat memilih bahasa baru, mungkin dibutuhkan pemulaian ulang GoldWallet agar perubahan berlaku',
+    restartInfo: 'Saat memilih bahasa baru, mungkin dibutuhkan pemulaian ulang VelesWallet agar perubahan berlaku',
     confirmation: 'Konfirmasi',
     confirm: 'Konfirmasi',
     alertDescription: 'Pilih bahasa dan mulai ulang aplikasi?',

@@ -74,14 +74,14 @@ module.exports = {
       noTransactions: 'No transactions to show.',
     },
     walletModal: {
-      btcv: 'BTCV',
+      btcv: 'VLS',
       wallets: 'Wallets',
     },
     importWallet: {
       title: 'Import your wallet',
       header: 'Import wallet',
       subtitle:
-        "Write here your mnemonic, private key, WIF or anything you've got. GoldWallet will do its best to guess the correct format and import you wallet.",
+        "Write here your mnemonic, private key, WIF or anything you've got. VelesWallet will do its best to guess the correct format and import you wallet.",
       placeholder: 'Mnemonic, private key, WIF',
       import: 'Import',
       scanQrCode: 'or scan QR code',
@@ -142,7 +142,7 @@ module.exports = {
     import: {
       title: 'import',
       explanation:
-        "Write here your mnemonic, private key, WIF, or anything you've got. GoldWallet will do its best to guess the correct format and import your wallet",
+        "Write here your mnemonic, private key, WIF, or anything you've got. VelesWallet will do its best to guess the correct format and import your wallet",
       imported: 'Imported',
       error: 'Failed to import. Please, make sure that the provided data is valid.',
       success: 'Success',
@@ -212,8 +212,8 @@ module.exports = {
       address_field_is_not_valid: 'Address field is not valid',
       create_tx_error: 'There was an error creating the transaction. Please, make sure the address is valid.',
       address: 'address',
-      amount_placeholder: 'amount to send (in BTCV)',
-      fee_placeholder: 'plus transaction fee (in BTCV)',
+      amount_placeholder: 'amount to send (in VLS)',
+      fee_placeholder: 'plus transaction fee (in VLS)',
       note_placeholder: 'note to self',
       cancel: 'Cancel',
       scan: 'Scan',
@@ -267,10 +267,10 @@ module.exports = {
     releaseNotes: 'Release notes',
     runSelfTest: 'Run self test',
     buildWithAwesome: 'Build with awesome:',
-    rateGoldWallet: 'Rate GoldWallet',
+    rateVelesWallet: 'Rate VelesWallet',
     goToOurGithub: 'Go to our Github',
     alwaysBackupYourKeys: 'Always backup your keys',
-    title: 'Gold wallet is a free and open source Bitcoin Vault wallet. Licensed MIT.',
+    title: 'Gold wallet is a free and open source Cortez Vault wallet. Licensed MIT.',
   },
   electrumServer: {
     header: 'Electrum server',
@@ -291,7 +291,7 @@ module.exports = {
   },
   selectLanguage: {
     header: 'Language',
-    restartInfo: 'When selecting a new language, restarting GoldWallet may be required for the change to take effect',
+    restartInfo: 'When selecting a new language, restarting VelesWallet may be required for the change to take effect',
     confirmation: 'Confirmation',
     confirm: 'Confirm',
     alertDescription: 'Select language and restart the application?',

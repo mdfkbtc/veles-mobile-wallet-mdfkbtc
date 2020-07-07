@@ -72,12 +72,12 @@ module.exports = {
       receive: 'コインを受け取る',
       noTransactions: '表示するトランザクションがありません。',
     },
-    walletModal: { btcv: 'BTCV', wallets: 'ウォレット' },
+    walletModal: { btcv: 'VLS', wallets: 'ウォレット' },
     importWallet: {
       title: 'ご使用のウォレットをインポートする',
       header: 'ウォレットのインポート',
       subtitle:
-        'ここにユーザーのニーモニック、秘密鍵、WIF、または取得したその他のものを入力してください。GoldWalletでは、最善を尽くして、正しいフォーマットを推測し、ウォレットをインポートします。',
+        'ここにユーザーのニーモニック、秘密鍵、WIF、または取得したその他のものを入力してください。VelesWalletでは、最善を尽くして、正しいフォーマットを推測し、ウォレットをインポートします。',
       placeholder: 'ニーモニック、秘密鍵、WIF',
       import: 'QRコードをインポート',
       scanQrCode: 'またはスキャン',
@@ -127,7 +127,7 @@ module.exports = {
     import: {
       title: 'インポート',
       explanation:
-        'ここにユーザーのニーモニック、秘密鍵、WIF、または取得したその他のものを入力してください。GoldWalletでは、最善を尽くして、正しいフォーマットを推測し、ウォレットをインポートします',
+        'ここにユーザーのニーモニック、秘密鍵、WIF、または取得したその他のものを入力してください。VelesWalletでは、最善を尽くして、正しいフォーマットを推測し、ウォレットをインポートします',
       imported: 'インポート済み',
       error: 'インポートできませんでした。提供されたデータが有効であることを確認してください。',
       success: '成功',
@@ -196,8 +196,8 @@ module.exports = {
       address_field_is_not_valid: 'アドレスフィールドが有効ではありません',
       create_tx_error: 'トランザクションの作成中にエラーがありました。アドレスが有効であることを確認してください。',
       address: 'アドレス',
-      amount_placeholder: '（BTCVの）送信する金額',
-      fee_placeholder: '（BTCVの）追加のトランザクション料金',
+      amount_placeholder: '（VLSの）送信する金額',
+      fee_placeholder: '（VLSの）追加のトランザクション料金',
       note_placeholder: '自分のためのメモ',
       cancel: 'キャンセル',
       scan: 'スキャン',
@@ -245,10 +245,10 @@ module.exports = {
     releaseNotes: 'リリースノート',
     runSelfTest: 'セルフテストの実行',
     buildWithAwesome: '素晴らしいサービスを構築',
-    rateGoldWallet: 'GoldWalletを評価する',
+    rateVelesWallet: 'VelesWalletを評価する',
     goToOurGithub: '当社のGithubに進む',
     alwaysBackupYourKeys: '常に鍵をバックアップする',
-    title: 'ゴールドウォレットは、Bitcoin Vaultウォレットのための無料のオープンソースです。ライセンス：MIT。',
+    title: 'ゴールドウォレットは、Cortez Vaultウォレットのための無料のオープンソースです。ライセンス：MIT。',
   },
   electrumServer: {
     header: 'Electrumサーバー',
@@ -267,7 +267,7 @@ module.exports = {
   },
   selectLanguage: {
     header: '言語',
-    restartInfo: '新しい言語を選択したら、変更を有効にするために、GoldWalletの再起動が必要な場合があります',
+    restartInfo: '新しい言語を選択したら、変更を有効にするために、VelesWalletの再起動が必要な場合があります',
     confirmation: '確認',
     confirm: '確認する',
     alertDescription: '言語を選択して、アプリケーションを再起動しますか？',
