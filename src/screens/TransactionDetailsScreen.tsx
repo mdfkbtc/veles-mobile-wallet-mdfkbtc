@@ -205,7 +205,7 @@ class TransactionDetailsScreen extends Component<Props, State> {
           <StyledText
             title={i18n.transactions.details.viewInBlockRxplorer}
             onPress={() => {
-              const url = `http://explorer.bitcoinvault.global/tx/${this.state.tx.txid}`;
+              const url = `http://explorer.veles.network/tx/${this.state.tx.txid}`;
               Linking.canOpenURL(url).then(supported => {
                 if (supported) {
                   Linking.openURL(url);
