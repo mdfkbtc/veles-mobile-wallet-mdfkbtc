@@ -48,7 +48,7 @@ export class HDSegwitP2SHWallet extends AbstractHDWallet {
   static type = 'HDsegwitP2SH';
   static typeReadable = 'HD P2SH';
   static randomBytesSize = 32;
-  static basePath = "m/49'/440'/0'";
+  static basePath = "m/49'/0'/0'";
 
   allowSend() {
     return true;

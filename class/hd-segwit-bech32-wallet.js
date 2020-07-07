@@ -23,7 +23,7 @@ export class HDSegwitBech32Wallet extends AbstractHDWallet {
   static typeReadable = 'HD SegWit';
   static defaultRBFSequence = 2147483648; // 1 << 31, minimum for replaceable transactions as per BIP68
   static randomBytesSize = 32;
-  static basePath = "m/84'/440'/0'";
+  static basePath = "m/84'/0'/0'";
 
   constructor() {
     super();
