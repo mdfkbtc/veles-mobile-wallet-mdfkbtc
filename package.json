@@ -193,5 +193,5 @@
     "./**/*.{ts|tsx}": [
       "yarn typescript:check"
     ]
-  },
+  }
 }
