@@ -11,6 +11,7 @@ import { ApplicationState } from 'app/state';
 import { palette } from 'app/styles';
 import { loadTransactions, TransactionsActionType } from 'app/state/transactions/actions';
 import { loadWallets, WalletsActionType } from 'app/state/wallets/actions';
+import { palette } from 'app/styles';
 
 import { DashboarContentdHeader } from './DashboarContentdHeader';
 import { DashboardHeader } from './DashboardHeader';
@@ -230,9 +231,11 @@ class DashboardScreen extends Component<Props, State> {
           )}
         </ScreenTemplate>
         {!!filters.isFilteringOn && (
-          <TouchableOpacity onPress={this.resetFilters} style={styles.clearFiltersButton}>
-            <StyledText title={i18n.filterTransactions.clearFilters} />
-          </TouchableOpacity>
+          <View style={styles.clearFiltersButtonContainer}>
+            <TouchableOpacity onPress={this.resetFilters} style={styles.clearFiltersButton}>
+              <StyledText title={i18n.filterTransactions.clearFilters} />
+            </TouchableOpacity>
+          </View>
         )}
       </>
     );
@@ -261,8 +264,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: palette.background,
   },
+  clearFiltersButtonContainer: {
+    backgroundColor: palette.white,
+  },
   clearFiltersButton: {
     height: 59,
+    paddingHorizontal: 20,
     alignSelf: 'center',
     justifyContent: 'center',
   },
