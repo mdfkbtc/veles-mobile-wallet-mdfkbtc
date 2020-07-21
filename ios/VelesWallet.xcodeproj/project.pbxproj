@@ -84,7 +84,6 @@
 		8637D4B5E14D443A9031DA95 /* libRNFS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFS.a; sourceTree = "<group>"; };
 		90F86BC5194548CA87D729A9 /* libToolTipMenu.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libToolTipMenu.a; sourceTree = "<group>"; };
 		94565BFC6A0C4235B3EC7B01 /* libRNSVG.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSVG.a; sourceTree = "<group>"; };
-		95208B2A05884A76B5BB99C0 /* libRCTGoogleAnalyticsBridge.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTGoogleAnalyticsBridge.a; sourceTree = "<group>"; };
 		9B3A324B70BC8C6D9314FD4F /* Pods-VelesWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VelesWallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VelesWallet/Pods-VelesWallet.debug.xcconfig"; sourceTree = "<group>"; };
 		9DF4E6C040764E4BA1ACC1EB /* libTcpSockets.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libTcpSockets.a; sourceTree = "<group>"; };
 		9F1F51A83D044F3BB26A35FC /* libRNSVG-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNSVG-tvOS.a"; sourceTree = "<group>"; };
@@ -238,7 +237,6 @@
 				FD7977067E1A496F94D8B1B7 /* libRNDeviceInfo.a */,
 				8637D4B5E14D443A9031DA95 /* libRNFS.a */,
 				CD746B955C55410793BB72C0 /* libRNGestureHandler.a */,
-				95208B2A05884A76B5BB99C0 /* libRCTGoogleAnalyticsBridge.a */,
 				AB2325650CE04F018697ACFE /* libRNReactNativeHapticFeedback.a */,
 				3703B10AAB374CF896CCC2EA /* libBVLinearGradient.a */,
 				1DD63E4B5C8344BB9880C9EC /* libReactNativePermissions.a */,
