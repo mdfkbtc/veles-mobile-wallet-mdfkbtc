@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   header: {
     paddingVertical: 16,
-    color: palette.textGrey,
+    color: palette.white,
   },
   contact: {
     paddingVertical: 8,
@@ -90,6 +90,6 @@ const styles = StyleSheet.create({
   },
   listEmptyText: {
     ...typography.caption,
-    color: palette.textGrey,
+    color: palette.white,
   },
 });

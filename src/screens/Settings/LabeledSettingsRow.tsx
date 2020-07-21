@@ -22,11 +22,11 @@ const styles = StyleSheet.create({
   label: {
     paddingBottom: 16,
     ...typography.caption,
-    color: palette.textGrey,
+    color: palette.secondary,
   },
   greyLine: {
     marginVertical: 24,
-    borderColor: palette.grey,
+    borderColor: palette.white,
     width: '120%',
     borderWidth: StyleSheet.hairlineWidth,
     left: -20,

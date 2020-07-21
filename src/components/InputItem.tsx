@@ -137,12 +137,12 @@ const styles = StyleSheet.create({
   label: {
     position: 'absolute',
     left: 0,
-    color: palette.textGrey,
+    color: palette.secondary,
     fontFamily: fonts.ubuntu.light,
   },
   input: {
     marginTop: 6,
-    color: palette.textBlack,
+    color: palette.white,
     paddingRight: 50,
     minHeight: 27,
     borderBottomColor: palette.border,
@@ -166,6 +166,7 @@ const styles = StyleSheet.create({
     top: 12,
     ...typography.caption,
     lineHeight: 19,
+    color: palette.white,
   },
   error: {
     marginTop: 3,

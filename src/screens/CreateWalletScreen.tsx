@@ -202,20 +202,20 @@ const styles = StyleSheet.create({
   },
   description: {
     marginBottom: 52,
-    color: palette.textGrey,
+    color: palette.white,
     ...typography.caption,
     textAlign: 'center',
   },
   isLoadingDescription: {
     ...typography.caption,
-    color: palette.textGrey,
+    color: palette.white,
     textAlign: 'center',
     lineHeight: 19,
     flexGrow: 1,
     marginVertical: 10,
   },
   advancedOptionsLabel: {
-    color: palette.textGrey,
+    color: palette.white,
     marginBottom: 12,
   },
   radioButton: {
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
   },
   radioButtonSubtitle: {
     ...typography.overline,
-    color: palette.textGrey,
+    color: palette.white,
   },
   importButtonContainer: {
     marginTop: 12,

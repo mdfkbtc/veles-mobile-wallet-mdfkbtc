@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   title: { ...typography.headline4, marginTop: 16, textAlign: 'center' },
   description: {
     ...typography.caption,
-    color: palette.textGrey,
+    color: palette.white,
     textAlign: 'center',
     marginTop: 18,
   },

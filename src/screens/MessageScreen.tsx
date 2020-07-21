@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   },
   description: {
     ...typography.caption,
-    color: palette.textGrey,
+    color: palette.white,
     textAlign: 'center',
     lineHeight: 19,
     flexGrow: 1,

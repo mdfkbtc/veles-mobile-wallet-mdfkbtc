@@ -7,7 +7,7 @@ import RNRestart from 'react-native-restart';
 import { icons } from 'app/assets';
 import { ScreenTemplate, Header, Image } from 'app/components';
 import { Route, MainCardStackNavigatorParams } from 'app/consts';
-import { typography } from 'app/styles';
+import { typography, palette } from 'app/styles';
 
 const i18n = require('../../../loc');
 
@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
   languageItem: {
     ...typography.caption,
     width: '100%',
+    color: palette.white,
   },
   langaugeItemContainer: {
     marginVertical: 8,

@@ -77,7 +77,7 @@ export class ScreenTemplate extends React.PureComponent<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: palette.white,
+    backgroundColor: palette.background,
     paddingBottom: ifIphoneX(34, 0),
   },
   contentContainer: {
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     paddingHorizontal: 20,
-    backgroundColor: palette.white,
+    backgroundColor: palette.background,
     marginBottom: 12,
   },
 });

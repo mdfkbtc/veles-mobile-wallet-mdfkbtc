@@ -62,7 +62,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 50,
   },
-  title: { ...typography.headline4 },
+  title: { 
+    ...typography.headline4,
+    color: palette.white,
+  },
   image: {
     height: 172,
     width: '100%',
@@ -72,7 +75,7 @@ const styles = StyleSheet.create({
   description: {
     ...typography.caption,
     textAlign: 'center',
-    color: palette.textGrey,
+    color: palette.white,
     lineHeight: 19,
   },
 });

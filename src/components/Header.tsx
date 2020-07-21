@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Platform, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { images, icons } from 'app/assets';
 import { NavigationProp } from 'app/consts';
@@ -57,7 +57,7 @@ export const Header = ({ title, isBackArrow, isCancelButton, navigation, addFunc
   };
 
   return (
-    <GradientView variant={GradientView.Variant.Primary} style={styles.container}>
+    <View style={[styles.container, {backgroundColor:palette.headerColor}]}>
       <>
         {renderLeftItem()}
         <Text numberOfLines={1} style={[styles.title, { marginLeft: (cancelButtonWith && cancelButtonWith / 2) || 0 }]}>
@@ -69,7 +69,7 @@ export const Header = ({ title, isBackArrow, isCancelButton, navigation, addFunc
           </TouchableOpacity>
         )}
       </>
-    </GradientView>
+    </View>
   );
 };
 

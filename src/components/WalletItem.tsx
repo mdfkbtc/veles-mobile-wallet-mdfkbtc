@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   name: {
     ...typography.caption,
-    color: palette.textGrey,
+    color: palette.white,
   },
   image: {
     width: 41,

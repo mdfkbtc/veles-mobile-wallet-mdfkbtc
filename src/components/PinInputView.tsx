@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     shadowOpacity: 0.7,
-    shadowColor: palette.textGrey,
+    shadowColor: palette.white,
     shadowOffset: { height: 1, width: StyleSheet.hairlineWidth },
     elevation: 3,
   },

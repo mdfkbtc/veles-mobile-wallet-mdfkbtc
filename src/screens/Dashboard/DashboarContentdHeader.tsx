@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   chooseWalletButtonText: {
+    color: palette.textOrange,
     ...typography.headline4,
   },
   descriptionContainer: {
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
   },
   buttonDescription: {
     ...typography.caption,
-    color: palette.textGrey,
+    color: palette.white,
   },
   buttonsContainer: {
     flexDirection: 'row',

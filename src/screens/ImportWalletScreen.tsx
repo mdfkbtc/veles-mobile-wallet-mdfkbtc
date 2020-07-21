@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     ...typography.caption,
-    color: palette.textGrey,
+    color: palette.white,
     paddingTop: 18,
     textAlign: 'center',
   },

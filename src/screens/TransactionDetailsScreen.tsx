@@ -141,7 +141,7 @@ class TransactionDetailsScreen extends Component<Props, State> {
       <View style={styles.headerContainer}>
         <Image source={transaction.value < 0 ? images.bigMinus : images.bigPlus} style={styles.image} />
         <Text style={styles.walletLabel}>{transaction.walletLabel}</Text>
-        <Text style={[styles.value, { color: transaction.value < 0 ? palette.textRed : palette.textBlack }]}>
+        <Text style={[styles.value, { color: transaction.value < 0 ? palette.textRed : palette.textGreen }]}>
           {`${valuePreffix}${i18n.formatBalanceWithoutSuffix(
             Number(transaction.value),
             transaction.walletPreferredBalanceUnit,
@@ -253,6 +253,7 @@ const styles = StyleSheet.create({
     marginBottom: 13,
   },
   walletLabel: {
+    color: palette.textOrange,
     ...typography.headline8,
   },
   value: { ...typography.headline5, marginTop: 6, marginBottom: 10 },
@@ -270,7 +271,7 @@ const styles = StyleSheet.create({
     marginBottom: 13,
   },
   contentRowContainer: { marginVertical: 14 },
-  contentRowTitle: { ...typography.overline, color: palette.textGrey },
-  contentRowBody: { ...typography.caption, marginTop: 4, marginBottom: 3 },
+  contentRowTitle: { ...typography.overline, color: palette.white },
+  contentRowBody: { ...typography.caption, marginTop: 4, marginBottom: 3, color: palette.textWhiteMuted },
   row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
 });

@@ -14,18 +14,18 @@ export const TransactionItem = ({ item, onPress }: { item: Transaction; onPress:
   return (
     <TouchableOpacity style={styles.container} onPress={() => onPress(item)}>
       <View style={styles.leftColumn}>
-        <Text style={typography.headline5} numberOfLines={1}>
+        <Text style={[typography.headline5, {color: palette.textOrange}]} numberOfLines={1}>
           {item.walletLabel === CONST.allWallets ? i18n.transactions.details.noLabel : item.walletLabel}
         </Text>
-        {!!item.note && <Text style={typography.caption}>{item.note}</Text>}
+        {!!item.note && <Text style={[typography.caption, {color: palette.textWhiteMuted}]}>{item.note}</Text>}
         <Text style={styles.label}>{confirmations()}</Text>
         <Text style={styles.label}>{moment(item.received).format('LT')}</Text>
       </View>
       <View style={styles.rightColumn}>
-        <Text style={[typography.headline5, { color: item.value < 0 ? palette.textRed : palette.textBlack }]}>
+        <Text style={[typography.headline5, { color: item.value < 0 ? palette.textRed : palette.textGreen }]}>
           {i18n.formatBalanceWithoutSuffix(Number(item.value), item.walletPreferredBalanceUnit)}
         </Text>
-        <Text style={[typography.headline5, { color: item.value < 0 ? palette.textRed : palette.textBlack }]}>
+        <Text style={[typography.headline5, { color: item.value < 0 ? palette.textRed : palette.textGreen }]}>
           {item.walletPreferredBalanceUnit}
         </Text>
       </View>
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   label: {
     ...typography.caption,
-    color: palette.textGrey,
+    color: palette.white,
   },
   leftColumn: { justifyContent: 'space-between', maxWidth: '75%' },
   rightColumn: { alignItems: 'flex-end' },

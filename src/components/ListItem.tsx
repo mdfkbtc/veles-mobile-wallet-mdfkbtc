@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
   title: {
     ...typography.caption,
-    color: palette.textBlack,
+    color: palette.white,
   },
   image: {
     width: 19,
@@ -103,6 +103,6 @@ const styles = StyleSheet.create({
     height: 21,
   },
   disabled: {
-    color: palette.textGrey,
+    color: palette.grey,
   },
 });

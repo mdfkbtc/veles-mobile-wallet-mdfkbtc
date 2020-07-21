@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   typeLabel: {
-    color: palette.textGrey,
+    color: palette.white,
     ...typography.overline,
   },
   typeValue: {

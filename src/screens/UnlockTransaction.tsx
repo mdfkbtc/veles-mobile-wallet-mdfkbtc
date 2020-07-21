@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
 
   description: {
     ...typography.caption,
-    color: palette.textGrey,
+    color: palette.white,
     alignSelf: 'center',
     marginTop: 20,
     marginBottom: 44,

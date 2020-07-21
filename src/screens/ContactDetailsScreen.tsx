@@ -1,7 +1,7 @@
 import { RouteProp, CompositeNavigationProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 
 import {
@@ -85,17 +85,20 @@ export class ContactDetailsScreen extends React.PureComponent<Props, State> {
         footer={
           <>
             <Button onPress={this.navigateToSendCoins} title={i18n.contactDetails.sendCoinsButton} />
+            <Text></Text>
             <Button
               onPress={this.navigateToContactQRCode}
               title={i18n.contactDetails.showQRCodeButton}
               containerStyle={styles.showWalletXPUBContainer}
             />
+            <Text></Text>
             <FlatButton
               onPress={this.deleteContact}
               title={i18n.contactDetails.deleteButton}
               containerStyle={styles.deleteWalletButtonContainer}
               buttonType={ButtonType.Warning}
             />
+            <Text></Text>
           </>
         }
         header={<Header isBackArrow navigation={this.props.navigation} title={contact.name} />}

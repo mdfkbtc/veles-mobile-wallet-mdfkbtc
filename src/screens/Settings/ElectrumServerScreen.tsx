@@ -61,7 +61,9 @@ export const ElectrumServerScreen = (props: Props) => {
       footer={
         <>
           <Button title={i18n.electrumServer.save} onPress={onSavePress} containerStyle={styles.saveButton} />
-          <FlatButton title={i18n.electrumServer.useDefault} onPress={onUseDefaultPress} />
+          <Text></Text>
+          <Button title={i18n.electrumServer.useDefault} onPress={onUseDefaultPress} />
+          <Text></Text>
         </>
       }
       header={<Header isBackArrow={true} navigation={props.navigation} title={i18n.electrumServer.header} />}
@@ -92,10 +94,11 @@ const styles = StyleSheet.create({
     ...typography.headline4,
     alignSelf: 'center',
     marginTop: 10,
+    color: palette.white,
   },
   description: {
     ...typography.caption,
-    color: palette.textGrey,
+    color: palette.white,
     alignSelf: 'center',
     marginTop: 20,
     marginBottom: 40,

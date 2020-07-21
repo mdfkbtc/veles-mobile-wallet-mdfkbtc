@@ -10,7 +10,7 @@ import { BottomTabBarIcon } from './BottomTabBarIcon';
 import { GradientView } from './GradientView';
 
 export const BottomTabBarComponent = ({ state, descriptors, navigation }: BottomTabBarProps) => (
-  <GradientView variant={GradientView.Variant.Primary}>
+  <View style={[{backgroundColor: palette.headerColor}]}>
     <View style={styles.buttonsContainer}>
       {state.routes.map((route, index) => {
         const isFocused = state.index === index;
@@ -37,7 +37,7 @@ export const BottomTabBarComponent = ({ state, descriptors, navigation }: Bottom
         );
       })}
     </View>
-  </GradientView>
+  </View>
 );
 
 const styles = StyleSheet.create({

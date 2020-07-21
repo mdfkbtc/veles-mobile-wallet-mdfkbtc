@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttonStyle: {
-    borderRadius: 32.5,
+    backgroundColor: palette.buttonColor,
     height: 43,
   },
   titleStyle: {
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     opacity: 0.54,
   },
   disabledTitleStyle: {
-    color: palette.white,
+    color: palette.grey,
   },
   outlineTitle: {
     color: palette.secondary,

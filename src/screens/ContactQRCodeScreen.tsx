@@ -7,7 +7,7 @@ import Share from 'react-native-share';
 
 import { Button, ContactAvatar, Header, ScreenTemplate } from 'app/components';
 import { Route, MainCardStackNavigatorParams } from 'app/consts';
-import { typography } from 'app/styles';
+import { typography, palette } from 'app/styles';
 
 const i18n = require('../../loc');
 
@@ -34,7 +34,12 @@ export class ContactQRCodeScreen extends React.PureComponent<Props> {
     const { contact } = this.props.route.params;
     return (
       <ScreenTemplate
-        footer={<Button onPress={this.openShareDialog} title={i18n.contactDetails.share} />}
+        footer={
+          <>
+            <Button onPress={this.openShareDialog} title={i18n.contactDetails.share} />
+            <Text></Text>
+          </>
+        }
         header={<Header navigation={this.props.navigation} isBackArrow title={contact.name} />}
       >
         <ContactAvatar name={contact.name} />
@@ -56,6 +61,7 @@ const styles = StyleSheet.create({
   },
   address: {
     ...typography.headline5,
+    color: palette.white,
     textAlign: 'center',
   },
 });

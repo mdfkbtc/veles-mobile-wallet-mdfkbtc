@@ -559,7 +559,7 @@ export class SendCoinsScreen extends Component<Props, State> {
           {this.renderAmountInput()}
 
           <View style={styles.fee}>
-            <Text>{i18n.send.details.fee}</Text>
+            <Text style={styles.feeTitle}>{i18n.send.details.fee}</Text>
             <StyledText title={`${fee} ${i18n.send.details.feeUnit}`} onPress={this.setTransactionFee} />
           </View>
           <View style={styles.addressContainer}>
@@ -594,6 +594,10 @@ export class SendCoinsScreen extends Component<Props, State> {
 }
 
 const styles = StyleSheet.create({
+  feeTitle: {
+    color: palette.white,
+    marginRight: 5,
+  },
   buttonContainer: {
     marginBottom: 20,
   },
@@ -602,7 +606,7 @@ const styles = StyleSheet.create({
   },
   setTransactionHeaderDescription: {
     ...typography.caption,
-    color: palette.textGrey,
+    color: palette.white,
     textAlign: 'center',
     paddingTop: 20,
     paddingBottom: 40,

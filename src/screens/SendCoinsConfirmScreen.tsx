@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
   },
   buttonDescription: {
     ...typography.caption,
-    color: palette.textGrey,
+    color: palette.white,
   },
   address: {
     ...typography.headline9,

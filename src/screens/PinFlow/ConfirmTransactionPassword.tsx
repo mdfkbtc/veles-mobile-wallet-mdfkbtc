@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   },
   pinDescription: {
     ...typography.caption,
-    color: palette.textGrey,
+    color: palette.white,
     margin: 20,
     textAlign: 'center',
   },

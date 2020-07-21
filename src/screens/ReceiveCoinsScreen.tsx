@@ -213,11 +213,11 @@ const styles = StyleSheet.create({
     width: 140,
     height: 140,
   },
-  address: { ...typography.headline9, alignSelf: 'center', marginTop: 30 },
-  inputTitle: { ...typography.headline4, alignSelf: 'center', marginVertical: 20 },
+  address: { ...typography.headline9, alignSelf: 'center', marginTop: 30, marginBottom: 30, color: palette.white },
+  inputTitle: { ...typography.headline4, alignSelf: 'center', marginVertical: 30, color: palette.white },
   amountInput: { width: '100%', borderBottomColor: palette.grey, borderBottomWidth: 1, paddingBottom: 10 },
-  amount: { ...typography.caption, color: palette.textGrey },
+  amount: { ...typography.caption, color: palette.white },
   buttonContainer: {
-    marginBottom: 20,
+    marginBottom: 0,
   },
 });

@@ -88,7 +88,7 @@ export class ConfirmPinScreen extends PureComponent<Props, State> {
         }
       >
         <View style={styles.infoContainer}>
-          <Text style={typography.headline4}>
+          <Text style={[typography.headline4, {color: palette.white}]}>
             {this.state.flowType === FlowType.newPin ? i18n.onboarding.confirmNewPin : i18n.onboarding.confirmPin}
           </Text>
           <Text style={styles.pinDescription}>{i18n.onboarding.createPinDescription}</Text>
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   },
   pinDescription: {
     ...typography.caption,
-    color: palette.textGrey,
+    color: palette.white,
     margin: 20,
     textAlign: 'center',
   },

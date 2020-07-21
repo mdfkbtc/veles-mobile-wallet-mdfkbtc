@@ -4,7 +4,7 @@ import { StyleSheet, ViewStyle, StyleProp } from 'react-native';
 
 import { typography } from 'app/styles';
 
-import { FlatButton } from './FlatButton';
+import { Button } from './Button';
 
 const i18n = require('../../loc');
 
@@ -20,7 +20,7 @@ export const CopyButton: React.FunctionComponent<Props> = ({ textToCopy, contain
     Clipboard.setString(textToCopy);
   };
   return (
-    <FlatButton
+    <Button
       containerStyle={containerStyle}
       titleStyle={styles.titleStyle}
       title={isCopied ? i18n._.copied : i18n._.copy}

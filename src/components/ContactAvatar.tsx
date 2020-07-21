@@ -50,6 +50,6 @@ const styles = StyleSheet.create({
     ...typography.headline1,
     letterSpacing: 0.6,
     lineHeight: 46,
-    color: palette.textBlack,
+    color: palette.textOrange,
   },
 });

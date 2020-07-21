@@ -29,7 +29,7 @@ export class TextAreaItem extends PureComponent<Props, State> {
         <BaseTextInput
           style={[styles.input, isActive && styles.inputActive, style, !!error && styles.isError]}
           placeholder={placeholder}
-          placeholderTextColor={palette.textGrey}
+          placeholderTextColor={palette.white}
           numberOfLines={100}
           selectionColor={palette.textSecondary}
           multiline={true}

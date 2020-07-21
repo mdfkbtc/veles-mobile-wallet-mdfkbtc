@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   },
   description: {
     ...typography.caption,
-    color: palette.textGrey,
+    color: palette.white,
     textAlign: 'center',
     paddingVertical: 20,
   },
@@ -112,6 +112,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     width: '100%',
   },
-  listItemTitle: { ...typography.overline, color: palette.textGrey, marginTop: 24 },
+  listItemTitle: { ...typography.overline, color: palette.white, marginTop: 24 },
   listItemContent: { ...typography.caption, marginTop: 4, marginBottom: 3 },
 });

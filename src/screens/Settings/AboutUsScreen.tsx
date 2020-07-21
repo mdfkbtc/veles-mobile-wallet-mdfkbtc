@@ -57,13 +57,15 @@ export const AboutUsScreen = (props: Props) => {
   return (
     <ScreenTemplate header={<Header isBackArrow={true} navigation={props.navigation} title={i18n.aboutUs.header} />}>
       <Text style={styles.title}>{i18n.aboutUs.title}</Text>
-      <Text style={styles.description}>{i18n.aboutUs.alwaysBackupYourKeys}</Text>
+      <Text style={[styles.description, {color: palette.textRed, fontSize: 16, fontWeight: '900',}]}>{i18n.aboutUs.alwaysBackupYourKeys}</Text>
+      <Text></Text>
       <Button
         source={icons.github}
         onPress={goToGithub}
         title={i18n.aboutUs.goToOurGithub}
         containerStyle={styles.buttonContainer}
       />
+      <Text></Text>
       <Button
         onPress={handleRateButtonPress}
         source={icons.star}
@@ -91,16 +93,17 @@ const styles = StyleSheet.create({
     ...typography.headline4,
     textAlign: 'center',
     paddingBottom: 14,
+    color: palette.white,
   },
   description: {
     ...typography.caption,
-    color: palette.textGrey,
+    color: palette.white,
     alignSelf: 'center',
     paddingVertical: 4,
   },
   buildData: {
     ...typography.subtitle4,
-    color: palette.textGrey,
+    color: palette.white,
     textAlign: 'center',
     paddingVertical: 20,
   },
