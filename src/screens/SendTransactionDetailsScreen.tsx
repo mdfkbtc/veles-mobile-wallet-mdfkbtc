@@ -67,7 +67,7 @@ export class SendTransactionDetailsScreen extends PureComponent<Props> {
           </Text>
           <Text style={styles.listItemTitle}>{i18n.transactions.details.fee}</Text>
           <Text style={styles.listItemContent}>
-            {fee} {BitcoinUnit.BTC}
+            {satoshiPerByte} {i18n.send.details.feeUnit}
           </Text>
           <Text style={styles.listItemTitle}>{i18n.transactions.details.txSize}</Text>
           <Text style={styles.listItemContent}>
