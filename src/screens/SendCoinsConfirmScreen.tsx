@@ -128,7 +128,7 @@ export class SendCoinsConfirmScreen extends Component<Props> {
       navigation,
       route: { params },
     } = this.props;
-    const { fromWallet, recipients, fee } = params;
+    const { fromWallet, recipients, fee, satoshiPerByte } = params;
 
     const item = recipients[0];
 
@@ -155,7 +155,7 @@ export class SendCoinsConfirmScreen extends Component<Props> {
             <Text style={typography.caption}>{`${i18n.send.details.fee}  `}</Text>
             <View style={styles.feeBox}>
               <Text style={styles.fee}>
-                {fee} {i18n.send.details.feeUnit}
+                {satoshiPerByte} {i18n.send.details.feeUnit}
               </Text>
             </View>
           </View>
