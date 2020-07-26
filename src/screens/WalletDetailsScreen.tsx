@@ -83,11 +83,13 @@ export class WalletDetailsScreen extends React.PureComponent<Props, State> {
         footer={
           <>
             {!isWatchOnly && <Button onPress={this.navigateToWalletExport} title={i18n.wallets.details.exportWallet} />}
+            <Text></Text>
             <Button
               onPress={this.navigateToWalletXpub}
               title={i18n.wallets.details.showWalletXPUB}
               containerStyle={styles.showWalletXPUBContainer}
             />
+            <Text></Text>
             <FlatButton
               onPress={this.navigateToDeleteWallet}
               title={i18n.wallets.details.deleteWallet}

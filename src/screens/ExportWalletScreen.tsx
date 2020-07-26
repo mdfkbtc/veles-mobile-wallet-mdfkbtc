@@ -6,7 +6,7 @@ import QRCode from 'react-native-qrcode-svg';
 
 import { Header, Chip, ScreenTemplate } from 'app/components';
 import { RootStackParams, Route } from 'app/consts';
-import { typography } from 'app/styles';
+import { typography, palette } from 'app/styles';
 
 const i18n = require('../../loc');
 
@@ -21,7 +21,7 @@ export const ExportWalletScreen = ({ route, navigation }: Props) => {
 
   return (
     <ScreenTemplate
-      header={<Header title={i18n.wallets.exportWallet.header} isCancelButton={true} navigation={navigation} />}
+      header={<Header navigation={navigation} isBackArrow title={i18n.wallets.exportWallet.header} />}
     >
       <Text style={styles.title}>{i18n.wallets.exportWallet.title}</Text>
       <View style={styles.qrCodeContainer}>
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     paddingVertical: 24,
     alignItems: 'center',
   },
-  title: { ...typography.headline4, textAlign: 'center' },
+  title: { ...typography.headline4,color: palette.white, textAlign: 'center' },
   mnemonicPhraseContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',

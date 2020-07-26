@@ -32,7 +32,7 @@ export const WalletItem = (props: WalletItemProps) => {
         {selected && <Image style={styles.image} source={images.successBadge} />}
       </View>
       <View style={styles.textContainer}>
-        <Text style={typography.headline5}>{i18n.formatBalance(Number(value), unit, true)}</Text>
+        <Text style={[typography.headline5, { color: palette.textOrange }]}>{i18n.formatBalance(Number(value), unit, true)}</Text>
         <Text style={styles.name}>{name}</Text>
       </View>
     </TouchableOpacity>

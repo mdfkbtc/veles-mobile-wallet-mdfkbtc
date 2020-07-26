@@ -7,7 +7,7 @@ import QRCode from 'react-native-qrcode-svg';
 import { Header, ScreenTemplate } from 'app/components';
 import { CopyButton } from 'app/components/CopyButton';
 import { RootStackParams, Route } from 'app/consts';
-import { typography } from 'app/styles';
+import { typography, palette } from 'app/styles';
 
 import { WatchOnlyWallet } from '../../class';
 
@@ -26,13 +26,14 @@ export const ExportWalletXpubScreen = ({ navigation, route }: Props) => {
 
   return (
     <ScreenTemplate
-      header={<Header title={i18n.wallets.exportWalletXpub.header} isCancelButton={true} navigation={navigation} />}
+      header={<Header navigation={navigation} isBackArrow title={i18n.wallets.exportWalletXpub.header} />}
     >
       <Text style={styles.title}>{wallet.label}</Text>
       <View style={styles.qrCodeContainer}>
         <QRCode quietZone={10} value={xpub} size={140} ecl={'H'} />
       </View>
       <Text style={styles.xpub}>{xpub}</Text>
+      <Text></Text>
       <CopyButton textToCopy={xpub} />
     </ScreenTemplate>
   );
@@ -43,8 +44,8 @@ const styles = StyleSheet.create({
     paddingVertical: 24,
     alignItems: 'center',
   },
-  title: { ...typography.headline4, marginTop: 16, textAlign: 'center' },
+  title: { ...typography.headline4, marginTop: 16,color: palette.textOrange, textAlign: 'center' },
   xpub: {
-    ...typography.caption,
+    ...typography.caption, color: palette.white,
   },
 });

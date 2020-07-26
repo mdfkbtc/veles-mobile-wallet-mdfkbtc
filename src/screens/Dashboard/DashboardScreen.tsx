@@ -259,6 +259,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: palette.background,
   },
   clearFiltersButton: {
     height: 59,

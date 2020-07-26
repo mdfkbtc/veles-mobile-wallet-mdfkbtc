@@ -53,10 +53,12 @@ const styles = StyleSheet.create({
     maxHeight: SCREEN_HEIGHT / 2,
     backgroundColor: palette.white,
     borderRadius: 8,
+    backgroundColor: palette.background,
   },
   titleStyle: {
     ...typography.headline4,
     textAlign: 'center',
+    color: palette.white,
   },
   walletContainer: {
     marginTop: 31,
