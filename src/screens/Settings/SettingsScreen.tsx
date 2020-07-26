@@ -83,7 +83,7 @@ export const SettingsScreen = (props: Props) => {
     <>
       <Header navigation={props.navigation} title={i18n.settings.header} />
       <ScreenTemplate>
-        <Image source={images.goldWalletLogoBlack} style={styles.logo} resizeMode="contain" />
+        <Image source={images.walletLogoBlack} style={styles.logo} resizeMode="contain" />
         <LabeledSettingsRow label={i18n.settings.general}>{renderGeneralSettings()}</LabeledSettingsRow>
         <LabeledSettingsRow label={i18n.settings.security}>{renderSecuritySettings()}</LabeledSettingsRow>
         <LabeledSettingsRow label={i18n.settings.about}>{renderAboutSettings()}</LabeledSettingsRow>

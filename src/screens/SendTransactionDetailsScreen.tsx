@@ -38,7 +38,7 @@ export class SendTransactionDetailsScreen extends PureComponent<Props> {
 
     return (
       <ScreenTemplate
-        header={<Header title={i18n.transactions.details.details} isCancelButton={true} navigation={navigation} />}
+        header={<Header navigation={navigation} isBackArrow title={i18n.transactions.details.details} />}
       >
         <View style={styles.upperContainer}>
           <Text style={styles.title}>{i18n.transactions.details.transactionHex}</Text>
@@ -49,6 +49,7 @@ export class SendTransactionDetailsScreen extends PureComponent<Props> {
             containerStyle={styles.button}
             onPress={() => Clipboard.setString(tx)}
           />
+          <Text></Text>
           <Button
             title={i18n.transactions.details.verify}
             containerStyle={styles.button}
@@ -92,10 +93,12 @@ const styles = StyleSheet.create({
   title: {
     ...typography.headline4,
     paddingVertical: 20,
+    color: palette.white,
   },
   detailsTitle: {
     ...typography.headline4,
     alignSelf: 'center',
+    color: palette.white,
   },
   description: {
     ...typography.caption,
@@ -112,6 +115,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     width: '100%',
   },
-  listItemTitle: { ...typography.overline, color: palette.white, marginTop: 24 },
-  listItemContent: { ...typography.caption, marginTop: 4, marginBottom: 3 },
+  listItemTitle: { ...typography.overline, color: palette.secondary, marginTop: 24 },
+  listItemContent: { ...typography.caption, marginTop: 4, color: palette.white, marginBottom: 3 },
 });

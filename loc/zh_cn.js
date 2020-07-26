@@ -52,7 +52,7 @@ module.exports = {
   },
   unlock: {
     title: '解锁',
-    touchID: 'Touch ID用于“Gold Wallet”',
+    touchID: 'Touch ID用于“Veles Wallet”',
     confirmButton: '确认指纹以继续。',
     enter: '输入PIN',
   },
@@ -99,6 +99,9 @@ module.exports = {
       advancedOptions: '高级选项',
       multipleAddresses: '多个地址',
       singleAddress: '单个地址',
+      singleSegwitAddress: 'It contains a single native segwit address',
+      singleLegacyAddress: 'It cointains a single legacy address',
+      legacyAddress: 'It contains a tree of legacy addresses, generated from a single 24-word seed',      
       segwidAddress: '它包含一系列的由单一的24词种子生成的本地segwit地址',
     },
     addSuccess: {
@@ -240,7 +243,7 @@ module.exports = {
     rateVelesWallet: '为 VelesWallet 评分',
     goToOurGithub: '请访问我们的 Github',
     alwaysBackupYourKeys: '时刻备份您的秘钥',
-    title: 'Gold wallet 是免费的开源比特币Vault钱包软件。由麻省理工授权。',
+    title: 'Veles wallet 是免费的开源比特币Vault钱包软件。由麻省理工授权。',
   },
   electrumServer: {
     header: 'Electrum 服务器',

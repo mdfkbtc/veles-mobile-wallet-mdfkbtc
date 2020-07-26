@@ -105,6 +105,9 @@ module.exports = {
       advancedOptions: '高度なオプション',
       multipleAddresses: '複数のアドレス',
       singleAddress: '単一のアドレス',
+      singleSegwitAddress: 'It contains a single native segwit address',
+      singleLegacyAddress: 'It cointains a single legacy address',
+      legacyAddress: 'It contains a tree of legacy addresses, generated from a single 24-word seed',
       segwidAddress: '単一の24文字シードから生成されるsegwitアドレスのツリーを含めます。',
     },
     addSuccess: {

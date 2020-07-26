@@ -54,7 +54,7 @@ module.exports = {
   },
   unlock: {
     title: 'Kilidi Aç',
-    touchID: '"Gold Wallet" için Touch ID',
+    touchID: '"Veles Wallet" için Touch ID',
     confirmButton: 'Devam etmek için parmak iziyle doğrulama yapın.',
     enter: 'PIN Girin',
   },
@@ -106,6 +106,9 @@ module.exports = {
       advancedOptions: 'Gelişmiş seçenekler',
       multipleAddresses: 'Çoklu adresler',
       singleAddress: 'Tek adres',
+      singleSegwitAddress: 'It contains a single native segwit address',
+      singleLegacyAddress: 'It cointains a single legacy address',
+      legacyAddress: 'It contains a tree of legacy addresses, generated from a single 24-word seed',      
       segwidAddress: 'Tek bir 24 kelimelik seedden oluşturulmuş yerli segwit adreslerinden oluşan ağaç içerir',
     },
     addSuccess: {
@@ -253,7 +256,7 @@ module.exports = {
     rateVelesWallet: 'VelesWallet’ı Puanla',
     goToOurGithub: 'Github’umuza Git',
     alwaysBackupYourKeys: 'Her zaman anahtarlarınızı yedekleyin',
-    title: 'Gold Wallet ücretsiz ve açık kaynaklı bir Cortez Vault cüzdanıdır. Lisanslı MIT.',
+    title: 'Veles Wallet ücretsiz ve açık kaynaklı bir Cortez Vault cüzdanıdır. Lisanslı MIT.',
   },
   electrumServer: {
     header: 'Electrum sunucusu',

@@ -1,12 +1,18 @@
 import BigNumber from 'bignumber.js';
 import * as bip39 from 'bip39';
+import b58 from 'bs58check';
+import { NativeModules } from 'react-native';
 
+import { BitcoinUnit } from '../models/bitcoinUnits';
 import signer from '../models/signer';
 import { AbstractHDWallet } from './abstract-hd-wallet';
 
 const HDNode = require('bip32');
 const bitcoin = require('bitcoinjs-lib');
 
+const BlueElectrum = require('../BlueElectrum');
+
+const { RNRandomBytes } = NativeModules;
 /**
  * HD Wallet (BIP39).
  * In particular, BIP44 (P2PKH legacy addressess)
@@ -17,6 +23,10 @@ export class HDLegacyP2PKHWallet extends AbstractHDWallet {
   static typeReadable = 'HD Legacy (BIP44 P2PKH)';
 
   allowSend() {
+    return true;
+  }
+
+  allowSendMax() {
     return true;
   }
 
@@ -59,6 +69,29 @@ export class HDLegacyP2PKHWallet extends AbstractHDWallet {
     const child = root.derivePath(path);
 
     return child.toWIF();
+  }
+
+  async generate() {
+    const that = this;
+    return new Promise(function(resolve) {
+      if (typeof RNRandomBytes === 'undefined') {
+        // CLI/CI environment
+        // crypto should be provided globally by test launcher
+        return crypto.randomBytes(32, (err, buf) => { // eslint-disable-line
+          if (err) throw err;
+          that.setSecret(bip39.entropyToMnemonic(buf.toString('hex')));
+          resolve();
+        });
+      }
+
+      // RN environment
+      RNRandomBytes.randomBytes(32, (err, bytes) => {
+        if (err) throw new Error(err);
+        const b = Buffer.from(bytes, 'base64').toString('hex');
+        that.setSecret(bip39.entropyToMnemonic(b));
+        resolve();
+      });
+    });
   }
 
   async generateAddresses() {

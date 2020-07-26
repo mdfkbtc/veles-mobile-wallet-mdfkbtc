@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     ...typography.headline4,
     alignSelf: 'center',
     marginTop: 10,
+    color: palette.white,
   },
   inputContainer: {
     width: '100%',

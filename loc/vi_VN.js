@@ -57,7 +57,7 @@ module.exports = {
   },
   unlock: {
     title: 'Mở khóa ',
-    touchID: 'Chạm ID cho “Gold Wallet”',
+    touchID: 'Chạm ID cho “Veles Wallet”',
     confirmButton: 'Xác nhận dấu vân tay để tiếp tục.',
     enter: 'Nhập PIN',
   },
@@ -109,6 +109,9 @@ module.exports = {
       advancedOptions: 'Tùy chọn nâng cao',
       multipleAddresses: 'Nhiều địa chỉ',
       singleAddress: 'Một địa chỉ',
+      singleSegwitAddress: 'It contains a single native segwit address',
+      singleLegacyAddress: 'It cointains a single legacy address',
+      legacyAddress: 'It contains a tree of legacy addresses, generated from a single 24-word seed',      
       segwidAddress: 'Nó chứa một cây bao gồm các địa chỉ ví segwit, được tạo từ một hạt giống 24 từ duy nhất',
     },
     addSuccess: {

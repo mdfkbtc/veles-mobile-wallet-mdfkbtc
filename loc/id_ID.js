@@ -55,7 +55,7 @@ module.exports = {
   },
   unlock: {
     title: 'Buka Kunci',
-    touchID: 'Touch ID untuk "Gold Wallet"',
+    touchID: 'Touch ID untuk "Veles Wallet"',
     confirmButton: 'Konfirmasi sidik jari Anda untuk melanjutkan.',
     enter: 'Masukkan PIN',
   },
@@ -107,6 +107,9 @@ module.exports = {
       advancedOptions: 'Opsi lanjutan',
       multipleAddresses: 'Beberapa alamat',
       singleAddress: 'Satu alamat',
+      singleSegwitAddress: 'It contains a single native segwit address',
+      singleLegacyAddress: 'It cointains a single legacy address',
+      legacyAddress: 'It contains a tree of legacy addresses, generated from a single 24-word seed',
       segwidAddress:
         'Alamat ini mengandung sebuah pohon dari alamat segwit native, yang dihasilkan oleh sebuah benih tunggal 24-kata',
     },

@@ -54,7 +54,7 @@ module.exports = {
   },
   unlock: {
     title: 'Unlock',
-    touchID: 'Touch ID for "Gold Wallet"',
+    touchID: 'Touch ID for "Veles Wallet"',
     confirmButton: 'Confirm fingerprint to continue.',
     enter: 'Enter PIN',
   },
@@ -118,6 +118,9 @@ module.exports = {
       advancedOptions: 'Advanced options',
       multipleAddresses: 'It contains a tree of P2SH addresses generated from a single 24-word seed',
       singleAddress: 'It contains a single P2SH address',
+      singleSegwitAddress: 'It contains a single native segwit address',
+      singleLegacyAddress: 'It cointains a single legacy address',
+      legacyAddress: 'It contains a tree of legacy addresses, generated from a single 24-word seed',
       segwidAddress: 'It contains a tree of native segwit addresses, generated from a single 24-word seed',
     },
     addSuccess: {
@@ -271,7 +274,7 @@ module.exports = {
     rateVelesWallet: 'Rate VelesWallet',
     goToOurGithub: 'Go to our Github',
     alwaysBackupYourKeys: 'Always backup your keys',
-    title: 'Gold wallet is a free and open source Cortez Vault wallet. Licensed MIT.',
+    title: 'Veles wallet is a free and open source Cortez Vault wallet. Licensed MIT.',
   },
   electrumServer: {
     header: 'Electrum server',

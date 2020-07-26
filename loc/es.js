@@ -54,7 +54,7 @@ module.exports = {
   },
   unlock: {
     title: 'Desbloquear',
-    touchID: 'Touch ID para «Gold Wallet»',
+    touchID: 'Touch ID para «Veles Wallet»',
     confirmButton: 'Confirmar la huella digital para continuar.',
     enter: 'Introducir PIN',
   },
@@ -106,6 +106,9 @@ module.exports = {
       advancedOptions: 'Opciones avanzadas',
       multipleAddresses: 'Múltiples direcciones',
       singleAddress: 'Dirección única',
+      singleSegwitAddress: 'It contains a single native segwit address',
+      singleLegacyAddress: 'It cointains a single legacy address',
+      legacyAddress: 'It contains a tree of legacy addresses, generated from a single 24-word seed',
       segwidAddress:
         'Contiene un árbol de direcciones SegWit nativas, generadas a partir de una única semilla de 24 palabras',
     },
@@ -254,7 +257,7 @@ module.exports = {
     rateVelesWallet: 'Valorar VelesWallet',
     goToOurGithub: 'Acceda a nuestro Github',
     alwaysBackupYourKeys: 'Siempre guarde una copia de seguridad de sus claves',
-    title: 'Gold Wallet es un monedero de Cortez Vault gratuito y de código abierto. Con licencia MIT.',
+    title: 'Veles Wallet es un monedero de Cortez Vault gratuito y de código abierto. Con licencia MIT.',
   },
   electrumServer: {
     header: 'Servidor Electrum',

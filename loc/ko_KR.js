@@ -105,6 +105,9 @@ module.exports = {
       advancedOptions: '고급 옵션',
       multipleAddresses: '여러 개의 주소',
       singleAddress: '단일 주소',
+      singleSegwitAddress: 'It contains a single native segwit address',
+      singleLegacyAddress: 'It cointains a single legacy address',
+      legacyAddress: 'It contains a tree of legacy addresses, generated from a single 24-word seed',
       segwidAddress:
         '24개의 개별 단어로 구성된 시드 암호문으로부터 생성된 고유한 세그윗 (Segwit) 주소의 모음을 포함합니다.',
     },
