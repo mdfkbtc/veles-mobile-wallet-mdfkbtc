@@ -11,7 +11,6 @@ import { ApplicationState } from 'app/state';
 import { palette } from 'app/styles';
 import { loadTransactions, TransactionsActionType } from 'app/state/transactions/actions';
 import { loadWallets, WalletsActionType } from 'app/state/wallets/actions';
-import { palette } from 'app/styles';
 
 import { DashboarContentdHeader } from './DashboarContentdHeader';
 import { DashboardHeader } from './DashboardHeader';
