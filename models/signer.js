@@ -161,7 +161,8 @@ exports.createSegwitTransaction = function(utxos, toAddress, amount, fixedFee, W
       // using only confirmed outputs
       continue;
     }
-    const satoshis = parseInt((unspent.value * 100000000).toFixed(0));
+    const satoshis = parseInt((unspent.value).toFixed(0));
+    //const satoshis = parseInt((unspent.value * 100000000).toFixed(0));
     psbt.addInput({
       hash: unspent.txid,
       index: unspent.vout,
@@ -174,6 +175,7 @@ exports.createSegwitTransaction = function(utxos, toAddress, amount, fixedFee, W
     });
     unspentAmount += satoshis;
   }
+  //const amountToOutput = parseInt(((amount - fixedFee)).toFixed(0));
   const amountToOutput = parseInt(((amount - fixedFee) * 100000000).toFixed(0));
   psbt.addOutput({
     address: toAddress,
@@ -192,6 +194,8 @@ exports.createSegwitTransaction = function(utxos, toAddress, amount, fixedFee, W
     }
   }
 
+  console.log('amountToOutput ', amountToOutput, 'unspentAmount ', unspentAmount, 'feeInSatoshis ', feeInSatoshis);
+ 
   for (let c = 0; c < utxos.length; c++) {
     psbt.signInput(c, keyPair);
   }
