@@ -90,6 +90,6 @@ const styles = StyleSheet.create({
   circleButtonImage: { height: 32, width: 32, margin: 5 },
   circleButtonText: {
     ...typography.headline6,
-    color: palette.textSecondary,
+    color: palette.white,
   },
 });

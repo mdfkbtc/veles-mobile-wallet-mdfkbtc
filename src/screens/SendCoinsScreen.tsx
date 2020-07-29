@@ -572,7 +572,7 @@ export class SendCoinsScreen extends Component<Props, State> {
                 })
               }
             >
-              <Image style={styles.icon} source={images.ContactList} />
+              <Image style={styles.icon} source={images.AddressBookIcon} />
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.qrCodeIcon}

@@ -91,10 +91,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   iconInCircle: {
-    height: 50,
-    width: 50,
+    height: 140,
+    width: 140,
     position: 'absolute',
-    bottom: 10,
-    right: 20,
+    bottom: -5,
+    right: 0,
+    borderRadius: 15,
   },
 });

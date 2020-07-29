@@ -2,6 +2,7 @@ export const images = {
   Dashboard: require('./images/dashboard.png'),
   DashboardInactive: require('./images/dashboardInactive.png'),
   ContactList: require('./images/addressBook.png'),
+  AddressBookIcon: require('./images/addressBookIcon.png'),
   ContactListInactive: require('./images/addressBookInactive.png'),
   Settings: require('./images/settings.png'),
   SettingsInactive: require('./images/settingsInactive.png'),

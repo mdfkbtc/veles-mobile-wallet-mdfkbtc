@@ -6,6 +6,7 @@ export const palette = {
   textOrange: '#f19b7e',
   textGreen: '#aeed6a',
   textRed: 'rgb(230, 93, 93)',
+  textWhite: 'rgba(255, 255, 255, 0.74)',
   textWhiteMuted: 'rgba(255, 255, 255, 0.54)',
   buttonColor: '#262626',
   lightGrey: 'rgb(237,238,239)',
