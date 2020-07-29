@@ -474,7 +474,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.minebest.goldwalletbtcv;
+				PRODUCT_BUNDLE_IDENTIFIER = network.veles.wallet;
 				PRODUCT_NAME = VelesWallet;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "VelesWallet-Bridging-Header.h";
@@ -513,7 +513,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.minebest.goldwalletbtcv;
+				PRODUCT_BUNDLE_IDENTIFIER = network.veles.wallet;
 				PRODUCT_NAME = VelesWallet;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "VelesWallet-Bridging-Header.h";

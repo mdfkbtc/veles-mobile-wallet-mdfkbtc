@@ -1,5 +1,5 @@
 {
-  "name": "goldwallet",
+  "name": "veleswallet",
   "version": "5.0.4",
   "devDependencies": {
     "@babel/core": "^7.6.2",
