@@ -118,7 +118,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "network.veles.wallet"
+        applicationId "io.veles.wallet"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 4

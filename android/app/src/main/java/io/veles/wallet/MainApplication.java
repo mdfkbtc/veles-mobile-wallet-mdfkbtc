@@ -1,4 +1,4 @@
-package network.veles.wallet;
+package io.veles.wallet;
 
 import android.app.Application;
 

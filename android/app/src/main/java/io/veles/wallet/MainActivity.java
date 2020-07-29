@@ -1,4 +1,4 @@
-package network.veles.wallet;
+package io.veles.wallet;
 
 import com.facebook.react.ReactActivity;
 import org.devio.rn.splashscreen.SplashScreen;

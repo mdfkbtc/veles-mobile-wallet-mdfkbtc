@@ -1,5 +1,5 @@
 
-package network.veles.wallet;
+package io.veles.wallet;
 
 import android.content.Intent;
 import android.os.Bundle;
