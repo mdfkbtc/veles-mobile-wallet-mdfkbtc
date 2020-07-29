@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
   containerStyle: {
     paddingHorizontal: 20,
     maxHeight: SCREEN_HEIGHT / 2,
-    backgroundColor: palette.white,
     borderRadius: 8,
     backgroundColor: palette.background,
   },

@@ -72,7 +72,7 @@ const mapDispatchToProps = {
 export default connect(null, mapDispatchToProps)(DeleteContactScreen);
 
 const styles = StyleSheet.create({
-  title: { ...typography.headline4, marginTop: 16, textAlign: 'center' },
+  title: { ...typography.headline4, marginTop: 16, color: palette.white, textAlign: 'center' },
   description: {
     ...typography.caption,
     color: palette.white,

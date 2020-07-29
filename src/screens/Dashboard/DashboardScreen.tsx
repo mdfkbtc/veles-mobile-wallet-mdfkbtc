@@ -261,6 +261,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    color: palette.secondary,
     backgroundColor: palette.background,
   },
   clearFiltersButtonContainer: {

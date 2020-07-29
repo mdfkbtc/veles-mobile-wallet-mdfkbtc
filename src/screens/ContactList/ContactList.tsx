@@ -70,8 +70,9 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   header: {
+    ...typography.headline3,
     paddingVertical: 16,
-    color: palette.white,
+    color: palette.textOrange,
   },
   contact: {
     paddingVertical: 8,
