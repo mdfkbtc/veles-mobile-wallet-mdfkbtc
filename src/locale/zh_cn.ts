@@ -160,7 +160,7 @@ module.exports = {
       transactionHex: '十六进制字符串交易标识符',
       transactionHexDescription: '这是十六进制字符串交易标识符，已签名并准备发送到网络',
       copyAndBoriadcast: '稍后复制和发送',
-      verify: '在 coinb.in 上验证',
+      verify: '在 wallet.veles.network 上验证',
       amount: '金额',
       fee: '手续费',
       txSize: '交易大小',

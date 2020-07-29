@@ -54,7 +54,7 @@ export class SendTransactionDetailsScreen extends PureComponent<Props> {
             title={i18n.transactions.details.verify}
             containerStyle={styles.button}
             onPress={() => {
-              Linking.openURL('https://coinb.in/?verify=' + tx);
+              Linking.openURL('https://wallet.veles.network/?verify=' + tx);
             }}
           />
         </View>
