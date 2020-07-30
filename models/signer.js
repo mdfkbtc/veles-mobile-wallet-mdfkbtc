@@ -329,6 +329,7 @@ exports.createTransaction = function(utxos, toAddress, _amount, _fixedFee, WIF, 
   }
   txb.addOutput(toAddress, amountToOutput);
 
+  console.log('amountToOutput ', amountToOutput, ', fixedFee ', fixedFee, ', unspentAmount', unspentAmount)
   if (amountToOutput + fixedFee < unspentAmount) {
     // sending less than we have, so the rest should go back
     txb.addOutput(fromAddress, unspentAmount - amountToOutput - fixedFee);

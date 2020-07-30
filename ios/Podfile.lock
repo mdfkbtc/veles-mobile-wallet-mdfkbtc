@@ -2,6 +2,7 @@ PODS:
   - boost-for-react-native (1.63.0)
   - BVLinearGradient (2.5.6):
     - React
+  - CocoaAsyncSocket (7.6.4)
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.61.5)
   - FBReactNativeSpec (0.61.5):
@@ -217,7 +218,7 @@ PODS:
     - React
   - react-native-restart (0.0.15):
     - React
-  - react-native-safe-area-context (3.0.6):
+  - react-native-safe-area-context (3.1.1):
     - React
   - react-native-slider (2.0.0-rc.1):
     - React
@@ -264,7 +265,7 @@ PODS:
     - React
   - RNCAsyncStorage (1.9.0):
     - React
-  - RNCClipboard (1.2.2):
+  - RNCClipboard (1.2.3):
     - React
   - RNCMaskedView (0.1.10):
     - React
@@ -272,10 +273,10 @@ PODS:
     - React
   - RNDeviceInfo (5.5.6):
     - React
-  - RNFastImage (8.1.5):
+  - RNFastImage (8.3.2):
     - React
-    - SDWebImage (~> 5.0)
-    - SDWebImageWebPCoder (~> 0.4.1)
+    - SDWebImage (~> 5.8)
+    - SDWebImageWebPCoder (~> 0.6.1)
   - RNFS (2.13.3):
     - React
   - RNGestureHandler (1.6.1):
@@ -305,16 +306,17 @@ PODS:
     - React
   - RNWatch (0.4.1):
     - React
-  - SDWebImage (5.8.0):
-    - SDWebImage/Core (= 5.8.0)
-  - SDWebImage/Core (5.8.0)
-  - SDWebImageWebPCoder (0.4.1):
+  - SDWebImage (5.8.4):
+    - SDWebImage/Core (= 5.8.4)
+  - SDWebImage/Core (5.8.4)
+  - SDWebImageWebPCoder (0.6.1):
     - libwebp (~> 1.0)
-    - SDWebImage/Core (~> 5.5)
+    - SDWebImage/Core (~> 5.7)
   - Sentry (4.4.3):
     - Sentry/Core (= 4.4.3)
   - Sentry/Core (4.4.3)
   - TcpSockets (4.0.0):
+    - CocoaAsyncSocket
     - React
   - ToolTipMenu (5.2.1):
     - React
@@ -389,6 +391,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - boost-for-react-native
+    - CocoaAsyncSocket
     - libwebp
     - lottie-ios
     - SDWebImage
@@ -522,6 +525,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
+  CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBLazyVector: aaeaf388755e4f29cd74acbc9e3b8da6d807c37f
   FBReactNativeSpec: 118d0d177724c2d67f08a59136eb29ef5943ec75
@@ -546,7 +550,7 @@ SPEC CHECKSUMS:
   react-native-image-picker: 7a85cf7b0a53845f03ae52fb4592a2748ded069b
   react-native-randombytes: 3638d24759d67c68f6ccba60c52a7a8a8faa6a23
   react-native-restart: fff228304625f55de2ebd4de43938110f4c888ed
-  react-native-safe-area-context: e22a8ca00f758273d2408953965cb8db67da7925
+  react-native-safe-area-context: 344b969c45af3d8464d36e8dea264942992ef033
   react-native-slider: 884693dd50f84745baa511ecdcde4c16f32182fb
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
@@ -562,11 +566,11 @@ SPEC CHECKSUMS:
   ReactNativePrivacySnapshot: cc295e45dc22810e9ff2c93380d643de20a77015
   RemobileReactNativeQrcodeLocalImage: 57aadc12896b148fb5e04bc7c6805f3565f5c3fa
   RNCAsyncStorage: 453cd7c335ec9ba3b877e27d02238956b76f3268
-  RNCClipboard: 8148e21ac347c51fd6cd4b683389094c216bb543
+  RNCClipboard: 48eaf27bea3de7c9a265529725434268d47a2ee9
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNDefaultPreference: 628cb35719f2fe4111c000ccfa7e186400bbc47e
   RNDeviceInfo: 722dc13c269b9dbf305aa4b790d36731602e99b7
-  RNFastImage: 35ae972d6727c84ee3f5c6897e07f84d0a3445e9
+  RNFastImage: e19ba191922e7dab9d932a4d59d62d76660aa222
   RNFS: c9bbde46b0d59619f8e7b735991c60e0f73d22c1
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNHandoff: d3b0754cca3a6bcd9b25f544f733f7f033ccf5fa
@@ -581,13 +585,13 @@ SPEC CHECKSUMS:
   RNSVG: 0eb087cfb5d7937be93c45b163b26352a647e681
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   RNWatch: a14e378448e187cc12f307f61d41fe8a65400e86
-  SDWebImage: 84000f962cbfa70c07f19d2234cbfcf5d779b5dc
-  SDWebImageWebPCoder: 36f8f47bd9879a8aea6044765c1351120fd8e3a8
+  SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
+  SDWebImageWebPCoder: d0dac55073088d24b2ac1b191a71a8f8d0adac21
   Sentry: 14bdd673870e8cf64932b149fad5bbbf39a9b390
-  TcpSockets: 4ef55305239923b343ed0a378b1fac188b1373b0
+  TcpSockets: a8eb6b5867fe643e6cfed5db2e4de62f4d1e8fd0
   ToolTipMenu: 8ac61aded0fbc4acfe7e84a7d0c9479d15a9a382
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: 10567d1e173aae9ab5e898db3c41267100a01a22
+PODFILE CHECKSUM: f708eddb7bb6b7e7bfacaa787b3c1a97c45870fb
 
-COCOAPODS: 1.9.2
+COCOAPODS: 1.9.3
