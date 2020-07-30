@@ -49,13 +49,14 @@
     "test": "yarn jest",
     "jest": "node node_modules/jest/bin/jest.js tests/integration/*",
     "install_local": "cd src && yarn install",
-    "lint": "eslint '**/*.{js,ts,tsx}'",
     "lint": "yarn lint",
     "unit": "./node_modules/.bin/mocha tests/unit/*",
     "typescript:check": "tsc --noEmit",
     "prettier:fix": "prettier --write '**/*.{js,ts,tsx}'",
     "precommit": "yarn lint-staged",
-    "shake": "adb shell input keyevent 82"
+    "shake": "adb shell input keyevent 82",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "jest": {
     "preset": "react-native",
@@ -90,7 +91,7 @@
     "buffer": "5.2.1",
     "buffer-reverse": "1.0.1",
     "coinselect": "3.1.11",
-    "crypto-js": "3.1.9-1",
+    "crypto-js": "3.2.1",
     "dayjs": "1.8.27",
     "ecurve": "1.0.6",
     "electrum-client": "git+https://github.com/BlueWallet/rn-electrum-client.git",
@@ -99,7 +100,7 @@
     "i18next": "^19.4.5",
     "intl": "1.2.5",
     "lottie-react-native": "3.1.1",
-    "mocha": "5.2.0",
+    "mocha": "6.2.3",
     "moment": "^2.24.0",
     "node-libs-react-native": "1.0.3",
     "path-browserify": "1.0.0",
@@ -108,7 +109,7 @@
     "react": "16.9.0",
     "react-i18next": "^11.5.0",
     "react-localization": "1.0.13",
-    "react-native": "0.61.5",
+    "react-native": "0.62.0",
     "react-native-biometrics": "2.1.4",
     "react-native-calendars": "^1.265.0",
     "react-native-camera": "3.4.0",
@@ -163,7 +164,8 @@
     "url": "0.11.0",
     "util": "0.12.1",
     "uuid": "^3.4.0",
-    "wif": "2.0.6"
+    "wif": "2.0.6",
+    "snyk": "^1.369.2"
   },
   "react-native": {
     "path": "path-browserify",
@@ -186,10 +188,10 @@
     "stream": "stream-browserify"
   },
   "lint-staged": {
-    "./**/*.{ts,tsx,js,jsx}": [
-    ],
+    "./**/*.{ts,tsx,js,jsx}": [],
     "./**/*.{ts|tsx}": [
       "yarn typescript:check"
     ]
-  }
+  },
+  "snyk": true
 }
