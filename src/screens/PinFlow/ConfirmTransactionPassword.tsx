@@ -82,7 +82,7 @@ export class ConfirmTransactionPassword extends PureComponent<Props, State> {
         header={<Header navigation={this.props.navigation} isBackArrow title={i18n.onboarding.confirmPassword} />}
       >
         <View style={styles.infoContainer}>
-          <Text style={typography.headline4}>{i18n.onboarding.createPassword}</Text>
+          <Text style={[typography.headline4, { color: palette.white }]}>{i18n.onboarding.createPassword}</Text>
           <Text style={styles.pinDescription}>{i18n.onboarding.createPasswordDescription}</Text>
         </View>
         <View style={styles.inputItemContainer}>
