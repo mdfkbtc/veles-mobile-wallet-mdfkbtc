@@ -7,7 +7,7 @@ import { DateObject } from 'react-native-calendars';
 import { images } from 'app/assets';
 import { Header, ScreenTemplate, InputItem, Image } from 'app/components';
 import { Button } from 'app/components/Button';
-import { Calendar } from 'app/components/Calendar';
+import { Calendar } from 'react-native-calendars'; //'app/components/Calendar';
 import { CardGroup } from 'app/components/CardGroup';
 import { RowTemplate } from 'app/components/RowTemplate';
 import { CONST, Route, MainCardStackNavigatorParams } from 'app/consts';
@@ -151,7 +151,7 @@ export const FilterTransactionsScreen = (props: Props) => {
       }
       header={<Header navigation={props.navigation} isBackArrow={true} title={i18n.filterTransactions.header} />}
     >
-      <Calendar isVisible={isCalendarVisible} onDateSelect={onDateSelect} onClose={closeCalendar} />
+      
       <CardGroup
         onCardPressAction={title => setTransactionType(title)}
         cards={[

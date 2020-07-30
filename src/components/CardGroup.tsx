@@ -81,6 +81,9 @@ const styles = StyleSheet.create({
   headerTitle: {
     ...typography.caption,
     textAlign: 'center',
+    color: palette.white,
+    fontWeight: 'bold',
+    textTransform: 'capitalize'
   },
   headerContainer: {
     paddingBottom: 6.5,

@@ -262,6 +262,7 @@ const styles = StyleSheet.create({
   title: {
     ...typography.headline4,
     textAlign: 'center',
+    color: palette.white,
   },
   subtitle: {
     ...typography.caption,
@@ -272,6 +273,7 @@ const styles = StyleSheet.create({
   textArea: {
     marginTop: 24,
     height: 250,
+    backgroundColor: '#ffddbb'
   },
   scanQRCodeButtonContainer: {
     marginTop: 12,
