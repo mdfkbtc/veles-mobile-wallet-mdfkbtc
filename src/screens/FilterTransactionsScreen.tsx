@@ -65,34 +65,7 @@ export const FilterTransactionsScreen = (props: Props) => {
         <AppStateManager handleAppComesToBackground={closeCalendar} />
         <RowTemplate
           items={[
-            <View key={Index.From}>
-              <InputItem
-                key={Index.From}
-                editable={false}
-                label={i18n.filterTransactions.fromDate}
-                value={fromDate}
-                onFocus={() => showCalendar(Index.From)}
-              />
-              <TouchableOpacity
-                key={Index.From}
-                onPress={() => showCalendar(Index.From)}
-                style={styles.buttonOverlay}
-              />
-              {!!fromDate && (
-                <TouchableOpacity style={styles.clearButton} onPress={() => setFromDate('')}>
-                  <Image source={images.closeInverted} style={styles.clearImage} />
-                </TouchableOpacity>
-              )}
-            </View>,
-            <View key={Index.To}>
-              <InputItem label={i18n.filterTransactions.toDate} value={toDate} editable={false} />
-              <TouchableOpacity onPress={() => showCalendar(Index.To)} style={styles.buttonOverlay} />
-              {!!toDate && (
-                <TouchableOpacity style={styles.clearButton} onPress={() => setToDate('')}>
-                  <Image source={images.closeInverted} style={styles.clearImage} />
-                </TouchableOpacity>
-              )}
-            </View>,
+
           ]}
         />
       </View>
