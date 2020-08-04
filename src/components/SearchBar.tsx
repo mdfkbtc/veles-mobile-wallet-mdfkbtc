@@ -62,12 +62,9 @@ export class SearchBar extends React.PureComponent<Props, State> {
           )}
         </View>
         {focused && (
-          <FlatButton
-            onPress={this.cancelSearch}
-            containerStyle={styles.cancelButtonContainer}
-            titleStyle={typography.headline4}
-            title={i18n.contactList.cancel}
-          />
+          <TouchableOpacity style={styles.cancelButtonContainer} onPress={this.cancelSearch}>
+              <Image source={images.cancelSmall} style={styles.clearImage} />
+          </TouchableOpacity>
         )}
       </View>
     );
@@ -104,6 +101,7 @@ const styles = StyleSheet.create({
   },
   cancelButtonContainer: {
     marginStart: 12,
+    marginTop: 11,
   },
   clearButton: {
     height: 36,
