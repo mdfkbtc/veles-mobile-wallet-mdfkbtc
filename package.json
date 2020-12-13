@@ -76,7 +76,7 @@
     "@react-native-community/slider": "2.0.0-rc.1",
     "@react-navigation/bottom-tabs": "^5.6.0",
     "@react-navigation/native": "^5.6.1",
-    "@react-navigation/stack": "^5.6.1",
+    "@react-navigation/stack": "^5.12.8",
     "@remobile/react-native-qrcode-local-image": "git+https://github.com/BlueWallet/react-native-qrcode-local-image.git",
     "@sentry/react-native": "1.0.9",
     "@types/react-native-calendars": "^1.20.7",
