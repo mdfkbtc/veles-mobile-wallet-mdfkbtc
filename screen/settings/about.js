@@ -1,8 +1,13 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { ScrollView, Linking, Dimensions } from 'react-native';
+import { getApplicationName, getVersion, getBundleId, getBuildNumber } from 'react-native-device-info';
+import Rate, { AndroidMarket } from 'react-native-rate';
+
 import {
   BlueTextCentered,
   BlueLoading,
+  BlueSpacing10,
   BlueSpacing20,
   BlueButton,
   SafeBlueArea,
@@ -10,11 +15,10 @@ import {
   BlueText,
   BlueNavigationStyle,
 } from '../../BlueComponents';
-import PropTypes from 'prop-types';
-import { getApplicationName, getVersion, getBundleId, getBuildNumber } from 'react-native-device-info';
-import Rate, { AndroidMarket } from 'react-native-rate';
+
 /** @type {AppStorage} */
-let BlueApp = require('../../BlueApp');
+const BlueApp = require('../../BlueApp');
+
 const { width, height } = Dimensions.get('window');
 const loc = require('../../loc/');
 
@@ -46,10 +50,10 @@ export default class About extends Component {
       <SafeBlueArea forceInset={{ horizontal: 'always' }} style={{ flex: 1 }}>
         <ScrollView>
           <BlueCard>
-            <BlueTextCentered h4>BlueWallet is a free and open source Bitcoin wallet. Licensed MIT.</BlueTextCentered>
+            <BlueTextCentered h4>Veles Wallet is a free and open source wallet. Licensed MIT.</BlueTextCentered>
             <BlueSpacing20 />
 
-            <BlueTextCentered h4>Always backup your keys</BlueTextCentered>
+            <BlueTextCentered h4>Always backup your keys !</BlueTextCentered>
             <BlueSpacing20 />
 
             <BlueButton
@@ -59,35 +63,9 @@ export default class About extends Component {
                 color: BlueApp.settings.buttonTextColor,
               }}
               onPress={() => {
-                Linking.openURL('https://github.com/BlueWallet/BlueWallet');
+                Linking.openURL('https://github.com/velescore/veles-mobile-wallet');
               }}
-              title="github.com/BlueWallet/BlueWallet"
-            />
-            <BlueSpacing20 />
-
-            <BlueButton
-              icon={{
-                name: 'twitter',
-                type: 'font-awesome',
-                color: BlueApp.settings.buttonTextColor,
-              }}
-              onPress={() => {
-                Linking.openURL('https://twitter.com/bluewalletio');
-              }}
-              title="Follow us on Twitter"
-            />
-            <BlueSpacing20 />
-
-            <BlueButton
-              icon={{
-                name: 'telegram',
-                type: 'font-awesome',
-                color: BlueApp.settings.buttonTextColor,
-              }}
-              onPress={() => {
-                Linking.openURL('https://t.me/bluewallet');
-              }}
-              title="Join Telegram chat"
+              title="github.com/velescore/veles-mobile-wallet"
             />
             <BlueSpacing20 />
 
@@ -98,13 +76,13 @@ export default class About extends Component {
                 color: BlueApp.settings.buttonTextColor,
               }}
               onPress={() => {
-                let options = {
+                const options = {
                   AppleAppID: '1376878040',
-                  GooglePackageName: 'io.bluewallet.bluewallet',
+                  GooglePackageName: 'io.veles.wallet',
                   preferredAndroidMarket: AndroidMarket.Google,
                   preferInApp: true,
                   openAppStoreIfInAppFails: true,
-                  fallbackPlatformURL: 'https://bluewallet.io',
+                  fallbackPlatformURL: 'https://veles.network',
                 };
                 Rate.rate(options, success => {
                   if (success) {
@@ -112,19 +90,21 @@ export default class About extends Component {
                   }
                 });
               }}
-              title="Rate BlueWallet"
+              title="Rate Veles Wallet"
             />
 
             <BlueSpacing20 />
-            <BlueText h3>Built with awesome:</BlueText>
-            <BlueSpacing20 />
-            <BlueText h4>* React Native</BlueText>
-            <BlueText h4>* Bitcoinjs-lib</BlueText>
-            <BlueText h4>* blockcypher.com API</BlueText>
-            <BlueText h4>* Nodejs</BlueText>
-            <BlueText h4>* react-native-elements</BlueText>
-            <BlueText h4>* rn-nodeify</BlueText>
-            <BlueText h4>* bignumber.js</BlueText>
+            <BlueText h4>Built with awesome:</BlueText>
+            <BlueSpacing10 />
+            <BlueText h5>* React Native</BlueText>
+            <BlueText h5>* Bitcoinjs-lib</BlueText>
+            <BlueText h5>* blockcypher.com API</BlueText>
+            <BlueText h5>* Nodejs</BlueText>
+            <BlueText h5>* react-native-elements</BlueText>
+            <BlueText h5>* rn-nodeify</BlueText>
+            <BlueText h5>* bignumber.js</BlueText>
+            <BlueText h5>* BlueWallet</BlueText>
+            <BlueText h5>* GoldWallet</BlueText>
             <BlueSpacing20 />
 
             <BlueButton
@@ -135,12 +115,6 @@ export default class About extends Component {
             />
             <BlueSpacing20 />
 
-            <BlueButton
-              onPress={() => {
-                this.props.navigation.navigate('Selftest');
-              }}
-              title="Run self test"
-            />
             <BlueTextCentered />
             <BlueTextCentered>
               {getApplicationName()} ver {getVersion()} (build {getBuildNumber()})

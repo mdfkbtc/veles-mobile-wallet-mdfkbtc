@@ -1,10 +1,20 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { ActivityIndicator, View, TextInput } from 'react-native';
-import { BlueSpacing20, BlueButton, SafeBlueArea, BlueCard, BlueText, BlueSpacing, BlueNavigationStyle } from '../../BlueComponents';
-import PropTypes from 'prop-types';
+
+import {
+  BlueSpacing20,
+  BlueButton,
+  SafeBlueArea,
+  BlueCard,
+  BlueText,
+  BlueSpacing,
+  BlueNavigationStyle,
+} from '../../BlueComponents';
 import { SegwitBech32Wallet } from '../../class';
+
 /** @type {AppStorage} */
-let BlueApp = require('../../BlueApp');
+const BlueApp = require('../../BlueApp');
 
 export default class RBF extends Component {
   static navigationOptions = () => ({
@@ -19,8 +29,8 @@ export default class RBF extends Component {
 
     let sourceWallet;
     let sourceTx;
-    for (let w of BlueApp.getWallets()) {
-      for (let t of w.getTransactions()) {
+    for (const w of BlueApp.getWallets()) {
+      for (const t of w.getTransactions()) {
         if (t.hash === txid) {
           // found our source wallet
           sourceWallet = w;
@@ -32,7 +42,7 @@ export default class RBF extends Component {
 
     let destinationAddress;
 
-    for (let o of sourceTx.outputs) {
+    for (const o of sourceTx.outputs) {
       if (!o.addresses && o.script) {
         // probably bech32 output, so we need to decode address
         o.addresses = [SegwitBech32Wallet.scriptPubKeyToAddress(o.script)];
@@ -69,12 +79,12 @@ export default class RBF extends Component {
   }
 
   async componentDidMount() {
-    let startTime = Date.now();
+    const startTime = Date.now();
     console.log('transactions/RBF - componentDidMount');
     this.setState({
       isLoading: false,
     });
-    let endTime = Date.now();
+    const endTime = Date.now();
     console.log('componentDidMount took', (endTime - startTime) / 1000, 'sec');
   }
 
@@ -126,7 +136,9 @@ export default class RBF extends Component {
       <SafeBlueArea style={{ flex: 1, paddingTop: 20 }}>
         <BlueSpacing />
         <BlueCard title={'Replace By Fee'} style={{ alignItems: 'center', flex: 1 }}>
-          <BlueText>RBF allows you to increase fee on already sent but not confirmed transaction, thus speeding up mining</BlueText>
+          <BlueText>
+            RBF allows you to increase fee on already sent but not confirmed transaction, thus speeding up mining
+          </BlueText>
           <BlueSpacing20 />
 
           <BlueText>
@@ -137,47 +149,45 @@ export default class RBF extends Component {
           <View
             style={{
               flexDirection: 'row',
-              borderColor: '#d2d2d2',
-              borderBottomColor: '#d2d2d2',
+              borderColor: BlueApp.settings.inputBorderColor,
               borderWidth: 1.0,
               borderBottomWidth: 0.5,
-              backgroundColor: '#f5f5f5',
+              backgroundColor: BlueApp.settings.inputBackgroundColor,
               minHeight: 44,
               height: 44,
               alignItems: 'center',
               marginVertical: 8,
               borderRadius: 4,
-            }}
-          >
+            }}>
             <TextInput
               onChangeText={text => this.setState({ newDestinationAddress: text })}
               placeholder={'receiver address here'}
+              placeholderTextColor={BlueApp.settings.alternativeTextColor}
               value={this.state.newDestinationAddress}
-              style={{ flex: 1, minHeight: 33, marginHorizontal: 8 }}
+              style={{ flex: 1, minHeight: 33, marginHorizontal: 8, color: BlueApp.settings.foregroundColor }}
             />
           </View>
 
           <View
             style={{
               flexDirection: 'row',
-              borderColor: '#d2d2d2',
-              borderBottomColor: '#d2d2d2',
+              borderColor: BlueApp.settings.inputBorderColor,
               borderWidth: 1.0,
               borderBottomWidth: 0.5,
-              backgroundColor: '#f5f5f5',
+              backgroundColor: BlueApp.settings.inputBackgroundColor,
               minHeight: 44,
               height: 44,
               alignItems: 'center',
               marginVertical: 8,
               borderRadius: 4,
-            }}
-          >
+            }}>
             <TextInput
               onChangeText={text => this.setState({ feeDelta: text })}
               keyboardType={'numeric'}
               placeholder={'fee to add (in BTC)'}
+              placeholderTextColor={BlueApp.settings.alternativeTextColor}
               value={this.state.feeDelta + ''}
-              style={{ flex: 1, minHeight: 33, marginHorizontal: 8 }}
+              style={{ flex: 1, minHeight: 33, marginHorizontal: 8, color: BlueApp.settings.foregroundColor }}
             />
           </View>
         </BlueCard>

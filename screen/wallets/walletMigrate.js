@@ -3,7 +3,8 @@ import RNFS from 'react-native-fs';
 import RNSecureKeyStore, { ACCESSIBLE } from 'react-native-secure-key-store';
 
 export default class WalletMigrate {
-  static expoDataDirectory = RNFS.DocumentDirectoryPath + '/ExponentExperienceData/%40overtorment%2Fbluewallet/RCTAsyncLocalStorage';
+  static expoDataDirectory =
+    RNFS.DocumentDirectoryPath + '/ExponentExperienceData/%40overtorment%2Fbluewallet/RCTAsyncLocalStorage';
 
   constructor(onComplete) {
     this.onComplete = onComplete;
@@ -33,7 +34,9 @@ export default class WalletMigrate {
     try {
       await RNFS.copyFile(WalletMigrate.expoDataDirectory, RNFS.DocumentDirectoryPath + '/RCTAsyncLocalStorage_V1');
     } catch (error) {
-      console.log('An error was encountered when trying to copy Expo data to /RCTAsyncLocalStorage_V1. Exiting migration...');
+      console.log(
+        'An error was encountered when trying to copy Expo data to /RCTAsyncLocalStorage_V1. Exiting migration...',
+      );
       console.log(error);
     }
     try {
@@ -62,7 +65,8 @@ export default class WalletMigrate {
           } else if (file.name !== 'manifest.json') {
             const manifestFile = await RNFS.readFile(file.path);
             const manifestFileParsed = JSON.parse(manifestFile);
-            if (typeof manifestFileParsed === 'object') await AsyncStorage.setItem('data', JSON.stringify(manifestFileParsed));
+            if (typeof manifestFileParsed === 'object')
+              await AsyncStorage.setItem('data', JSON.stringify(manifestFileParsed));
           }
         }
       } catch (error) {

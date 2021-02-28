@@ -13,9 +13,10 @@ module.exports = {
     createBitcoinWallet:
       'Bitcoin ウォレットを持っていません。Lightning ウォレットへ課金する場合は Bitcoin ウォレットを新規作成するかインポートする必要があります。続行しますか?',
     list: {
-      app_name: 'BlueWallet',
+      app_name: 'Veles Wallet',
       title: 'ウォレット',
-      header: 'ウォレットは秘密鍵(プライベートキー)とウォレットアドレスのペアで構成されています。' + 'コインを受信するために共有できます。',
+      header:
+        'ウォレットは秘密鍵(プライベートキー)とウォレットアドレスのペアで構成されています。コインを受信するために共有できます。',
       add: 'ウォレットの追加',
       create_a_wallet: 'ウォレットの作成',
       create_a_wallet1: 'ウォレット作成は無料で',
@@ -23,7 +24,8 @@ module.exports = {
       latest_transaction: '最新の取引',
       empty_txs1: 'ここに取引が表示されます',
       empty_txs2: '現在は何もありません',
-      empty_txs1_lightning: 'Lightning ウォレットを日常の取引にご利用ください。手数料は安く、送金はあっという間に完了します。',
+      empty_txs1_lightning:
+        'Lightning ウォレットを日常の取引にご利用ください。手数料は安く、送金はあっという間に完了します。',
       empty_txs2_lightning: '\n利用を開始するには"資金の管理"をタップしてウォレットへ送金してください。',
       tap_here_to_buy: 'Bitcoin を購入するにはここをタップ',
     },
@@ -45,7 +47,7 @@ module.exports = {
       imported: 'インポート完了',
       coming_soon: '準備中',
       lightning: 'Lightning',
-      bitcoin: 'Bitcoin',
+      bitcoin: 'Veles',
     },
     details: {
       title: 'ウォレット',
@@ -74,7 +76,7 @@ module.exports = {
     import: {
       title: 'インポート',
       explanation:
-        'ここにニモニック、秘密鍵(プライベートキー）、WIFなどを入力してください。BlueWallet が正しい形式を推測しウォレットをインポートします。',
+        'ここにニーモニック、秘密鍵(プライベートキー）、WIFなどを入力してください。Veles Wallet が正しい形式を推測しウォレットをインポートします。',
       imported: 'インポート完了',
       error: 'インポートに失敗しました。入力したデータが有効か確認してください。',
       success: '成功',
@@ -90,8 +92,8 @@ module.exports = {
       bad_password: 'パスワードが違います',
       wallet_already_exists: '同じウォレットが既に存在します',
       bad_wif: 'WIF 形式が間違っています',
-      imported_wif: 'WIF インポート完了 ',
-      with_address: ' アドレス ',
+      imported_wif: 'WIF インポート完了',
+      with_address: 'アドレス',
       imported_segwit: 'SegWit インポート完了',
       imported_legacy: 'Legacy インポート完了',
       imported_watchonly: '閲覧専用 インポート完了',
@@ -115,33 +117,33 @@ module.exports = {
   },
   send: {
     header: '送金',
+    success: {
+      done: '完了',
+    },
     details: {
       title: '取引の作成',
       amount_field_is_not_valid: '金額欄が正しくありません',
       fee_field_is_not_valid: '手数料欄が正しくありません',
       address_field_is_not_valid: 'アドレス欄が正しくありません',
-      total_exceeds_balance: '送金額が利用可能残額を超えています。',
       create_tx_error: '取引作成中にエラーが発生しました。有効な送金アドレスか確認してください。',
       address: 'アドレス',
-      amount_placeholder: '送金額 (BTC)',
-      fee_placeholder: '取引手数料 (BTC)',
+      amount_placeholder: '送金額 (VLS)',
+      fee_placeholder: '取引手数料 (VLS)',
       note_placeholder: 'ラベル',
       cancel: '中止',
-      scan: '読取り',
+      scan: 'スキャン',
       send: '送金',
       create: '作成',
       remaining_balance: '残高',
+      total_exceeds_balance: '送金額が利用可能残高を超えています。',
     },
     confirm: {
       header: '確認',
       sendNow: '送金実行',
     },
-    success: {
-      done: '完了',
-    },
     create: {
-      details: '詳細',
-      title: '取引の作成',
+      title: '詳細',
+      details: '取引作成',
       error: '取引作成でエラーが発生しました。アドレスまたは送金額を確認してください。',
       go_back: '戻る',
       this_is_hex: '署名されネットワークへ送信される 16 進数取引コードです',
@@ -149,7 +151,7 @@ module.exports = {
       amount: '送金額',
       fee: '手数料',
       tx_size: 'TX サイズ',
-      satoshi_per_byte: 'Satoshi/byte',
+      satoshi_per_byte: 'Satoshi（サトシ）/1バイト',
       memo: 'メモ',
       broadcast: '送信',
       not_enough_fee: '手数料不足です。増額してください',
@@ -158,60 +160,51 @@ module.exports = {
   receive: {
     header: '入金',
     details: {
-      title: 'このアドレスを支払者と共有',
+      title: 'このアドレスを支払い人と共有',
       share: '共有',
       copiedToClipboard: 'クリップボードにコピーしました。',
       label: '概要',
       create: '作成',
       setAmount: '入金額',
     },
-    scan_lnurl: 'Scan to receive',
+    scan_lnurl: 'スキャンして受信',
   },
   buyBitcoin: {
     header: 'Bitcoin の購入',
-    tap_your_address: 'タップしてアドレスをクリップボードにコピー:',
+    tap_your_address: 'タップしてアドレスをクリップボードにコピー',
     copied: 'クリップボードにコピーしました!',
   },
   settings: {
     header: '設定',
-    plausible_deniability: '隠匿設定...',
-    storage_not_encrypted: 'ウォレット: 暗号化されていません',
-    storage_encrypted: 'ウォレット: 暗号化されています',
+    plausible_deniability: '拒否権',
+    storage_not_encrypted: 'ウォレット 暗号化されていません',
+    storage_encrypted: 'ウォレット 暗号化されています',
     password: 'パスワード',
     password_explain: 'ウォレットの復号に使用するパスワードを作成',
     retype_password: 'パスワードの再入力',
     passwords_do_not_match: 'パスワードが一致しません',
     encrypt_storage: 'ウォレットの暗号化',
     lightning_settings: 'Lightning 設定',
-    lightning_settings_explain:
-      '他の LND ノードへ接続するには LndHub をインストール後、' +
-      'URL を入力してください。既定の設定を使用するには空欄にします' +
-      'ndHub\n (lndhub.io)',
-    electrum_settings: 'Electrum Settings',
+    electrum_settings: 'Electrum 設定',
     electrum_settings_explain: 'Set to blank to use default',
     save: '保存',
-    about: 'BlueWallet について',
+    about: 'Veles Wallet について',
     language: '言語',
     currency: '通貨',
-    advanced_options: 'Advanced Options',
-    enable_advanced_mode: 'Enable advanced mode',
+    advanced_options: '詳細オプション',
+    enable_advanced_mode: '詳細モードを有効にする',
   },
   plausibledeniability: {
-    title: '隠匿設定',
+    title: '拒否権',
     help:
-      'BuleWallet のウォレットの復号に必要なパスワードを第三者に強要される場合、' +
-      'コインを安全に保護するためにメインのウォレットとは異なるパスワードで' +
-      '暗号化されたダミーのウォレットを作成することが可能です。' +
-      '第三者へ異なるパスワードを提供すれば、BlueWallet のダミーの' +
-      '暗号化ウォレットを復号することとなり、メインのウォレットは隠匿され' +
-      'コインは安全に保護されます。',
+      'BuleWallet のウォレットの復号に必要なパスワードを第三者に強要される場合、コインを安全に保護するためにメインのウォレットとは異なるパスワードで 暗号化されたダミーのウォレットを作成することが可能です。第三者へ異なるパスワードを提供すれば、Veles Wallet のダミーの 暗号化ウォレットを復号することとなり、メインのウォレットは隠匿され コインは安全に保護されます。',
     help2:
-      '新規のダミーのウォレットはメインと同様に機能します。少額のコインを入金しておくことで' +
-      'ダミーと疑われないようにすることが可能です。',
+      '新規のダミーのウォレットはメインと同様に機能します。少額のコインを入金しておくことで ダミーと疑われないようにすることが可能です。',
     create_fake_storage: 'ダミーの暗号化ウォレットの作成',
     go_back: '戻る',
     create_password: 'パスワードの作成',
-    create_password_explanation: 'ダミーのウォレットのパスワードはメインのウォレットのパスワードと異なる必要があります。',
+    create_password_explanation:
+      'ダミーのウォレットのパスワードはメインのウォレットのパスワードと異なる必要があります。',
     password_should_not_match: 'ダミーのウォレットのパスワードはメインのウォレットのパスワードと異なる必要があります。',
     retype_password: 'パスワードの再入力',
     passwords_do_not_match: 'パスワードが一致しません',
@@ -230,16 +223,16 @@ module.exports = {
   pleasebackup: {
     title: 'ウォレットを作成しています...',
     text:
-      'すべてのニモニックを別紙に書きとめてください。他のデバイスへウォレットをリストアする際にニモニックが必要になります。デスクトップ用ウォレットの Electrum wallet (https://electrum.org/) へニモニックを使用してウォレットをリストアすることが可能です。',
-    ok: 'すべてのニモニックを書きとめました',
+      'すべてのニーモニックを別紙に書きとめてください。他のデバイスへウォレットをリストアする際にニモニックが必要になります。デスクトップ用ウォレットの Electrum wallet (https//electrum.org/) へニーモニックを使用してウォレットをリストアすることが可能です。',
+    ok: 'すべてのニーモニックを書きとめました',
   },
   lndViewInvoice: {
     wasnt_paid_and_expired: 'この請求書は支払いが行われなかったため無効になりました',
     has_been_paid: 'この請求書は支払い完了しました',
     please_pay: '支払う額',
     sats: 'sats',
-    for: 'メモ:',
+    for: 'メモ',
     additional_info: '追加情報',
-    open_direct_channel: 'このノードの直接チャネルを作成:',
+    open_direct_channel: 'このノードの直接チャネルを作成',
   },
 };

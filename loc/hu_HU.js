@@ -13,9 +13,10 @@ module.exports = {
     createBitcoinWallet:
       'Jelenleg még nincsen Bitcoin tárcád. Lightning tárca létrehozásához először készíts egy Bitcoin tárcát, vagy importálj egy már meglévő tárcát. Mindenképp folytatod?',
     list: {
-      app_name: 'BlueWallet',
+      app_name: 'Veles Wallet',
       title: 'tárcák',
-      header: 'Egy tárca nem más, mint egy kulcspár, és egy cím. A cím nyilvános, és megoszhatod másokkal, ha szeretnél Bitcoint fogadni',
+      header:
+        'Egy tárca nem más, mint egy kulcspár, és egy cím. A cím nyilvános, és megoszhatod másokkal, ha szeretnél Bitcoint fogadni',
       add: 'Új Tárca',
       create_a_wallet: 'Új tárca',
       create_a_wallet1: 'Ingyenes, és annyit hozhatsz létre',
@@ -74,7 +75,7 @@ module.exports = {
     import: {
       title: 'importálás',
       explanation:
-        'Írd be a kulcsszavaidat, a titkos kulcsodat, WIF-et, vagy bármi mást. A BlueWallet megpróbálja kitalálni a helyes formátumot, és importálja a tárcádat',
+        'Írd be a kulcsszavaidat, a titkos kulcsodat, WIF-et, vagy bármi mást. A Veles Wallet megpróbálja kitalálni a helyes formátumot, és importálja a tárcádat',
       imported: 'Importálva',
       error: 'Importálás sikertelen. Ellenőrizd, hogy helyes adatokat adtál-e meg.',
       success: 'Sikeres importálás!',
@@ -123,8 +124,8 @@ module.exports = {
       total_exceeds_balance: 'A megadott összeg nagyobb, mint a tárca elérhető egyenlege',
       create_tx_error: 'Hiba történt a tranzakció létrehozásakor. Ellenőrizd a megadott cím érvényességét.',
       address: 'cím',
-      amount_placeholder: 'küldendő összeg (BTC)',
-      fee_placeholder: 'tranzakciós díj (BTC)',
+      amount_placeholder: 'küldendő összeg (VLS)',
+      fee_placeholder: 'tranzakciós díj (VLS)',
       note_placeholder: 'saját megjegyzés',
       cancel: 'Megszakít',
       scan: 'Scan',
@@ -185,7 +186,7 @@ module.exports = {
     lightning_settings: 'Lightning Beállítások',
     lightning_settings_explain:
       'Saját LND-csomóponthoz való csatlakozáshoz telepítsd az LndHub-ot' +
-      ' és írd be az URL-ét alul. Hagyd üresen, ha a BlueWallet saját LNDHub-jához (lndhub.io) szeretnél csatlakozni.' +
+      ' és írd be az URL-ét alul. Hagyd üresen, ha a Veles Wallet saját LNDHub-jához (lndhub.io) szeretnél csatlakozni.' +
       ' A beállítások mentése után, minden újonnan létrehozott tárca a megadott LDNHubot fogja használni.',
     save: 'Ment',
     about: 'Egyéb',
@@ -198,13 +199,14 @@ module.exports = {
     title: 'Elfogadható tagadhatóság',
     help:
       'Bizonyos körülmények között arra kényszerülhetsz, hogy megadd' +
-      'a jelszavadat. A pénzed biztonsága érdekében a BlueWallettel létrehozhatsz egy ' +
+      'a jelszavadat. A pénzed biztonsága érdekében a Veles Wallettel létrehozhatsz egy ' +
       'alternatív titkosított tárhelyet, alternatív jelszóval. Kényszer hatása alatt ' +
-      'megadhatod az alternatív jelszavadat, ami után a BlueWallet az alternatív ' +
+      'megadhatod az alternatív jelszavadat, ami után a Veles Wallet az alternatív ' +
       'tárhelyedet fogja megnyitni. Ez ugyanúgy fog kinézni, mint egy igazi tárhely, ' +
       'azzal a különbséggel, hogy a pénzed teljes biztonságban lesz az elsődleges ' +
       'tárhelyen.',
-    help2: 'Az alternatív tárhely teljesen működőképes, és akár egy kisebb összeget is elhelyezhetsz rajta, hogy hitelesebbnek tűnjön.',
+    help2:
+      'Az alternatív tárhely teljesen működőképes, és akár egy kisebb összeget is elhelyezhetsz rajta, hogy hitelesebbnek tűnjön.',
     create_fake_storage: 'Hamis tárhely létrehozása',
     go_back: 'Vissza',
     create_password: 'Jelszó létrehozása',

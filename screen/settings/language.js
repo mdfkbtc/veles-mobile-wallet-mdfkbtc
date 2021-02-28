@@ -1,9 +1,11 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { FlatList, TouchableOpacity } from 'react-native';
-import { BlueLoading, BlueText, SafeBlueArea, BlueListItem, BlueCard, BlueNavigationStyle } from '../../BlueComponents';
-import PropTypes from 'prop-types';
 import { Icon } from 'react-native-elements';
-let loc = require('../../loc');
+
+import { BlueLoading, BlueText, SafeBlueArea, BlueListItem, BlueCard, BlueNavigationStyle } from '../../BlueComponents';
+
+const loc = require('../../loc');
 
 export default class Language extends Component {
   static navigationOptions = () => ({
@@ -31,8 +33,9 @@ export default class Language extends Component {
         { label: 'Suomi (FI)', value: 'fi_fi' },
         { label: 'Français (FR)', value: 'fr_fr' },
         { label: 'Indonesia (ID)', value: 'id_id' },
-        { label: 'Magyar (HU)', value: 'hu_hu' },
         { label: '日本語 (JP)', value: 'jp_jp' },
+        { label: '한국어 (KO)', value: 'ko_kr' },
+        { label: 'Magyar (HU)', value: 'hu_hu' },
         { label: 'Nederlands (NL)', value: 'nl_nl' },
         { label: 'Norsk (NB)', value: 'nb_no' },
         { label: 'Português (BR)', value: 'pt_br' },
@@ -58,16 +61,15 @@ export default class Language extends Component {
     return (
       <TouchableOpacity
         onPress={() => {
-          console.log('setLanguage', item.value);
+          console.warn('setLanguage', item.value);
           loc.saveLanguage(item.value);
           return this.setState({ language: item.value });
-        }}
-      >
+        }}>
         <BlueListItem
           title={item.label}
           {...(this.state.language === item.value
             ? {
-                rightIcon: <Icon name="check" type="font-awesome" color="#0c2550" />,
+                rightIcon: <Icon name="check" type="font-awesome" color="#aeed6a" />,
               }
             : { hideChevron: true })}
         />
@@ -90,7 +92,9 @@ export default class Language extends Component {
           renderItem={this.renderItem}
         />
         <BlueCard>
-          <BlueText>When selecting a new language, restarting BlueWallet may be required for the change to take effect.</BlueText>
+          <BlueText>
+            When selecting a new language, restarting Veles Wallet may be required for the change to take effect.
+          </BlueText>
         </BlueCard>
       </SafeBlueArea>
     );

@@ -13,9 +13,11 @@ module.exports = {
     createBitcoinWallet:
       'Şu anda Bitcoin cüzdanınız yok. Lightning cüzdanına yükleme yapmak için Bitcoin cüzdanı oluşturmak veya içeri yüklemek gerekir. Yine de devam etmek istiyor musunuz?',
     list: {
-      app_name: 'BlueWallet',
+      app_name: 'Veles Wallet',
       title: 'cüzdanlar',
-      header: 'Cüzdan biri gizli, biri halka açık olan bir çift anahtar ve koin almak için' + ' paylaşabileceğiniz bir adrestir.',
+      header:
+        'Cüzdan biri gizli, biri halka açık olan bir çift anahtar ve koin almak için' +
+        ' paylaşabileceğiniz bir adrestir.',
       add: 'Cüzdan Ekle',
       create_a_wallet: 'Cüzdan oluştur',
       create_a_wallet1: 'Oluşturması bedava ve',
@@ -75,7 +77,7 @@ module.exports = {
     import: {
       title: 'içeri yükle',
       explanation:
-        'Buraya cüzdan yedek cümlenizi, gizli anahtarınızı, WIF veya diğer bilginizi yazın. BlueWallet elinden gelen en iyi tahmini yaparak cüzdanınızı içeri aktarmaya çalışacak.',
+        'Buraya cüzdan yedek cümlenizi, gizli anahtarınızı, WIF veya diğer bilginizi yazın. Veles Wallet elinden gelen en iyi tahmini yaparak cüzdanınızı içeri aktarmaya çalışacak.',
       imported: 'İçeri aktarıldı',
       error: 'İçeri aktarma başarısız oldu. Lütfen girilen bilginin doğru olduğundan emin olun.',
       success: 'Başarılı',
@@ -124,8 +126,8 @@ module.exports = {
       total_exceeds_balance: 'Gönderme miktarı mevcut bakiyeyi aşıyor.',
       create_tx_error: 'İşlem oluşturulurken bir hata oluştu. Lütfen adresin geçerli olduğundan emin olun.',
       address: 'adres',
-      amount_placeholder: 'gönderilecek miktar (BTC cinsinden)',
-      fee_placeholder: 'artı işlem ücreti (BTC cinsinden)',
+      amount_placeholder: 'gönderilecek miktar (VLS cinsinden)',
+      fee_placeholder: 'artı işlem ücreti (VLS cinsinden)',
       note_placeholder: 'kendime not',
       cancel: 'Vazgeç',
       scan: 'Tara',
@@ -186,7 +188,7 @@ module.exports = {
     lightning_settings: 'Lightning Ayarları',
     lightning_settings_explain:
       'Kendi LND düğümünüze bağlanmak için lütfen LndHubı yükleyin.' +
-      " ve URL’sini buraya, ayarlara yazın. BlueWallet'in LNDHub (lndhub.io) programını kullanmak için boş bırakın. Değişiklikleri kaydettikten sonra oluşturulan cüzdanlar belirtilen LNDHub'a bağlanacaktır.",
+      " ve URL’sini buraya, ayarlara yazın. Veles Wallet'in LNDHub (lndhub.io) programını kullanmak için boş bırakın. Değişiklikleri kaydettikten sonra oluşturulan cüzdanlar belirtilen LNDHub'a bağlanacaktır.",
     electrum_settings: 'Electrum Settings',
     electrum_settings_explain: 'Set to blank to use default',
     save: 'Kaydet',
@@ -200,10 +202,10 @@ module.exports = {
     title: 'Makul Ret',
     help:
       'Bazı koşullar altında, şifrenizi açıklamanız gerekebilir. ' +
-      'Paralarınızı güvende tutmak için, BlueWallet başka bir şifre ile ' +
+      'Paralarınızı güvende tutmak için, Veles Wallet başka bir şifre ile ' +
       'şifreli depolama alanı yaratabilir. Baskı altında, ' +
       'Bu şifreyi 3. bir tarafa söyleyebilirsiniz. Girilirse ' +
-      "BlueWallet, yeni 'sahte' bir depolamanın kilidini açacaktır. Bu 3. şahıslara " +
+      "Veles Wallet, yeni 'sahte' bir depolamanın kilidini açacaktır. Bu 3. şahıslara " +
       'normal görünecektir, ancak paraların olduğu ana depolama alanınızı gizlice saklamaya ' +
       'devam edecektir.',
     help2: 'Yeni depolama alanı tamamen işlevsel olacak ve ufak ' + 'bir miktar tutarsanız daha inanılır görünecektir.',
