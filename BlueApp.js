@@ -2,11 +2,12 @@
  * @exports {AppStorage}
  */
 import { AppStorage } from './class';
-let prompt = require('./prompt');
-let EV = require('./events');
-let currency = require('./currency');
-let loc = require('./loc');
-let BlueElectrum = require('./BlueElectrum'); // eslint-disable-line
+import DeviceQuickActions from './class/quickActions';
+
+const currency = require('./currency');
+const EV = require('./events');
+const loc = require('./loc');
+const prompt = require('./prompt');
 
 /** @type {AppStorage} */
 const BlueApp = new AppStorage();
@@ -19,11 +20,12 @@ async function startAndDecrypt(retry) {
   }
   let password = false;
   if (await BlueApp.storageIsEncrypted()) {
+    DeviceQuickActions.clearShortcutItems();
     do {
       password = await prompt((retry && loc._.bad_password) || loc._.enter_password, loc._.storage_is_encrypted, false);
     } while (!password);
   }
-  let success = await BlueApp.loadFromDisk(password);
+  const success = await BlueApp.loadFromDisk(password);
   if (success) {
     console.log('loaded from disk');
     EV(EV.enum.WALLETS_COUNT_CHANGED);
@@ -68,3 +70,4 @@ BlueApp.startAndDecrypt = startAndDecrypt;
 currency.startUpdater();
 
 module.exports = BlueApp;
+export default BlueApp;
