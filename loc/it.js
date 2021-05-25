@@ -13,7 +13,7 @@ module.exports = {
     createBitcoinWallet:
       'Non hai un portafoglio Bitcoin attualmente. Per ricaricare un portafoglio Lightning, è necessario creare o importare un portafoglio Bitcoin. Vuoi continuare lo stesso?',
     list: {
-      app_name: 'BlueWallet',
+      app_name: 'Veles Wallet',
       title: 'Portafogli',
       header:
         'Un portafoglio rappresenta la coppia fra un segreto (chiave privata) e un indirizzo' +
@@ -77,7 +77,7 @@ module.exports = {
     import: {
       title: 'Importa',
       explanation:
-        'Scrivi qui la tua frase mnemonica, chiave privata, WIF, o qualunque altra cosa tu abbia. BlueWallet tenterà di indovinare il formato corretto e importerà il tuo portafoglio',
+        'Scrivi qui la tua frase mnemonica, chiave privata, WIF, o qualunque altra cosa tu abbia. Veles Wallet tenterà di indovinare il formato corretto e importerà il tuo portafoglio',
       imported: 'Importato',
       error: 'Importazione fallita. Assicurati che le informazioni fornite siano valide.',
       success: 'Fatto',
@@ -124,10 +124,11 @@ module.exports = {
       fee_field_is_not_valid: 'Commissione non valida',
       address_field_is_not_valid: 'Indirizzo non valido',
       total_exceeds_balance: "L'importo da inviare eccede i fondi disponibili.",
-      create_tx_error: "Si è verificato un errore nella creazione della transazione. Assicurati che l'indirizzo sia valido",
+      create_tx_error:
+        "Si è verificato un errore nella creazione della transazione. Assicurati che l'indirizzo sia valido",
       address: 'Indirizzo',
-      amount_placeholder: 'Importo da inviare (in BTC)',
-      fee_placeholder: 'Più commissione (in BTC)',
+      amount_placeholder: 'Importo da inviare (in VLS)',
+      fee_placeholder: 'Più commissione (in VLS)',
       note_placeholder: 'Nota',
       cancel: 'Annulla',
       scan: 'Scansiona',
@@ -202,18 +203,22 @@ module.exports = {
     title: 'Negazione Plausibile',
     help:
       'In alcune circostanze, potresti essere costretto a rivelare la ' +
-      'password. Per mantenere i tuoi Bitcoin al sicuro, BlueWallet può creare un altro ' +
+      'password. Per mantenere i tuoi Bitcoin al sicuro, Veles Wallet può creare un altro ' +
       'archivio criptato, con una password diversa. Se costretto, ' +
       'puoi rivelare questa password alle terze parti. Se inserita in ' +
-      'BlueWallet, questa sbloccherà un "falso" archivio. Esso sembrerà ' +
+      'Veles Wallet, questa sbloccherà un "falso" archivio. Esso sembrerà ' +
       'autentico alle terze parti, ma manterrà segretamente il tuo archivio principale ' +
       'con i Bitcoin al sicuro.',
-    help2: 'Il nuovo archivio sarà completamente funzionante, e puoi conservarci ' + 'piccole quantità così sembrerà più credibile.',
+    help2:
+      'Il nuovo archivio sarà completamente funzionante, e puoi conservarci ' +
+      'piccole quantità così sembrerà più credibile.',
     create_fake_storage: 'Crea archivio falso criptato',
     go_back: 'Indietro',
     create_password: 'Crea una password',
-    create_password_explanation: "La password per l'archivio falso non deve corrispondere a quella dell'archivio principale",
-    password_should_not_match: "La password per l'archivio falso non deve corrispondere a quella dell'archivio principale",
+    create_password_explanation:
+      "La password per l'archivio falso non deve corrispondere a quella dell'archivio principale",
+    password_should_not_match:
+      "La password per l'archivio falso non deve corrispondere a quella dell'archivio principale",
     retype_password: 'Reinserisci password',
     passwords_do_not_match: 'Le password non corrispondono, riprova',
     success: 'Fatto',

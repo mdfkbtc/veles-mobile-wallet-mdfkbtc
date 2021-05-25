@@ -13,7 +13,7 @@
     createBitcoinWallet:
       'Okwangoku awunayo ingxowa yebitcoin. Ukuze kuxhaswe ingxowa ekhawulezayo, Ingxowa yeBitcoin kufuneka idalwe okanye ikhutshelwe. Ungathanda ukuqhubeka ?',
     list: {
-      app_name: 'BlueWallet',
+      app_name: 'Veles Wallet',
       title: 'Ingxowa',
       header: 'Ingxowa imele ukuba nemfihlelo yokuyivula nekheli kwaye unokuyisebenzisa ukwamkela imali.',
       add: 'Yongeza Ingxowa',
@@ -72,7 +72,7 @@
     import: {
       title: 'ukungenisa',
       explanation:
-        'Bhale apha imnemonic yakho, ngundoqo, WIF , okanye nantoni na onayo. BlueWallet uya kwenza konke okusemandleni ukuqiqa ifomathi efanelekileyo kwaye ingenise ingxowa yakho',
+        'Bhale apha imnemonic yakho, ngundoqo, WIF , okanye nantoni na onayo. Veles Wallet uya kwenza konke okusemandleni ukuqiqa ifomathi efanelekileyo kwaye ingenise ingxowa yakho',
       imported: 'Ngenisiwe',
       error: 'Ayiphumelelanga ukungenisa. Nceda, uqiniseka ukuba idata ehlinzekiweyo iyasebenza.',
       success: 'Iphumelele',
@@ -121,8 +121,8 @@
       total_exceeds_balance: 'Imali yokuthumela idlula imali ekhoyo.',
       create_tx_error: 'Kukho impazamo yokudala ukuthengiselana. Nceda, qinisekisa ukuba idilesi iyasebenza.',
       address: 'idilesi',
-      amount_placeholder: 'inani lokuthumela (nge BTC)',
-      fee_placeholder: 'kunye nentlawulo yokuthengiswa (nge BTC)',
+      amount_placeholder: 'inani lokuthumela (nge VLS)',
+      fee_placeholder: 'kunye nentlawulo yokuthengiswa (nge VLS)',
       note_placeholder: 'inqaku kumntu',
       cancel: 'Rhoxisa',
       scan: 'Ukutshekisha',
@@ -192,10 +192,10 @@
     title: 'Ukuphika',
     help:
       'Phantsi kweemeko unokunyaneliswa ukuba uchaze a ' +
-      'inombolo yokuvula. BlueWallet ukugcina imali yakho ikhuselekile, unokudala enye ' +
+      'inombolo yokuvula. Veles Wallet ukugcina imali yakho ikhuselekile, unokudala enye ' +
       'ukugcinwa kwekhowudi, ngegama eligqithisiweyo. Phantsi kwefuthe, ' +
       'unako ukutyhila le phasiwedi kumntu wesithatu. Ukuba ungenayo ' +
-      'BlueWallet, iya kuvula ukugcinwa kwetyala ‘entsha’. Oku kuya kubonakala ' +
+      'Veles Wallet, iya kuvula ukugcinwa kwetyala ‘entsha’. Oku kuya kubonakala ' +
       'Umlenze kumntu wesithathu kodwa uza kugcina ngasese ukugcinwa kwakho ' +
       'ngemali ekhuselekile..',
     help2:

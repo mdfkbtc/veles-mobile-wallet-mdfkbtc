@@ -8,14 +8,15 @@ module.exports = {
     ok: 'OK',
   },
   wallets: {
+    overview_wallets: 'Overview',
     select_wallet: 'Select Wallet',
     options: 'options',
     createBitcoinWallet:
       'You currently do not have a Bitcoin wallet. In order to fund a Lightning wallet, a Bitcoin wallet needs to be created or imported. Would you like to continue anyway?',
     list: {
-      app_name: 'BlueWallet',
+      app_name: 'Veles Wallet',
       title: 'wallets',
-      header: 'A wallet represents a pair of a secret (private key) and an address' + 'you can share to receive coins.',
+      header: 'A wallet represents a pair of a secret (private key) and an address you can share to receive coins.',
       add: 'Add Wallet',
       create_a_wallet: 'Create a wallet',
       create_a_wallet1: "It's free and you can create",
@@ -46,7 +47,7 @@ module.exports = {
       imported: 'Imported',
       coming_soon: 'Coming soon',
       lightning: 'Lightning',
-      bitcoin: 'Bitcoin',
+      bitcoin: 'Veles',
     },
     details: {
       title: 'Wallet',
@@ -64,6 +65,7 @@ module.exports = {
       export_backup: 'Export / backup',
       buy_bitcoin: 'Buy Bitcoin',
       show_xpub: 'Show wallet XPUB',
+      mnemoic_seed: 'Mnemoic Seed',
     },
     export: {
       title: 'wallet export',
@@ -75,7 +77,7 @@ module.exports = {
     import: {
       title: 'import',
       explanation:
-        "Write here your mnemonic, private key, WIF, or anything you've got. BlueWallet will do its best to guess the correct format and import your wallet",
+        "Write here your mnemonic, private key, WIF, or anything you've got. Veles Wallet will do its best to guess the correct format and import your wallet",
       imported: 'Imported',
       error: 'Failed to import. Please, make sure that the provided data is valid.',
       success: 'Success',
@@ -91,8 +93,8 @@ module.exports = {
       bad_password: 'Bad password',
       wallet_already_exists: 'Such wallet already exists',
       bad_wif: 'Bad WIF',
-      imported_wif: 'Imported WIF ',
-      with_address: ' with address ',
+      imported_wif: 'Imported WIF',
+      with_address: 'with address',
       imported_segwit: 'Imported SegWit',
       imported_legacy: 'Imported Legacy',
       imported_watchonly: 'Imported Watch-only',
@@ -107,8 +109,8 @@ module.exports = {
     },
     details: {
       title: 'Transaction',
-      from: 'Input',
-      to: 'Output',
+      from: 'From',
+      to: 'To',
       copy: 'Copy',
       transaction_details: 'Transaction details',
       show_in_block_explorer: 'View in block explorer',
@@ -116,29 +118,29 @@ module.exports = {
   },
   send: {
     header: 'Send',
+    success: {
+      done: 'Done',
+    },
     details: {
       title: 'create transaction',
       amount_field_is_not_valid: 'Amount field is not valid',
       fee_field_is_not_valid: 'Fee field is not valid',
       address_field_is_not_valid: 'Address field is not valid',
-      total_exceeds_balance: 'The sending amount exceeds the available balance.',
       create_tx_error: 'There was an error creating the transaction. Please, make sure the address is valid.',
       address: 'address',
-      amount_placeholder: 'amount to send (in BTC)',
-      fee_placeholder: 'plus transaction fee (in BTC)',
+      amount_placeholder: 'amount to send (in VLS)',
+      fee_placeholder: 'plus transaction fee (in VLS)',
       note_placeholder: 'note to self',
       cancel: 'Cancel',
       scan: 'Scan',
       send: 'Send',
-      create: 'Create',
+      create: 'Create Invoice',
       remaining_balance: 'Remaining balance',
+      total_exceeds_balance: 'The sending amount exceeds the available balance.',
     },
     confirm: {
       header: 'Confirm',
       sendNow: 'Send now',
-    },
-    success: {
-      done: 'Done',
     },
     create: {
       details: 'Details',
@@ -170,23 +172,20 @@ module.exports = {
   },
   buyBitcoin: {
     header: 'Buy Bitcoin',
-    tap_your_address: 'Tap your address to copy it to clipboard:',
+    tap_your_address: 'Tap your address to copy it to clipboard',
     copied: 'Copied to Clipboard!',
   },
   settings: {
     header: 'settings',
     plausible_deniability: 'Plausible deniability...',
-    storage_not_encrypted: 'Storage: not encrypted',
-    storage_encrypted: 'Storage: encrypted',
+    storage_not_encrypted: 'Storage not encrypted',
+    storage_encrypted: 'Storage encrypted',
     password: 'Password',
     password_explain: 'Create the password you will use to decrypt the storage',
     retype_password: 'Re-type password',
     passwords_do_not_match: 'Passwords do not match',
     encrypt_storage: 'Encrypt storage',
     lightning_settings: 'Lightning Settings',
-    lightning_settings_explain:
-      'To connect to your own LND node please install LndHub' +
-      " and put its URL here in settings. Leave blank to use BlueWallet's LNDHub (lndhub.io). Wallets created after saving changes will connect to the specified LNDHub.",
     electrum_settings: 'Electrum Settings',
     electrum_settings_explain: 'Set to blank to use default',
     save: 'Save',
@@ -199,14 +198,9 @@ module.exports = {
   plausibledeniability: {
     title: 'Plausible Deniability',
     help:
-      'Under certain circumstances, you might be forced to disclose a ' +
-      'password. To keep your coins safe, BlueWallet can create another ' +
-      'encrypted storage, with a different password. Under pressure, ' +
-      'you can disclose this password to a 3rd party. If entered in ' +
-      "BlueWallet, it will unlock new 'fake' storage. This will seem " +
-      'legit to a 3rd party, but will secretly keep your main storage ' +
-      'with coins safe.',
-    help2: 'New storage will be fully functional, and you can store some ' + 'minimum amounts there so it looks more believable.',
+      'Under certain circumstances, you might be forced to disclose a password. To keep your coins safe, Veles Wallet can create another encrypted storage, with a different password. Under pressure, you can disclose this password to a 3rd party. If entered in Veles Wallet, it will unlock new fake storage. This will seem legit to a 3rd party, but will secretly keep your main storage with coins safe.',
+    help2:
+      'New storage will be fully functional, and you can store some minimum amounts there so it looks more believable.',
     create_fake_storage: 'Create fake encrypted storage',
     go_back: 'Go Back',
     create_password: 'Create a password',
@@ -222,8 +216,8 @@ module.exports = {
     refill_lnd_balance: 'Refill Lightning wallet balance',
     refill: 'Refill',
     withdraw: 'Withdraw',
-    expired: 'Expired',
     placeholder: 'Invoice',
+    expired: 'Expired',
     sameWalletAsInvoiceError: 'You can not pay an invoice with the same wallet used to create it.',
   },
   pleasebackup: {
@@ -237,8 +231,8 @@ module.exports = {
     has_been_paid: 'This invoice has been paid for',
     please_pay: 'Please pay',
     sats: 'sats',
-    for: 'For:',
+    for: 'For',
     additional_info: 'Additional Information',
-    open_direct_channel: 'Open direct channel with this node:',
+    open_direct_channel: 'Open direct channel with this node',
   },
 };

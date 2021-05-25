@@ -10,10 +10,11 @@ module.exports = {
   wallets: {
     select_wallet: 'Choix du portefeuille',
     options: 'options',
-    createBitcoinWallet: 'In order to use a Lightning wallet, a Bitcoin wallet is needed to fund it. Would you like to continue anyway?',
+    createBitcoinWallet:
+      'In order to use a Lightning wallet, a Bitcoin wallet is needed to fund it. Would you like to continue anyway?',
 
     list: {
-      app_name: 'BlueWallet',
+      app_name: 'Veles Wallet',
       title: 'portefeuilles',
       header:
         'Un portefeuille represente une paire de clées (publique/privée) et une adresse que vous pouvez partager pour recevoir des transactions.',
@@ -76,7 +77,7 @@ module.exports = {
     import: {
       title: 'importer',
       explanation:
-        "Write here your mnemonic, private key, WIF, or anything you've got. BlueWallet will do its best to guess the correct format and import your wallet",
+        "Write here your mnemonic, private key, WIF, or anything you've got. Veles Wallet will do its best to guess the correct format and import your wallet",
       imported: 'Importé',
       error: "Échec de l'import. Merci, de vérifier que les données saisies sont valides.",
       success: 'Succès',
@@ -125,8 +126,8 @@ module.exports = {
       total_exceeds_balance: 'Le montant à envoyer excède le montant disponible.',
       create_tx_error: 'There was an error creating the transaction. Please, make sure the address is valid.',
       address: 'adresse',
-      amount_placeholder: 'montant à envoyer (en BTC)',
-      fee_placeholder: 'plus frais de transaction (en BTC)',
+      amount_placeholder: 'montant à envoyer (en VLS)',
+      fee_placeholder: 'plus frais de transaction (en VLS)',
       note_placeholder: 'note (optionnelle)',
       cancel: 'Annuler',
       scan: 'Scanner',
@@ -202,18 +203,22 @@ module.exports = {
     title: 'Déni plausible',
     help:
       'Dans certaines circonstances, vous serez peut-être forcé par un tiers à communiquer ' +
-      'votre mot de passe. Pour protéger vos biens, BlueWallet permet de créer un autre ' +
+      'votre mot de passe. Pour protéger vos biens, Veles Wallet permet de créer un autre ' +
       'espace de stockage, avec un mot de passe différent. Sous la contrainte, ' +
       'vous pourrez divulger ce mot de passe au tier. Quand il est saisi ' +
-      "BlueWallet, débloquera se 'faux' espace de stockage. Le tiers pourra " +
+      "Veles Wallet, débloquera se 'faux' espace de stockage. Le tiers pourra " +
       'confondre ces données avec des données légitimes, votre espace de stockage ' +
       "principal restera sécurisé et hors d'atteinte.",
-    help2: 'New storage will be fully functional, and you can store some ' + 'minimum amounts there so it looks more believable.',
+    help2:
+      'New storage will be fully functional, and you can store some ' +
+      'minimum amounts there so it looks more believable.',
     create_fake_storage: 'Créer un faux espace de stockage chiffré',
     go_back: 'Retour',
     create_password: 'Créer un mot de passe',
-    create_password_explanation: 'Le mot de passe pour le faux espace de stockage ne doit pas être le même que celui du stockage principal',
-    password_should_not_match: 'Le mot de passe pour le faux espace de stockage ne doit pas être le même que celui du stockage principal',
+    create_password_explanation:
+      'Le mot de passe pour le faux espace de stockage ne doit pas être le même que celui du stockage principal',
+    password_should_not_match:
+      'Le mot de passe pour le faux espace de stockage ne doit pas être le même que celui du stockage principal',
     retype_password: 'Confirmation du mot de passe',
     passwords_do_not_match: 'Vos mot de passe ne sont pas identiques, veillez ré-essayer',
     success: 'Succès',

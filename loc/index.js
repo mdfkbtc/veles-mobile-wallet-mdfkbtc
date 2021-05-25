@@ -1,11 +1,15 @@
-import Localization from 'react-localization';
 import AsyncStorage from '@react-native-community/async-storage';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import Localization from 'react-localization';
+
 import { AppStorage } from '../class';
 import { BitcoinUnit } from '../models/bitcoinUnits';
-import relativeTime from 'dayjs/plugin/relativeTime';
-const dayjs = require('dayjs');
-const currency = require('../currency');
+
 const BigNumber = require('bignumber.js');
+const dayjs = require('dayjs');
+
+const currency = require('../currency');
+
 let strings;
 dayjs.extend(relativeTime);
 
@@ -89,6 +93,10 @@ dayjs.extend(relativeTime);
       case 'vi_vn':
         require('dayjs/locale/vi');
         break;
+      case 'ko_KR':
+        lang = 'ko';
+        require('dayjs/locale/ko');
+        break;
       default:
         localeForDayJSAvailable = false;
         break;
@@ -127,6 +135,7 @@ strings = new Localization({
   vi_vn: require('./vi_VN.js'),
   zar_xho: require('./ZAR_Xho.js'),
   zar_afr: require('./ZAR_Afr.js'),
+  ko_kr: require('./ko_KR.js'),
 });
 
 strings.saveLanguage = lang => AsyncStorage.setItem(AppStorage.LANG, lang);
@@ -135,14 +144,14 @@ strings.transactionTimeToReadable = time => {
   if (time === 0) {
     return strings._.never;
   }
-  let ret;
+  let timejs;
   try {
-    ret = dayjs(time).fromNow();
+    timejs = dayjs(time).format('YYYY-MM-DD, HH:mm:ss');
   } catch (_) {
     console.warn('incorrect locale set for dayjs');
     return time;
   }
-  return ret;
+  return timejs;
 };
 
 function removeTrailingZeros(value) {
@@ -178,7 +187,8 @@ strings.formatBalance = (balance, toUnit, withFormatting = false) => {
       BitcoinUnit.SATS
     );
   } else if (toUnit === BitcoinUnit.LOCAL_CURRENCY) {
-    return currency.satoshiToLocalCurrency(balance);
+    return ' ';
+    //return currency.satoshiToLocalCurrency(balance);
   }
 };
 
@@ -197,9 +207,13 @@ strings.formatBalanceWithoutSuffix = (balance = 0, toUnit, withFormatting = fals
       const value = new BigNumber(balance).dividedBy(100000000).toFixed(8);
       return removeTrailingZeros(value);
     } else if (toUnit === BitcoinUnit.SATS) {
-      return (balance < 0 ? '-' : '') + (withFormatting ? new Intl.NumberFormat().format(balance).replace(/[^0-9]/g, ' ') : balance);
+      return (
+        (balance < 0 ? '-' : '') +
+        (withFormatting ? new Intl.NumberFormat().format(balance).replace(/[^0-9]/g, ' ') : balance)
+      );
     } else if (toUnit === BitcoinUnit.LOCAL_CURRENCY) {
-      return currency.satoshiToLocalCurrency(balance);
+      return ' ';
+      //return currency.satoshiToLocalCurrency(balance);
     }
   }
   return balance.toString();

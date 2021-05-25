@@ -1,8 +1,9 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { BackHandler } from 'react-native';
 import { WebView } from 'react-native-webview';
+
 import { BlueLoading, BlueNavigationStyle } from '../../BlueComponents';
-import PropTypes from 'prop-types';
 
 export default class Marketplace extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -14,7 +15,7 @@ export default class Marketplace extends Component {
   constructor(props) {
     super(props);
     if (!props.navigation.getParam('fromWallet')) throw new Error('Invalid param');
-    let fromWallet = props.navigation.getParam('fromWallet');
+    const fromWallet = props.navigation.getParam('fromWallet');
 
     this.state = {
       url: '',
@@ -32,7 +33,7 @@ export default class Marketplace extends Component {
       address = this.state.fromWallet.getAddress();
     }
 
-    let url = 'https://bluewallet.io/marketplace-btc/?address=' + address; // default
+    const url = 'https://bluewallet.io/marketplace-btc/?address=' + address; // default
 
     this.setState({
       url,

@@ -13,7 +13,7 @@ module.exports = {
     createBitcoinWallet:
       'Sinulla ei tällä hetkellä ole Bitcoin lompakkoa. Rahoittaaksesi Lightning lompakkoa, Bitcoin lompakko tulee tuoda tai luoda. Haluatko kuitenkin jatkaa?',
     list: {
-      app_name: 'BlueWallet',
+      app_name: 'Veles Wallet',
       title: 'lompakot',
       header:
         'Lompakko koostuu salaisesta avaimesta (private key) sekä julkisesta osoitteesta' +
@@ -77,7 +77,7 @@ module.exports = {
     import: {
       title: 'tuo',
       explanation:
-        'Kirjoita tähän muistisanasi, private key, WIF tai jotain mitä sinulla on. BlueWallet tekee parhaansa arvatakseen oikean muodon ja tuo lompakkosi',
+        'Kirjoita tähän muistisanasi, private key, WIF tai jotain mitä sinulla on. Veles Wallet tekee parhaansa arvatakseen oikean muodon ja tuo lompakkosi',
       imported: 'Tuotu',
       error: 'Tuonti epäonnistui. Varmista, että annettu tieto on oikein',
       success: 'Onnistui',
@@ -126,8 +126,8 @@ module.exports = {
       total_exceeds_balance: 'Lähetettävä summa ylittää katteen',
       create_tx_error: 'Virhe siirron luonnissa. Varmista, että osoite on oikein.',
       address: 'osoite',
-      amount_placeholder: 'lähetettävä summa (BTC)',
-      fee_placeholder: 'plus siirtokulu (BTC)',
+      amount_placeholder: 'lähetettävä summa (VLS)',
+      fee_placeholder: 'plus siirtokulu (VLS)',
       note_placeholder: 'muistiinpano',
       cancel: 'Peruuta',
       scan: 'Skannaa',
@@ -188,7 +188,7 @@ module.exports = {
     lightning_settings: 'Lightning asetukset',
     lightning_settings_explain:
       'Yhdistääksesi omaan LND noodiin, asenna LndHub' +
-      ' ja laita sen URL tänne. Jätä tyhjäksi käyttääksesi BlueWalletin LNDHubia (lndhub.io). Muutosten tallentamisen jälkeen luodut lompakot yhdistävät annettuun LNDHubiin.',
+      ' ja laita sen URL tänne. Jätä tyhjäksi käyttääksesi Veles Walletin LNDHubia (lndhub.io). Muutosten tallentamisen jälkeen luodut lompakot yhdistävät annettuun LNDHubiin.',
     electrum_settings: 'Electrum Settings',
     electrum_settings_explain: 'Set to blank to use default',
     save: 'Tallenna',
@@ -202,18 +202,22 @@ module.exports = {
     title: 'Uskottava Kiistettävyys',
     help:
       'Joissain tilanteissa, saatat olla pakotettu kertomaan ' +
-      'salasanasi. Pitääksesi kolikkosi turvassa, BlueWallet voi luoda toisen ' +
+      'salasanasi. Pitääksesi kolikkosi turvassa, Veles Wallet voi luoda toisen ' +
       'salatun tallennustilan, toisella salasanalla. Paineen alla, ' +
       'voit kertoa tämän salasanan kolmannelle osapuolelle. Annettaessa ' +
-      'BlueWalletiin, se avaa uuden väärennetyn tallennustilan. Se näyttää ' +
+      'Veles Walletiin, se avaa uuden väärennetyn tallennustilan. Se näyttää ' +
       'oikealta kolmannelle osapuolelle, mutta pitää oikean tallennustilasi ' +
       'kolikkoineen turvassa.',
-    help2: 'Uusi tallennustila näyttää täysin toimivalta, ja voit säilyttää ' + 'pieniä summia siellä, jotta se näyttää uskottavalta.',
+    help2:
+      'Uusi tallennustila näyttää täysin toimivalta, ja voit säilyttää ' +
+      'pieniä summia siellä, jotta se näyttää uskottavalta.',
     create_fake_storage: 'Luo väärennetty tallennustila',
     go_back: 'Mene Takaisin',
     create_password: 'Luo salasana',
-    create_password_explanation: 'Väärennetyn tallennustilan salasanan ei tule täsmätä oikean tallennustilan salasanan kanssa',
-    password_should_not_match: 'Väärennetyn tallennustilan salasanan ei tule täsmätä oikean tallennustilan salasanan kanssa',
+    create_password_explanation:
+      'Väärennetyn tallennustilan salasanan ei tule täsmätä oikean tallennustilan salasanan kanssa',
+    password_should_not_match:
+      'Väärennetyn tallennustilan salasanan ei tule täsmätä oikean tallennustilan salasanan kanssa',
     retype_password: 'Salasana uudelleen',
     passwords_do_not_match: 'Salasanat eivät täsmää, yritä uudelleen',
     success: 'Onnistui',
