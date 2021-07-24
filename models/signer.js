@@ -7,17 +7,18 @@
  *
  **/
 const bitcoinjs = require('bitcoinjs-lib');
+
 const _p2wpkh = bitcoinjs.payments.p2wpkh;
 const _p2sh = bitcoinjs.payments.p2sh;
 const toSatoshi = num => parseInt((num * 100000000).toFixed(0));
 
 exports.createHDTransaction = function(utxos, toAddress, amount, fixedFee, changeAddress) {
-  let feeInSatoshis = parseInt((fixedFee * 100000000).toFixed(0));
-  let amountToOutputSatoshi = parseInt(((amount - fixedFee) * 100000000).toFixed(0)); // how much payee should get
-  let txb = new bitcoinjs.TransactionBuilder();
+  const feeInSatoshis = parseInt((fixedFee * 100000000).toFixed(0));
+  const amountToOutputSatoshi = parseInt(((amount - fixedFee) * 100000000).toFixed(0)); // how much payee should get
+  const txb = new bitcoinjs.TransactionBuilder();
   txb.setVersion(1);
   let unspentAmountSatoshi = 0;
-  let ourOutputs = {};
+  const ourOutputs = {};
   let outputNum = 0;
   for (const unspent of utxos) {
     if (unspent.confirmations < 1) {
@@ -27,7 +28,7 @@ exports.createHDTransaction = function(utxos, toAddress, amount, fixedFee, chang
     txb.addInput(unspent.txid, unspent.vout);
     ourOutputs[outputNum] = ourOutputs[outputNum] || {};
     ourOutputs[outputNum].keyPair = bitcoinjs.ECPair.fromWIF(unspent.wif);
-    unspentAmountSatoshi += unspent.amount;
+    unspentAmountSatoshi += unspent.value;
     if (unspentAmountSatoshi >= amountToOutputSatoshi + feeInSatoshis) {
       // found enough inputs to satisfy payee and pay fees
       break;
@@ -60,28 +61,28 @@ exports.createHDTransaction = function(utxos, toAddress, amount, fixedFee, chang
     });
   }
 
-  let tx = txb.build();
+  const tx = txb.build();
   return tx.toHex();
 };
 
 exports.createHDSegwitTransaction = function(utxos, toAddress, amount, fixedFee, changeAddress) {
-  let feeInSatoshis = parseInt((fixedFee * 100000000).toFixed(0));
-  let amountToOutputSatoshi = parseInt(((amount - fixedFee) * 100000000).toFixed(0)); // how much payee should get
-  let psbt = new bitcoinjs.Psbt();
+  const feeInSatoshis = parseInt((fixedFee * 100000000).toFixed(0));
+  const amountToOutputSatoshi = parseInt(((amount - fixedFee) * 100000000).toFixed(0)); // how much payee should get
+  const psbt = new bitcoinjs.Psbt();
   psbt.setVersion(1);
   let unspentAmountSatoshi = 0;
-  let ourOutputs = [];
+  const ourOutputs = [];
   let outputNum = 0;
   for (const unspent of utxos) {
     if (unspent.confirmations < 1) {
       // using only confirmed outputs
       continue;
     }
-    let keyPair = bitcoinjs.ECPair.fromWIF(unspent.wif);
-    let p2wpkh = _p2wpkh({
+    const keyPair = bitcoinjs.ECPair.fromWIF(unspent.wif);
+    const p2wpkh = _p2wpkh({
       pubkey: keyPair.publicKey,
     });
-    let p2sh = _p2sh({
+    const p2sh = _p2sh({
       redeem: p2wpkh,
     });
     psbt.addInput({
@@ -89,15 +90,15 @@ exports.createHDSegwitTransaction = function(utxos, toAddress, amount, fixedFee,
       index: unspent.vout,
       witnessUtxo: {
         script: p2sh.output,
-        value: unspent.amount,
+        value: unspent.value,
       },
       redeemScript: p2wpkh.output,
     });
     ourOutputs[outputNum] = ourOutputs[outputNum] || {};
     ourOutputs[outputNum].keyPair = keyPair;
     ourOutputs[outputNum].redeemScript = p2wpkh.output;
-    ourOutputs[outputNum].amount = unspent.amount;
-    unspentAmountSatoshi += unspent.amount;
+    ourOutputs[outputNum].amount = unspent.value;
+    unspentAmountSatoshi += unspent.value;
     if (unspentAmountSatoshi >= amountToOutputSatoshi + feeInSatoshis) {
       // found enough inputs to satisfy payee and pay fees
       break;
@@ -133,7 +134,7 @@ exports.createHDSegwitTransaction = function(utxos, toAddress, amount, fixedFee,
     psbt.signInput(c, ourOutputs[c].keyPair);
   }
 
-  let tx = psbt.finalizeAllInputs().extractTransaction();
+  const tx = psbt.finalizeAllInputs().extractTransaction();
   return tx.toHex();
 };
 
@@ -143,16 +144,16 @@ exports.createSegwitTransaction = function(utxos, toAddress, amount, fixedFee, W
     sequence = bitcoinjs.Transaction.DEFAULT_SEQUENCE;
   }
 
-  let feeInSatoshis = parseInt((fixedFee * 100000000).toFixed(0));
-  let keyPair = bitcoinjs.ECPair.fromWIF(WIF);
-  let p2wpkh = _p2wpkh({
+  const feeInSatoshis = parseInt((fixedFee * 100000000).toFixed(0));
+  const keyPair = bitcoinjs.ECPair.fromWIF(WIF);
+  const p2wpkh = _p2wpkh({
     pubkey: keyPair.publicKey,
   });
-  let p2sh = _p2sh({
+  const p2sh = _p2sh({
     redeem: p2wpkh,
   });
 
-  let psbt = new bitcoinjs.Psbt();
+  const psbt = new bitcoinjs.Psbt();
   psbt.setVersion(1);
   let unspentAmount = 0;
   for (const unspent of utxos) {
@@ -160,7 +161,8 @@ exports.createSegwitTransaction = function(utxos, toAddress, amount, fixedFee, W
       // using only confirmed outputs
       continue;
     }
-    const satoshis = parseInt((unspent.amount * 100000000).toFixed(0));
+    const satoshis = parseInt((unspent.value).toFixed(0));
+    //const satoshis = parseInt((unspent.value * 100000000).toFixed(0));
     psbt.addInput({
       hash: unspent.txid,
       index: unspent.vout,
@@ -173,7 +175,8 @@ exports.createSegwitTransaction = function(utxos, toAddress, amount, fixedFee, W
     });
     unspentAmount += satoshis;
   }
-  let amountToOutput = parseInt(((amount - fixedFee) * 100000000).toFixed(0));
+  //const amountToOutput = parseInt(((amount - fixedFee)).toFixed(0));
+  const amountToOutput = parseInt(((amount - fixedFee) * 100000000).toFixed(0));
   psbt.addOutput({
     address: toAddress,
     value: amountToOutput,
@@ -191,11 +194,12 @@ exports.createSegwitTransaction = function(utxos, toAddress, amount, fixedFee, W
     }
   }
 
+  console.log('amountToOutput ', amountToOutput, 'unspentAmount ', unspentAmount, 'feeInSatoshis ', feeInSatoshis);
+ 
   for (let c = 0; c < utxos.length; c++) {
     psbt.signInput(c, keyPair);
   }
-
-  let tx = psbt.finalizeAllInputs().extractTransaction();
+  const tx = psbt.finalizeAllInputs().extractTransaction();
   return tx.toHex();
 };
 
@@ -204,32 +208,32 @@ exports.createRBFSegwitTransaction = function(txhex, addressReplaceMap, feeDelta
     throw Error('replace-by-fee requires increased fee, not decreased');
   }
 
-  let tx = bitcoinjs.Transaction.fromHex(txhex);
+  const tx = bitcoinjs.Transaction.fromHex(txhex);
 
   // looking for latest sequence number in inputs
   let highestSequence = 0;
-  for (let i of tx.ins) {
+  for (const i of tx.ins) {
     if (i.sequence > highestSequence) {
       highestSequence = i.sequence;
     }
   }
-  let keyPair = bitcoinjs.ECPair.fromWIF(WIF);
-  let p2wpkh = _p2wpkh({
+  const keyPair = bitcoinjs.ECPair.fromWIF(WIF);
+  const p2wpkh = _p2wpkh({
     pubkey: keyPair.publicKey,
   });
-  let p2sh = _p2sh({
+  const p2sh = _p2sh({
     redeem: p2wpkh,
   });
 
   // creating TX
-  let psbt = new bitcoinjs.Psbt();
+  const psbt = new bitcoinjs.Psbt();
   psbt.setVersion(1);
-  for (let unspent of tx.ins) {
-    let txid = Buffer.from(unspent.hash)
+  for (const unspent of tx.ins) {
+    const txid = Buffer.from(unspent.hash)
       .reverse()
       .toString('hex');
-    let index = unspent.index;
-    let amount = utxodata[txid][index];
+    const index = unspent.index;
+    const amount = utxodata[txid][index];
     psbt.addInput({
       hash: txid,
       index,
@@ -242,8 +246,8 @@ exports.createRBFSegwitTransaction = function(txhex, addressReplaceMap, feeDelta
     });
   }
 
-  for (let o of tx.outs) {
-    let outAddress = bitcoinjs.address.fromOutputScript(o.script);
+  for (const o of tx.outs) {
+    const outAddress = bitcoinjs.address.fromOutputScript(o.script);
     if (addressReplaceMap[outAddress]) {
       // means this is DESTINATION address, not messing with it's amount
       // but replacing the address itseld
@@ -253,7 +257,7 @@ exports.createRBFSegwitTransaction = function(txhex, addressReplaceMap, feeDelta
       });
     } else {
       // CHANGE address, so we deduct increased fee from here
-      let feeDeltaInSatoshi = parseInt((feeDelta * 100000000).toFixed(0));
+      const feeDeltaInSatoshi = parseInt((feeDelta * 100000000).toFixed(0));
       psbt.addOutput({
         address: outAddress,
         value: o.value - feeDeltaInSatoshi,
@@ -266,20 +270,20 @@ exports.createRBFSegwitTransaction = function(txhex, addressReplaceMap, feeDelta
     psbt.signInput(c, keyPair);
   }
 
-  let newTx = psbt.finalizeAllInputs().extractTransaction();
+  const newTx = psbt.finalizeAllInputs().extractTransaction();
   return newTx.toHex();
 };
 
 exports.generateNewSegwitAddress = function() {
-  let keyPair = bitcoinjs.ECPair.makeRandom();
-  let address = bitcoinjs.payments.p2sh({
+  const keyPair = bitcoinjs.ECPair.makeRandom();
+  const address = bitcoinjs.payments.p2sh({
     redeem: bitcoinjs.payments.p2wpkh({
       pubkey: keyPair.publicKey,
     }),
   }).address;
 
   return {
-    address: address,
+    address,
     WIF: keyPair.toWIF(),
   };
 };
@@ -300,7 +304,7 @@ exports.URI = function(paymentInfo) {
 };
 
 exports.WIF2segwitAddress = function(WIF) {
-  let keyPair = bitcoinjs.ECPair.fromWIF(WIF);
+  const keyPair = bitcoinjs.ECPair.fromWIF(WIF);
   return bitcoinjs.payments.p2sh({
     redeem: bitcoinjs.payments.p2wpkh({
       pubkey: keyPair.publicKey,
@@ -309,10 +313,10 @@ exports.WIF2segwitAddress = function(WIF) {
 };
 
 exports.createTransaction = function(utxos, toAddress, _amount, _fixedFee, WIF, fromAddress) {
-  let fixedFee = toSatoshi(_fixedFee);
-  let amountToOutput = toSatoshi(_amount - _fixedFee);
-  let pk = bitcoinjs.ECPair.fromWIF(WIF); // eslint-disable-line new-cap
-  let txb = new bitcoinjs.TransactionBuilder();
+  const fixedFee = toSatoshi(_fixedFee);
+  const amountToOutput = toSatoshi(_amount - _fixedFee);
+  const pk = bitcoinjs.ECPair.fromWIF(WIF); // eslint-disable-line new-cap
+  const txb = new bitcoinjs.TransactionBuilder();
   txb.setVersion(1);
   let unspentAmount = 0;
   for (const unspent of utxos) {
@@ -321,10 +325,11 @@ exports.createTransaction = function(utxos, toAddress, _amount, _fixedFee, WIF, 
       continue;
     }
     txb.addInput(unspent.txid, unspent.vout);
-    unspentAmount += toSatoshi(unspent.amount);
+    unspentAmount += toSatoshi(unspent.value);
   }
   txb.addOutput(toAddress, amountToOutput);
 
+  console.log('amountToOutput ', amountToOutput, ', fixedFee ', fixedFee, ', unspentAmount', unspentAmount)
   if (amountToOutput + fixedFee < unspentAmount) {
     // sending less than we have, so the rest should go back
     txb.addOutput(fromAddress, unspentAmount - amountToOutput - fixedFee);
