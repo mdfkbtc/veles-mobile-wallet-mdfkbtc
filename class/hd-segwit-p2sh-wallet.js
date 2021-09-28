@@ -1,13 +1,17 @@
-import { AbstractHDWallet } from './abstract-hd-wallet';
+import BigNumber from 'bignumber.js';
+import bip39 from 'bip39';
+import b58 from 'bs58check';
 import Frisbee from 'frisbee';
 import { NativeModules } from 'react-native';
-import bip39 from 'bip39';
-import BigNumber from 'bignumber.js';
-import b58 from 'bs58check';
-import signer from '../models/signer';
+
 import { BitcoinUnit } from '../models/bitcoinUnits';
-const bitcoin = require('bitcoinjs-lib');
+import signer from '../models/signer';
+import { AbstractHDWallet } from './abstract-hd-wallet';
+
 const HDNode = require('bip32');
+const bitcoin = require('bitcoinjs-lib');
+
+const BlueElectrum = require('../BlueElectrum');
 
 const { RNRandomBytes } = NativeModules;
 
@@ -20,7 +24,7 @@ function ypubToXpub(ypub) {
   let data = b58.decode(ypub);
   if (data.readUInt32BE() !== 0x049d7cb2) throw new Error('Not a valid ypub extended key!');
   data = data.slice(4);
-  data = Buffer.concat([Buffer.from('0488b21e', 'hex'), data]);
+  data = Buffer.concat([Buffer.from('a40c86fa', 'hex'), data]);
 
   return b58.encode(data);
 }
@@ -50,19 +54,19 @@ export class HDSegwitP2SHWallet extends AbstractHDWallet {
     return true;
   }
 
-  allowSendMax(): boolean {
+  allowSendMax() {
     return true;
   }
 
   async generate() {
-    let that = this;
+    const that = this;
     return new Promise(function(resolve) {
       if (typeof RNRandomBytes === 'undefined') {
         // CLI/CI environment
         // crypto should be provided globally by test launcher
         return crypto.randomBytes(32, (err, buf) => { // eslint-disable-line
           if (err) throw err;
-          that.secret = bip39.entropyToMnemonic(buf.toString('hex'));
+          that.setSecret(bip39.entropyToMnemonic(buf.toString('hex')));
           resolve();
         });
       }
@@ -70,19 +74,11 @@ export class HDSegwitP2SHWallet extends AbstractHDWallet {
       // RN environment
       RNRandomBytes.randomBytes(32, (err, bytes) => {
         if (err) throw new Error(err);
-        let b = Buffer.from(bytes, 'base64').toString('hex');
-        that.secret = bip39.entropyToMnemonic(b);
+        const b = Buffer.from(bytes, 'base64').toString('hex');
+        that.setSecret(bip39.entropyToMnemonic(b));
         resolve();
       });
     });
-  }
-
-  _getExternalWIFByIndex(index) {
-    return this._getWIFByIndex(false, index);
-  }
-
-  _getInternalWIFByIndex(index) {
-    return this._getWIFByIndex(true, index);
   }
 
   /**
@@ -92,42 +88,14 @@ export class HDSegwitP2SHWallet extends AbstractHDWallet {
    * @returns {*}
    * @private
    */
-  _getWIFByIndex(internal, index) {
+  _getWIFByIndex(index) {
     const mnemonic = this.secret;
     const seed = bip39.mnemonicToSeed(mnemonic);
     const root = bitcoin.bip32.fromSeed(seed);
-    const path = `m/49'/0'/0'/${internal ? 1 : 0}/${index}`;
+    const path = `m/49'/0'/0'/0/${index}`;
     const child = root.derivePath(path);
 
     return bitcoin.ECPair.fromPrivateKey(child.privateKey).toWIF();
-  }
-
-  _getExternalAddressByIndex(index) {
-    index = index * 1; // cast to int
-    if (this.external_addresses_cache[index]) return this.external_addresses_cache[index]; // cache hit
-
-    if (!this._node0) {
-      const xpub = ypubToXpub(this.getXpub());
-      const hdNode = HDNode.fromBase58(xpub);
-      this._node0 = hdNode.derive(0);
-    }
-    const address = nodeToP2shSegwitAddress(this._node0.derive(index));
-
-    return (this.external_addresses_cache[index] = address);
-  }
-
-  _getInternalAddressByIndex(index) {
-    index = index * 1; // cast to int
-    if (this.internal_addresses_cache[index]) return this.internal_addresses_cache[index]; // cache hit
-
-    if (!this._node1) {
-      const xpub = ypubToXpub(this.getXpub());
-      const hdNode = HDNode.fromBase58(xpub);
-      this._node1 = hdNode.derive(1);
-    }
-    const address = nodeToP2shSegwitAddress(this._node1.derive(index));
-
-    return (this.internal_addresses_cache[index] = address);
   }
 
   /**
@@ -158,105 +126,21 @@ export class HDSegwitP2SHWallet extends AbstractHDWallet {
     return this._xpub;
   }
 
-  async _getTransactionsBatch(addresses) {
-    const api = new Frisbee({ baseURI: 'https://blockchain.info' });
-    let transactions = [];
-    let offset = 0;
-
-    while (1) {
-      let response = await api.get('/multiaddr?active=' + addresses + '&n=100&offset=' + offset);
-
-      if (response && response.body) {
-        if (response.body.txs && response.body.txs.length === 0) {
-          break;
-        }
-
-        this._lastTxFetch = +new Date();
-
-        // processing TXs and adding to internal memory
-        if (response.body.txs) {
-          for (let tx of response.body.txs) {
-            let value = 0;
-
-            for (let input of tx.inputs) {
-              // ----- INPUTS
-
-              if (input.prev_out && input.prev_out.addr && this.weOwnAddress(input.prev_out.addr)) {
-                // this is outgoing from us
-                value -= input.prev_out.value;
-              }
-            }
-
-            for (let output of tx.out) {
-              // ----- OUTPUTS
-
-              if (output.addr && this.weOwnAddress(output.addr)) {
-                // this is incoming to us
-                value += output.value;
-              }
-            }
-
-            tx.value = value; // new BigNumber(value).div(100000000).toString() * 1;
-            if (response.body.hasOwnProperty('info')) {
-              if (response.body.info.latest_block.height && tx.block_height) {
-                tx.confirmations = response.body.info.latest_block.height - tx.block_height + 1;
-              } else {
-                tx.confirmations = 0;
-              }
-            } else {
-              tx.confirmations = 0;
-            }
-            transactions.push(tx);
-          }
-
-          if (response.body.txs.length < 100) {
-            // this fetch yilded less than page size, thus requesting next batch makes no sense
-            break;
-          }
-        } else {
-          break; // error ?
-        }
-      } else {
-        throw new Error('Could not fetch transactions from API: ' + response.err); // breaks here
-      }
-
-      offset += 100;
+  generateAddresses() {
+    if (!this._node0) {
+      const xpub = ypubToXpub(this.getXpub());
+      const hdNode = HDNode.fromBase58(xpub);
+      this._node0 = hdNode.derive(0);
     }
-    return transactions;
-  }
-
-  /**
-   * @inheritDoc
-   */
-  async fetchTransactions() {
-    try {
-      if (this.usedAddresses.length === 0) {
-        // just for any case, refresh balance (it refreshes internal `this.usedAddresses`)
-        await this.fetchBalance();
-      }
-
-      this.transactions = [];
-
-      let addresses4batch = [];
-      for (let addr of this.usedAddresses) {
-        addresses4batch.push(addr);
-        if (addresses4batch.length >= 45) {
-          let addresses = addresses4batch.join('|');
-          let transactions = await this._getTransactionsBatch(addresses);
-          this.transactions = this.transactions.concat(transactions);
-          addresses4batch = [];
-        }
-      }
-      // final batch
-      for (let c = 0; c <= this.gap_limit; c++) {
-        addresses4batch.push(this._getExternalAddressByIndex(this.next_free_address_index + c));
-        addresses4batch.push(this._getInternalAddressByIndex(this.next_free_change_address_index + c));
-      }
-      let addresses = addresses4batch.join('|');
-      let transactions = await this._getTransactionsBatch(addresses);
-      this.transactions = this.transactions.concat(transactions);
-    } catch (err) {
-      console.warn(err);
+    for (let index = 0; index < this.num_addresses; index++) {
+      const address = nodeToP2shSegwitAddress(this._node0.derive(index));
+      this._address.push(address);
+      this._address_to_wif_cache[address] = this._getWIFByIndex(index);
+      this._addr_balances[address] = {
+        total: 0,
+        c: 0,
+        u: 0,
+      };
     }
   }
 
@@ -269,7 +153,7 @@ export class HDSegwitP2SHWallet extends AbstractHDWallet {
    * @returns {string}
    */
   createTx(utxos, amount, fee, address) {
-    for (let utxo of utxos) {
+    for (const utxo of utxos) {
       utxo.wif = this._getWifForAddress(utxo.address);
     }
 
@@ -277,18 +161,12 @@ export class HDSegwitP2SHWallet extends AbstractHDWallet {
 
     if (amount === BitcoinUnit.MAX) {
       amountPlusFee = new BigNumber(0);
-      for (let utxo of utxos) {
-        amountPlusFee = amountPlusFee.plus(utxo.amount);
+      for (const utxo of utxos) {
+        amountPlusFee = amountPlusFee.plus(utxo.value);
       }
       amountPlusFee = amountPlusFee.dividedBy(100000000).toString(10);
     }
 
-    return signer.createHDSegwitTransaction(
-      utxos,
-      address,
-      amountPlusFee,
-      fee,
-      this._getInternalAddressByIndex(this.next_free_change_address_index),
-    );
+    return signer.createHDSegwitTransaction(utxos, address, amountPlusFee, fee, this.getAddressForTransaction());
   }
 }

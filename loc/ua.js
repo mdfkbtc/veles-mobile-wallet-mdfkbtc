@@ -10,10 +10,11 @@ module.exports = {
   wallets: {
     options: 'options',
     select_wallet: 'Select Wallet',
-    createBitcoinWallet: 'In order to use a Lightning wallet, a Bitcoin wallet is needed to fund it. Would you like to continue anyway?',
+    createBitcoinWallet:
+      'In order to use a Lightning wallet, a Bitcoin wallet is needed to fund it. Would you like to continue anyway?',
 
     list: {
-      app_name: 'BlueWallet',
+      app_name: 'Veles Wallet',
       title: 'гаманці',
       header: 'Гаманець це секретний (приватний) ключ, і відповідна йому адреса на яку можна отримувати біткоїни',
       add: 'Додати Гаманець',
@@ -74,7 +75,7 @@ module.exports = {
     },
     import: {
       title: 'імпорт',
-      explanation: 'Мнемоніка, приватний ключ, чи будь що. BlueWallet спробуе вгадати вірний формат',
+      explanation: 'Мнемоніка, приватний ключ, чи будь що. Veles Wallet спробуе вгадати вірний формат',
       imported: 'імпортовано',
       error: 'Невдача. Це взашалі валідно?',
       success: 'Успіх',
@@ -121,8 +122,8 @@ module.exports = {
       fee_field_is_not_valid: 'Поле `комісія` не валідно',
       address_field_is_not_valid: 'Поле `адреса` не валідно',
       receiver_placeholder: 'Адреса одержувача',
-      amount_placeholder: 'скільки відправити (в BTC)',
-      fee_placeholder: 'плюс комісія за переказ (в BTC)',
+      amount_placeholder: 'скільки відправити (в VLS)',
+      fee_placeholder: 'плюс комісія за переказ (в VLS)',
       create_tx_error: 'There was an error creating the transaction. Please, make sure the address is valid.',
       note_placeholder: 'примітка платежу',
       cancel: 'Відміна',
@@ -202,10 +203,10 @@ module.exports = {
     title: 'Правдоподібне Заперечення',
     help:
       'При певних обставинах вас можуть змусити розкрити пароль. ' +
-      'Щоб зберегти ваші біткоїни в безпеці, Bluewallet може створити ' +
+      'Щоб зберегти ваші біткоїни в безпеці, Veles Wallet може створити ' +
       'ще одне зашифроване сховище, з іншим паролем. Під тиском, ' +
       'ви можете розкрити третім особам цей пароль. Якщо ввести цей пароль ' +
-      "Bluewallet, розблоковується 'фальшиве' сховище. Це виглядатиме " +
+      "Veles Wallet, розблоковується 'фальшиве' сховище. Це виглядатиме " +
       'правдоподібно для третіх осіб, але при цьому збереже ваше основне сховище ' +
       'з біткоїнамі в безпеці.',
     help2:

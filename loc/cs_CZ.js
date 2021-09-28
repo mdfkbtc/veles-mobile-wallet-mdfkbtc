@@ -10,11 +10,13 @@ module.exports = {
   wallets: {
     select_wallet: 'Vyberte peněženku',
     options: 'možnosti',
-    createBitcoinWallet: 'In order to use a Lightning wallet, a Bitcoin wallet is needed to fund it. Would you like to continue anyway?',
+    createBitcoinWallet:
+      'In order to use a Lightning wallet, a Bitcoin wallet is needed to fund it. Would you like to continue anyway?',
     list: {
-      app_name: 'BlueWallet',
+      app_name: 'Veles Wallet',
       title: 'peněženky',
-      header: 'Peněženka reprezentuje pár tajného (privátního) klíče a adresy' + 'kterou můžete sdílet, abyste získali mince',
+      header:
+        'Peněženka reprezentuje pár tajného (privátního) klíče a adresy' + 'kterou můžete sdílet, abyste získali mince',
       add: 'Přidat peněženku',
       create_a_wallet: 'Vytvořit peněženku',
       create_a_wallet1: 'Je to zdarma a můžete vytvořit',
@@ -74,7 +76,7 @@ module.exports = {
     import: {
       title: 'importovat',
       explanation:
-        'Zadejte zde svůj mnemonic seed, privátní klíč, WIF, nebo cokoliv co máte. BlueWallet se pokusí uhodnout správný formát a naimportovat vaší peněženku',
+        'Zadejte zde svůj mnemonic seed, privátní klíč, WIF, nebo cokoliv co máte. Veles Wallet se pokusí uhodnout správný formát a naimportovat vaší peněženku',
       imported: 'Importováno',
       error: 'Chyba při importu. Prosím ujistěte se, že poskytnutá data jsou správná.',
       success: 'Úspěch',
@@ -123,8 +125,8 @@ module.exports = {
       total_exceeds_balance: 'Částka, kterou se snažíte poslat, přesahuje dostupný zůstatek.',
       create_tx_error: 'Nastala chyba při vytváření transakce. Prosím ujistěte se, že adresa je platná.',
       address: 'adresa',
-      amount_placeholder: 'částka k odeslání (v BTC)',
-      fee_placeholder: 'plus transakční poplatek (v BTC)',
+      amount_placeholder: 'částka k odeslání (v VLS)',
+      fee_placeholder: 'plus transakční poplatek (v VLS)',
       note_placeholder: 'poznámka pro sebe',
       cancel: 'Zrušit',
       scan: 'Skenovat',
@@ -190,7 +192,7 @@ module.exports = {
     electrum_settings: 'Electrum Settings',
     electrum_settings_explain: 'Set to blank to use default',
     save: 'save',
-    about: 'O BlueWallet',
+    about: 'O Veles Wallet',
     language: 'Jazyk',
     currency: 'Měna',
     advanced_options: 'Advanced Options',
@@ -200,9 +202,9 @@ module.exports = {
     title: 'Plausible Deniability',
     help:
       'Za určitých okolností můžete být donuceni k prozrazení vašeho hesla.' +
-      'K zajištění bezpečností vašich prostředků, BlueWallet může vytvořit' +
+      'K zajištění bezpečností vašich prostředků, Veles Wallet může vytvořit' +
       'další zašifrované úložiště s rozdílný heslem. V případě potřeby' +
-      'můžete toto heslo dát třetí straně. Pokud bude zadáno do BlueWallet,' +
+      'můžete toto heslo dát třetí straně. Pokud bude zadáno do Veles Wallet,' +
       'odemkne nové "falešné" úložiště. Toto bude vypadat legitimně, ale' +
       'udrží vaše pravé hlavní úložiště v bezpečí.',
     help2: 'Nové úložiště bude plně funkční, můžete na něj uložit minimální částku, aby vypadalo více uvěřitelně.',

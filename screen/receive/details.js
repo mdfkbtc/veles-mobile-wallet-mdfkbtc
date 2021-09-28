@@ -1,7 +1,10 @@
+import bip21 from 'bip21';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View, InteractionManager, ScrollView } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
-import bip21 from 'bip21';
+import Share from 'react-native-share';
+
 import {
   BlueLoading,
   SafeBlueArea,
@@ -9,15 +12,15 @@ import {
   BlueButton,
   BlueButtonLink,
   BlueNavigationStyle,
+  BlueSpacing10,
   is,
 } from '../../BlueComponents';
-import PropTypes from 'prop-types';
 import Privacy from '../../Privacy';
-import Share from 'react-native-share';
 import { Chain } from '../../models/bitcoinUnits';
+
 /** @type {AppStorage} */
-let BlueApp = require('../../BlueApp');
-let loc = require('../../loc');
+const BlueApp = require('../../BlueApp');
+const loc = require('../../loc');
 
 export default class ReceiveDetails extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -28,7 +31,7 @@ export default class ReceiveDetails extends Component {
 
   constructor(props) {
     super(props);
-    let secret = props.navigation.state.params.secret || '';
+    const secret = props.navigation.state.params.secret || '';
 
     this.state = {
       secret: secret,
@@ -44,22 +47,22 @@ export default class ReceiveDetails extends Component {
     {
       let address;
       let wallet;
-      for (let w of BlueApp.getWallets()) {
+      for (const w of BlueApp.getWallets()) {
         if (w.getSecret() === this.state.secret) {
           // found our wallet
           wallet = w;
         }
       }
       if (wallet) {
-        if (wallet.getAddressAsync) {
+        if (wallet.getAddressForTransaction) {
           if (wallet.chain === Chain.ONCHAIN) {
             try {
-              address = await Promise.race([wallet.getAddressAsync(), BlueApp.sleep(1000)]);
+              address = await Promise.race([wallet.getAddressForTransaction(), BlueApp.sleep(1000)]);
             } catch (_) {}
             if (!address) {
               // either sleep expired or getAddressAsync threw an exception
               console.warn('either sleep expired or getAddressAsync threw an exception');
-              address = wallet._getExternalAddressByIndex(wallet.next_free_address_index);
+              address = wallet.getAddressForTransaction();
             } else {
               BlueApp.saveToDisk(); // caching whatever getAddressAsync() generated internally
             }
@@ -69,7 +72,7 @@ export default class ReceiveDetails extends Component {
             });
           } else if (wallet.chain === Chain.OFFCHAIN) {
             try {
-              await Promise.race([wallet.getAddressAsync(), BlueApp.sleep(1000)]);
+              await Promise.race([wallet.getAddressForTransaction(), BlueApp.sleep(1000)]);
               address = wallet.getAddress();
             } catch (_) {}
             if (!address) {
@@ -118,7 +121,7 @@ export default class ReceiveDetails extends Component {
                 logo={require('../../img/qr-code.png')}
                 size={(is.ipad() && 300) || 300}
                 logoSize={90}
-                color={BlueApp.settings.foregroundColor}
+                color={BlueApp.settings.navbarColor}
                 logoBackgroundColor={BlueApp.settings.brandingColor}
                 ecl={'H'}
                 getRef={c => (this.qrCodeSVG = c)}
@@ -135,6 +138,7 @@ export default class ReceiveDetails extends Component {
                 });
               }}
             />
+            <BlueSpacing10 />
             <View>
               <BlueButton
                 icon={{
@@ -144,12 +148,12 @@ export default class ReceiveDetails extends Component {
                 }}
                 onPress={async () => {
                   if (this.qrCodeSVG === undefined) {
-                    Share.open({ message: `bitcoin:${this.state.address}` }).catch(error => console.log(error));
+                    Share.open({ message: `veles:${this.state.address}` }).catch(error => console.log(error));
                   } else {
                     InteractionManager.runAfterInteractions(async () => {
                       this.qrCodeSVG.toDataURL(data => {
-                        let shareImageBase64 = {
-                          message: `bitcoin:${this.state.address}`,
+                        const shareImageBase64 = {
+                          message: `veles:${this.state.address}`,
                           url: `data:image/png;base64,${data}`,
                         };
                         Share.open(shareImageBase64).catch(error => console.log(error));

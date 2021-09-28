@@ -10,11 +10,14 @@ module.exports = {
   wallets: {
     select_wallet: 'Vælg wallet',
     options: 'valgmuligheder',
-    createBitcoinWallet: 'In order to use a Lightning wallet, a Bitcoin wallet is needed to fund it. Would you like to continue anyway?',
+    createBitcoinWallet:
+      'In order to use a Lightning wallet, a Bitcoin wallet is needed to fund it. Would you like to continue anyway?',
     list: {
-      app_name: 'BlueWallet',
+      app_name: 'Veles Wallet',
       title: 'wallets',
-      header: 'En wallet består af par af hemmelige (private nøgler) og en adresse' + 'som du kan dele med andre for at modtage coins.',
+      header:
+        'En wallet består af par af hemmelige (private nøgler) og en adresse' +
+        'som du kan dele med andre for at modtage coins.',
       add: 'Tilføj Wallet',
       create_a_wallet: 'Opret en  wallet',
       create_a_wallet1: 'Det er helt gratis og du kan oprette',
@@ -74,7 +77,7 @@ module.exports = {
     import: {
       title: 'importer',
       explanation:
-        'Indtast din huskeregel, private nøgle, WIF, eller hvad du end har. BlueWallet vil forsøge at gætte det rigtige format og importere din wallet',
+        'Indtast din huskeregel, private nøgle, WIF, eller hvad du end har. Veles Wallet vil forsøge at gætte det rigtige format og importere din wallet',
       imported: 'Importeret',
       error: 'Importen lykkedes ikke. Er det en gyldig nøgle?',
       success: 'Succes',
@@ -123,8 +126,8 @@ module.exports = {
       total_exceeds_balance: 'Beløbet du prøver at sende er større end din kontosaldo.',
       create_tx_error: 'Der skete en fejl ved oprettelse af transaktionen. Check om addressen er gyldig.',
       address: 'adresse',
-      amount_placeholder: 'beløb der skal sendes (i BTC)',
-      fee_placeholder: 'plus transaktionsgebyr (i BTC)',
+      amount_placeholder: 'beløb der skal sendes (i VLS)',
+      fee_placeholder: 'plus transaktionsgebyr (i VLS)',
       note_placeholder: 'Notat til eget brug',
       cancel: 'Annuller',
       scan: 'Scan',
@@ -200,18 +203,21 @@ module.exports = {
     title: 'Sandsynlig benægtelse',
     help:
       'Under visse omstændighder, kan du blive tvunget til at give din ' +
-      'adgangskode. For at beskytte dine coins kan du med Bluewallet lave ' +
+      'adgangskode. For at beskytte dine coins kan du med Veles Wallet lave ' +
       'et falsk krypteret lager, med en anden kode. I en presset situation, ' +
       'kan du give denne adgangskode istedet. Hvis denne kode indtastes i ' +
-      'BlueWallet, vil brugeren se den alternative wallet. Det vil se helt' +
+      'Veles Wallet, vil brugeren se den alternative wallet. Det vil se helt' +
       'legitimt ud for andre, og dermed beskytte din originale wallet og ' +
       'dine coins.',
-    help2: 'Det nye lager vil være fuldt funktionsdygtigt, og du kan evt have nogle ' + 'småbeløb så det ser troværdigt ud.',
+    help2:
+      'Det nye lager vil være fuldt funktionsdygtigt, og du kan evt have nogle ' + 'småbeløb så det ser troværdigt ud.',
     create_fake_storage: 'Opret falsk kryopteret lager',
     go_back: 'tilbage',
     create_password: 'Opret adgangskode',
-    create_password_explanation: 'Adgangskoden til det falske lager må ikke være den samme som den du bruger til det rigtige lager',
-    password_should_not_match: 'Adgangskoden til det falske lager må ikke være den samme som den du bruger til det rigtige lager',
+    create_password_explanation:
+      'Adgangskoden til det falske lager må ikke være den samme som den du bruger til det rigtige lager',
+    password_should_not_match:
+      'Adgangskoden til det falske lager må ikke være den samme som den du bruger til det rigtige lager',
     retype_password: 'Indtast adgangskoden igen',
     passwords_do_not_match: 'Adgangskoden er ikke den samme, prøv igen',
     success: 'Succes',
