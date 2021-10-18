@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="io.bluewallet.bluewallet">
+  package="io.veles.wallet">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
@@ -14,9 +14,15 @@
       android:usesCleartextTraffic="true"
       android:theme="@style/AppTheme">
       <activity
+        android:name=".SplashActivity"
+        android:theme="@style/SplashTheme"
+        android:label="@string/app_name">
+      </activity>
+      <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+        android:screenOrientation="portrait"
         android:windowSoftInputMode="adjustResize">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -28,7 +34,7 @@
           <category android:name="android.intent.category.BROWSABLE" />
           <data android:scheme="bitcoin" />
           <data android:scheme="lightning" />
-          <data android:scheme="bluewallet" />
+          <data android:scheme="veleswallet" />
           <data android:scheme="lapp" />
           <data android:scheme="blue" />
         </intent-filter>
