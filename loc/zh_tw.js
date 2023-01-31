@@ -12,7 +12,7 @@ module.exports = {
     options: '選項',
     createBitcoinWallet: '您當前沒有bitcoin錢包. 為了支援閃電錢包, 我們需要建立或者匯入一個比特幣錢包. 是否需要繼續?',
     list: {
-      app_name: 'BlueWallet',
+      app_name: 'Veles Wallet',
       title: '錢包',
       header: '一個錢包代表一對的私鑰和地址' + '你可以通過分享收款.',
       add: '新增錢包',
@@ -72,7 +72,7 @@ module.exports = {
     },
     import: {
       title: '匯入',
-      explanation: '輸入你的助記詞，私鑰或者WIF, 或者其他格式的資料. BlueWallet將盡可能的自動識別資料格式並匯入錢包',
+      explanation: '輸入你的助記詞，私鑰或者WIF, 或者其他格式的資料. Veles Wallet將盡可能的自動識別資料格式並匯入錢包',
       imported: '已經匯入',
       error: '匯入失敗，請確認你提供的資訊是有效的',
       success: '成功',
@@ -121,8 +121,8 @@ module.exports = {
       total_exceeds_balance: '餘額不足',
       create_tx_error: '建立交易失敗. 請確認地址格式正確.',
       address: '地址',
-      amount_placeholder: '傳送金額(in BTC)',
-      fee_placeholder: '手續費用 (in BTC)',
+      amount_placeholder: '傳送金額(in VLS)',
+      fee_placeholder: '手續費用 (in VLS)',
       note_placeholder: '訊息',
       cancel: '取消',
       scan: '掃描',
@@ -180,7 +180,8 @@ module.exports = {
     passwords_do_not_match: '兩次輸入密碼不同',
     encrypt_storage: '加密儲存',
     lightning_settings: '閃電網路設定',
-    lightning_settings_explain: '如要要連線你自己的閃電節點請安裝LndHub' + ' 並把url地址輸入到下面. 空白將使用預設的LndHub (lndhub.io)',
+    lightning_settings_explain:
+      '如要要連線你自己的閃電節點請安裝LndHub' + ' 並把url地址輸入到下面. 空白將使用預設的LndHub (lndhub.io)',
     save: '儲存',
     about: '關於',
     language: '語言',
@@ -192,10 +193,10 @@ module.exports = {
     title: '可否認性',
     help:
       '在某些情況下, 你不得不暴露 ' +
-      '密碼. 為了讓你的比特幣更加安全, BlueWallet可以建立一些 ' +
+      '密碼. 為了讓你的比特幣更加安全, Veles Wallet可以建立一些 ' +
       '加密空間, 用不同的密碼. 在壓力之下, ' +
       '你可以暴露這個錢包密碼. 再次進入 ' +
-      'BlueWallet, 我們會解鎖一些虛擬空間. 對第三方來說看上去' +
+      'Veles Wallet, 我們會解鎖一些虛擬空間. 對第三方來說看上去' +
       '是合理的, 但會偷偷的幫你保證主錢包的安全 ' +
       '幣也就安全了.',
     help2: '新的空間具備完整的功能，你可以存在 ' + '少量的金額在裡面.',

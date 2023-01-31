@@ -1,11 +1,13 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { FlatList, TouchableOpacity, ActivityIndicator, View } from 'react-native';
-import { SafeBlueArea, BlueNavigationStyle, BlueListItem, BlueText, BlueCard } from '../../BlueComponents';
-import PropTypes from 'prop-types';
 import { Icon } from 'react-native-elements';
+
+import { SafeBlueArea, BlueNavigationStyle, BlueListItem, BlueText, BlueCard } from '../../BlueComponents';
 import { FiatUnit } from '../../models/fiatUnit';
-let loc = require('../../loc');
-let currency = require('../../currency');
+
+const currency = require('../../currency');
+const loc = require('../../loc');
 
 export default class Currency extends Component {
   static navigationOptions = () => ({
@@ -39,8 +41,7 @@ export default class Currency extends Component {
             await currency.startUpdater();
             this.setState({ isSavingNewPreferredCurrency: false });
           });
-        }}
-      >
+        }}>
         <BlueListItem
           title={item.endPointKey + ' (' + item.symbol + ')'}
           {...(this.state.selectedCurrency.endPointKey === item.endPointKey

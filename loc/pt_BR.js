@@ -14,9 +14,10 @@ module.exports = {
 
     list: {
       tabBarLabel: 'Carteiras',
-      app_name: 'BlueWallet',
+      app_name: 'Veles Wallet',
       title: 'carteiras',
-      header: 'Uma carteira representa um par composto de uma chave privada secreta e um endereço de depósito que você pode compartilhar.',
+      header:
+        'Uma carteira representa um par composto de uma chave privada secreta e um endereço de depósito que você pode compartilhar.',
       add: 'adicionar wallet',
       create_a_wallet: 'Criar uma carteira',
       create_a_wallet1: 'é grátis e você pode criar',
@@ -131,8 +132,8 @@ module.exports = {
       fee_field_is_not_valid: 'Campo de taxa não é válido',
       address_field_is_not_valid: 'Campo de endereço não é válido',
       receiver_placeholder: 'endereço de envio aqui',
-      amount_placeholder: 'quantia a enviar (em BTC)',
-      fee_placeholder: 'mais a taxa de transacção (em BTC)',
+      amount_placeholder: 'quantia a enviar (em VLS)',
+      fee_placeholder: 'mais a taxa de transacção (em VLS)',
       create_tx_error: 'Erro na criação da transação, por favor confira se o endereço é válido.',
       note_placeholder: 'Nota pessoal',
       cancel: 'Cancelar',
@@ -190,7 +191,7 @@ module.exports = {
     lightning_settings: 'Preferências Lightning',
     lightning_settings_explain:
       'Para se conectar ao seu próprio ponto LND, você precisa instalar a aplicação LndHub' +
-      ' e copiar sua URL para cá. Deixe em branco para usar a LndHub padrão fornecida pela BlueWallet (lndhub.io).' +
+      ' e copiar sua URL para cá. Deixe em branco para usar a LndHub padrão fornecida pela Veles Wallet (lndhub.io).' +
       ' Carteiras criadas após mudanças nestas preferências ficarão ligadas à instância LndHub que estiver especificada.',
     electrum_settings: 'Electrum Settings',
     electrum_settings_explain: 'Set to blank to use default',
@@ -205,13 +206,14 @@ module.exports = {
     title: 'Negação plausível',
     help:
       'Em algumas circunstâncias, você pode ser forçado a revelar uma ' +
-      'senha. Para manter seus bitcoins seguros, A BlueWallet pode criar ' +
+      'senha. Para manter seus bitcoins seguros, A Veles Wallet pode criar ' +
       'uma senha alternativa. Sob pressão, você pode revelar essa senha ao ' +
-      'invés da senha principal. Quando inserida na BlueWallet, esta abrirá ' +
+      'invés da senha principal. Quando inserida na Veles Wallet, esta abrirá ' +
       'uma interface falsa, que parecerá legítima a um terceiro, enquanto ' +
       'suas carteiras originais continuarão à salvo em segredo.',
     help2:
-      'Essa nova interface é completamente funcional e você pode inclusive ' + 'manter nele um valor minímo para que pareça mais real.',
+      'Essa nova interface é completamente funcional e você pode inclusive ' +
+      'manter nele um valor minímo para que pareça mais real.',
     create_fake_storage: 'Criar armazenamento criptografada falsa',
     go_back: 'Voltar',
     create_password: 'Criar senha',
