@@ -87,7 +87,7 @@
     "prop-types": "15.7.2",
     "react": "16.8.6",
     "react-localization": "1.0.13",
-    "react-native": "0.60.5",
+    "react-native": "0.62.0",
     "react-native-biometrics": "git+https://github.com/BlueWallet/react-native-biometrics.git",
     "react-native-camera": "3.4.0",
     "react-native-device-info": "4.0.1",
