@@ -80,7 +80,7 @@
     "intl": "1.2.5",
     "lottie-react-native": "3.1.1",
     "mocha": "5.2.0",
-    "node-libs-react-native": "1.0.3",
+    "node-libs-react-native": "1.2.1",
     "path-browserify": "1.0.0",
     "prettier": "1.18.2",
     "process": "0.11.10",
