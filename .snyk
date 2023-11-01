@@ -1,0 +1,41 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.14.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - '@sentry/react-native > @sentry/wizard > snyk > lodash':
+        patched: '2020-06-06T00:19:40.220Z'
+    - '@sentry/react-native > @sentry/wizard > snyk > inquirer > lodash':
+        patched: '2020-06-06T00:19:40.220Z'
+    - '@sentry/react-native > @sentry/wizard > snyk > @snyk/dep-graph > lodash':
+        patched: '2020-06-06T00:19:40.220Z'
+    - '@sentry/react-native > @sentry/wizard > snyk > snyk-config > lodash':
+        patched: '2020-06-06T00:19:40.220Z'
+    - '@sentry/react-native > @sentry/wizard > snyk > snyk-mvn-plugin > lodash':
+        patched: '2020-06-06T00:19:40.220Z'
+    - '@sentry/react-native > @sentry/wizard > snyk > snyk-nodejs-lockfile-parser > lodash':
+        patched: '2020-06-06T00:19:40.220Z'
+    - '@sentry/react-native > @sentry/wizard > snyk > snyk-nuget-plugin > lodash':
+        patched: '2020-06-06T00:19:40.220Z'
+    - '@sentry/react-native > @sentry/wizard > snyk > @snyk/dep-graph > graphlib > lodash':
+        patched: '2020-06-06T00:19:40.220Z'
+    - '@sentry/react-native > @sentry/wizard > snyk > snyk-go-plugin > graphlib > lodash':
+        patched: '2020-06-06T00:19:40.220Z'
+    - '@sentry/react-native > @sentry/wizard > snyk > snyk-nodejs-lockfile-parser > graphlib > lodash':
+        patched: '2020-06-06T00:19:40.220Z'
+    - '@sentry/react-native > @sentry/wizard > snyk > @snyk/snyk-cocoapods-plugin > @snyk/dep-graph > lodash':
+        patched: '2020-06-06T00:19:40.220Z'
+    - '@sentry/react-native > @sentry/wizard > snyk > snyk-nuget-plugin > dotnet-deps-parser > lodash':
+        patched: '2020-06-06T00:19:40.220Z'
+    - '@sentry/react-native > @sentry/wizard > snyk > snyk-php-plugin > @snyk/composer-lockfile-parser > lodash':
+        patched: '2020-06-06T00:19:40.220Z'
+    - '@sentry/react-native > @sentry/wizard > snyk > @snyk/snyk-cocoapods-plugin > @snyk/dep-graph > graphlib > lodash':
+        patched: '2020-06-06T00:19:40.220Z'
+    - '@sentry/react-native > @sentry/wizard > snyk > @snyk/snyk-cocoapods-plugin > @snyk/cocoapods-lockfile-parser > @snyk/ruby-semver > lodash':
+        patched: '2020-06-06T00:19:40.220Z'
+    - '@sentry/react-native > @sentry/wizard > snyk > @snyk/snyk-cocoapods-plugin > @snyk/cocoapods-lockfile-parser > @snyk/dep-graph > graphlib > lodash':
+        patched: '2020-06-06T00:19:40.220Z'
+  SNYK-JS-TREEKILL-536781:
+    - '@sentry/react-native > @sentry/wizard > snyk > snyk-sbt-plugin > tree-kill':
+        patched: '2020-06-06T00:19:40.220Z'

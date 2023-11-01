@@ -6,6 +6,7 @@ import { BlueButton, SafeBlueArea, BlueCard } from '../../BlueComponents';
 import { BitcoinUnit } from '../../models/bitcoinUnits';
 import PropTypes from 'prop-types';
 let loc = require('../../loc');
+let BlueApp = require('../../BlueApp');
 
 export default class Success extends Component {
   static navigationOptions = {
@@ -37,7 +38,7 @@ export default class Success extends Component {
           <View style={{ flexDirection: 'row', justifyContent: 'center', paddingTop: 76, paddingBottom: 16 }}>
             <Text
               style={{
-                color: '#0f5cc0',
+                color: BlueApp.settings.alternativeTextColor2,
                 fontSize: 36,
                 fontWeight: '600',
               }}
@@ -46,7 +47,7 @@ export default class Success extends Component {
             </Text>
             <Text
               style={{
-                color: '#0f5cc0',
+                color: BlueApp.settings.alternativeTextColor2,
                 fontSize: 16,
                 marginHorizontal: 4,
                 paddingBottom: 6,
@@ -89,7 +90,7 @@ export default class Success extends Component {
         </BlueCard>
         <View
           style={{
-            backgroundColor: '#ccddf9',
+            backgroundColor: BlueApp.settings.buttonBackgroundColor,
             width: 120,
             height: 120,
             borderRadius: 60,
@@ -99,7 +100,7 @@ export default class Success extends Component {
             marginBottom: 53,
           }}
         >
-          <Icon name="check" size={50} type="font-awesome" color="#0f5cc0" />
+          <Icon name="check" size={50} type="font-awesome" color="#e4b99c" />
         </View>
         <BlueCard>
           <BlueButton

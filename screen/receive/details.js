@@ -9,6 +9,7 @@ import {
   BlueButton,
   BlueButtonLink,
   BlueNavigationStyle,
+  BlueSpacing10,
   is,
 } from '../../BlueComponents';
 import PropTypes from 'prop-types';
@@ -51,15 +52,15 @@ export default class ReceiveDetails extends Component {
         }
       }
       if (wallet) {
-        if (wallet.getAddressAsync) {
+        if (wallet.getAddressForTransaction) {
           if (wallet.chain === Chain.ONCHAIN) {
             try {
-              address = await Promise.race([wallet.getAddressAsync(), BlueApp.sleep(1000)]);
+              address = await Promise.race([wallet.getAddressForTransaction(), BlueApp.sleep(1000)]);
             } catch (_) {}
             if (!address) {
               // either sleep expired or getAddressAsync threw an exception
               console.warn('either sleep expired or getAddressAsync threw an exception');
-              address = wallet._getExternalAddressByIndex(wallet.next_free_address_index);
+              address = wallet.getAddressForTransaction();
             } else {
               BlueApp.saveToDisk(); // caching whatever getAddressAsync() generated internally
             }
@@ -69,7 +70,7 @@ export default class ReceiveDetails extends Component {
             });
           } else if (wallet.chain === Chain.OFFCHAIN) {
             try {
-              await Promise.race([wallet.getAddressAsync(), BlueApp.sleep(1000)]);
+              await Promise.race([wallet.getAddressForTransaction(), BlueApp.sleep(1000)]);
               address = wallet.getAddress();
             } catch (_) {}
             if (!address) {
@@ -118,7 +119,7 @@ export default class ReceiveDetails extends Component {
                 logo={require('../../img/qr-code.png')}
                 size={(is.ipad() && 300) || 300}
                 logoSize={90}
-                color={BlueApp.settings.foregroundColor}
+                color={BlueApp.settings.navbarColor}
                 logoBackgroundColor={BlueApp.settings.brandingColor}
                 ecl={'H'}
                 getRef={c => (this.qrCodeSVG = c)}
@@ -135,6 +136,7 @@ export default class ReceiveDetails extends Component {
                 });
               }}
             />
+            <BlueSpacing10 />
             <View>
               <BlueButton
                 icon={{
@@ -144,12 +146,12 @@ export default class ReceiveDetails extends Component {
                 }}
                 onPress={async () => {
                   if (this.qrCodeSVG === undefined) {
-                    Share.open({ message: `bitcoin:${this.state.address}` }).catch(error => console.log(error));
+                    Share.open({ message: `veles:${this.state.address}` }).catch(error => console.log(error));
                   } else {
                     InteractionManager.runAfterInteractions(async () => {
                       this.qrCodeSVG.toDataURL(data => {
                         let shareImageBase64 = {
-                          message: `bitcoin:${this.state.address}`,
+                          message: `veles:${this.state.address}`,
                           url: `data:image/png;base64,${data}`,
                         };
                         Share.open(shareImageBase64).catch(error => console.log(error));

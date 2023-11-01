@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import RNSecureKeyStore, { ACCESSIBLE } from 'react-native-secure-key-store';
 import {
-  HDLegacyBreadwalletWallet,
   HDSegwitP2SHWallet,
   HDLegacyP2PKHWallet,
   WatchOnlyWallet,
@@ -10,8 +9,8 @@ import {
   SegwitBech32Wallet,
   HDSegwitBech32Wallet,
 } from './';
-import { LightningCustodianWallet } from './lightning-custodian-wallet';
 import WatchConnectivity from '../WatchConnectivity';
+import DeviceQuickActions from './quickActions';
 const encryption = require('../encryption');
 
 export class AppStorage {
@@ -30,28 +29,30 @@ export class AppStorage {
     this.tx_metadata = {};
     this.cachedPassword = false;
     this.settings = {
-      brandingColor: '#ffffff',
-      foregroundColor: '#0c2550',
-      buttonBackgroundColor: '#ccddf9',
-      buttonTextColor: '#0c2550',
-      buttonAlternativeTextColor: '#2f5fb3',
-      buttonDisabledBackgroundColor: '#eef0f4',
+      brandingColor: '#383737',
+      foregroundColor: '#ffffff',
+      buttonBackgroundColor: 'rgba(38, 38, 38, 0.9)',
+      buttonTextColor: '#ffffff',
+      buttonAlternativeTextColor: '#ffffff',
+      buttonDisabledBackgroundColor: 'rgba(38, 38, 38, 0.9)',
       buttonDisabledTextColor: '#9aa0aa',
-      inputBorderColor: '#d2d2d2',
-      inputBackgroundColor: '#f5f5f5',
+      buttonLinkUrlColor: '#e4b99c',
+      inputBorderColor: 'rgba(38, 38, 38, 0.9)',
+      inputBackgroundColor: 'rgba(38, 38, 38, 0.9)',
       alternativeTextColor: '#9aa0aa',
-      alternativeTextColor2: '#0f5cc0',
-      buttonBlueBackgroundColor: '#ccddf9',
-      incomingBackgroundColor: '#d2f8d6',
-      incomingForegroundColor: '#37c0a1',
-      outgoingBackgroundColor: '#f8d2d2',
-      outgoingForegroundColor: '#d0021b',
-      successColor: '#37c0a1',
-      failedColor: '#ff0000',
+      alternativeTextColor2: '#f19b7e',
+      buttonBlueBackgroundColor: 'rgba(38, 38, 38, 0.9)',
+      incomingBackgroundColor: 'rgba(38, 38, 38, 1)',
+      incomingForegroundColor: '#aeed6a',
+      outgoingBackgroundColor: 'rgba(38, 38, 38, 1)',
+      outgoingForegroundColor: '#FAA',
+      successColor: '#aeed6a',
+      failedColor: '#FAA',
       shadowColor: '#000000',
       inverseForegroundColor: '#ffffff',
       hdborderColor: '#68BBE1',
       hdbackgroundColor: '#ECF9FF',
+      navbarColor: '#000000',
       lnborderColor: '#F7C056',
       lnbackgroundColor: '#FFFAEF',
     };
@@ -137,6 +138,8 @@ export class AppStorage {
     this.cachedPassword = password;
     await this.setItem('data', data);
     await this.setItem(AppStorage.FLAG_ENCRYPTED, '1');
+    DeviceQuickActions.clearShortcutItems();
+    DeviceQuickActions.removeAllWallets();
   }
 
   /**
@@ -208,31 +211,6 @@ export class AppStorage {
             case HDSegwitBech32Wallet.type:
               unserializedWallet = HDSegwitBech32Wallet.fromJson(key);
               break;
-            case HDLegacyBreadwalletWallet.type:
-              unserializedWallet = HDLegacyBreadwalletWallet.fromJson(key);
-              break;
-            case LightningCustodianWallet.type:
-              /** @type {LightningCustodianWallet} */
-              unserializedWallet = LightningCustodianWallet.fromJson(key);
-              let lndhub = false;
-              try {
-                lndhub = await AsyncStorage.getItem(AppStorage.LNDHUB);
-              } catch (Error) {
-                console.warn(Error);
-              }
-
-              if (unserializedWallet.baseURI) {
-                unserializedWallet.setBaseURI(unserializedWallet.baseURI); // not really necessary, just for the sake of readability
-                console.log('using saved uri for for ln wallet:', unserializedWallet.baseURI);
-              } else if (lndhub) {
-                console.log('using wallet-wide settings ', lndhub, 'for ln wallet');
-                unserializedWallet.setBaseURI(lndhub);
-              } else {
-                console.log('using default', LightningCustodianWallet.defaultBaseUri, 'for ln wallet');
-                unserializedWallet.setBaseURI(LightningCustodianWallet.defaultBaseUri);
-              }
-              unserializedWallet.init();
-              break;
             case LegacyWallet.type:
             default:
               unserializedWallet = LegacyWallet.fromJson(key);
@@ -244,8 +222,15 @@ export class AppStorage {
             this.tx_metadata = data.tx_metadata;
           }
         }
-        WatchConnectivity.init();
-        WatchConnectivity.shared && (await WatchConnectivity.shared.sendWalletsToWatch());
+        WatchConnectivity.shared.wallets = this.wallets;
+        WatchConnectivity.shared.tx_metadata = this.tx_metadata;
+        WatchConnectivity.shared.fetchTransactionsFunction = async () => {
+          await this.fetchWalletTransactions();
+          await this.saveToDisk();
+        };
+        await WatchConnectivity.shared.sendWalletsToWatch(this.wallets);
+        DeviceQuickActions.setWallets(this.wallets);
+        DeviceQuickActions.setQuickActions();
         return true;
       } else {
         return false; // failed loading data or loading/decryptin data
@@ -265,6 +250,7 @@ export class AppStorage {
   deleteWallet(wallet) {
     let secret = wallet.getSecret();
     let tempWallets = [];
+
     for (let value of this.wallets) {
       if (value.getSecret() === secret) {
         // the one we should delete
@@ -318,8 +304,11 @@ export class AppStorage {
     } else {
       await this.setItem(AppStorage.FLAG_ENCRYPTED, ''); // drop the flag
     }
-    WatchConnectivity.init();
-    WatchConnectivity.shared && WatchConnectivity.shared.sendWalletsToWatch();
+    WatchConnectivity.shared.wallets = this.wallets;
+    WatchConnectivity.shared.tx_metadata = this.tx_metadata;
+    WatchConnectivity.shared.sendWalletsToWatch();
+    DeviceQuickActions.setWallets(this.wallets);
+    DeviceQuickActions.setQuickActions();
     return this.setItem('data', JSON.stringify(data));
   }
 
@@ -355,7 +344,7 @@ export class AppStorage {
    *
    * @param index {Integer} Index of the wallet in this.wallets array,
    *                        blank to fetch from all wallets
-   * @return {Promise.<void>}
+   * @return {Promise.<void>} 
    */
   async fetchWalletTransactions(index) {
     console.log('fetchWalletTransactions for wallet#', index);
@@ -441,7 +430,7 @@ export class AppStorage {
   getBalance() {
     let finalBalance = 0;
     for (let wal of this.wallets) {
-      finalBalance += wal.balance;
+      finalBalance += wal.getBalance();
     }
     return finalBalance;
   }

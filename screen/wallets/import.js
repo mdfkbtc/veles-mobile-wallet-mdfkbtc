@@ -3,7 +3,6 @@ import {
   SegwitP2SHWallet,
   LegacyWallet,
   WatchOnlyWallet,
-  HDLegacyBreadwalletWallet,
   HDSegwitP2SHWallet,
   HDLegacyP2PKHWallet,
   HDSegwitBech32Wallet,
@@ -13,16 +12,17 @@ import { KeyboardAvoidingView, Platform, Dimensions, View, TouchableWithoutFeedb
 import {
   BlueFormMultiInput,
   BlueButtonLink,
+  BlueButtonLinkUrl,
   BlueFormLabel,
   BlueLoading,
   BlueDoneAndDismissKeyboardInputAccessory,
   BlueButton,
   SafeBlueArea,
+  BlueSpacing10,
   BlueSpacing20,
   BlueNavigationStyle,
 } from '../../BlueComponents';
 import PropTypes from 'prop-types';
-import { LightningCustodianWallet } from '../../class/lightning-custodian-wallet';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import Privacy from '../../Privacy';
 let EV = require('../../events');
@@ -35,7 +35,7 @@ const { width } = Dimensions.get('window');
 export default class WalletsImport extends Component {
   static navigationOptions = {
     ...BlueNavigationStyle(),
-    title: loc.wallets.import.title,
+    title: loc.wallets.import.title.slice(0,1).toUpperCase() + loc.wallets.import.title.slice(1, loc.wallets.import.title.length),
   };
 
   constructor(props) {
@@ -75,28 +75,7 @@ export default class WalletsImport extends Component {
 
   async importMnemonic(text) {
     try {
-      // is it lightning custodian?
-      if (text.indexOf('blitzhub://') !== -1 || text.indexOf('lndhub://') !== -1) {
-        let lnd = new LightningCustodianWallet();
-        if (text.includes('@')) {
-          const split = text.split('@');
-          lnd.setBaseURI(split[1]);
-          lnd.setSecret(split[0]);
-        } else {
-          lnd.setBaseURI(LightningCustodianWallet.defaultBaseUri);
-          lnd.setSecret(text);
-        }
-        lnd.init();
-        await lnd.authorize();
-        await lnd.fetchTransactions();
-        await lnd.fetchUserInvoices();
-        await lnd.fetchPendingTransactions();
-        await lnd.fetchBalance();
-        return this._saveWallet(lnd);
-      }
-
       // trying other wallet types
-
       let segwitWallet = new SegwitP2SHWallet();
       segwitWallet.setSecret(text);
       if (segwitWallet.getAddress()) {
@@ -137,16 +116,6 @@ export default class WalletsImport extends Component {
         if (hd4.getBalance() > 0) {
           await hd4.fetchTransactions();
           return this._saveWallet(hd4);
-        }
-      }
-
-      let hd1 = new HDLegacyBreadwalletWallet();
-      hd1.setSecret(text);
-      if (hd1.validateMnemonic()) {
-        await hd1.fetchBalance();
-        if (hd1.getBalance() > 0) {
-          await hd1.fetchTransactions();
-          return this._saveWallet(hd1);
         }
       }
 
@@ -242,7 +211,7 @@ export default class WalletsImport extends Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <View style={{ flex: 1, paddingTop: 20 }}>
+        <View style={{ flex: 1, paddingTop: 20, backgroundColor: BlueApp.settings.brandingColor }}>
           <BlueLoading />
         </View>
       );
@@ -265,20 +234,26 @@ export default class WalletsImport extends Component {
               onFocus={() => this.setState({ isToolbarVisibleForAndroid: true })}
               onBlur={() => this.setState({ isToolbarVisibleForAndroid: false })}
             />
-            {Platform.select({
-              ios: (
-                <BlueDoneAndDismissKeyboardInputAccessory
-                  onClearTapped={() => this.setState({ label: '' }, () => Keyboard.dismiss())}
-                  onPasteTapped={text => this.setState({ label: text }, () => Keyboard.dismiss())}
-                />
-              ),
-              android: this.state.isToolbarVisibleForAndroid && (
-                <BlueDoneAndDismissKeyboardInputAccessory
-                  onClearTapped={() => this.setState({ label: '' }, () => Keyboard.dismiss())}
-                  onPasteTapped={text => this.setState({ label: text }, () => Keyboard.dismiss())}
-                />
-              ),
-            })}
+            <View
+              style={{
+              alignItems: 'center',
+              }}
+            >
+              {Platform.select({
+                ios: (
+                  <BlueDoneAndDismissKeyboardInputAccessory
+                    onClearTapped={() => this.setState({ label: '' }, () => Keyboard.dismiss())}
+                    onPasteTapped={text => this.setState({ label: text }, () => Keyboard.dismiss())}
+                  />
+                ),
+                android: this.state.isToolbarVisibleForAndroid && (
+                  <BlueDoneAndDismissKeyboardInputAccessory
+                    onClearTapped={() => this.setState({ label: '' }, () => Keyboard.dismiss())}
+                    onPasteTapped={text => this.setState({ label: text }, () => Keyboard.dismiss())}
+                  />
+                ),
+              })}
+            </View>
           </KeyboardAvoidingView>
         </TouchableWithoutFeedback>
 
@@ -292,7 +267,7 @@ export default class WalletsImport extends Component {
             disabled={!this.state.label}
             title={loc.wallets.import.do_import}
             buttonStyle={{
-              width: width / 1.5,
+              width: width / 3,
             }}
             onPress={async () => {
               if (!this.state.label) {
@@ -304,6 +279,7 @@ export default class WalletsImport extends Component {
               });
             }}
           />
+          <BlueSpacing10 />
           <BlueButtonLink
             title={loc.wallets.import.scan_qr}
             onPress={() => {
