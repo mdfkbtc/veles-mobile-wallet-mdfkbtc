@@ -1,8 +1,9 @@
-import { BitcoinUnit } from './bitcoinUnits';
 import BigNumber from 'bignumber.js';
-let loc = require('../loc');
+
+import { BitcoinUnit } from './bitcoinUnits';
 
 const BlueElectrum = require('../BlueElectrum');
+const loc = require('../loc');
 
 export const NetworkTransactionFeeType = Object.freeze({
   FAST: 'Fast',
@@ -25,25 +26,25 @@ export default class NetworkTransactionFees {
   static recommendedFees() {
     return new Promise(async (resolve, reject) => {
       try {
-        let response = await BlueElectrum.estimateFees();
+        const response = await BlueElectrum.estimateFees();
         if (typeof response === 'object') {
           const fast = loc.formatBalanceWithoutSuffix(
             new BigNumber(response.fast)
-              .multipliedBy(100000)
+              .multipliedBy(1)
               .toNumber()
               .toFixed(0),
             BitcoinUnit.SATS,
           );
           const medium = loc.formatBalanceWithoutSuffix(
             new BigNumber(response.medium)
-              .multipliedBy(100000)
+              .multipliedBy(1)
               .toNumber()
               .toFixed(0),
             BitcoinUnit.SATS,
           );
           const slow = loc.formatBalanceWithoutSuffix(
             new BigNumber(response.slow)
-              .multipliedBy(100000)
+              .multipliedBy(1)
               .toNumber()
               .toFixed(0),
             BitcoinUnit.SATS,
