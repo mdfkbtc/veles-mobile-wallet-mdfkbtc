@@ -1,13 +1,15 @@
 import { BitcoinUnit, Chain } from '../models/bitcoinUnits';
+
 const createHash = require('create-hash');
+
 export class AbstractWallet {
   static type = 'abstract';
   static typeReadable = 'abstract';
 
   static fromJson(obj) {
-    let obj2 = JSON.parse(obj);
-    let temp = new this();
-    for (let key2 of Object.keys(obj2)) {
+    const obj2 = JSON.parse(obj);
+    const temp = new this();
+    for (const key2 of Object.keys(obj2)) {
       temp[key2] = obj2[key2];
     }
 
@@ -19,10 +21,11 @@ export class AbstractWallet {
     this.typeReadable = this.constructor.typeReadable;
     this.label = '';
     this.secret = ''; // private key or recovery phrase
-    this.balance = 0;
-    this.unconfirmed_balance = 0;
+    this.balance = 0; // SAT
+    this.unconfirmed_balance = 0; // SAT
     this.transactions = [];
-    this._address = false; // cache
+    this.unconfirmed_transactions = [];
+    this._address = false;
     this.utxo = [];
     this._lastTxFetch = 0;
     this._lastBalanceFetch = 0;
@@ -39,7 +42,7 @@ export class AbstractWallet {
   }
 
   getTransactions() {
-    return this.transactions;
+    return this.unconfirmed_transactions.concat(this.transactions);
   }
 
   /**
@@ -59,11 +62,11 @@ export class AbstractWallet {
    * @returns {number} Available to spend amount, int, in sats
    */
   getBalance() {
-    return this.balance;
+    return this.balance + this.unconfirmed_balance;
   }
 
   getPreferredBalanceUnit() {
-    for (let value of Object.values(BitcoinUnit)) {
+    for (const value of Object.values(BitcoinUnit)) {
       if (value === this.preferredBalanceUnit) {
         return this.preferredBalanceUnit;
       }
@@ -92,7 +95,7 @@ export class AbstractWallet {
   }
 
   weOwnAddress(address) {
-    return this._address === address;
+    return this.getAddress() === address;
   }
 
   /**
@@ -131,5 +134,9 @@ export class AbstractWallet {
 
   getAddressAsync() {
     return new Promise(resolve => resolve(this.getAddress()));
+  }
+
+  getUtxo() {
+    return this.utxo;
   }
 }
