@@ -13,7 +13,7 @@ module.exports = {
     createBitcoinWallet:
       'Um eine Lightning wallet zu verwenden, muss erstmal eine Bitcoin Wallet eingerichtet werden. Bitte erstell oder importier eine Bitcoin Wallet.',
     list: {
-      app_name: 'BlueWallet',
+      app_name: 'Veles Wallet',
       title: 'Wallets',
       header:
         'Eine Wallet spiegelt ein Paar kryptographische Schlüssel wider. Einen geheimen Schlüseel und eine Adresse als öffentlichen Schlüssel. Den öffentlichen Schlüssel kann man zum Empfang von Bitcoin teilen.',
@@ -76,7 +76,7 @@ module.exports = {
     import: {
       title: 'Importieren',
       explanation:
-        'Gib hier deine mnemonische Phrase, deinen privaten Schlüssel, WIF oder worüber du auch immer verfügst ein. BlueWallet wird bestmöglich dein Format interpretieren und die Wallet importieren',
+        'Gib hier deine mnemonische Phrase, deinen privaten Schlüssel, WIF oder worüber du auch immer verfügst ein. Veles Wallet wird bestmöglich dein Format interpretieren und die Wallet importieren',
       imported: 'Importiert',
       error: 'Fehler beim Import. Ist die Eingabe korrekt?',
       success: 'Erfolg',
@@ -125,8 +125,8 @@ module.exports = {
       total_exceeds_balance: 'Der zu sendende Betrag ist größer als der verfügbare Betrag.',
       create_tx_error: 'Fehler beim Erstellen der Transaktion. Bitte stelle sicher, dass die Adresse korrekt ist.',
       address: 'Adresse',
-      amount_placeholder: 'Betrag (in BTC)',
-      fee_placeholder: 'plus Gebühr (in BTC)',
+      amount_placeholder: 'Betrag (in VLS)',
+      fee_placeholder: 'plus Gebühr (in VLS)',
       note_placeholder: 'Notiz',
       cancel: 'Abbrechen',
       scan: 'Scan',
@@ -146,7 +146,8 @@ module.exports = {
       title: 'Transaktion erstellen',
       error: 'Fehler beim Erstellen der Transaktion. Falsche Adresse oder Betrag?',
       go_back: 'Zurück',
-      this_is_hex: 'Das ist die hexadezimale Darstellung der signierten Transaktion und bereit zum Übertragen an das Netzwerk',
+      this_is_hex:
+        'Das ist die hexadezimale Darstellung der signierten Transaktion und bereit zum Übertragen an das Netzwerk',
       to: 'An',
       amount: 'Betrag',
       fee: 'Gebühr',
@@ -203,18 +204,21 @@ module.exports = {
     help:
       'Unter bestimmten Umständen könntest du dazu gezwungen werden, ' +
       'dein Passwort preiszugeben. Um deine Bitcoins zu sichern, kann ' +
-      'BlueWallet einen weiteren verschlüsselten Speicher mit einem ' +
+      'Veles Wallet einen weiteren verschlüsselten Speicher mit einem ' +
       'anderen Passwort erstellen. Unter Druck kannst du das ' +
       'zweite Passwort an Fremde weitergeben. Wenn eingegeben, öffnet ' +
-      'BlueWallet einen anderen Speicher zur Täuschung. Dies wirkt ' +
+      'Veles Wallet einen anderen Speicher zur Täuschung. Dies wirkt ' +
       'auf Fremde täuschend echt und dein Hauptspeicher bleibt geheim ' +
       'und sicher.',
-    help2: 'Der andere Speicher ist voll funktional und man kann einen Minimalbetrag für die Glaubhaftigkeit hinterlegen.',
+    help2:
+      'Der andere Speicher ist voll funktional und man kann einen Minimalbetrag für die Glaubhaftigkeit hinterlegen.',
     create_fake_storage: 'Erstelle verschlüsselten Speicher zur Täuschung',
     go_back: 'Zurück',
     create_password: 'Erstelle ein Passwort',
-    create_password_explanation: 'Das Passwort für den täuschenden Speicher darf nicht mit dem deines Hauptspeichers übereinstimmen',
-    password_should_not_match: 'Das Passwort für den täuschenden Speicher darf nicht mit dem deines Hauptspeichers übereinstimmen',
+    create_password_explanation:
+      'Das Passwort für den täuschenden Speicher darf nicht mit dem deines Hauptspeichers übereinstimmen',
+    password_should_not_match:
+      'Das Passwort für den täuschenden Speicher darf nicht mit dem deines Hauptspeichers übereinstimmen',
     retype_password: 'Passwort wiederholen',
     passwords_do_not_match: 'Passwörter stimmen nicht überein. Neuer Versuch',
     success: 'Erfolg!',
