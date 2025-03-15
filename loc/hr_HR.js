@@ -11,9 +11,10 @@ module.exports = {
     select_wallet: 'Odaberi volet',
     options: 'opcije',
     list: {
-      app_name: 'BlueWallet',
+      app_name: 'Veles Wallet',
       title: 'Voleti',
-      header: 'Volet je par privatnog ključa (tajna!) i javne adrese ' + 'koju slobodno možete dijeliti kada primate novce.',
+      header:
+        'Volet je par privatnog ključa (tajna!) i javne adrese ' + 'koju slobodno možete dijeliti kada primate novce.',
       add: 'Dodaj volet',
       create_a_wallet: 'Stvori novi volet',
       create_a_wallet1: 'Ne košta ništa i možete',
@@ -31,7 +32,8 @@ module.exports = {
     },
     add: {
       title: 'Dodaj volet',
-      description: 'Možete ili skenirati bekap papirnati volet (u WIF - Wallet Import Format), ili stvoriti novi volet. Segwit je podržan.',
+      description:
+        'Možete ili skenirati bekap papirnati volet (u WIF - Wallet Import Format), ili stvoriti novi volet. Segwit je podržan.',
       scan: 'Skeniraj',
       create: 'Stvori',
       label_new_segwit: 'Novi SegWit',
@@ -72,7 +74,7 @@ module.exports = {
     import: {
       title: 'unesi',
       explanation:
-        'Ovdje upiši svoj mnemonik slijed riječi, privatni ključ, WIF, ili što već imaš. BlueWallet će pokušati porocijeniti format i unesti tvoj volet.',
+        'Ovdje upiši svoj mnemonik slijed riječi, privatni ključ, WIF, ili što već imaš. Veles Wallet će pokušati porocijeniti format i unesti tvoj volet.',
       imported: 'Uneseno',
       error: 'Neuspješan unos. Molimo pažljivo provjerite ispravnost unesenih podataka.',
       success: 'Uspjeh',
@@ -121,8 +123,8 @@ module.exports = {
       total_exceeds_balance: 'Iznos je veći od raspoloživog.',
       create_tx_error: 'Pogreška prilikom stvaranja transakcije. Molimo provijeri da je adresa ispravna.',
       address: 'adresa',
-      amount_placeholder: 'iznos za slanje (u BTC)',
-      fee_placeholder: 'plus trošak transakcije (u BTC)',
+      amount_placeholder: 'iznos za slanje (u VLS)',
+      fee_placeholder: 'plus trošak transakcije (u VLS)',
       note_placeholder: 'bilješka za evidenciju',
       cancel: 'Otkaži',
       scan: 'Skeniraj',
@@ -199,11 +201,13 @@ module.exports = {
     help:
       'Pazi. Netko gadan te može u iznimnim okolnostima (pljačka, prijevremeni izbori, itd.) ' +
       'brutalno pritisnuti da mu otkriješ lozinku za svoj volet. ' +
-      'BlueWallet ti čuva leđa buraz. Nemaš brige. Gledaj, ' +
+      'Veles Wallet ti čuva leđa buraz. Nemaš brige. Gledaj, ' +
       'stvoriti ćemo fejk volet sa drugačijom lozinkom. Haha, žišku? ' +
       'Pa kad se ovaj počne pjeniti, a ti vidiš da je vrag odnio šalu, ' +
       'samo mu podvali lozinku za ovaj drugi volet. Eto mu ga. Nek si cucla. ',
-    help2: 'Novi spremnik će biti posve funkcionalan, možeš pohraniti koliko ' + 'misliš da je potrebno da izgleda uvjerljivo.',
+    help2:
+      'Novi spremnik će biti posve funkcionalan, možeš pohraniti koliko ' +
+      'misliš da je potrebno da izgleda uvjerljivo.',
     create_fake_storage: 'Stvori fejk enkriptirani spremnik',
     go_back: 'Povratak',
     create_password: 'Unesi lozinku',
