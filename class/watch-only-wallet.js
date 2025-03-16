@@ -1,7 +1,8 @@
-import { LegacyWallet } from './legacy-wallet';
-import { HDSegwitP2SHWallet } from './hd-segwit-p2sh-wallet';
 import { HDLegacyP2PKHWallet } from './hd-legacy-p2pkh-wallet';
 import { HDSegwitBech32Wallet } from './hd-segwit-bech32-wallet';
+import { HDSegwitP2SHWallet } from './hd-segwit-p2sh-wallet';
+import { LegacyWallet } from './legacy-wallet';
+
 const bitcoin = require('bitcoinjs-lib');
 
 export class WatchOnlyWallet extends LegacyWallet {
@@ -14,23 +15,27 @@ export class WatchOnlyWallet extends LegacyWallet {
   }
 
   allowSend() {
-    return !!this.use_with_hardware_wallet && this._hdWalletInstance instanceof HDSegwitBech32Wallet && this._hdWalletInstance.allowSend();
+    return (
+      !!this.use_with_hardware_wallet &&
+      this._hdWalletInstance instanceof HDSegwitBech32Wallet &&
+      this._hdWalletInstance.allowSend()
+    );
   }
 
   allowBatchSend() {
     return (
-      !!this.use_with_hardware_wallet && this._hdWalletInstance instanceof HDSegwitBech32Wallet && this._hdWalletInstance.allowBatchSend()
+      !!this.use_with_hardware_wallet &&
+      this._hdWalletInstance instanceof HDSegwitBech32Wallet &&
+      this._hdWalletInstance.allowBatchSend()
     );
   }
 
   allowSendMax() {
     return (
-      !!this.use_with_hardware_wallet && this._hdWalletInstance instanceof HDSegwitBech32Wallet && this._hdWalletInstance.allowSendMax()
+      !!this.use_with_hardware_wallet &&
+      this._hdWalletInstance instanceof HDSegwitBech32Wallet &&
+      this._hdWalletInstance.allowSendMax()
     );
-  }
-
-  getAddress() {
-    return this.secret;
   }
 
   createTx(utxos, amount, fee, toAddress, memo) {
@@ -38,12 +43,13 @@ export class WatchOnlyWallet extends LegacyWallet {
   }
 
   valid() {
-    if (this.secret.startsWith('xpub') || this.secret.startsWith('ypub') || this.secret.startsWith('zpub')) return true;
+    if (this.secret.startsWith('xpub') || this.secret.startsWith('ypub') || this.secret.startsWith('zpub')) return true; // xpubs unsupported due to path mixing
 
     try {
-      bitcoin.address.toOutputScript(this.getAddress());
+      bitcoin.address.toOutputScript(this.secret);
       return true;
     } catch (e) {
+      console.warn(e.message);
       return false;
     }
   }
@@ -53,7 +59,7 @@ export class WatchOnlyWallet extends LegacyWallet {
    * as a property of `this`, and in case such property exists - it recreates it and copies data from old one.
    * this is needed after serialization/save/load/deserialization procedure.
    */
-  init() {
+  async init() {
     let hdWalletInstance;
     if (this.secret.startsWith('xpub')) hdWalletInstance = new HDLegacyP2PKHWallet();
     else if (this.secret.startsWith('ypub')) hdWalletInstance = new HDSegwitP2SHWallet();
@@ -62,15 +68,25 @@ export class WatchOnlyWallet extends LegacyWallet {
     hdWalletInstance._xpub = this.secret;
     if (this._hdWalletInstance) {
       // now, porting all properties from old object to new one
-      for (let k of Object.keys(this._hdWalletInstance)) {
+      for (const k of Object.keys(this._hdWalletInstance)) {
         hdWalletInstance[k] = this._hdWalletInstance[k];
       }
-
       // deleting properties that cant survive serialization/deserialization:
       delete hdWalletInstance._node1;
       delete hdWalletInstance._node0;
     }
+    await hdWalletInstance.generateAddresses();
     this._hdWalletInstance = hdWalletInstance;
+  }
+
+  getAddress() {
+    if (this._hdWalletInstance) return this._hdWalletInstance.getAddress();
+    return this.secret;
+  }
+
+  getAddressForTransaction() {
+    if (this._hdWalletInstance) return this._hdWalletInstance.getAddressForTransaction();
+    return this.secret;
   }
 
   getBalance() {
@@ -101,22 +117,6 @@ export class WatchOnlyWallet extends LegacyWallet {
       // return LegacyWallet.prototype.fetchBalance.call(this);
       return super.fetchTransactions();
     }
-  }
-
-  async getAddressAsync() {
-    if (this.isAddressValid(this.secret)) return new Promise(resolve => resolve(this.secret));
-    if (this._hdWalletInstance) return this._hdWalletInstance.getAddressAsync();
-    throw new Error('Not initialized');
-  }
-
-  async _getExternalAddressByIndex(index) {
-    if (this._hdWalletInstance) return this._hdWalletInstance._getExternalAddressByIndex(index);
-    throw new Error('Not initialized');
-  }
-
-  async getChangeAddressAsync() {
-    if (this._hdWalletInstance) return this._hdWalletInstance.getChangeAddressAsync();
-    throw new Error('Not initialized');
   }
 
   async fetchUtxo() {
