@@ -1,14 +1,17 @@
 /* global describe, it, expect, jest, jasmine */
-import React from 'react';
-import { LegacyWallet, SegwitP2SHWallet, AppStorage } from '../../class';
-import TestRenderer from 'react-test-renderer';
-import Settings from '../../screen/settings/settings';
-import Selftest from '../../screen/selftest';
-import { BlueHeader } from '../../BlueComponents';
-import { FiatUnit } from '../../models/fiatUnit';
 import AsyncStorage from '@react-native-community/async-storage';
+import React from 'react';
+import TestRenderer from 'react-test-renderer';
+
+import { BlueHeader } from '../../BlueComponents';
+import { LegacyWallet, SegwitP2SHWallet, AppStorage } from '../../class';
+import { FiatUnit } from '../../models/fiatUnit';
+import Selftest from '../../screen/selftest';
+import Settings from '../../screen/settings/settings';
+
 global.crypto = require('crypto'); // shall be used by tests under nodejs CLI, but not in RN environment
-let assert = require('assert');
+const assert = require('assert');
+
 jest.mock('react-native-qrcode-svg', () => 'Video');
 jest.useFakeTimers();
 jest.mock('Picker', () => {
@@ -51,18 +54,18 @@ jest.mock('ScrollView', () => {
 
 describe('unit - LegacyWallet', function() {
   it('serialize and unserialize work correctly', () => {
-    let a = new LegacyWallet();
+    const a = new LegacyWallet();
     a.setLabel('my1');
-    let key = JSON.stringify(a);
+    const key = JSON.stringify(a);
 
-    let b = LegacyWallet.fromJson(key);
+    const b = LegacyWallet.fromJson(key);
     assert(key === JSON.stringify(b));
 
     assert.strictEqual(key, JSON.stringify(b));
   });
 
   it('can validate addresses', () => {
-    let w = new LegacyWallet();
+    const w = new LegacyWallet();
     assert.ok(w.isAddressValid('12eQ9m4sgAwTSQoNXkRABKhCXCsjm2jdVG'));
     assert.ok(!w.isAddressValid('12eQ9m4sgAwTSQoNXkRABKhCXCsjm2j'));
     assert.ok(w.isAddressValid('3BDsBDxDimYgNZzsqszNZobqQq3yeUoJf2'));
@@ -89,8 +92,8 @@ it('Selftest work', () => {
   // console.log((root.findAllByType('Text')[0].props));
 
   let okFound = false;
-  let allTests = [];
-  for (var v of root.findAllByType('Text')) {
+  const allTests = [];
+  for (const v of root.findAllByType('Text')) {
     let text = v.props.children;
     if (text.join) {
       text = text.join('');
@@ -107,14 +110,14 @@ it('Selftest work', () => {
 
 it('Wallet can fetch UTXO', async () => {
   jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
-  let w = new SegwitP2SHWallet();
+  const w = new SegwitP2SHWallet();
   w._address = '12c6DSiU4Rq3P4ZxziKxzrL5LmMBrzjrJX';
   await w.fetchUtxo();
   assert.ok(w.utxo.length > 0, 'unexpected empty UTXO');
 });
 
 it('SegwitP2SHWallet can generate segwit P2SH address from WIF', async () => {
-  let l = new SegwitP2SHWallet();
+  const l = new SegwitP2SHWallet();
   l.setSecret('Kxr9tQED9H44gCmp6HAdmemAzU3n84H3dGkuWTKvE23JgHMW8gct');
   assert.ok(l.getAddress() === '34AgLJhwXrvmkZS1o5TrcdeevMt22Nar53', 'expected ' + l.getAddress());
   assert.ok(l.getAddress() === (await l.getAddressAsync()));
@@ -122,7 +125,7 @@ it('SegwitP2SHWallet can generate segwit P2SH address from WIF', async () => {
 
 it('Wallet can fetch balance', async () => {
   jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
-  let w = new LegacyWallet();
+  const w = new LegacyWallet();
   w._address = '115fUy41sZkAG14CmdP1VbEKcNRZJWkUWG'; // hack internals
   assert.ok(w.getBalance() === 0);
   assert.ok(w.getUnconfirmedBalance() === 0);
@@ -134,13 +137,13 @@ it('Wallet can fetch balance', async () => {
 });
 
 it('Wallet can fetch TXs', async () => {
-  let w = new LegacyWallet();
+  const w = new LegacyWallet();
   w._address = '12eQ9m4sgAwTSQoNXkRABKhCXCsjm2jdVG';
   await w.fetchTransactions();
   assert.strictEqual(w.getTransactions().length, 2);
 
-  let tx0 = w.getTransactions()[0];
-  let txExpected = {
+  const tx0 = w.getTransactions()[0];
+  const txExpected = {
     block_hash: '0000000000000000000d05c54a592db8532f134e12b4c3ae0821ce582fad3566',
     block_height: 530933,
     block_index: 1587,
@@ -194,7 +197,7 @@ it('Wallet can fetch TXs', async () => {
 describe('currency', () => {
   it('fetches exchange rate and saves to AsyncStorage', async () => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
-    let currency = require('../../currency');
+    const currency = require('../../currency');
     await currency.startUpdater();
     let cur = await AsyncStorage.getItem(AppStorage.EXCHANGE_RATES);
     cur = JSON.parse(cur);
@@ -211,7 +214,7 @@ describe('currency', () => {
     // now setting with a proper setter
     await currency.setPrefferedCurrency(FiatUnit.EUR);
     await currency.startUpdater();
-    let preferred = await currency.getPreferredCurrency();
+    const preferred = await currency.getPreferredCurrency();
     assert.strictEqual(preferred.endPointKey, 'EUR');
     cur = JSON.parse(await AsyncStorage.getItem(AppStorage.EXCHANGE_RATES));
     assert.ok(cur['BTC_EUR'] > 0);
