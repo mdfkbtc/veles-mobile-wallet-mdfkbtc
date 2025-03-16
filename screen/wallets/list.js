@@ -1,34 +1,46 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, FlatList, InteractionManager, RefreshControl, ScrollView } from 'react-native';
-import { BlueLoading, SafeBlueArea, WalletsCarousel, BlueList, BlueHeaderDefaultMain, BlueTransactionListItem } from '../../BlueComponents';
 import { Icon } from 'react-native-elements';
-import { NavigationEvents } from 'react-navigation';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
-import PropTypes from 'prop-types';
-import WalletGradient from '../../class/walletGradient';
-import OnAppLaunch from '../../class/onAppLaunch';
-let EV = require('../../events');
-let A = require('../../analytics');
+import { NavigationEvents } from 'react-navigation';
+
+import {
+  BlueLoading,
+  SafeBlueArea,
+  WalletsCarousel,
+  BlueList,
+  BlueHeaderDefaultMain,
+  BlueTransactionListItem,
+  NavbarLogo,
+} from '../../BlueComponents';
+
+const BlueApp = require('../../BlueApp');
+const BlueElectrum = require('../../BlueElectrum');
+const EV = require('../../events');
 /** @type {AppStorage} */
-let BlueApp = require('../../BlueApp');
-let loc = require('../../loc');
-let BlueElectrum = require('../../BlueElectrum');
+const loc = require('../../loc');
 
 export default class WalletsList extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerStyle: {
-      backgroundColor: '#FFFFFF',
+      backgroundColor: BlueApp.settings.navbarColor,
       borderBottomWidth: 0,
       elevation: 0,
     },
+    headerTitleStyle: {
+      fontWeight: '600',
+      color: BlueApp.settings.foregroundColor,
+    },
+    headerLeft: <NavbarLogo />,
     headerRight: (
       <TouchableOpacity
         style={{ marginHorizontal: 16, width: 40, height: 40, justifyContent: 'center', alignItems: 'flex-end' }}
-        onPress={() => navigation.navigate('Settings')}
-      >
+        onPress={() => navigation.navigate('Settings')}>
         <Icon size={22} name="kebab-horizontal" type="octicon" color={BlueApp.settings.foregroundColor} />
       </TouchableOpacity>
     ),
+    title: loc.wallets.overview_wallets,
   });
 
   constructor(props) {
@@ -51,23 +63,16 @@ export default class WalletsList extends Component {
     // the idea is that upon wallet launch we will refresh
     // all balances and all transactions here:
     InteractionManager.runAfterInteractions(async () => {
-      const isViewAllWalletsEnabled = await OnAppLaunch.isViewAllWalletsEnabled();
-      if (!isViewAllWalletsEnabled) {
-        const selectedDefaultWallet = await OnAppLaunch.getSelectedDefaultWallet();
-        const walletIndex = this.state.wallets.findIndex(wallet => wallet.getID() === selectedDefaultWallet.getID());
-        this.handleClick(walletIndex);
-      }
-
       let noErr = true;
       try {
         await BlueElectrum.waitTillConnected();
-        let balanceStart = +new Date();
+        const balanceStart = +new Date();
         await BlueApp.fetchWalletBalances();
-        let balanceEnd = +new Date();
+        const balanceEnd = +new Date();
         console.log('fetch all wallet balances took', (balanceEnd - balanceStart) / 1000, 'sec');
-        let start = +new Date();
+        const start = +new Date();
         await BlueApp.fetchWalletTransactions();
-        let end = +new Date();
+        const end = +new Date();
         console.log('fetch all wallet txs took', (end - start) / 1000, 'sec');
       } catch (_) {
         noErr = false;
@@ -96,13 +101,13 @@ export default class WalletsList extends Component {
           try {
             await BlueElectrum.ping();
             await BlueElectrum.waitTillConnected();
-            let balanceStart = +new Date();
+            const balanceStart = +new Date();
             await BlueApp.fetchWalletBalances(this.lastSnappedTo || 0);
-            let balanceEnd = +new Date();
+            const balanceEnd = +new Date();
             console.log('fetch balance took', (balanceEnd - balanceStart) / 1000, 'sec');
-            let start = +new Date();
+            const start = +new Date();
             await BlueApp.fetchWalletTransactions(this.lastSnappedTo || 0);
-            let end = +new Date();
+            const end = +new Date();
             console.log('fetch tx took', (end - start) / 1000, 'sec');
           } catch (err) {
             noErr = false;
@@ -118,9 +123,6 @@ export default class WalletsList extends Component {
 
   redrawScreen() {
     console.log('wallets/list redrawScreen()');
-    if (BlueApp.getBalance() !== 0) {
-      A(A.ENUM.GOT_NONZERO_BALANCE);
-    }
 
     this.setState({
       isLoading: false,
@@ -139,11 +141,11 @@ export default class WalletsList extends Component {
 
   handleClick(index) {
     console.log('click', index);
-    let wallet = BlueApp.wallets[index];
+    const wallet = BlueApp.wallets[index];
     if (wallet) {
       this.props.navigation.navigate('WalletTransactions', {
         wallet: wallet,
-        headerColor: WalletGradient.headerColorFor(wallet.type),
+        key: `WalletTransactions-${wallet.getID()}`,
       });
     } else {
       // if its out of index - this must be last card with incentive to create wallet
@@ -172,12 +174,12 @@ export default class WalletsList extends Component {
    */
   async lazyRefreshWallet(index) {
     /** @type {Array.<AbstractWallet>} wallets */
-    let wallets = BlueApp.getWallets();
+    const wallets = BlueApp.getWallets();
     if (!wallets[index]) {
       return;
     }
 
-    let oldBalance = wallets[index].getBalance();
+    const oldBalance = wallets[index].getBalance();
     let noErr = true;
     let didRefresh = false;
 
@@ -229,9 +231,8 @@ export default class WalletsList extends Component {
             fontSize: 24,
             marginVertical: 8,
             color: BlueApp.settings.foregroundColor,
-          }}
-        >
-          {loc.transactions.list.title}
+          }}>
+          {loc.transactions.list.tabBarLabel}
         </Text>
       </View>
     );
@@ -244,6 +245,10 @@ export default class WalletsList extends Component {
       ReactNativeHapticFeedback.trigger('notificationError', { ignoreAndroidSystemSettings: false });
     }
   };
+
+  /* Outcomented but maybe will be used in future
+   * <BlueHeaderDefaultMain leftText={loc.wallets.list.title} onNewWalletPress={() => this.props.navigation.navigate('AddWallet')} />
+   */
 
   _renderItem = data => {
     return <BlueTransactionListItem item={data.item} itemPriceUnit={data.item.walletPreferredBalanceUnit} />;
@@ -261,11 +266,13 @@ export default class WalletsList extends Component {
         />
         <ScrollView
           refreshControl={
-            <RefreshControl onRefresh={() => this.refreshTransactions()} refreshing={!this.state.isFlatListRefreshControlHidden} />
-          }
-        >
-          <BlueHeaderDefaultMain leftText={loc.wallets.list.title} onNewWalletPress={() => this.props.navigation.navigate('AddWallet')} />
+            <RefreshControl
+              onRefresh={() => this.refreshTransactions()}
+              refreshing={!this.state.isFlatListRefreshControlHidden}
+            />
+          }>
           <WalletsCarousel
+            removeClippedSubviews={false}
             data={this.state.wallets}
             handleClick={index => {
               this.handleClick(index);
@@ -285,8 +292,7 @@ export default class WalletsList extends Component {
                       fontSize: 18,
                       color: '#9aa0aa',
                       textAlign: 'center',
-                    }}
-                  >
+                    }}>
                     {loc.wallets.list.empty_txs1}
                   </Text>
                   <Text
@@ -294,8 +300,7 @@ export default class WalletsList extends Component {
                       fontSize: 18,
                       color: '#9aa0aa',
                       textAlign: 'center',
-                    }}
-                  >
+                    }}>
                     {loc.wallets.list.empty_txs2}
                   </Text>
                 </View>
