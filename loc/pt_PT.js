@@ -10,12 +10,15 @@ module.exports = {
   wallets: {
     options: 'opções',
     select_wallet: 'Seleccione uma Wallet',
-    createBitcoinWallet: 'Para poder usar uma wallet Lightning, é necessária uma wallet Bitcoin para a financiar. Deseja continuar?',
+    createBitcoinWallet:
+      'Para poder usar uma wallet Lightning, é necessária uma wallet Bitcoin para a financiar. Deseja continuar?',
 
     list: {
-      app_name: 'BlueWallet',
+      app_name: 'Veles Wallet',
       title: 'wallets',
-      header: 'Uma wallet representa um par entre um segredo (chave privada) e um endereço' + 'que pode partilhar para receber Bitcoin.',
+      header:
+        'Uma wallet representa um par entre um segredo (chave privada) e um endereço' +
+        'que pode partilhar para receber Bitcoin.',
       add: 'adicionar wallet',
       create_a_wallet: 'Adicionar uma wallet',
       create_a_wallet1: 'É gratuito e pode',
@@ -129,8 +132,8 @@ module.exports = {
       fee_field_is_not_valid: 'Campo de taxa não é válido',
       address_field_is_not_valid: 'Campo de endereço não é válido',
       receiver_placeholder: 'endereço de envio aqui',
-      amount_placeholder: 'quantia a enviar (em BTC)',
-      fee_placeholder: 'mais a taxa de transacção (em BTC)',
+      amount_placeholder: 'quantia a enviar (em VLS)',
+      fee_placeholder: 'mais a taxa de transacção (em VLS)',
       create_tx_error: 'Houve um erro na criação da transacção. Por favor verifique que o endereço é válido.',
       note_placeholder: 'Nota pessoal',
       total_exceeds_balance: 'O valor total excede o saldo disponível.',
@@ -189,7 +192,7 @@ module.exports = {
     lightning_settings_explain:
       'Para se ligar ao seu próprio node LND, por favor instale o LndHub ' +
       'e coloque o seu endereço aqui nas definições. ' +
-      'Deixe em branco para usar o LNDHub da BlueWallet (lndhub.io). ' +
+      'Deixe em branco para usar o LNDHub da Veles Wallet (lndhub.io). ' +
       'Wallets criadas depois desta alteração ligar-se-ão ao LNDHub especificado.',
     electrum_settings: 'Definições do Electrum',
     electrum_settings_explain: 'Deixe em branco para usar o valor por omissão',
@@ -204,13 +207,14 @@ module.exports = {
     title: 'Negação plausível',
     help:
       'Em algumas circunstâncias, pode ser forçado a relevar uma ' +
-      'password. Para manter as suas moedas seguras, A BlueWallet pode criar outro ' +
+      'password. Para manter as suas moedas seguras, A Veles Wallet pode criar outro ' +
       'armazenamento encriptado, com uma password diferente. Sobre pressão, ' +
       'pode revelar esta password a um terceiro. Se inserida na ' +
-      'BlueWallet, esta vai abrir um armazenamento "falso". Que vai parecer ' +
+      'Veles Wallet, esta vai abrir um armazenamento "falso". Que vai parecer ' +
       'legítimo a um terceiro, mas que secretamente vai manter o seu armazenamento principal ' +
       'com as moedas em segurança.',
-    help2: 'Este novo armazenamento é completamente funcional, e pode guardar ' + 'um valor minímo para parecer mais real.',
+    help2:
+      'Este novo armazenamento é completamente funcional, e pode guardar ' + 'um valor minímo para parecer mais real.',
     create_fake_storage: 'Criar armazenamento encriptado FALSO',
     go_back: 'Voltar',
     create_password: 'Criar password',

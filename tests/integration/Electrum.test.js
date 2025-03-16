@@ -1,8 +1,11 @@
 /* global it, describe, afterAll, beforeAll, jasmine */
 const bitcoin = require('bitcoinjs-lib');
+
 global.net = require('net');
-let BlueElectrum = require('../../BlueElectrum');
-let assert = require('assert');
+const BlueElectrum = require('../../BlueElectrum');
+
+const assert = require('assert');
+
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 150 * 1000;
 
 afterAll(() => {
@@ -34,8 +37,8 @@ describe('Electrum', () => {
   it('ElectrumClient can connect and query', async () => {
     const ElectrumClient = require('electrum-client');
 
-    for (let peer of BlueElectrum.hardcodedPeers) {
-      let mainClient = new ElectrumClient(peer.tcp, peer.host, 'tcp');
+    for (const peer of BlueElectrum.hardcodedPeers) {
+      const mainClient = new ElectrumClient(peer.tcp, peer.host, 'tcp');
 
       try {
         await mainClient.connect();
@@ -50,9 +53,9 @@ describe('Electrum', () => {
       let script = bitcoin.address.toOutputScript(addr4elect);
       let hash = bitcoin.crypto.sha256(script);
       let reversedHash = Buffer.from(hash.reverse());
-      let start = +new Date();
+      const start = +new Date();
       let balance = await mainClient.blockchainScripthash_getBalance(reversedHash.toString('hex'));
-      let end = +new Date();
+      const end = +new Date();
       console.warn(peer.host, 'took', (end - start) / 1000, 'seconds to fetch balance');
       assert.ok(balance.confirmed > 0);
 
@@ -70,23 +73,23 @@ describe('Electrum', () => {
   });
 
   it('BlueElectrum can do getBalanceByAddress()', async function() {
-    let address = '3GCvDBAktgQQtsbN6x5DYiQCMmgZ9Yk8BK';
-    let balance = await BlueElectrum.getBalanceByAddress(address);
+    const address = '3GCvDBAktgQQtsbN6x5DYiQCMmgZ9Yk8BK';
+    const balance = await BlueElectrum.getBalanceByAddress(address);
     assert.strictEqual(balance.confirmed, 51432);
     assert.strictEqual(balance.unconfirmed, 0);
     assert.strictEqual(balance.addr, address);
   });
 
   it('BlueElectrum can do getTransactionsByAddress()', async function() {
-    let txs = await BlueElectrum.getTransactionsByAddress('bc1qt4t9xl2gmjvxgmp5gev6m8e6s9c85979ta7jeh');
+    const txs = await BlueElectrum.getTransactionsByAddress('bc1qt4t9xl2gmjvxgmp5gev6m8e6s9c85979ta7jeh');
     assert.strictEqual(txs.length, 1);
     assert.strictEqual(txs[0].tx_hash, 'ad00a92409d8982a1d7f877056dbed0c4337d2ebab70b30463e2802279fb936d');
     assert.strictEqual(txs[0].height, 563077);
   });
 
   it('BlueElectrum can do getTransactionsFullByAddress()', async function() {
-    let txs = await BlueElectrum.getTransactionsFullByAddress('bc1qt4t9xl2gmjvxgmp5gev6m8e6s9c85979ta7jeh');
-    for (let tx of txs) {
+    const txs = await BlueElectrum.getTransactionsFullByAddress('bc1qt4t9xl2gmjvxgmp5gev6m8e6s9c85979ta7jeh');
+    for (const tx of txs) {
       assert.ok(tx.address === 'bc1qt4t9xl2gmjvxgmp5gev6m8e6s9c85979ta7jeh');
       assert.ok(tx.txid);
       assert.ok(tx.confirmations);
@@ -103,7 +106,7 @@ describe('Electrum', () => {
   });
 
   it('BlueElectrum can do multiGetBalanceByAddress()', async function() {
-    let balances = await BlueElectrum.multiGetBalanceByAddress([
+    const balances = await BlueElectrum.multiGetBalanceByAddress([
       'bc1qt4t9xl2gmjvxgmp5gev6m8e6s9c85979ta7jeh',
       'bc1qvd6w54sydc08z3802svkxr7297ez7cusd6266p',
       'bc1qwp58x4c9e5cplsnw5096qzdkae036ug7a34x3r',
@@ -123,7 +126,7 @@ describe('Electrum', () => {
   });
 
   it('BlueElectrum can do multiGetUtxoByAddress()', async () => {
-    let utxos = await BlueElectrum.multiGetUtxoByAddress(
+    const utxos = await BlueElectrum.multiGetUtxoByAddress(
       [
         'bc1qt4t9xl2gmjvxgmp5gev6m8e6s9c85979ta7jeh',
         'bc1qvd6w54sydc08z3802svkxr7297ez7cusd6266p',
@@ -140,11 +143,14 @@ describe('Electrum', () => {
     );
     assert.strictEqual(utxos['bc1qt4t9xl2gmjvxgmp5gev6m8e6s9c85979ta7jeh'][0].vout, 1);
     assert.strictEqual(utxos['bc1qt4t9xl2gmjvxgmp5gev6m8e6s9c85979ta7jeh'][0].value, 50000);
-    assert.strictEqual(utxos['bc1qt4t9xl2gmjvxgmp5gev6m8e6s9c85979ta7jeh'][0].address, 'bc1qt4t9xl2gmjvxgmp5gev6m8e6s9c85979ta7jeh');
+    assert.strictEqual(
+      utxos['bc1qt4t9xl2gmjvxgmp5gev6m8e6s9c85979ta7jeh'][0].address,
+      'bc1qt4t9xl2gmjvxgmp5gev6m8e6s9c85979ta7jeh',
+    );
   });
 
   it('ElectrumClient can do multiGetHistoryByAddress()', async () => {
-    let histories = await BlueElectrum.multiGetHistoryByAddress(
+    const histories = await BlueElectrum.multiGetHistoryByAddress(
       [
         'bc1qt4t9xl2gmjvxgmp5gev6m8e6s9c85979ta7jeh',
         'bc1qvd6w54sydc08z3802svkxr7297ez7cusd6266p',
@@ -167,7 +173,7 @@ describe('Electrum', () => {
   });
 
   it('ElectrumClient can do multiGetTransactionByTxid()', async () => {
-    let txdatas = await BlueElectrum.multiGetTransactionByTxid(
+    const txdatas = await BlueElectrum.multiGetTransactionByTxid(
       [
         'ad00a92409d8982a1d7f877056dbed0c4337d2ebab70b30463e2802279fb936d',
         '042c9e276c2d06b0b84899771a7f218af90dd60436947c49a844a05d7c104b26',
@@ -202,12 +208,14 @@ describe('Electrum', () => {
     // possible solution: fetch it without verbose and decode locally. unfortunatelly it omits such info as confirmations, time etc
     // so whoever uses it should be prepared for this.
     // tbh consumer wallets dont usually work with such big txs, so probably we dont need it
-    let txdatas = await BlueElectrum.multiGetTransactionByTxid(['484a11c5e086a281413b9192b4f60c06abf745f08c2c28c4b4daefe6df3b9e5c']);
+    const txdatas = await BlueElectrum.multiGetTransactionByTxid([
+      '484a11c5e086a281413b9192b4f60c06abf745f08c2c28c4b4daefe6df3b9e5c',
+    ]);
     assert.ok(txdatas['484a11c5e086a281413b9192b4f60c06abf745f08c2c28c4b4daefe6df3b9e5c']);
   });
 
   it('ElectrumClient can do multiGetHistoryByAddress() to obtain txhex', async () => {
-    let txdatas = await BlueElectrum.multiGetTransactionByTxid(
+    const txdatas = await BlueElectrum.multiGetTransactionByTxid(
       ['881c54edd95cbdd1583d6b9148eb35128a47b64a2e67a5368a649d6be960f08e'],
       3,
       false,
