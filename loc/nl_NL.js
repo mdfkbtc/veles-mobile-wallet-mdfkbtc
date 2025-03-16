@@ -13,9 +13,11 @@ module.exports = {
     createBitcoinWallet:
       'Om een Lightning-portemonnee te kunnen gebruiken, is een Bitcoin-portemonnee nodig om deze te financieren. Wil je toch doorgaan?',
     list: {
-      app_name: 'BlueWallet',
+      app_name: 'Veles Wallet',
       title: 'portemonnees',
-      header: 'Een portemonnee vertegenwoordigt een geheime (privésleutel) en een adres' + 'dat u kunt delen om munten te ontvangen.',
+      header:
+        'Een portemonnee vertegenwoordigt een geheime (privésleutel) en een adres' +
+        'dat u kunt delen om munten te ontvangen.',
       add: 'Portemonnee toevoegen',
       create_a_wallet: 'Portemonnee aanmaken',
       create_a_wallet1: 'Het is gratis en u kunt er',
@@ -75,7 +77,7 @@ module.exports = {
     import: {
       title: 'importeren',
       explanation:
-        'Schrijf hier uw ezelsbruggetje, privésleutel, WIF, of een ander formaat. BlueWallet zal zijn best doen om het juiste formaat te raden en uw portemonnee te importeren',
+        'Schrijf hier uw ezelsbruggetje, privésleutel, WIF, of een ander formaat. Veles Wallet zal zijn best doen om het juiste formaat te raden en uw portemonnee te importeren',
       imported: 'Geïmporteerd',
       error: 'Importeren mislukt. Zorg ervoor dat de verstrekte gegevens geldig zijn.',
       success: 'Succes',
@@ -122,10 +124,11 @@ module.exports = {
       fee_field_is_not_valid: 'Tarief is niet geldig',
       address_field_is_not_valid: 'Adresveld is niet geldig',
       total_exceeds_balance: 'Het verzendingsbedrag overschrijdt het beschikbare saldo.',
-      create_tx_error: 'Er is een fout opgetreden bij het maken van de transactie. Zorg ervoor dat het adres geldig is.',
+      create_tx_error:
+        'Er is een fout opgetreden bij het maken van de transactie. Zorg ervoor dat het adres geldig is.',
       address: 'adres',
-      amount_placeholder: 'te verzenden bedrag (in BTC)',
-      fee_placeholder: 'plus transactie vergoeding (in BTC)',
+      amount_placeholder: 'te verzenden bedrag (in VLS)',
+      fee_placeholder: 'plus transactie vergoeding (in VLS)',
       note_placeholder: 'notitie voor mezelf',
       cancel: 'Annuleren',
       scan: 'Scannen',
@@ -202,19 +205,22 @@ module.exports = {
     help:
       'Onder bepaalde omstandigheden kunt u worden gedwongen om uw' +
       ' wachtwoord te onthullen. Om uw munten veilig te houden, kan ' +
-      'BlueWallet nog een versleutelde opslag aanmaken, met een ander ' +
+      'Veles Wallet nog een versleutelde opslag aanmaken, met een ander ' +
       'wachtwoord. Onder druk kunt u dit wachtwoord bekendmaken aan ' +
-      'de derde partij. Indien ingevoerd in BlueWallet, zal het nieuwe ' +
+      'de derde partij. Indien ingevoerd in Veles Wallet, zal het nieuwe ' +
       "nep'-opslagruimte worden ontgrendeld. Dit lijkt legitiem voor de " +
       'derde partij, maar zal uw hoofdopslag met munten niet bekend maken ' +
       'aan de derde partij',
     help2:
-      'De nieuwe opslag zal volledig functioneel zijn en u kunt er ' + 'een minimum aantal munten opslaan zodat het geloofwaardig lijkt.',
+      'De nieuwe opslag zal volledig functioneel zijn en u kunt er ' +
+      'een minimum aantal munten opslaan zodat het geloofwaardig lijkt.',
     create_fake_storage: 'Nep versleutelde opslag aanmaken',
     go_back: 'Ga terug',
     create_password: 'Wachtwoord aanmaken',
-    create_password_explanation: 'Wachtwoord voor nep-opslag hoort niet overeen te komen met wachtwoord voor uw hoofdopslag',
-    password_should_not_match: 'Wachtwoord voor nep-opslag hoort niet overeen te komen met wachtwoord voor uw hoofdopslag',
+    create_password_explanation:
+      'Wachtwoord voor nep-opslag hoort niet overeen te komen met wachtwoord voor uw hoofdopslag',
+    password_should_not_match:
+      'Wachtwoord voor nep-opslag hoort niet overeen te komen met wachtwoord voor uw hoofdopslag',
     retype_password: 'Herhaal wachtwoord',
     passwords_do_not_match: 'Wachtwoorden komen niet overeen, probeer het opnieuw',
     success: 'Succes',
@@ -227,7 +233,8 @@ module.exports = {
     withdraw: 'Opvragen',
     expired: 'Verlopen',
     placeholder: 'Invoice',
-    sameWalletAsInvoiceError: 'U kunt geen factuur betalen met dezelfde portemonnee die is gebruikt om de factuur te maken.',
+    sameWalletAsInvoiceError:
+      'U kunt geen factuur betalen met dezelfde portemonnee die is gebruikt om de factuur te maken.',
   },
   pleasebackup: {
     title: 'Your wallet is created...',
