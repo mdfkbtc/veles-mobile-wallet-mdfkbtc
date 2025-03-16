@@ -1,6 +1,10 @@
 /* global alert */
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { ActivityIndicator, View, TextInput, TouchableOpacity, Linking, Clipboard } from 'react-native';
+import { Icon, Text } from 'react-native-elements';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+
 import {
   BlueSpacing20,
   BlueReplaceFeeSuggestions,
@@ -11,16 +15,14 @@ import {
   BlueSpacing,
   BlueNavigationStyle,
 } from '../../BlueComponents';
-import PropTypes from 'prop-types';
 import { HDSegwitBech32Transaction, HDSegwitBech32Wallet } from '../../class';
-import { Icon, Text } from 'react-native-elements';
-import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+
 /** @type {AppStorage} */
-let EV = require('../../events');
-let BlueElectrum = require('../../BlueElectrum');
-let loc = require('../../loc');
+const BlueApp = require('../../BlueApp');
+const BlueElectrum = require('../../BlueElectrum');
+const EV = require('../../events');
+const loc = require('../../loc');
 /** @type {AppStorage} */
-let BlueApp = require('../../BlueApp');
 
 export default class CPFP extends Component {
   static navigationOptions = () => ({
@@ -48,7 +50,7 @@ export default class CPFP extends Component {
       try {
         await BlueElectrum.ping();
         await BlueElectrum.waitTillConnected();
-        let result = await this.state.wallet.broadcastTx(this.state.txhex);
+        const result = await this.state.wallet.broadcastTx(this.state.txhex);
         if (result) {
           console.log('broadcast result = ', result);
           EV(EV.enum.REMOTE_TRANSACTIONS_COUNT_CHANGED); // someone should fetch txs
@@ -86,9 +88,9 @@ export default class CPFP extends Component {
       return this.setState({ nonReplaceable: true, isLoading: false });
     }
 
-    let tx = new HDSegwitBech32Transaction(null, this.state.txid, this.state.wallet);
+    const tx = new HDSegwitBech32Transaction(null, this.state.txid, this.state.wallet);
     if ((await tx.isToUsTransaction()) && (await tx.getRemoteConfirmationsNum()) === 0) {
-      let info = await tx.getInfo();
+      const info = await tx.getInfo();
       return this.setState({ nonReplaceable: false, feeRate: info.feeRate + 1, isLoading: false, tx });
       // 1 sat makes a lot of difference, since sometimes because of rounding created tx's fee might be insufficient
     } else {
@@ -103,7 +105,7 @@ export default class CPFP extends Component {
       const tx = this.state.tx;
       this.setState({ isLoading: true });
       try {
-        let { tx: newTx } = await tx.createCPFPbumpFee(newFeeRate);
+        const { tx: newTx } = await tx.createCPFPbumpFee(newFeeRate);
         this.setState({ stage: 2, txhex: newTx.toHex(), newTxid: newTx.getId() });
         this.setState({ isLoading: false });
       } catch (_) {
@@ -115,11 +117,11 @@ export default class CPFP extends Component {
 
   render() {
     if (this.state.isLoading) {
-      return (
+      return ((
         <View style={{ flex: 1, paddingTop: 20 }}>
           <ActivityIndicator />
         </View>
-      );
+      ));
     }
 
     if (this.state.stage === 3) {
@@ -131,7 +133,7 @@ export default class CPFP extends Component {
     }
 
     if (this.state.nonReplaceable) {
-      return (
+      return ((
         <SafeBlueArea style={{ flex: 1, paddingTop: 20 }}>
           <BlueSpacing20 />
           <BlueSpacing20 />
@@ -141,7 +143,7 @@ export default class CPFP extends Component {
 
           <BlueText h4>This transaction is not bumpable</BlueText>
         </SafeBlueArea>
-      );
+      ));
     }
 
     return this.renderStage1(
@@ -151,7 +153,7 @@ export default class CPFP extends Component {
   }
 
   renderStage2() {
-    return (
+    return ((
       <View style={{ flex: 1, paddingTop: 20 }}>
         <BlueCard style={{ alignItems: 'center', flex: 1 }}>
           <BlueText style={{ color: '#0c2550', fontWeight: '500' }}>{loc.send.create.this_is_hex}</BlueText>
@@ -175,26 +177,32 @@ export default class CPFP extends Component {
           />
 
           <TouchableOpacity style={{ marginVertical: 24 }} onPress={() => Clipboard.setString(this.state.txhex)}>
-            <Text style={{ color: '#9aa0aa', fontSize: 15, fontWeight: '500', alignSelf: 'center' }}>Copy and broadcast later</Text>
+            <Text style={{ color: '#9aa0aa', fontSize: 15, fontWeight: '500', alignSelf: 'center' }}>
+              Copy and broadcast later
+            </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{ marginVertical: 24 }} onPress={() => Linking.openURL('https://coinb.in/?verify=' + this.state.txhex)}>
-            <Text style={{ color: '#9aa0aa', fontSize: 15, fontWeight: '500', alignSelf: 'center' }}>Verify on coinb.in</Text>
+          <TouchableOpacity
+            style={{ marginVertical: 24 }}
+            onPress={() => Linking.openURL('https://coinb.in/?verify=' + this.state.txhex)}>
+            <Text style={{ color: '#9aa0aa', fontSize: 15, fontWeight: '500', alignSelf: 'center' }}>
+              Verify on coinb.in
+            </Text>
           </TouchableOpacity>
           <BlueButton onPress={() => this.broadcast()} title={loc.send.confirm.sendNow} />
         </BlueCard>
       </View>
-    );
+    ));
   }
 
   renderStage3() {
-    return (
+    return ((
       <SafeBlueArea style={{ flex: 1, paddingTop: 19 }}>
         <BlueCard style={{ alignItems: 'center', flex: 1 }}>
           <View style={{ flexDirection: 'row', justifyContent: 'center', paddingTop: 76, paddingBottom: 16 }} />
         </BlueCard>
         <View
           style={{
-            backgroundColor: '#ccddf9',
+            backgroundColor: BlueApp.settings.buttonBackgroundColor,
             width: 120,
             height: 120,
             borderRadius: 60,
@@ -202,8 +210,7 @@ export default class CPFP extends Component {
             justifyContent: 'center',
             marginTop: 43,
             marginBottom: 53,
-          }}
-        >
+          }}>
           <Icon name="check" size={50} type="font-awesome" color="#0f5cc0" />
         </View>
         <BlueCard>
@@ -215,22 +222,29 @@ export default class CPFP extends Component {
           />
         </BlueCard>
       </SafeBlueArea>
-    );
+    ));
   }
 
   renderStage1(text) {
-    return (
+    return ((
       <SafeBlueArea style={{ flex: 1, paddingTop: 20 }}>
         <BlueSpacing />
         <BlueCard style={{ alignItems: 'center', flex: 1 }}>
           <BlueText>{text}</BlueText>
           <BlueSpacing20 />
-          <BlueReplaceFeeSuggestions onFeeSelected={fee => this.setState({ newFeeRate: fee })} transactionMinimum={this.state.feeRate} />
+          <BlueReplaceFeeSuggestions
+            onFeeSelected={fee => this.setState({ newFeeRate: fee })}
+            transactionMinimum={this.state.feeRate}
+          />
           <BlueSpacing />
-          <BlueButton disabled={this.state.newFeeRate <= this.state.feeRate} onPress={() => this.createTransaction()} title="Create" />
+          <BlueButton
+            disabled={this.state.newFeeRate <= this.state.feeRate}
+            onPress={() => this.createTransaction()}
+            title="Create"
+          />
         </BlueCard>
       </SafeBlueArea>
-    );
+    ));
   }
 }
 
