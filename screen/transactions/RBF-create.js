@@ -1,8 +1,10 @@
 /** @type {AppStorage}  */
 /* global alert */
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { TextInput, View, ActivtyIndicator } from 'react-native';
 import { FormValidationMessage } from 'react-native-elements';
+
 import {
   BlueLoading,
   BlueSpacing20,
@@ -13,10 +15,11 @@ import {
   BlueSpacing,
   BlueNavigationStyle,
 } from '../../BlueComponents';
-import PropTypes from 'prop-types';
+
+const BigNumber = require('bignumber.js');
 const bitcoinjs = require('bitcoinjs-lib');
-let BigNumber = require('bignumber.js');
-let BlueApp = require('../../BlueApp');
+
+const BlueApp = require('../../BlueApp');
 
 export default class SendCreate extends Component {
   static navigationOptions = () => ({
@@ -42,11 +45,11 @@ export default class SendCreate extends Component {
   async componentDidMount() {
     console.log('RBF-create - componentDidMount');
 
-    let utxo = [];
+    const utxo = [];
 
     let lastSequence = 0;
     let totalInputAmountSatoshi = 0;
-    for (let input of this.state.sourceTx.inputs) {
+    for (const input of this.state.sourceTx.inputs) {
       if (input.sequence > lastSequence) {
         lastSequence = input.sequence;
       }
@@ -69,7 +72,7 @@ export default class SendCreate extends Component {
       // lastSequence = 1
     }
 
-    let txMetadata = BlueApp.tx_metadata[this.state.txid];
+    const txMetadata = BlueApp.tx_metadata[this.state.txid];
     if (txMetadata) {
       if (txMetadata.last_sequence) {
         lastSequence = Math.max(lastSequence, txMetadata.last_sequence);
@@ -81,7 +84,7 @@ export default class SendCreate extends Component {
     let changeAddress;
     let transferAmount;
     let totalOutputAmountSatoshi = 0;
-    for (let o of this.state.sourceTx.outputs) {
+    for (const o of this.state.sourceTx.outputs) {
       totalOutputAmountSatoshi += o.value;
       if (o.addresses[0] === this.state.fromWallet.getAddress()) {
         // change
@@ -112,14 +115,21 @@ export default class SendCreate extends Component {
       // more responsive
       let tx;
       try {
-        tx = this.state.fromWallet.createTx(utxo, transferAmount, newFee, this.state.newDestinationAddress, false, lastSequence);
+        tx = this.state.fromWallet.createTx(
+          utxo,
+          transferAmount,
+          newFee,
+          this.state.newDestinationAddress,
+          false,
+          lastSequence,
+        );
         BlueApp.tx_metadata[this.state.txid] = txMetadata || {};
         BlueApp.tx_metadata[this.state.txid]['last_sequence'] = lastSequence;
 
         // in case new TX get confirmed, we must save metadata under new txid
-        let bitcoin = bitcoinjs;
-        let txDecoded = bitcoin.Transaction.fromHex(tx);
-        let txid = txDecoded.getId();
+        const bitcoin = bitcoinjs;
+        const txDecoded = bitcoin.Transaction.fromHex(tx);
+        const txid = txDecoded.getId();
         BlueApp.tx_metadata[txid] = BlueApp.tx_metadata[this.state.txid];
         BlueApp.tx_metadata[txid]['txhex'] = tx;
         //
@@ -135,7 +145,7 @@ export default class SendCreate extends Component {
 
       let newFeeSatoshi = new BigNumber(newFee);
       newFeeSatoshi = parseInt(newFeeSatoshi.multipliedBy(100000000));
-      let satoshiPerByte = Math.round(newFeeSatoshi / (tx.length / 2));
+      const satoshiPerByte = Math.round(newFeeSatoshi / (tx.length / 2));
       this.setState({
         isLoading: false,
         size: Math.round(tx.length / 2),
@@ -229,7 +239,11 @@ export default class SendCreate extends Component {
         {this.state.isLoading ? (
           <ActivtyIndicator />
         ) : (
-          <BlueButton icon={{ name: 'bullhorn', type: 'font-awesome' }} onPress={() => this.broadcast()} title="Broadcast" />
+          <BlueButton
+            icon={{ name: 'bullhorn', type: 'font-awesome' }}
+            onPress={() => this.broadcast()}
+            title="Broadcast"
+          />
         )}
       </SafeBlueArea>
     );
