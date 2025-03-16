@@ -60,7 +60,6 @@ export const Settings = () => {
     <BlueLoading />
   ) : (
     <SafeBlueArea forceInset={{ horizontal: 'always' }} style={{ flex: 1 }}>
-      <BlueHeaderDefaultSub leftText={loc.settings.header} rightComponent={null} />
       <ScrollView>
         {BlueApp.getWallets().length > 1 && (
           <BlueListItem component={TouchableOpacity} onPress={() => navigate('DefaultView')} title="On Launch" />
@@ -75,9 +74,7 @@ export const Settings = () => {
             switched={biometrics.isBiometricsEnabled}
           />
         )}
-        <BlueListItem title={loc.settings.lightning_settings} component={TouchableOpacity} onPress={() => navigate('LightningSettings')} />
         <BlueListItem title={loc.settings.language} component={TouchableOpacity} onPress={() => navigate('Language')} />
-        <BlueListItem title={loc.settings.currency} component={TouchableOpacity} onPress={() => navigate('Currency')} />
         <BlueListItem title={'Electrum server'} component={TouchableOpacity} onPress={() => navigate('ElectrumSettings')} />
         <BlueListItem title={loc.settings.advanced_options} component={TouchableOpacity} onPress={onShowAdvancedOptions} />
         {showAdvancedOptions && (
@@ -98,6 +95,7 @@ export const Settings = () => {
 export default class SettingsContainer extends Component {
   static navigationOptions = {
     ...BlueNavigationStyle,
+    title: loc.settings.header.slice(0,1).toUpperCase() + loc.settings.header.slice(1, loc.settings.header.length),
   };
 
   render() {

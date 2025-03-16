@@ -35,7 +35,7 @@ import Modal from 'react-native-modal';
 import NetworkTransactionFees, { NetworkTransactionFee } from '../../models/networkTransactionFees';
 import BitcoinBIP70TransactionDecode from '../../bip70/bip70';
 import { BitcoinUnit, Chain } from '../../models/bitcoinUnits';
-import { HDLegacyP2PKHWallet, HDSegwitBech32Wallet, HDSegwitP2SHWallet, LightningCustodianWallet, WatchOnlyWallet } from '../../class';
+import { HDLegacyP2PKHWallet, HDSegwitBech32Wallet, HDSegwitP2SHWallet, WatchOnlyWallet } from '../../class';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { BitcoinTransaction } from '../../models/bitcoinTransactionInfo';
 const bitcoin = require('bitcoinjs-lib');
@@ -68,10 +68,10 @@ export default class SendDetails extends Component {
     let fromWallet = null;
     if (props.navigation.state.params) fromWallet = props.navigation.state.params.fromWallet;
 
-    const wallets = BlueApp.getWallets().filter(wallet => wallet.type !== LightningCustodianWallet.type);
+    const wallets = BlueApp.getWallets();
 
     if (wallets.length === 0) {
-      alert('Before creating a transaction, you must first add a Bitcoin wallet.');
+      alert('Before creating a transaction, you must first add a Veles wallet.');
       return props.navigation.goBack(null);
     } else {
       if (!fromWallet && wallets.length > 0) {
@@ -101,7 +101,7 @@ export default class SendDetails extends Component {
 
   renderNavigationHeader() {
     this.props.navigation.setParams({
-      withAdvancedOptionsMenuButton: this.state.fromWallet.allowBatchSend(),
+      withAdvancedOptionsMenuButton: this.state.fromWallet.allowBatchSend() || this.state.fromWallet.allowSendMax(),
       advancedOptionsMenuButtonAction: () => {
         Keyboard.dismiss();
         this.setState({ isAdvancedTransactionOptionsVisible: true });
@@ -128,8 +128,8 @@ export default class SendDetails extends Component {
         });
       } else {
         let recipients = this.state.addresses;
-        const dataWithoutSchema = data.replace('bitcoin:', '');
-        if (btcAddressRx.test(dataWithoutSchema) || (dataWithoutSchema.indexOf('bc1') === 0 && dataWithoutSchema.indexOf('?') === -1)) {
+        const dataWithoutSchema = data.replace('veles:', '');
+        if (btcAddressRx.test(dataWithoutSchema) || (dataWithoutSchema.indexOf('veles1') === 0 && dataWithoutSchema.indexOf('?') === -1)) {
           recipients[[this.state.recipientsScrollIndex]].address = dataWithoutSchema;
           this.setState({
             address: recipients,
@@ -140,8 +140,8 @@ export default class SendDetails extends Component {
           let address = '';
           let options;
           try {
-            if (!data.toLowerCase().startsWith('bitcoin:')) {
-              data = `bitcoin:${data}`;
+            if (!data.toLowerCase().startsWith('veles:')) {
+              data = `veles:${data}`;
             }
             const decoded = bip21.decode(data);
             address = decoded.address;
@@ -155,7 +155,7 @@ export default class SendDetails extends Component {
             this.setState({ isLoading: false });
           }
           console.log(options);
-          if (btcAddressRx.test(address) || address.indexOf('bc1') === 0) {
+          if (btcAddressRx.test(address) || address.indexOf('veles1') === 0) {
             recipients[[this.state.recipientsScrollIndex]].address = address;
             recipients[[this.state.recipientsScrollIndex]].amount = options.amount;
             this.setState({
@@ -196,7 +196,7 @@ export default class SendDetails extends Component {
           this.setState({ addresses, memo: initialMemo, isLoading: false });
         } catch (error) {
           console.log(error);
-          alert('Error: Unable to decode Bitcoin address');
+          alert('Error: Unable to decode Veles address');
         }
       }
     } else if (this.props.navigation.state.params.address) {
@@ -239,7 +239,7 @@ export default class SendDetails extends Component {
             } catch (error) {
               console.log(error);
               this.setState({ isLoading: false });
-              alert('Error: Unable to decode Bitcoin address');
+              alert('Error: Unable to decode Veles address');
             }
           }
         }
@@ -306,9 +306,9 @@ export default class SendDetails extends Component {
     index[0] = 0;
     for (let utxo of utxos) {
       if (!utxoIsInSatoshis) {
-        utxo.amount = new BigNumber(utxo.amount).multipliedBy(100000000).toNumber();
+        utxo.value = new BigNumber(utxo.value).multipliedBy(100000000).toNumber();
       }
-      index[c] = utxo.amount + index[c - 1];
+      index[c] = utxo.value + index[c - 1];
       c++;
     }
 
@@ -439,15 +439,7 @@ export default class SendDetails extends Component {
       const firstTransaction = this.state.addresses[0];
       try {
         await this.state.fromWallet.fetchUtxo();
-        if (this.state.fromWallet.getChangeAddressAsync) {
-          await this.state.fromWallet.getChangeAddressAsync(); // to refresh internal pointer to next free address
-        }
-        if (this.state.fromWallet.getAddressAsync) {
-          await this.state.fromWallet.getAddressAsync(); // to refresh internal pointer to next free address
-        }
-
         utxo = this.state.fromWallet.utxo;
-
         do {
           console.log('try #', tries, 'fee=', fee);
           if (this.recalculateAvailableBalance(this.state.fromWallet.getBalance(), firstTransaction.amount, fee) < 0) {
@@ -519,7 +511,7 @@ export default class SendDetails extends Component {
     const wallet = this.state.fromWallet;
     await wallet.fetchUtxo();
     const firstTransaction = this.state.addresses[0];
-    const changeAddress = await wallet.getChangeAddressAsync();
+    const changeAddress = await wallet.getAddressForTransaction();
     let satoshis = new BigNumber(firstTransaction.amount).multipliedBy(100000000).toNumber();
     const requestedSatPerByte = +this.state.fee.toString().replace(/\D/g, '');
     console.log({ satoshis, requestedSatPerByte, utxo: wallet.getUtxo() });
@@ -530,6 +522,7 @@ export default class SendDetails extends Component {
         transaction.amount === BitcoinUnit.MAX ? BitcoinUnit.MAX : new BigNumber(transaction.amount).multipliedBy(100000000).toNumber();
       if (amount > 0.0 || amount === BitcoinUnit.MAX) {
         targets.push({ address: transaction.address, value: amount });
+        console.warn("createHDbech: " + transaction.address, amount);
       }
     }
 
@@ -583,7 +576,7 @@ export default class SendDetails extends Component {
       ReactNativeHapticFeedback.trigger('notificationWarning');
       Alert.alert(
         'Wallet Selection',
-        `The selected wallet does not support sending Bitcoin to multiple recipients. Are you sure to want to select this wallet?`,
+        `The selected wallet does not support sending Veles to multiple recipients. Are you sure to want to select this wallet?`,
         [
           {
             text: loc._.ok,
@@ -704,6 +697,7 @@ export default class SendDetails extends Component {
   };
 
   renderAdvancedTransactionOptionsModal = () => {
+    const isSendMaxUsed = this.state.addresses.some(element => element.amount === BitcoinUnit.MAX);
     return (
       <Modal
         isVisible={this.state.isAdvancedTransactionOptionsVisible}
@@ -715,49 +709,59 @@ export default class SendDetails extends Component {
       >
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'position' : null}>
           <View style={styles.advancedTransactionOptionsModalContent}>
-            <TouchableOpacity
-              disabled={this.state.addresses.some(element => element.amount === BitcoinUnit.MAX)}
-              onPress={() => {
-                const addresses = this.state.addresses;
-                addresses.push(new BitcoinTransaction());
-                this.setState(
-                  {
-                    addresses,
-                    isAdvancedTransactionOptionsVisible: false,
-                  },
-                  () => {
-                    this.scrollView.scrollToEnd();
-                    if (this.state.addresses.length > 1) this.scrollView.flashScrollIndicators();
-                  },
-                );
-              }}
-            >
+            {this.state.fromWallet.allowSendMax() && (
               <BlueListItem
-                disabled={this.state.addresses.some(element => element.amount === BitcoinUnit.MAX)}
-                title="Add Recipient"
+                disabled={!(this.state.fromWallet.getBalance() > 0) || isSendMaxUsed}
+                title="Use Full Balance"
                 hideChevron
+                component={TouchableOpacity}
+                onPress={this.onUseAllPressed}
               />
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              disabled={this.state.addresses.length < 2}
-              onPress={() => {
-                const addresses = this.state.addresses;
-                addresses.splice(this.state.recipientsScrollIndex, 1);
-                this.setState(
-                  {
-                    addresses,
-                    isAdvancedTransactionOptionsVisible: false,
-                  },
-                  () => {
-                    if (this.state.addresses.length > 1) this.scrollView.flashScrollIndicators();
-                    this.setState({ recipientsScrollIndex: this.scrollViewCurrentIndex });
-                  },
-                );
-              }}
-            >
-              <BlueListItem disabled={this.state.addresses.length < 2} title="Remove Recipient" hideChevron />
-            </TouchableOpacity>
+            )}
+            {this.state.fromWallet.allowBatchSend() && (
+              <>
+                <BlueListItem
+                  disabled={isSendMaxUsed}
+                  title="Add Recipient"
+                  hideChevron
+                  component={TouchableOpacity}
+                  onPress={() => {
+                    const addresses = this.state.addresses;
+                    addresses.push(new BitcoinTransaction());
+                    this.setState(
+                      {
+                        addresses,
+                        isAdvancedTransactionOptionsVisible: false,
+                      },
+                      () => {
+                        this.scrollView.scrollToEnd();
+                        if (this.state.addresses.length > 1) this.scrollView.flashScrollIndicators();
+                      },
+                    );
+                  }}
+                />
+                <BlueListItem
+                  title="Remove Recipient"
+                  hideChevron
+                  disabled={this.state.addresses.length < 2}
+                  component={TouchableOpacity}
+                  onPress={() => {
+                    const addresses = this.state.addresses;
+                    addresses.splice(this.state.recipientsScrollIndex, 1);
+                    this.setState(
+                      {
+                        addresses,
+                        isAdvancedTransactionOptionsVisible: false,
+                      },
+                      () => {
+                        if (this.state.addresses.length > 1) this.scrollView.flashScrollIndicators();
+                        this.setState({ recipientsScrollIndex: this.scrollViewCurrentIndex });
+                      },
+                    );
+                  }}
+                />
+              </>
+            )}
           </View>
         </KeyboardAvoidingView>
       </Modal>
@@ -766,7 +770,7 @@ export default class SendDetails extends Component {
 
   renderCreateButton = () => {
     return (
-      <View style={{ marginHorizontal: 56, marginVertical: 16, alignContent: 'center', backgroundColor: '#FFFFFF', minHeight: 44 }}>
+      <View style={{ marginHorizontal: 56, marginVertical: 16, alignContent: 'center', backgroundColor: BlueApp.settings.buttonBackgroundColor, minHeight: 44 }}>
         {this.state.isLoading ? <ActivityIndicator /> : <BlueButton onPress={() => this.createTransaction()} title={'Next'} />}
       </View>
     );
@@ -794,7 +798,7 @@ export default class SendDetails extends Component {
               this.props.navigation.navigate('SelectWallet', { onWalletSelect: this.onWalletSelect, chainType: Chain.ONCHAIN })
             }
           >
-            <Text style={{ color: '#0c2550', fontSize: 14 }}>{this.state.fromWallet.getLabel()}</Text>
+            <Text style={{ color: BlueApp.settings.buttonLinkUrlColor, fontSize: 14 }}>{this.state.fromWallet.getLabel()}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -826,7 +830,7 @@ export default class SendDetails extends Component {
     let rows = [];
     for (let [index, item] of this.state.addresses.entries()) {
       rows.push(
-        <View style={{ minWidth: width, maxWidth: width, width: width }}>
+        <View style={{ minWidth: width, maxWidth: width, width: width, backgroundColor: BlueApp.settings.brandingColor }}>
           <BlueBitcoinAmount
             isLoading={this.state.isLoading}
             amount={item.amount ? item.amount.toString() : null}
@@ -878,17 +882,41 @@ export default class SendDetails extends Component {
     return rows;
   };
 
+  onUseAllPressed = () => {
+    ReactNativeHapticFeedback.trigger('notificationWarning');
+    Alert.alert(
+      'Use full balance',
+      `Are you sure you want to use your wallet's full balance for this transaction? ${
+        this.state.addresses.length > 1 ? 'Your other recipients will be removed from this transaction.' : ''
+      }`,
+      [
+        {
+          text: loc._.ok,
+          onPress: async () => {
+            Keyboard.dismiss();
+            const recipient = this.state.addresses[this.state.recipientsScrollIndex];
+            recipient.amount = BitcoinUnit.MAX;
+            this.setState({ addresses: [recipient], recipientsScrollIndex: 0, isAdvancedTransactionOptionsVisible: false });
+          },
+          style: 'default',
+        },
+        { text: loc.send.details.cancel, onPress: () => {}, style: 'cancel' },
+      ],
+      { cancelable: false },
+    );
+  };
+
   render() {
     if (this.state.isLoading || typeof this.state.fromWallet === 'undefined') {
       return (
-        <View style={{ flex: 1, paddingTop: 20 }}>
+        <View style={{ flex: 1, paddingTop: 20 , backgroundColor: BlueApp.settings.brandingColor }}>
           <BlueLoading />
         </View>
       );
     }
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-        <View style={{ flex: 1, justifyContent: 'space-between' }}>
+        <View style={{ flex: 1, justifyContent: 'space-between', backgroundColor: BlueApp.settings.brandingColor }}>
           <View>
             <KeyboardAvoidingView behavior="position">
               <ScrollView
@@ -908,12 +936,12 @@ export default class SendDetails extends Component {
                 hide={!this.state.showMemoRow}
                 style={{
                   flexDirection: 'row',
-                  borderColor: '#d2d2d2',
-                  borderBottomColor: '#d2d2d2',
+                  borderColor: BlueApp.settings.inputBorderColor,
                   borderWidth: 1.0,
                   borderBottomWidth: 0.5,
-                  backgroundColor: '#f5f5f5',
+                  backgroundColor: BlueApp.settings.inputBackgroundColor,
                   minHeight: 44,
+                  color: '#ffffff',
                   height: 44,
                   marginHorizontal: 20,
                   alignItems: 'center',
@@ -923,10 +951,11 @@ export default class SendDetails extends Component {
               >
                 <TextInput
                   onChangeText={text => this.setState({ memo: text })}
-                  placeholder={loc.send.details.note_placeholder}
+                  placeholder={loc.send.details.note_placeholder.slice(0,1).toUpperCase() + loc.send.details.note_placeholder.slice(1, loc.send.details.note_placeholder.length)}
+                  placeholderTextColor={BlueApp.settings.alternativeTextColor}
                   value={this.state.memo}
                   numberOfLines={1}
-                  style={{ flex: 1, marginHorizontal: 8, minHeight: 33 }}
+                  style={{ color: BlueApp.settings.foregroundColor, flex: 1, marginHorizontal: 8, minHeight: 33 }}
                   editable={!this.state.isLoading}
                   onSubmitEditing={Keyboard.dismiss}
                   inputAccessoryViewID={BlueDismissKeyboardInputAccessory.InputAccessoryViewID}
@@ -961,56 +990,9 @@ export default class SendDetails extends Component {
           </View>
           <BlueDismissKeyboardInputAccessory />
           {Platform.select({
-            ios: (
-              <BlueUseAllFundsButton
-                onUseAllPressed={() => {
-                  ReactNativeHapticFeedback.trigger('notificationWarning');
-                  Alert.alert(
-                    'Use full balance',
-                    `Are you sure you want to use your wallet's full balance for this transaction? ${
-                      this.state.addresses.length > 1 ? 'Your other recipients will be removed from this transaction.' : ''
-                    }`,
-                    [
-                      {
-                        text: loc._.ok,
-                        onPress: async () => {
-                          Keyboard.dismiss();
-                          const recipient = this.state.addresses[this.state.recipientsScrollIndex];
-                          recipient.amount = BitcoinUnit.MAX;
-                          this.setState({ addresses: [recipient], recipientsScrollIndex: 0 });
-                        },
-                        style: 'default',
-                      },
-                      { text: loc.send.details.cancel, onPress: () => {}, style: 'cancel' },
-                    ],
-                    { cancelable: false },
-                  );
-                }}
-                wallet={this.state.fromWallet}
-              />
-            ),
+            ios: <BlueUseAllFundsButton onUseAllPressed={this.onUseAllPressed} wallet={this.state.fromWallet} />,
             android: this.state.isAmountToolbarVisibleForAndroid && (
-              <BlueUseAllFundsButton
-                onUseAllPressed={() => {
-                  Alert.alert(
-                    'Use all funds',
-                    `Are you sure you want to use your all of your wallet's funds for this transaction?`,
-                    [
-                      {
-                        text: loc._.ok,
-                        onPress: async () => {
-                          Keyboard.dismiss();
-                          this.setState({ amount: BitcoinUnit.MAX });
-                        },
-                        style: 'default',
-                      },
-                      { text: loc.send.details.cancel, onPress: () => {}, style: 'cancel' },
-                    ],
-                    { cancelable: false },
-                  );
-                }}
-                wallet={this.state.fromWallet}
-              />
+              <BlueUseAllFundsButton onUseAllPressed={this.onUseAllPressed} wallet={this.state.fromWallet} />
             ),
           })}
 
@@ -1023,7 +1005,7 @@ export default class SendDetails extends Component {
 
 const styles = StyleSheet.create({
   modalContent: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: BlueApp.settings.brandingColor,
     padding: 22,
     justifyContent: 'center',
     alignItems: 'center',
@@ -1034,7 +1016,7 @@ const styles = StyleSheet.create({
     height: 200,
   },
   advancedTransactionOptionsModalContent: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: BlueApp.settings.brandingColor,
     padding: 22,
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,

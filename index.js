@@ -9,7 +9,6 @@ import App from './App';
 import LottieView from 'lottie-react-native';
 import UnlockWith from './UnlockWith.js';
 
-/** @type {AppStorage} */
 const A = require('./analytics');
 
 if (!Error.captureStackTrace) {
@@ -51,7 +50,8 @@ class BlueAppComponent extends React.Component {
         <LottieView
           ref={ref => (this.loadingSplash = ref)}
           onAnimationFinish={this.onAnimationFinish}
-          source={require('./img/bluewalletsplash.json')}
+          source={require('./img/splash.json')}
+          style={{ backgroundColor: '#383737' }}
           autoPlay
           loop={false}
         />
@@ -68,7 +68,8 @@ class BlueAppComponent extends React.Component {
           <LottieView
             ref={ref => (this.loadingSplash = ref)}
             onAnimationFinish={this.onAnimationFinish}
-            source={require('./img/bluewalletsplash.json')}
+            source={require('./img/splash.json')}
+            style={{ backgroundColor: '#383737' }}
             autoPlay
             loop={false}
           />

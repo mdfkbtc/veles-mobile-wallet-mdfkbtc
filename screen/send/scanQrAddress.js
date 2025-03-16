@@ -1,6 +1,6 @@
 /* global alert */
 import React from 'react';
-import { Image, TouchableOpacity } from 'react-native';
+import { Image, TouchableOpacity, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import { RNCamera } from 'react-native-camera';
 import { SafeBlueArea } from '../../BlueComponents';
@@ -51,7 +51,7 @@ export default class ScanQRCode extends React.Component {
           }}
           onPress={() => this.props.navigation.goBack(null)}
         >
-          <Image style={{ alignSelf: 'center' }} source={require('../../img/close-white.png')} />
+          <Image style={{ alignSelf: 'center' }} source={require('../../img/close.png')} />
         </TouchableOpacity>
         <TouchableOpacity
           style={{
@@ -74,7 +74,7 @@ export default class ScanQRCode extends React.Component {
               },
               response => {
                 if (response.uri) {
-                  const uri = response.uri.toString().replace('file://', '');
+                  const uri = Platform.OS === 'ios' ? response.uri.toString().replace('file://', '') : response.path.toString();
                   LocalQRCode.decode(uri, (error, result) => {
                     if (!error) {
                       this.onBarCodeRead({ data: result });

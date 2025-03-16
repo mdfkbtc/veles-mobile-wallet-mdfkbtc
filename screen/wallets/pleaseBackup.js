@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Privacy from '../../Privacy';
 import { ScrollView } from 'react-native-gesture-handler';
 let loc = require('../../loc');
+let BlueApp = require('../../BlueApp');
 
 export default class PleaseBackup extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -55,8 +56,8 @@ export default class PleaseBackup extends Component {
       <SafeBlueArea style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={{ justifyContent: 'space-between' }}>
           <View style={{ alignItems: 'center', paddingHorizontal: 16 }}>
-            <BlueText style={{ textAlign: 'center', fontWeight: 'bold', color: '#0C2550' }}>{loc.pleasebackup.success}</BlueText>
-            <BlueText style={{ paddingBottom: 20, paddingRight: 20, paddingLeft: 20, color: '#0C2550' }}>{loc.pleasebackup.text}</BlueText>
+            <BlueText style={{ textAlign: 'center', fontWeight: 'bold', color: BlueApp.settings.successColor }}>{loc.pleasebackup.success}</BlueText>
+            <BlueText style={{ paddingBottom: 20, paddingRight: 20, paddingLeft: 20, color: BlueApp.settings.failedColor }}>{loc.pleasebackup.text}</BlueText>
 
             <View
               style={{
@@ -70,7 +71,7 @@ export default class PleaseBackup extends Component {
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -78,13 +79,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>1. {this.state.words[0]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>1. {this.state.words[0]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -92,13 +93,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>2. {this.state.words[1]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>2. {this.state.words[1]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -106,13 +107,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>3. {this.state.words[2]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>3. {this.state.words[2]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -120,13 +121,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>4. {this.state.words[3]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>4. {this.state.words[3]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -134,13 +135,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>5. {this.state.words[4]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>5. {this.state.words[4]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -148,13 +149,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>6. {this.state.words[5]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>6. {this.state.words[5]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -162,13 +163,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>7. {this.state.words[6]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>7. {this.state.words[6]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -176,13 +177,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>8. {this.state.words[7]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>8. {this.state.words[7]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -190,13 +191,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>9. {this.state.words[8]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>9. {this.state.words[8]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -204,13 +205,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>10. {this.state.words[9]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>10. {this.state.words[9]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -218,13 +219,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>11. {this.state.words[10]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>11. {this.state.words[10]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -232,13 +233,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>12. {this.state.words[11]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>12. {this.state.words[11]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -246,13 +247,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>13. {this.state.words[12]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>13. {this.state.words[12]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -260,13 +261,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>14. {this.state.words[13]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>14. {this.state.words[13]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -274,13 +275,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>15. {this.state.words[14]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>15. {this.state.words[14]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -288,13 +289,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>16. {this.state.words[15]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>16. {this.state.words[15]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -302,13 +303,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>17. {this.state.words[16]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>17. {this.state.words[16]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -316,13 +317,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>18. {this.state.words[17]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>18. {this.state.words[17]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -330,13 +331,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>19. {this.state.words[18]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>19. {this.state.words[18]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -344,13 +345,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>20. {this.state.words[19]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>20. {this.state.words[19]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -358,13 +359,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>21. {this.state.words[20]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>21. {this.state.words[20]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -372,13 +373,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>22. {this.state.words[21]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>22. {this.state.words[21]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -386,13 +387,13 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>23. {this.state.words[22]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>23. {this.state.words[22]}</Text>
                 </Badge>
               </View>
               <View style={{ width: 'auto', marginRight: 8, marginBottom: 8 }}>
                 <Badge
                   containerStyle={{
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: BlueApp.settings.buttonBackgroundColor,
                     paddingTop: 6,
                     paddingBottom: 6,
                     paddingLeft: 8,
@@ -400,7 +401,7 @@ export default class PleaseBackup extends Component {
                     borderRadius: 4,
                   }}
                 >
-                  <Text style={{ color: '#81868E', fontWeight: 'bold' }}>24. {this.state.words[23]}</Text>
+                  <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>24. {this.state.words[23]}</Text>
                 </Badge>
               </View>
             </View>

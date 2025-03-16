@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Dimensions, ActivityIndicator, View } from 'react-native';
+import { Dimensions, ActivityIndicator, ScrollView, View, } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
-import { BlueSpacing20, SafeBlueArea, BlueNavigationStyle, BlueText } from '../../BlueComponents';
+import { BlueSpacing20, SafeBlueArea, BlueNavigationStyle, BlueText, BlueCopyTextToClipboard, BlueCard } from '../../BlueComponents';
 import PropTypes from 'prop-types';
 import Privacy from '../../Privacy';
 import Biometric from '../../class/biometrics';
@@ -13,7 +13,7 @@ const { height, width } = Dimensions.get('window');
 export default class WalletExport extends Component {
   static navigationOptions = ({ navigation }) => ({
     ...BlueNavigationStyle(navigation, true),
-    title: loc.wallets.export.title,
+    title: loc.wallets.export.title.slice(0,1).toUpperCase() + loc.wallets.export.title.slice(1, loc.wallets.export.title.length),
     headerLeft: null,
   });
 
@@ -64,44 +64,43 @@ export default class WalletExport extends Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <View style={{ flex: 1, paddingTop: 20 }} onLayout={this.onLayout}>
+        <View style={{ flex: 1 }} onLayout={this.onLayout}>
           <ActivityIndicator />
         </View>
       );
     }
 
     return (
-      <SafeBlueArea style={{ flex: 1, paddingTop: 20 }}>
-        <View style={{ alignItems: 'center', flex: 1, justifyContent: 'center', paddingHorizontal: 0 }} onLayout={this.onLayout}>
-          <View>
+      <SafeBlueArea style={{ flex: 1 }}>
+        <ScrollView
+          centerContent
+          contentContainerStyle={{ alignItems: 'center', justifyContent: 'center', flexGrow: 1, padding: 10, paddingTop: 5 }}
+          onLayout={this.onLayout}
+        >
+          <BlueCard>
             <BlueText>{this.state.wallet.typeReadable}</BlueText>
-          </View>
-
-          {(() => {
-            if (this.state.wallet.getAddress()) {
-              return (
-                <View>
-                  <BlueText>{this.state.wallet.getAddress()}</BlueText>
-                </View>
-              );
-            }
-          })()}
-          <BlueSpacing20 />
+          </BlueCard>
 
           <QRCode
             value={this.state.wallet.getSecret()}
             logo={require('../../img/qr-code.png')}
             size={this.state.qrCodeHeight}
             logoSize={70}
-            color={BlueApp.settings.foregroundColor}
+            color={BlueApp.settings.navbarColor}
             logoBackgroundColor={BlueApp.settings.brandingColor}
             ecl={'H'}
           />
 
           <BlueSpacing20 />
 
-          <BlueText style={{ alignItems: 'center', paddingHorizontal: 8 }}>{this.state.wallet.getSecret()}</BlueText>
-        </View>
+          <BlueCard>
+            <BlueText>{loc.wallets.details.mnemoic_seed}</BlueText>
+          </BlueCard>
+          <BlueText style={{ alignItems: 'center', paddingHorizontal: 8, color: BlueApp.settings.failedColor }}>{this.state.wallet.getSecret()}</BlueText>
+
+          <BlueSpacing20 />
+
+        </ScrollView>
       </SafeBlueArea>
     );
   }
