@@ -13,7 +13,7 @@
     createBitcoinWallet:
       'U het nie huidiglik `n geldige Bitcoin Beursie nie. Skep of voer eers ‘n Bitcoin Beursie in, sodat ‘n Bitcoin Lightning Beursie geskep en bevonds mag word. Wil U voortgaan?',
     list: {
-      app_name: 'BlueWallet',
+      app_name: 'Veles Wallet',
       title: 'beursies',
       header:
         'U beursie verteenwoordig ‘n sleutelkombinasie, bestaande uit geheims (privaat sleutel) en address' +
@@ -74,7 +74,7 @@
     import: {
       title: 'Invoer',
       explanation:
-        'Sleutel mnemonic, privaat sleutel, WIF, of enige text verwysing. BlueWallet sal die korrekte formaat kies en u beursie importeer ',
+        'Sleutel mnemonic, privaat sleutel, WIF, of enige text verwysing. Veles Wallet sal die korrekte formaat kies en u beursie importeer ',
       imported: 'Invoer suksesvol',
       error: 'U invoer het misluk. Maak asseblief seker u data is korrek en geldig.',
       success: 'Suksesvol',
@@ -121,10 +121,11 @@
       fee_field_is_not_valid: 'Fooi spasie is ongeldig',
       address_field_is_not_valid: 'Adres is ongeldig',
       total_exceeds_balance: 'Die bedrag is meer as die beskikbare balans.',
-      create_tx_error: 'Daar was ‘n probleem met die skepping van die transaksie. Bevestig asseblief die adres is geldig.',
+      create_tx_error:
+        'Daar was ‘n probleem met die skepping van die transaksie. Bevestig asseblief die adres is geldig.',
       address: 'adres',
-      amount_placeholder: 'bedrag om te stuur (in BTC)',
-      fee_placeholder: 'plus transaksie fooi (in BTC)',
+      amount_placeholder: 'bedrag om te stuur (in VLS)',
+      fee_placeholder: 'plus transaksie fooi (in VLS)',
       note_placeholder: 'persoonlike notas',
       cancel: 'Kanselleer',
       scan: 'Skandeer',
@@ -195,7 +196,7 @@
     title: 'Geloofwaardige Ontkenbaarheid',
     help:
       'Onder sekere omstandighede mag u dalk geforseer word om u ' +
-      'wagwoord te deel teen u wil. Om u te beskerm kan Bluewallet ‘n ' +
+      'wagwoord te deel teen u wil. Om u te beskerm kan Veles Wallet ‘n ' +
       'tweede “fantasie” beursie skep wat as skerm kan dien. Indien u  ' +
       'hierdie wagwoord deel sal die 3de party nie toegang tot u hoof fondse kry nie.',
     help2: 'Fantasie berging is heeltemal funksioneel',

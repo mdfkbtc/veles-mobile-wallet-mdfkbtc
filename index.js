@@ -3,14 +3,13 @@ import 'intl/locale-data/jsonp/en';
 import React from 'react';
 import './shim.js';
 import { AppRegistry } from 'react-native';
-import WalletMigrate from './screen/wallets/walletMigrate';
-import { name as appName } from './app.json';
-import App from './App';
-import LottieView from 'lottie-react-native';
-import UnlockWith from './UnlockWith.js';
 
-/** @type {AppStorage} */
-const A = require('./analytics');
+import App from './App';
+import UnlockWith from './UnlockWith.js';
+import { name as appName } from './app.json';
+import WalletMigrate from './screen/wallets/walletMigrate';
+
+import LottieView from 'lottie-react-native';
 
 if (!Error.captureStackTrace) {
   // captureStackTrace is only available when debugging
@@ -29,7 +28,6 @@ class BlueAppComponent extends React.Component {
   }
 
   setIsMigratingData = async () => {
-    A(A.ENUM.INIT);
     this.setState({ isMigratingData: false });
   };
 
@@ -51,7 +49,8 @@ class BlueAppComponent extends React.Component {
         <LottieView
           ref={ref => (this.loadingSplash = ref)}
           onAnimationFinish={this.onAnimationFinish}
-          source={require('./img/bluewalletsplash.json')}
+          source={require('./img/splash.json')}
+          style={{ backgroundColor: '#383737' }}
           autoPlay
           loop={false}
         />
@@ -68,7 +67,8 @@ class BlueAppComponent extends React.Component {
           <LottieView
             ref={ref => (this.loadingSplash = ref)}
             onAnimationFinish={this.onAnimationFinish}
-            source={require('./img/bluewalletsplash.json')}
+            source={require('./img/splash.json')}
+            style={{ backgroundColor: '#383737' }}
             autoPlay
             loop={false}
           />
