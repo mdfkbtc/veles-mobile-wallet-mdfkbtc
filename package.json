@@ -107,7 +107,7 @@
     "react-native-prompt-android": "git+https://github.com/marcosrdz/react-native-prompt-android.git",
     "react-native-qrcode-svg": "5.1.2",
     "react-native-randombytes": "3.5.3",
-    "react-native-rate": "1.1.7",
+    "react-native-rate": "1.2.12",
     "react-native-secure-key-store": "git+https://github.com/marcosrdz/react-native-secure-key-store.git",
     "react-native-share": "2.0.0",
     "react-native-snap-carousel": "3.8.0",
