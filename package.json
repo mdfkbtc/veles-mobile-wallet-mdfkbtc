@@ -124,7 +124,7 @@
     "readable-stream": "3.4.0",
     "secure-random": "1.1.2",
     "stream-browserify": "2.0.2",
-    "url": "0.11.0",
+    "url": "0.11.4",
     "util": "0.12.1",
     "wif": "2.0.6"
   },
